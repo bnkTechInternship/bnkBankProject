@@ -2,14 +2,18 @@
 jdbc + java + bootstrap
 
 1. git clone https://github.com/bnkTechInternship/bnkBankProject.git
-2. git checkout -b gyk // gyk´Â ÀÚ±â°¡ ¿øÇÏ´Â ÀÌ¸§À¸·Î...
+2. git checkout -b gyk // gykëŠ” ìê¸°ê°€ ì›í•˜ëŠ” ì´ë¦„ìœ¼ë¡œ...
 3. git push --set-upstream origin gyk
---- ÀÌ·¯¸é ÀÚ±â¸¸ÀÇ ÀÛ¾÷¿µ¿ªÀÎ branch°¡ »ı¼º µÈ°Í....
+4. ì´ëŸ¬ë©´ ìê¸°ë§Œì˜ ì‘ì—…ì˜ì—­ì¸ branchê°€ ìƒì„± ëœê²ƒ
+---
 
 git add .
-git commit -m "Àû°í ½ÍÀº ¸Ş¼¼Áö..."
+
+git commit -m "ì ê³  ì‹¶ì€ ë©”ì„¸ì§€..."
+
 git push origin gyk
 
---- ÀÌ·¯¸é ÀÚ±â ÀÛ¾÷¿µ¿ªÀ¸·Î ÀÚ½ÅÀÇ ÄÚµå¸¦ ¿ø°İ ÀúÀå¼Ò¿¡ ¿Ã¸± ¼ö ÀÖÀ½ ---
+ì´ëŸ¬ë©´ ìê¸° ì‘ì—…ì˜ì—­ìœ¼ë¡œ ìì‹ ì˜ ì½”ë“œë¥¼ ì›ê²© ì €ì¥ì†Œì— ì˜¬ë¦´ ìˆ˜ ìˆìŒ
+--- 
 
-ÇÏ³ªÀÇ ±â´ÉÀÌ °³¹ß ¿Ï·áµÇ¸é pull request½ÅÃ»ÇÏ°í ÆÀ¿øÀÌ È®ÀÎÇÑ ÈÄ main¿¡ ÅëÇÕ...
+í•˜ë‚˜ì˜ ê¸°ëŠ¥ì´ ê°œë°œ ì™„ë£Œë˜ë©´ pull requestì‹ ì²­í•˜ê³  íŒ€ì›ì´ í™•ì¸í•œ í›„ mainì— í†µí•©...

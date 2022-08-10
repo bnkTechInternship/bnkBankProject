@@ -1,4 +1,7 @@
 # bnkBankProject
+
+git + github 초기 설정 방법...
+
 jdbc + java + bootstrap
 
 1. git clone https://github.com/bnkTechInternship/bnkBankProject.git

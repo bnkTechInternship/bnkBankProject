@@ -1,0 +1,6 @@
+$(function() {
+    $(window).resize(function() {
+        
+    })
+
+})

@@ -1,6 +1,3 @@
 $(function() {
-    $(window).resize(function() {
-        
-    })
-
+    alert(1);
 })

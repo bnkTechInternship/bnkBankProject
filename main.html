@@ -3,64 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
     <title>Document</title>
-    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-    <style>
-        * {
-            margin : 0;
-            padding : 0;
-            list-style: none;
-            text-decoration: none;
-            font-family: serif;
-        }
-        html, body, #container {
-            width: 100%;
-            height: 100%;
-        }
-        #container {
-            position: relative;
-        }
-        #top {
-            position: absolute;
-            top : -100%;
-            background-color: blue;
-            width : 100%;
-            height : 100%;
-            transition : 0.5s;
-            z-index: 2;
-        }
-        #bottom {
-            position : absolute;
-            top : 0%;
-            background-color: skyblue;
-            width : 100%;
-            height : 100%;
-            transition : 2s;
-            z-index: 1;
-        }
-    </style>
+    <link rel = "stylesheet" href = "css/main.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src = "script/main.js"></script>
 </head>
 <body>
     <div id="container">
-        <div id="top">
+        <div id="topNavbar">
+            <div id="topNavbar__one">
+                <img src = "img/bnk핫플5.png" id = "logo">
+                <div id = "topInputDiv">
+                    <input type = "text">
+                </div>
+                <div id = "myInfo">
+                    <img src = "img/more.png">
+                    <img src = "img/user.png">
+                </div>
+            </div>            
+        </div> <!-- topnavbar end -->
 
+
+        <div id="topNavbar2" class = "top">
+            <div id = "itemContainer">
+                <a href = "#" class = "item" id = "1">
+                    <img src = "img/bank.png"/>
+                    <span>은행</span>
+                </a>
+                <a href = "#" class = "item" id = "2">
+                    <img src = "img/restaurant.png"/>
+                    <span>맛집</span>
+                </a>
+                <a href = "#" class = "item" id = "3">
+                    <img src = "img/eiffel-tower.png"/>
+                    <span>관광지</span>
+                </a>
+                <a href = "#" class = "item" id = "4">
+                    <img src = "img/information.png"/>
+                    <span>홈페이지 정보</span>
+                </a>
+            </div>
         </div>
-        <div id="bottom">
-            <button>
-                123
-            </button>
-        </div>
+
+
+
+
     </div>
-
 </body>
-<script>
-    $(function() {
-        $("button").click(function() {
-            $("#top").css('top','0%');
-            $("#bottom").css('top','100%')
-            $("#bottom").css('display','none');
-        })
-    })
-</script>
 </html>

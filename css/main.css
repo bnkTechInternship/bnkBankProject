@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+/*- default setting */
+
+* {
+    padding : 0;
+    margin : 0;
+    text-decoration: none;
+    list-style: none;
+    font-family: 'Jua', serif;
+}
+
+a, a:link, a:visited, a:active {color : black;}
+
+html, body, #container {
+    width : 100%;
+    height : 100%;
+}
+/* default setting */
+
+
+
+
+/*- topNavbar */
+
+#topNavbar {
+    position : absolute;
+    top : 0;
+    left : 0;
+    width : 100%;
+    height : 80px;
+    border-bottom: 1px solid rgb(235,235,235);
+    display : grid;
+    grid-template-rows: 80px;
+    transition : 0.2s;
+}
+
+#logo {
+    grid-area: logo;
+    width : 130px;
+    height : 80px;
+}
+
+#myInfo {
+    width : 90px;
+    height : 60px;
+    grid-area: myInfo;
+    border : 1px solid #eeeeee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding : 0 15px 0 15px;
+    box-sizing: border-box;
+    border-radius: 50px;
+    display: flex;
+    align-self: center;
+    justify-self: center;
+    transition : 0.2s;
+}
+
+#topInputDiv {
+    grid-area : input;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#topInputDiv input {
+    width : 80%;
+    height : 40px;
+    border-radius: 30px;
+    box-sizing: border-box;
+    padding: 0 20px 0 20px;
+}
+
+#topInputDiv input:focus {
+    border-color: black;
+}
+
+#myInfo img {
+    width : 20px;
+    height  :20px;
+    padding : 0 10px 0 10px;
+    transition : 0.2s;
+}
+
+#topNavbar__one {
+    width : 100%;
+    height : 100%;
+    display: grid;
+    grid-template-areas: 
+            ".    logo   input   input   myInfo   .";
+    grid-template-columns: repeat(6,1fr);
+    position  :relative;
+}
+
+#myInfo:hover {
+    border : 1px solid skyblue;
+}
+
+/* topNavbar */
+
+
+
+/*- topNavbar2  */
+
+.top {
+    top : 80px;
+    left : 0;
+    box-sizing: border-box;
+    width : 100%;
+    height : 100px;
+}
+
+.bottom {
+    bottom : 0;
+    left : 0;
+    box-sizing: border-box;
+    width : 100%;
+    height : 100px;
+}
+
+#topNavbar2 {
+    position : absolute;
+    display: grid;
+    grid-template-areas :
+    ".    item   item   item   item   .";
+    grid-template-columns: repeat(6,1fr);
+    transition: 0.2s;
+}
+
+#bottomNavbar {
+    display: none;
+}
+
+#itemContainer {
+    width : 100%;
+    height : 100%;
+    display : flex;
+    grid-area: item;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#itemContainer a {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#topNavbar2 img, #bottomNavbar img {
+    width : 30;
+    height : 30px;
+    margin-bottom: 5px;
+}
+
+/* topNavbar2  */
+
+
+/* 반응형 */
+@media (max-width : 800px) {
+    #topNavbar{
+        position : absolute;
+        top : 0;
+        left : 0;
+        width : 100%;
+        height : 80px;
+        border-bottom: 1px solid rgb(235,235,235);
+        display : grid;
+        grid-template-rows: 80px;
+    }
+
+
+    #topNavbar__one {
+        width : 100%;
+        height : 100%;
+        display: grid;
+        grid-template-areas: 
+                "logo   input   input   myInfo";
+        grid-template-columns: repeat(4,1fr);
+        position  :relative;
+    }
+
+    #myInfo {
+        width : 80%;
+        height : 60px;
+        grid-area: myInfo;
+        border : 1px solid #eeeeee;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding : 0 15px 0 15px;
+        box-sizing: border-box;
+        border-radius: 50px;
+        display: flex;
+        align-self: center;
+        justify-self: center;
+    }
+
+    #myInfo img {
+        width : 30px;
+        height  :30px;
+        padding : 0 10px 0 10px;
+    }    
+
+    #topNavbar2{
+        position : absolute;
+        display: grid;
+        grid-template-areas :
+        "item    item   item   item   item   item";
+        grid-template-columns: repeat(6,1fr);
+        transition: 0.2s;
+        border-top: 1px solid #eeeeee;
+    }
+}
+
+

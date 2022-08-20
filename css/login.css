@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
 * {
     margin : 0;
     padding : 0;
     text-decoration: none;
     list-style: none;
-    font-family: serif;
+    font-family: 'Jua', cursive;
 }
 html, body {
     width : 100%;
@@ -49,7 +51,11 @@ body {
 }
 
 .input {
-    width : 70%;
+    width : 70%;    
+}
+
+.font {
+    font-family: 'DynaPuff', cursive;
 }
 
 #login_button {

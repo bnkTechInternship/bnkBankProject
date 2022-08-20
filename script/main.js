@@ -1,5 +1,17 @@
 $(function() {    
 
+    {
+        let width = $(window).innerWidth();
+        
+        if(width < 800) {
+            $("#topNavbar2").removeClass('top');
+            $("#topNavbar2").addClass('bottom');
+        } else {
+            $("#topNavbar2").addClass('top');
+            $("#topNavbar2").removeClass('bottom');
+        }
+    }
+
     $("#itemContainer a").hover(function() {
         let id = $(this).attr('id');
 
@@ -39,6 +51,24 @@ $(function() {
         $(this).css('border-bottom','2px solid black');
     })
 
+    $("#switch").click(function() {
+        let text =  $(this).text();
+        if(text === '지도로 보기') {
+            $(this).text('내용으로 보기')
+        }else {
+            $(this).text('지도로 보기')
+        }
+
+
+        $("#content").toggleClass('middle')
+        $("#content").toggleClass('goTop')
+        $("#content").toggleClass('block')
+
+        $("#map").toggleClass('middle');
+        $("#map").toggleClass('goBottom');
+        $("#map").toggleClass('block')
+    })
+
 
 
     $(window).resize(function() {
@@ -52,4 +82,7 @@ $(function() {
             $("#topNavbar2").removeClass('bottom');
         }
     })
+    
 })
+
+

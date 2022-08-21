@@ -55,18 +55,13 @@ $(function() {
         let text =  $(this).text();
         if(text === '지도로 보기') {
             $(this).text('내용으로 보기')
+            $("#map").css('z-index',2);
+            $("#content").css('z-index',1);
         }else {
             $(this).text('지도로 보기')
+            $("#map").css('z-index',1);
+            $("#content").css('z-index',2);
         }
-
-
-        $("#content").toggleClass('middle')
-        $("#content").toggleClass('goTop')
-        $("#content").toggleClass('block')
-
-        $("#map").toggleClass('middle');
-        $("#map").toggleClass('goBottom');
-        $("#map").toggleClass('block')
     })
 
 

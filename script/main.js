@@ -57,10 +57,18 @@ $(function() {
             $(this).text('내용으로 보기')
             $("#map").css('z-index',2);
             $("#content").css('z-index',1);
+
+            //test
+            $("#map").css('top',"0")
+            $("#content").css('top',"-100%")
         }else {
             $(this).text('지도로 보기')
             $("#map").css('z-index',1);
             $("#content").css('z-index',2);
+
+            // test
+            $("#map").css('top',"-100%")
+            $("#content").css('top',"0")
         }
     })
 
@@ -77,7 +85,6 @@ $(function() {
             $("#topNavbar2").removeClass('bottom');
         }
     })
-    
 })
 
 

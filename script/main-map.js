@@ -49,6 +49,30 @@ $(function() {
         });
     }
     $("#map").addClass('goBottom');
+
+    // 위치정보 받기
+    if(navigator.geolocation) {
+            
+        navigator.geolocation.getCurrentPosition(function(position) {
+            let arr = [];
+            // 위치를 가져오는데 성공할 경우
+            $.each(position.coords, function(key, item) {
+                arr[key] = item;
+            });
+            console.log(arr);
+
+            var moveLatLon = new kakao.maps.LatLng(arr['latitude'],arr['longitude']);
+            map.setCenter(moveLatLon);
+        }, function(error) {
+            
+            // 위치를 가져오는데 실패한 경우
+            console.log(error.message);
+            console.log('위치를 찾지 못했습니다. 기본 좌표는 부산은행 연수원입니다.')
+        });
+    } else {
+        consol.log("Geolocation을 지원하지 않는 브라우저 입니다.");
+    }
+
 })
 
 // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 

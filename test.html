@@ -18,11 +18,16 @@
         if(navigator.geolocation) {
             
             navigator.geolocation.getCurrentPosition(function(position) {
-                
+                let arr = [];
                 // 위치를 가져오는데 성공할 경우
-                jQuery.each(position.coords, function(key, item) {
+                $.each(position.coords, function(key, item) {
+                    arr[key] = item;
                     jQuery("<h3></h3>").html("● " + key + " : " + item).appendTo("body");
                 });
+                console.log(arr);
+                console.log(arr['latitude']);
+                console.log(arr['longitude']);
+                
             }, function(error) {
                 
                 // 위치를 가져오는데 실패한 경우

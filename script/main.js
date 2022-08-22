@@ -1,15 +1,12 @@
 $(function() {    
-
-    {
-        let width = $(window).innerWidth();
-        
-        if(width < 800) {
-            $("#topNavbar2").removeClass('top');
-            $("#topNavbar2").addClass('bottom');
-        } else {
-            $("#topNavbar2").addClass('top');
-            $("#topNavbar2").removeClass('bottom');
-        }
+    let width = $(window).innerWidth();
+    
+    if(width < 800) {
+        $("#topNavbar2").removeClass('top');
+        $("#topNavbar2").addClass('bottom');
+    } else {
+        $("#topNavbar2").addClass('top');
+        $("#topNavbar2").removeClass('bottom');
     }
 
     $("#itemContainer a").hover(function() {

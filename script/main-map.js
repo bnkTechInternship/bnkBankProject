@@ -59,7 +59,6 @@ $(function() {
             $.each(position.coords, function(key, item) {
                 arr[key] = item;
             });
-            console.log(arr);
 
             var moveLatLon = new kakao.maps.LatLng(arr['latitude'],arr['longitude']);
             map.setCenter(moveLatLon);

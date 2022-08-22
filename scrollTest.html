@@ -55,6 +55,8 @@
     </div>
 </body>
 <script>
+    let angle = 0;
+    let angle2 = 180;
       let arr = [{top: 1820, left: 410},
                  {top: 1820, left: 510},
                  {top: 1820, left: 610},
@@ -64,7 +66,7 @@
       let speed = [11,12,13,10,12,15]
       let downspeed = [15,18,19,17,16,19]
 
-    $(function() {    
+    $(async function() {    
         $("#pic1").css('right','0');
         $("#pic1").css('top','120px');
 
@@ -83,14 +85,22 @@
         $("#pic6").css('left','800');
         $("#pic7").css('top','120px');
         
-        
-        
+        $('.ab').hide()
+        $("#pic1").show(1000)
+        $("#pic2").show(2000)
+        $("#pic3").show(3000)
+        $("#pic4").show(4000)
+        $("#pic5").show(5000)
+        $("#pic6").show(6000)
+
     })
 
     $(window).on('scroll',function() {
             let scrollTop = $(window).scrollTop();
             console.log()
 
+            angle += 5;
+            angle2 += 5;
             // console.log($(`#pic1`).css('left'))
             // console.log(parseInt($(`#pic1`).css('left')) - 50);
 
@@ -99,14 +109,18 @@
                 // 이거 처음에 시작할때 left작은거하고 큰거 구분해서 넣어야할듯
                 // 처음부터 left가 작은애는 default로 원래자리 맞춰진다.
 
-
+                
                 let imgPosition = $(`#pic${i}`).offset();
                 
                 
-                if(arr[i-1].top > imgPosition.top) 
-                    $(`#pic${i}`).css('top',$("#pic1").offset().top +  downspeed[i-1] * 3);
-                if(scrollTop > 1090)
+                if(arr[i-1].top > imgPosition.top) {
+                    $(`#pic${i}`).css('top',$("#pic1").offset().top +  downspeed[i-1] * 2.5);
+                    $(`#pic${i}`).css('transform',`rotate(${angle%360}deg)`)
+                }
+                if(scrollTop > 1090) {
                     $(`#pic${i}`).css('top',"1820px");
+                    $(`#pic${i}`).css('transform',`rotate(${0}deg)`)
+                }
                 
 
                 if(arr[i-1].left < imgPosition.left)
@@ -121,13 +135,14 @@
                 // 처음부터 left가 작은애는 default로 원래자리 맞춰진다.
                 let imgPosition = $(`#pic${i}`).offset();
                 
-                if(arr[i-1].top > imgPosition.top)  {
-                    $(`#pic${i}`).css('top',parseInt($(`#pic${i}`).offset().top +  downspeed[i-1] * 3));
-                    console.log(1);
+                if(arr[i-1].top > imgPosition.top) {
+                    $(`#pic${i}`).css('top',$("#pic1").offset().top +  downspeed[i-1] * 2.5);
+                    $(`#pic${i}`).css('transform',`rotate(${angle2%360}deg)`)
                 }
-                    
-                if(scrollTop > 1090)
+                if(scrollTop > 1090) {
                     $(`#pic${i}`).css('top',"1900px");
+                    $(`#pic${i}`).css('transform',`rotate(${0}deg)`)
+                }
 
 
                     if(arr[i-1].left > imgPosition.left)

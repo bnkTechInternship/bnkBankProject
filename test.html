@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        #wrap {
+        img {
             position : absolute;
             top : 100px;
-            left : 150px;
+            left : 30%;
 
-            background-color: red;
+            background-color: wheat;
             border-radius: 15px;
-            width : 200px;
-            height : 100px;
+            width : 50%;
+            height : 500px;
 
             animation: motion 0.5s ease-out 0s infinite alternate; margin-top: 0;
         }
@@ -23,11 +23,17 @@
             0% {margin-top: 0px;}
             100% {margin-top: 50px;}
         }
+
+        #top {
+            z-index: 2;
+        }
+        #bottom {
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
-    <div id="wrap">
-
-    </div>
+        <!-- <img src = "img    /마커.png" id = "top"> -->
+        <img src = "img/분리1.png" id = "bottom">
 </body>
 </html>

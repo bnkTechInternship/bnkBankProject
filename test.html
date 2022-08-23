@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
     <title>Document</title>
     <style>
         img {
@@ -36,4 +38,27 @@
         <!-- <img src = "img    /마커.png" id = "top"> -->
         <img src = "img/분리1.png" id = "bottom">
 </body>
+<script>
+    if(navigator.geolocation) {
+            
+            navigator.geolocation.getCurrentPosition(function(position) {
+                let arr = [];
+                // 위치를 가져오는데 성공할 경우
+                $.each(position.coords, function(key, item) {
+                    arr[key] = item;
+                });
+    
+                // var moveLatLon = new kakao.maps.LatLng(arr['latitude'],arr['longitude']);
+                // map.setCenter(moveLatLon);
+                console.log(arr)
+            }, function(error) {
+                
+                // 위치를 가져오는데 실패한 경우
+                console.log(error.message);
+                console.log('위치를 찾지 못했습니다. 기본 좌표는 부산은행 연수원입니다.')
+            });
+        } else {
+            consol.log("Geolocation을 지원하지 않는 브라우저 입니다.");
+        }
+</script>
 </html>

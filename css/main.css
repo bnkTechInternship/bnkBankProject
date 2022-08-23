@@ -9,11 +9,23 @@
     font-family: 'Jua', serif;
 }
 
+
+
 a, a:link, a:visited, a:active {color : black;}
 
 html, body, #container {
     width : 100%;
     height : 100%;
+}
+
+*::-webkit-scrollbar {
+    width : 10px;    
+    background-color: #eeeeee;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #bbbbbb;
+    border-radius: 25px;
 }
 /* default setting */
 
@@ -133,6 +145,10 @@ html, body, #container {
     border-top: 1px solid rgb(235,235,235);
 }
 
+#default2 {
+    border-bottom: 2px solid black;
+}
+
 #bottomNavbar {
     display: none;
 }
@@ -165,7 +181,7 @@ html, body, #container {
 /*- switch */
 #switch {
     position : fixed;
-    top : 70%;
+    top : 85%;
     left : 45%;
     width : 100px;
     height : 50px;
@@ -225,7 +241,7 @@ html, body, #container {
 
     display : grid;
     grid-template-columns: repeat(auto-fill, minmax(230px, auto));
-    gap : 10px;
+    gap : 15px;
 }
 
 .content__item {
@@ -233,13 +249,19 @@ html, body, #container {
     max-height: 350px; 
     display: grid;
     border-radius: 15px;
+    cursor: pointer;
     /* justify-items: center; */
+}
+
+.content__item:hover img{
+    transform: scale(1.1);
+    transition: 0.2s;
 }
 
 .content__item img{
     width: 90%;
     height : 90%;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 .content__item__img {
@@ -338,6 +360,22 @@ html, body, #container {
         grid-template-columns: repeat(auto-fill, minmax(300px, auto));
         gap : 10px;
 
-}
+    }
+    #switch {
+        position : fixed;
+        top : 75%;
+        left : 45%;
+        width : 100px;
+        height : 50px;
+        background-color: #eeeeee;
+        border-radius: 50px;
+    
+        cursor : move;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 5;
+    }
 }
 /* 반응형 */

@@ -45,6 +45,13 @@
 	</select>
 	
 	
+	<update id="updateShopWait" parameterType="shop">
+		UPDATE shop
+		SET shop_wait = shop_wait +1
+		WHERE shop_idx=#{shop_idx}
+	</update>
+	
+	
 	
 	
 </mapper>

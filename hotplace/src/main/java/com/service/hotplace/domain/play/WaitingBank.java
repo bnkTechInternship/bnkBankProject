@@ -30,6 +30,8 @@ public class WaitingBank {
 	}
 	
 	
+	
+	
 
 
 	public WaitingBank(String userId, int bankIdx, int waitingIdx, int waitingCnt) {
@@ -37,6 +39,14 @@ public class WaitingBank {
 		this.userId = userId;
 		this.bankIdx = bankIdx;
 		this.waitingIdx = waitingIdx;
+		this.waitingCnt = waitingCnt;
+	}
+
+
+	public WaitingBank(String userId, int bankIdx, int waitingCnt) {
+		super();
+		this.userId = userId;
+		this.bankIdx = bankIdx;
 		this.waitingCnt = waitingCnt;
 	}
 

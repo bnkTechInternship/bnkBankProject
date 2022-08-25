@@ -30,8 +30,8 @@ public class MyBatisUnitTest {
 		SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(r);
 		SqlSession session = factory.openSession();
 		
-		
-//		Bank tmp = new Bank("기장","기장군","334","ㅇㅇ",4,44,"위도","경도");
+//		
+//		Bank tmp = new Bank("해운대점","기장군","334","ㅇㅇ",4,44,"위도","경도");
 //		System.out.println(tmp);
 //		
 //		int result=session.insert("sql.bank.mapper.registerBank",tmp);
@@ -97,11 +97,14 @@ public class MyBatisUnitTest {
 //		List<Review> list =session.selectList("sql.review.mapper.getReviewListByShopIdx", review.getShopIdx());
 //		for(Review kk : list) System.out.println(kk);
 		
-//		WaitingBank wb = new WaitingBank("id",7,1,"2022-08-24",2);
+		WaitingBank wb = new WaitingBank("aaa",7,3);
+		//System.out.println(wb.getBankIdx());
 //		session.insert("sql.waiting.mapper.registerWaitingBank",wb);
 //		session.commit();
 //		
-//		WaitingShop ws = new WaitingShop("id",1,1,1,2,"2022-08-24",2);
+		WaitingShop ws = new WaitingShop("id",1,1,1,2,"2022-08-24",2);
+
+//		System.out.println(ws.getShopIdx());
 //		session.insert("sql.waiting.mapper.registerWaitingShop",ws);
 //		session.commit();
 //		List<WaitingBank> list = session.selectList("sql.waiting.mapper.getBankListByUserId","id");
@@ -150,10 +153,21 @@ public class MyBatisUnitTest {
       
       List<WaitingShop> list = session.selectList("sql.waiting.mapper.getNowWaitingShop","id");
       
-      for(WaitingShop ws : list) System.out.println(ws);
+      //for(WaitingShop ws : list) System.out.println(ws);
 		
 //      String st = session.selectOne("sql.waiting.mapper.getNowWaitingShop","id");
 //	  System.out.println(st);
+      
+      
+//      int re = session.selectOne("sql.waiting.mapper.getBankUntilMyTurn",wb);
+//      System.out.println(re);
+//      
+//      
+      int re = session.update("sql.waiting.mapper.updateTotalShopCnt",ws);
+      System.out.println(re);
+      System.out.println(ws);
+//      
+//      
       
 	
 	}

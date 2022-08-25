@@ -51,4 +51,10 @@ public class ShopDAOImpl implements ShopDAO {
 		return sqlsession.selectList(NS+"getShopListByName",name);
 	}
 
+	@Override
+	public int updateShopWait(Shop shop) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlsession.update(NS+"updateShopWait",shop);
+	}
+
 }

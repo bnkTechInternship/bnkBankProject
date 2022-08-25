@@ -47,6 +47,12 @@ public class BankDAOImpl implements BankDAO{
 		return sqlSession.selectList(NS+"getBankByName",bankName);
 	}
 
+	@Override
+	public int updateBankWait(Bank bank) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.update(NS+"updateBankWait",bank);
+	}
+
 //	@Override
 //	public int updateBank(Bank bank) throws Exception {
 //		// TODO Auto-generated method stub

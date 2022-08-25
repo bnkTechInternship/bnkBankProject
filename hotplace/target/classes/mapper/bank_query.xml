@@ -48,6 +48,12 @@
 		WHERE bank_name LIKE '%' || #{value} || '%'
 	</select>
 	
+	<update id="updateBankWait" parameterType="bank">
+		UPDATE bank
+		SET bank_wait = bank_wait +1
+		WHERE bank_idx=#{bank_idx}
+	</update>
+	
 </mapper>
 
 

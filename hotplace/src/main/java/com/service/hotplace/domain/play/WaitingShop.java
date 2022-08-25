@@ -21,6 +21,22 @@ public class WaitingShop {
 
 	public WaitingShop() {}
 
+	
+	
+	
+
+	public WaitingShop(String userId, int menuIdx, int shopIdx, int quantity, int waitingCnt) {
+		super();
+		this.userId = userId;
+		this.menuIdx = menuIdx;
+		this.shopIdx = shopIdx;
+		this.quantity = quantity;
+		this.waitingCnt = waitingCnt;
+	}
+
+
+
+
 
 	public WaitingShop(String userId, int menuIdx, int shopIdx, int waitingIdx, int quantity, String waitingDate,
 			int waitingCnt, User user, Menu menu, Shop shop) {

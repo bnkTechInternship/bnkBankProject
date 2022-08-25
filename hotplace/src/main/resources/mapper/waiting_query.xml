@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sql.waiting.mapper">
+
+	<insert id="registerWaitingBank" parameterType="waitingBank">
+		INSERT INTO waiting_bank(user_id,bank_idx,waiting_idx,waiting_date,waiting_cnt)
+		VALUES(#{userId},#{bankIdx},#{waitingIdx},sysdate,#{waitingCnt})
+	</insert>
+	
+	<insert id="registerWaitingShop" parameterType="waitingShop">
+		INSERT INTO waiting_shop(user_id,menu_idx,shop_idx,waiting_idx,quantity,waiting_date,waiting_cnt)
+		VALUES(#{userId},#{menuIdx},#{shopIdx},#{waitingIdx},#{quantity},sysdate,#{waitingCnt})
+	</insert>
+	
+	<select id="getWaitingBank" parameterType="string" resultType="waitingBank">
+		SELECT * FROM waiting_bank
+		WHERE user_id=#{value}
+	</select>
+	
+	<select id="getWaitingShop" parameterType="string" resultType="waitingShop">
+		SELECT * FROM waiting_shop
+		WHERE user_id=#{value}
+	</select>
+	
+	<resultMap type="waitingShop" id="waitingshopwithshop">
+		<association property="shop" javaType="shop">
+			<id column="shop_idx" property="shopIdx"></id>
+			<result property="shopWait" column="shop_wait"/>
+		</association>
+	</resultMap>
+	
+	
+<!-- 	<select id="getNowWaitingShop" parameterType="string" resultType="waitingShop">
+		SELECT w.waiting_idx, s.shop_wait
+		FROM waiting_shop w, shop s
+		WHERE user_id=#{value} and w.shop_idx = s.shop_idx
+	</select> -->
+	
+	<select id="getNowWaitingShop" parameterType="string" resultMap="waitingshopwithshop" resultType="waitingShop">
+		SELECT w.waiting_idx, s.shop_wait
+		FROM waiting_shop w, shop s
+		WHERE user_id=#{value} and w.shop_idx = s.shop_idx
+	</select>
+	
+
+
+
+
+</mapper>
+
+
+
+
+
+
+
+

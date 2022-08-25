@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<properties resource="config/jdbc.properties" />
+
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+		<setting name="mapUnderscoreToCamelCase" value="true" />		
+	</settings>
+
+	<typeAliases>
+		<package name="com.service.hotplace.domain"/>
+	</typeAliases>
+	
+	<!-- JUnit 기반의 단위테스트용  -->
+ 	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="UNPOOLED">				
+				<property name="driver" value="${JDBC.Driver}" />
+				<property name="url" value="${JDBC.ConnectionURL}" />
+				<property name="username" value="${JDBC.Username}" />
+				<property name="password" value="${JDBC.Password}" />
+			</dataSource>
+		</environment>
+	</environments> 
+	<mappers>		
+		<mapper resource="mapper/bank_query.xml"/>	
+		<mapper resource="mapper/like_query.xml"/>	
+		<mapper resource="mapper/menu_query.xml"/>	
+		<mapper resource="mapper/review_query.xml"/>	
+		<mapper resource="mapper/waiting_query.xml"/>	
+		<mapper resource="mapper/shop_query.xml"/>	
+		<mapper resource="mapper/user_query.xml"/>	
+	</mappers>
+</configuration>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

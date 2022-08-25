@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sql.hotplace.mapper">
+	
+	<insert id="registerShop" parameterType="shop">
+		<selectKey keyProperty="shopIdx" resultType="int" order="BEFORE">
+		SELECT shop_seq.nextVal From dual
+		</selectKey>
+		INSERT INTO shop(shop_idx, shop_name,shop_address,shop_number,
+						shop_oper,shop_wait,shop_waittime,shop_lat,shop_long,total_cnt,web_address)
+		VALUES(#{shopIdx},#{shopName},#{shopAddress},#{shopNumber},#{shopOper},
+				#{shopWait},#{shopWaittime},#{shopLat},#{shopLong},#{totalCnt},#{webAddress})
+	</insert>
+	
+<!-- 	<select id="getShop" parameterType="shop" resultType="shop">
+		SELECT
+		*
+		FROM shop
+		<if test= "shopIdx!=null">
+			WHERE shop_idx=#{shopIdx}
+		</if>
+	</select> -->
+	
+	<select id="getShopList" resultType="shop">
+		SELECT
+		*
+		FROM shop
+	</select>
+	
+	<select id="getShop" parameterType="int" resultType="shop">
+		SELECT
+		*
+		FROM shop
+		WHERE shop_idx = #{shopIdx}
+	</select>
+	
+	<select id="getShopListByName" parameterType="string" resultType="shop">
+		SELECT
+		*
+		FROM shop
+		WHERE shop_name LIKE '%' || #{value} || '%'
+	</select>
+	
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+
+

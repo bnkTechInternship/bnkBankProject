@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sql.hotplace.mapper">
+
+	<insert id="registerUser" parameterType="user">
+		INSERT INTO user2(user_id, user_pw,user_name,user_email,
+						user_address,user_number,user_balance,user_point,register_date)
+		VALUES(#{userId},#{userPw},#{userName},#{userEmail},#{userAddress},
+				#{userNumber},#{userBalance},#{userPoint},sysdate)
+	</insert>
+	
+	<delete id="deleteUser" parameterType="string">
+		DELETE FROM user2 
+		WHERE user_id = #{value}
+	</delete>
+	
+	<update id="updateUser" parameterType="user">
+		UPDATE user2
+		SET user_pw=#{userPw}, user_email=#{userEmail}, user_address=#{userAddress},
+			user_number=#{userNumber},user_balance=#{userBalance},user_point=#{userPoint},register_date=#{registerDate}
+		WHERE user_id=#{userId}
+	</update>
+	
+<!-- 	<select id="getUser" parameterType="user" resultType="user">
+		SELECT
+		*
+		FROM user2
+		<if test= "userId!=null">
+			WHERE user_id=#{userId}
+		</if>
+	</select> -->
+	
+	<select id="getUserById" parameterType="string" resultType="user">
+		SELECT
+		*
+		FROM user2
+		WHERE user_id = #{value}
+	</select>
+	
+	<select id="getUserList"  resultType="user">
+		SELECT
+		*
+		FROM user2
+	</select>
+	
+	
+	
+	<select id="login" parameterType="user" resultType="user">
+		SELECT
+		*
+		FROM user2
+		WHERE user_id=#{userId}
+		AND user_pw=#{userPw}
+	</select>
+	<select id="getUserId" parameterType="user" resultType="user">
+		SELECT
+		user_id
+		FROM user2
+		WHERE user_email=#{userEmail}
+	</select>
+	<select id="getUserPw" parameterType="user" resultType="user">
+		SELECT
+		user_pw
+		FROM user2
+		WHERE user_email=#{userEmail}
+		AND user_id=#{userId}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+

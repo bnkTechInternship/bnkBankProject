@@ -1,0 +1,109 @@
+package com.service.hotplace.domain.place;
+
+public class Bank {
+	private int bankIdx;
+	private String bankName;
+	private String bankAddress;
+	private String bankNumber;
+	private String bankOper;
+	private int bankWait;
+	private int bankWaittime;
+	private String bankLat;
+	private String bankLong;
+	
+	
+
+	public Bank() {};
+	public Bank(int bankIdx, String bankName, String bankAddress, String bankNumber, String bankOper, int bankWait,
+			int bankWaittime, String bankLat, String bankLong) {
+		super();
+		this.bankIdx = bankIdx;
+		this.bankName = bankName;
+		this.bankAddress = bankAddress;
+		this.bankNumber = bankNumber;
+		this.bankOper = bankOper;
+		this.bankWait = bankWait;
+		this.bankWaittime = bankWaittime;
+		this.bankLat = bankLat;
+		this.bankLong = bankLong;
+	}
+	
+	
+	
+	public Bank(String bankName, String bankAddress, String bankNumber, String bankOper, int bankWait, int bankWaittime,
+			String bankLat, String bankLong) {
+		super();
+		this.bankName = bankName;
+		this.bankAddress = bankAddress;
+		this.bankNumber = bankNumber;
+		this.bankOper = bankOper;
+		this.bankWait = bankWait;
+		this.bankWaittime = bankWaittime;
+		this.bankLat = bankLat;
+		this.bankLong = bankLong;
+	}
+	public int getBankIdx() {
+		return bankIdx;
+	}
+	public void setBankIdx(int bankIdx) {
+		this.bankIdx = bankIdx;
+	}
+	public String getBankName() {
+		return bankName;
+	}
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+	public String getBankAddress() {
+		return bankAddress;
+	}
+	public void setBankAddress(String bankAddress) {
+		this.bankAddress = bankAddress;
+	}
+	public String getBankNumber() {
+		return bankNumber;
+	}
+	public void setBankNumber(String bankNumber) {
+		this.bankNumber = bankNumber;
+	}
+	public String getBankOper() {
+		return bankOper;
+	}
+	public void setBankOper(String bankOper) {
+		this.bankOper = bankOper;
+	}
+	public int getBankWait() {
+		return bankWait;
+	}
+	public void setBankWait(int bankWait) {
+		this.bankWait = bankWait;
+	}
+	public int getBankWaittime() {
+		return bankWaittime;
+	}
+	public void setBankWaittime(int bankWaittime) {
+		this.bankWaittime = bankWaittime;
+	}
+	public String getBankLat() {
+		return bankLat;
+	}
+	public void setBankLat(String bankLat) {
+		this.bankLat = bankLat;
+	}
+	public String getBankLong() {
+		return bankLong;
+	}
+	public void setBankLong(String bankLong) {
+		this.bankLong = bankLong;
+	}
+	
+	@Override
+	public String toString() {
+		return "Bank [bankIdx=" + bankIdx + ", bankName=" + bankName + ", bankAddress=" + bankAddress + ", bankNumber="
+				+ bankNumber + ", bankOper=" + bankOper + ", bankWait=" + bankWait + ", bankWaittime=" + bankWaittime
+				+ ", bankLat=" + bankLat + ", bankLong=" + bankLong + "]";
+	}
+	
+	
+
+}

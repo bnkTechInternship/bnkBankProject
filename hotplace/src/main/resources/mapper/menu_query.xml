@@ -36,11 +36,10 @@
 		WHERE menu_name LIKE '%' || #{value} || '%'
 	</select>
 	
-	
-
-	
-	
-	
+	<update id="updateMenu" parameterType="menu">
+		UPDATE menu SET menu_name = #{menuName}, menu_price = #{menuPrice}
+		WHERE menu_idx = #{menuIdx} and shop_idx= #{shopIdx}
+	</update>
 	
 </mapper>
 

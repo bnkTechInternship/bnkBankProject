@@ -53,13 +53,13 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
-	public String getUserId(String userEmail) throws Exception {
+	public String findUserId(String userEmail) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlsession.selectOne(NS+"getUserId",userEmail);
 	}
 
 	@Override
-	public String getUserPw(User user) throws Exception {
+	public String findUserPw(User user) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlsession.selectOne(NS+"getUserPw",user);
 	}

@@ -41,15 +41,47 @@ public class WaitingDAOImpl implements WaitingDAO {
 	}
 
 	@Override
-	public WaitingBank getNowWaitingBank(String userId) throws Exception {
+	public List<WaitingBank> getNowWaitingBank(String userId) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlsession.selectOne(NS+"getNowWaitingBank",userId);
 	}
 
 	@Override
-	public WaitingShop getNowWaitingShop(String userId) throws Exception {
+	public List<WaitingShop> getNowWaitingShop(String userId) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlsession.selectOne(NS+"getNowWaitingShop",userId);
 	}
+
+	@Override
+	public int getShopUntilMyTurn(WaitingShop waitingShop) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne(NS+"getShopUntilMyTurn",waitingShop);
+	}
+
+	@Override
+	public int getBankUntilMyTurn(WaitingBank waitingBank) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne(NS+"getBankUntilMyTurn",waitingBank);
+	}
+
+	@Override
+	public int getShopNowWaitingCnt(WaitingShop waitingShop) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne(NS+"getShopNowWaitingCnt",waitingShop);
+	}
+
+	@Override
+	public int getBankNowWaitingCnt(WaitingBank waitingBank) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne(NS+"getBankNowWaitingCnt",waitingBank);
+	}
+
+	@Override
+	public int updateTotalShopCnt(WaitingShop waitingShop) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlsession.update(NS+"updateTotalCnt",waitingShop);
+	}
+
+
 
 }

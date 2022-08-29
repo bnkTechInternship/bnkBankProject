@@ -12,6 +12,6 @@ public interface UserDAO {
 	User getUserById(String userId)throws Exception;
 	List<User> getUserList()throws Exception;
 	
-	String getUserId(String userEmail)throws Exception;
-	String getUserPw(User user)throws Exception;
+	String findUserId(String userEmail)throws Exception;
+	String findUserPw(User user)throws Exception;
 }

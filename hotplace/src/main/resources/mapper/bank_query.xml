@@ -10,23 +10,23 @@
 		SELECT bank_seq.nextVal From dual
 		</selectKey>
 		INSERT INTO bank(bank_idx, bank_name,bank_address,bank_number,
-						bank_oper,bank_wait,bank_waittime,bank_lat,bank_long)
+						bank_oper,bank_enternum,bank_lat,bank_long)
 		VALUES(#{bankIdx},#{bankName},#{bankAddress},#{bankNumber},#{bankOper},
-				#{bankWait},#{bankWaittime},#{bankLat},#{bankLong})
+				#{bankEnternum},#{bankLat},#{bankLong})
 	</insert>
 	
 	<delete id="deleteBank" parameterType="int">
 		DELETE FROM bank WHERE bank_idx = #{value}
 	</delete>
 	
-<!-- 	<select id="getBank" parameterType="bank" resultType="bank">
-		SELECT
-		*
-		FROM bank
-		<if test= "bankIdx!=null">
-			WHERE bank_idx=#{bankIdx}
-		</if>
-	</select> -->
+	<update id="updateBank" parameterType="bank">
+		UPDATE bank SET bank_name = #{bankName}, bank_address = #{bankAddress},
+		                bank_number = #{bankNumber}, bank_oper = #{bankOper},
+		                bank_lat = #{bankLat}, bank_long = #{bankLong}
+		WHERE bank_idx = #{bankIdx}
+	</update>
+	
+
 	
 	<select id="getBankList" resultType="bank">
 		SELECT
@@ -47,6 +47,12 @@
 		FROM bank
 		WHERE bank_name LIKE '%' || #{value} || '%'
 	</select>
+	
+	<update id="updateBankEnternum" parameterType="bank">
+		UPDATE bank
+		SET bank_enternum = bank_enternum +1
+		WHERE bank_idx=#{bank_idx}
+	</update>
 	
 </mapper>
 

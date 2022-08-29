@@ -11,7 +11,7 @@ public interface MenuDAO {
 	
 	List<Menu> getMenuByName(String menuName) throws Exception;
 	
-	//int updateMenu(Menu menu) throws Exception;
+	int updateMenu(Menu menu) throws Exception;
 	
 	Menu getMenuByIdx(int menuIdx) throws Exception;
 	List<Menu> getMenuList(int shopIdx) throws Exception;

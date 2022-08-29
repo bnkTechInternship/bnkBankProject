@@ -46,4 +46,10 @@ public class MenuDAOImpl implements MenuDAO {
 		return sqlsession.selectList(NS+"getMenuList",shopIdx);
 	}
 
+	@Override
+	public int updateMenu(Menu menu) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlsession.update(NS+"updateMenu",menu);
+	}
+
 }

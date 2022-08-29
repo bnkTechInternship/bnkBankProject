@@ -18,6 +18,7 @@ public class BankServiceImpl implements BankService{
 
 	@Override
 	public List<Bank> getBankList() throws Exception {
+		// TODO Auto-generated method stub
 		return bankDAO.getBankList();
 	}
 
@@ -32,5 +33,31 @@ public class BankServiceImpl implements BankService{
 		// TODO Auto-generated method stub
 		return bankDAO.getBankByName(bankName);
 	}
+
+	@Override
+	public int registerBank(Bank bank) throws Exception {
+		// TODO Auto-generated method stub
+		return bankDAO.registerBank(bank);
+	}
+
+	@Override
+	public int deleteBank(int bankIdx) throws Exception {
+		// TODO Auto-generated method stub
+		return bankDAO.deleteBank(bankIdx);
+	}
+
+	@Override
+	public int updateBank(Bank bank) throws Exception {
+		// TODO Auto-generated method stub
+		return bankDAO.updateBank(bank);
+	}
+
+	@Override
+	public int updateBankEnternum(Bank bank) throws Exception {
+		// TODO Auto-generated method stub
+		return bankDAO.updateBank(bank);
+	}
+
+
 
 }

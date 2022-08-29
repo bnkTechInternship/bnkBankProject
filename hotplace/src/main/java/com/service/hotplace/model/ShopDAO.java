@@ -18,6 +18,6 @@ public interface ShopDAO {
 	int updateShop(Shop shop) throws Exception;
 	
 	//현재입장순번 업데이트 +1 해주는 함수
-	int updateShopWait(Shop shop) throws Exception;
+	int updateShopEnternum(Shop shop) throws Exception;
 
 }

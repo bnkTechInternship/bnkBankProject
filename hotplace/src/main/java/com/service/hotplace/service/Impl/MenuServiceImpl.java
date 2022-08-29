@@ -19,9 +19,27 @@ public class MenuServiceImpl implements MenuService{
 	private MenuDAO menuDAO;
 
 	@Override
+	public int addMenu(Menu menu) throws Exception {
+		// TODO Auto-generated method stub
+		return menuDAO.addMenu(menu);
+	}
+
+	@Override
+	public int deleteMenu(int menuIdx) throws Exception {
+		// TODO Auto-generated method stub
+		return menuDAO.deleteMenu(menuIdx);
+	}
+
+	@Override
 	public List<Menu> getMenuByName(String menuName) throws Exception {
 		// TODO Auto-generated method stub
 		return menuDAO.getMenuByName(menuName);
+	}
+
+	@Override
+	public int updateMenu(Menu menu) throws Exception {
+		// TODO Auto-generated method stub
+		return menuDAO.updateMenu(menu);
 	}
 
 	@Override
@@ -31,11 +49,12 @@ public class MenuServiceImpl implements MenuService{
 	}
 
 	@Override
-	public List<Menu> getMenuList(Shop shop) throws Exception {
+	public List<Menu> getMenuList(int shopIdx) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return menuDAO.getMenuList(shopIdx);
 	}
-	
+
+
 	
 
 }

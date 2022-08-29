@@ -15,7 +15,7 @@ public class ShopServiceImpl implements ShopService{
 
 	@Autowired
 	private ShopDAO shopDAO;
-	
+
 	@Override
 	public List<Shop> getShopList() throws Exception {
 		// TODO Auto-generated method stub
@@ -33,5 +33,31 @@ public class ShopServiceImpl implements ShopService{
 		// TODO Auto-generated method stub
 		return shopDAO.getShopListByName(ShopName);
 	}
+
+	@Override
+	public int registerShop(Shop shop) throws Exception {
+		// TODO Auto-generated method stub
+		return shopDAO.registerShop(shop);
+	}
+
+	@Override
+	public int deleteShop(int shopIdx) throws Exception {
+		// TODO Auto-generated method stub
+		return shopDAO.deleteShop(shopIdx);
+	}
+
+	@Override
+	public int updateShop(Shop shop) throws Exception {
+		// TODO Auto-generated method stub
+		return shopDAO.updateShop(shop);
+	}
+
+	@Override
+	public int updateShopEnternum(Shop shop) throws Exception {
+		// TODO Auto-generated method stub
+		return shopDAO.updateShopEnternum(shop);
+	}
+	
+
 
 }

@@ -8,7 +8,7 @@ public class WaitingShop {
 	private String userId;
 	private int menuIdx;
 	private int shopIdx;
-	private int waitingIdx;
+	private int waitingNum;
 	private int quantity;
 	private String waitingDate;
 	private int waitingCnt;
@@ -38,13 +38,13 @@ public class WaitingShop {
 
 
 
-	public WaitingShop(String userId, int menuIdx, int shopIdx, int waitingIdx, int quantity, String waitingDate,
+	public WaitingShop(String userId, int menuIdx, int shopIdx, int waitingNum, int quantity, String waitingDate,
 			int waitingCnt, User user, Menu menu, Shop shop) {
 		super();
 		this.userId = userId;
 		this.menuIdx = menuIdx;
 		this.shopIdx = shopIdx;
-		this.waitingIdx = waitingIdx;
+		this.waitingNum = waitingNum;
 		this.quantity = quantity;
 		this.waitingDate = waitingDate;
 		this.waitingCnt = waitingCnt;
@@ -54,24 +54,24 @@ public class WaitingShop {
 	}
 
 
-	public WaitingShop(String userId, int menuIdx, int shopIdx, int waitingIdx, int quantity, int waitingCnt) {
+	public WaitingShop(String userId, int menuIdx, int shopIdx, int waitingNum, int quantity, int waitingCnt) {
 		super();
 		this.userId = userId;
 		this.menuIdx = menuIdx;
 		this.shopIdx = shopIdx;
-		this.waitingIdx = waitingIdx;
+		this.waitingNum = waitingNum;
 		this.quantity = quantity;
 		this.waitingCnt = waitingCnt;
 	}
 
 
-	public WaitingShop(String userId, int menuIdx, int shopIdx, int waitingIdx, int quantity, String waitingDate,
+	public WaitingShop(String userId, int menuIdx, int shopIdx, int waitingNum, int quantity, String waitingDate,
 			int waitingCnt) {
 		super();
 		this.userId = userId;
 		this.menuIdx = menuIdx;
 		this.shopIdx = shopIdx;
-		this.waitingIdx = waitingIdx;
+		this.waitingNum = waitingNum;
 		this.quantity = quantity;
 		this.waitingDate = waitingDate;
 		this.waitingCnt = waitingCnt;
@@ -108,13 +108,13 @@ public class WaitingShop {
 	}
 
 
-	public int getWaitingIdx() {
-		return waitingIdx;
+	public int getWaitingNum() {
+		return waitingNum;
 	}
 
 
-	public void setWaitingIdx(int waitingIdx) {
-		this.waitingIdx = waitingIdx;
+	public void setWaitingNum(int waitingNum) {
+		this.waitingNum = waitingNum;
 	}
 
 
@@ -180,8 +180,8 @@ public class WaitingShop {
 
 	@Override
 	public String toString() {
-		return "WaitingShop [userId=" + userId + ", menuIdx=" + menuIdx + ", shopIdx=" + shopIdx + ", waitingIdx="
-				+ waitingIdx + ", quantity=" + quantity + ", waitingDate=" + waitingDate + ", waitingCnt=" + waitingCnt
+		return "WaitingShop [userId=" + userId + ", menuIdx=" + menuIdx + ", shopIdx=" + shopIdx + ", waitingNum="
+				+ waitingNum + ", quantity=" + quantity + ", waitingDate=" + waitingDate + ", waitingCnt=" + waitingCnt
 				+ ", user=" + user + ", menu=" + menu + ", shop=" + shop + "]";
 	}
 

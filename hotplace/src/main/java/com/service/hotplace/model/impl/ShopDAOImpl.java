@@ -52,7 +52,7 @@ public class ShopDAOImpl implements ShopDAO {
 	}
 
 	@Override
-	public int updateShopWait(Shop shop) throws Exception {
+	public int updateShopEnternum(Shop shop) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlsession.update(NS+"updateShopWait",shop);
 	}

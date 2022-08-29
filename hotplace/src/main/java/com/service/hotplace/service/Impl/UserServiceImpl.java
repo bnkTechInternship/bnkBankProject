@@ -1,68 +1,68 @@
-package com.service.hotplace.model.impl;
+package com.service.hotplace.service.Impl;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.service.hotplace.domain.person.User;
-import com.service.hotplace.model.UserDAO;
+import com.service.hotplace.service.UserService;
 
-@Repository
-public class UserDAOImpl implements UserDAO{
+
+@Service
+public class UserServiceImpl implements UserService{
 	
-	static final String NS="sql.hotplace.mapper.";
-	@Autowired
-	private SqlSession sqlsession;
+	@Autowired 
+	private UserService userService;
 
 	@Override
 	public int registerUser(User user) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlsession.insert(NS+"registerUser",user);
+		return userService.registerUser(user);
 	}
 
 	@Override
 	public int updateUser(User user) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlsession.update(NS+"updateUser",user);
+		return userService.updateUser(user);
 	}
 
 	@Override
 	public int deleteUser(User user) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlsession.delete(NS+"deleteUser",user);
+		return userService.deleteUser(user);
 	}
 
 	@Override
 	public User login(User user) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlsession.selectOne(NS+"login",user);
+		return userService.login(user);
 	}
 
 	@Override
 	public User getUserById(String userId) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlsession.selectOne(NS+"getUserById",userId);
+		return userService.getUserById(userId);
 	}
 
 	@Override
 	public List<User> getUserList() throws Exception {
 		// TODO Auto-generated method stub
-		return sqlsession.selectList(NS+"getUserList");
+		return userService.getUserList();
 	}
 
 	@Override
 	public String findUserId(String userEmail) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlsession.selectOne(NS+"getUserId",userEmail);
+		return userService.findUserId(userEmail);
 	}
 
 	@Override
 	public String findUserPw(User user) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlsession.selectOne(NS+"getUserPw",user);
+		return userService.findUserPw(user);
 	}
 	
-	
+
+
 }

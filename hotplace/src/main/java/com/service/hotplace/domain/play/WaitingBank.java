@@ -6,7 +6,7 @@ import com.service.hotplace.domain.place.Bank;
 public class WaitingBank {
 	private String userId;
 	private int bankIdx;
-	private int waitingIdx;
+	private int waitingNum;
 	private String waitingDate;
 	private int waitingCnt;
 	
@@ -17,12 +17,12 @@ public class WaitingBank {
 	public WaitingBank() {}
 
 
-	public WaitingBank(String userId, int bankIdx, int waitingIdx, String waitingDate, int waitingCnt, User user,
+	public WaitingBank(String userId, int bankIdx, int waitingNum, String waitingDate, int waitingCnt, User user,
 			Bank bank) {
 		super();
 		this.userId = userId;
 		this.bankIdx = bankIdx;
-		this.waitingIdx = waitingIdx;
+		this.waitingNum = waitingNum;
 		this.waitingDate = waitingDate;
 		this.waitingCnt = waitingCnt;
 		this.user = user;
@@ -34,11 +34,11 @@ public class WaitingBank {
 	
 
 
-	public WaitingBank(String userId, int bankIdx, int waitingIdx, int waitingCnt) {
+	public WaitingBank(String userId, int bankIdx, int waitingNum, int waitingCnt) {
 		super();
 		this.userId = userId;
 		this.bankIdx = bankIdx;
-		this.waitingIdx = waitingIdx;
+		this.waitingNum = waitingNum;
 		this.waitingCnt = waitingCnt;
 	}
 
@@ -51,11 +51,11 @@ public class WaitingBank {
 	}
 
 
-	public WaitingBank(String userId, int bankIdx, int waitingIdx, String waitingDate, int waitingCnt) {
+	public WaitingBank(String userId, int bankIdx, int waitingNum, String waitingDate, int waitingCnt) {
 		super();
 		this.userId = userId;
 		this.bankIdx = bankIdx;
-		this.waitingIdx = waitingIdx;
+		this.waitingNum = waitingNum;
 		this.waitingDate = waitingDate;
 		this.waitingCnt = waitingCnt;
 	}
@@ -81,13 +81,13 @@ public class WaitingBank {
 	}
 
 
-	public int getWaitingIdx() {
-		return waitingIdx;
+	public int getWaitingNum() {
+		return waitingNum;
 	}
 
 
-	public void setWaitingIdx(int waitingIdx) {
-		this.waitingIdx = waitingIdx;
+	public void setWaitingNum(int waitingNum) {
+		this.waitingNum = waitingNum;
 	}
 
 
@@ -133,7 +133,7 @@ public class WaitingBank {
 
 	@Override
 	public String toString() {
-		return "WaitingBank [userId=" + userId + ", bankIdx=" + bankIdx + ", waitingIdx=" + waitingIdx
+		return "WaitingBank [userId=" + userId + ", bankIdx=" + bankIdx + ", waitingNum=" + waitingNum
 				+ ", waitingDate=" + waitingDate + ", waitingCnt=" + waitingCnt + ", user=" + user + ", bank=" + bank
 				+ "]";
 	}

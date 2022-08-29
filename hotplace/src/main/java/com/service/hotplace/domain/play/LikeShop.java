@@ -8,6 +8,8 @@ public class LikeShop {
 	private int likeIdx;
 	private String userId;
 	private int shopIdx;
+	
+	
 	private User user;
 	private Shop shop;
 

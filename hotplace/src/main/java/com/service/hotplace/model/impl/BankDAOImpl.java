@@ -48,9 +48,15 @@ public class BankDAOImpl implements BankDAO{
 	}
 
 	@Override
-	public int updateBankWait(Bank bank) throws Exception {
+	public int updateBankEnternum(Bank bank) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.update(NS+"updateBankWait",bank);
+		return sqlSession.update(NS+"updateBankEnternum",bank);
+	}
+
+	@Override
+	public int updateBank(Bank bank) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.update(NS+"updateBank",bank);
 	}
 
 //	@Override

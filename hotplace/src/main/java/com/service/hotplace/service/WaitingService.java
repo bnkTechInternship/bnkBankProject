@@ -22,6 +22,18 @@ public interface WaitingService {
 	WaitingBank getNowWaitingBank(User user) throws Exception;
 	WaitingShop getNowWaitingShop(User user) throws Exception;
 	
+	//현재 줄서고 있는 가게 내 앞에 몇팀남았는지
+	int getShopUntilMyTurn(WaitingShop waitingShop) throws Exception;
+	int getBankUntilMyTurn(WaitingBank waitingBank) throws Exception;
+	
+	//가게별 현재 대기팀수
+	int getShopNowWaitingCnt(WaitingShop waitingShop) throws Exception;
+	int getBankNowWaitingCnt(WaitingBank waitingBank) throws Exception;
+	
+	//가게별 누적인원업데이트
+	int updateTotalShopCnt(WaitingShop waitingShop) throws Exception;
+	
+	
 	
 
 }

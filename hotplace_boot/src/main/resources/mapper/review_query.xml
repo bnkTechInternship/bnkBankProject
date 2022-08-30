@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sql.review.mapper">
+	
+
+	<insert id="addReview" parameterType="review">
+		INSERT INTO review
+		VALUES(#{userId},#{shopIdx},#{score},#{comm})
+	</insert>
+	
+	
+	<delete id="deleteReview" parameterType="review">
+		DELETE FROM review
+		WHERE user_id = #{userId} and shop_idx=#{shopIdx}
+	</delete>
+	
+	<update id="updateReview" parameterType="review">
+		UPDATE review
+		SET score=#{score}, comm=#{comm}
+		WHERE user_id = #{userId} and shop_idx=#{shopIdx}
+		
+	</update>
+	
+	<select id="getReviewListByUserId" parameterType="String" resultType="review">
+		SELECT * FROM review
+		WHERE user_id = #{value}
+	</select>
+	
+	<select id="getReviewListByShopIdx" parameterType="int"  resultType="review">
+		SELECT * FROM review
+		WHERE shop_idx=#{value}
+	</select>
+	
+	<select id="getScoreAvg" parameterType="int" resultType="double">
+		SELECT avg(score) FROM review
+		WHERE shop_idx = #{value}
+	</select>
+	 
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+
+

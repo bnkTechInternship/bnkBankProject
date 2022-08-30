@@ -10,12 +10,12 @@ public class Shop {
 	private String shopLat;
 	private String shopLong;
 	private int totalCnt;
-	private String web_address;
+	private String webAddress;
 	
 	public Shop() {}
 
 	public Shop(int shopIdx, String shopName, String shopAddress, String shopNumber, String shopOper, int shopEnternum,
-			String shopLat, String shopLong, int totalCnt, String web_address) {
+			String shopLat, String shopLong, int totalCnt, String webAddress) {
 		super();
 		this.shopIdx = shopIdx;
 		this.shopName = shopName;
@@ -26,7 +26,23 @@ public class Shop {
 		this.shopLat = shopLat;
 		this.shopLong = shopLong;
 		this.totalCnt = totalCnt;
-		this.web_address = web_address;
+		this.webAddress = webAddress;
+	}
+	
+	
+
+	public Shop(String shopName, String shopAddress, String shopNumber, String shopOper, int shopEnternum,
+			String shopLat, String shopLong, int totalCnt, String webAddress) {
+		super();
+		this.shopName = shopName;
+		this.shopAddress = shopAddress;
+		this.shopNumber = shopNumber;
+		this.shopOper = shopOper;
+		this.shopEnternum = shopEnternum;
+		this.shopLat = shopLat;
+		this.shopLong = shopLong;
+		this.totalCnt = totalCnt;
+		this.webAddress = webAddress;
 	}
 
 	public int getShopIdx() {
@@ -101,19 +117,19 @@ public class Shop {
 		this.totalCnt = totalCnt;
 	}
 
-	public String getWeb_address() {
-		return web_address;
+	public String getWebAddress() {
+		return webAddress;
 	}
 
-	public void setWeb_address(String web_address) {
-		this.web_address = web_address;
+	public void setWebAddress(String webAddress) {
+		this.webAddress = webAddress;
 	}
 
 	@Override
 	public String toString() {
 		return "Shop [shopIdx=" + shopIdx + ", shopName=" + shopName + ", shopAddress=" + shopAddress + ", shopNumber="
 				+ shopNumber + ", shopOper=" + shopOper + ", shopEnternum=" + shopEnternum + ", shopLat=" + shopLat
-				+ ", shopLong=" + shopLong + ", totalCnt=" + totalCnt + ", web_address=" + web_address + "]";
+				+ ", shopLong=" + shopLong + ", totalCnt=" + totalCnt + ", webAddress=" + webAddress + "]";
 	};
 	
 

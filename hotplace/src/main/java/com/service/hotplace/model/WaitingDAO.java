@@ -2,6 +2,8 @@ package com.service.hotplace.model;
 
 import java.util.List;
 
+import com.service.hotplace.domain.place.Bank;
+import com.service.hotplace.domain.place.Shop;
 import com.service.hotplace.domain.play.WaitingBank;
 import com.service.hotplace.domain.play.WaitingShop;
 
@@ -24,8 +26,8 @@ public interface WaitingDAO {
 	int getBankUntilMyTurn(WaitingBank waitingBank) throws Exception;
 	
 	//가게별 현재 대기팀수
-	int getShopNowWaitingCnt(WaitingShop waitingShop) throws Exception;
-	int getBankNowWaitingCnt(WaitingBank waitingBank) throws Exception;
+	int getShopNowWaitingCnt(Shop shop) throws Exception;
+	int getBankNowWaitingCnt(Bank bank) throws Exception;
 	
 	//가게별 누적인원업데이트
 	int updateTotalShopCnt(WaitingShop waitingShop) throws Exception;

@@ -49,13 +49,13 @@
 		WHERE user_id=#{userId}
 		AND user_pw=#{userPw}
 	</select>
-	<select id="findUserId" parameterType="user" resultType="user">
+	<select id="findUserId" parameterType="user" resultType="string">
 		SELECT
 		user_id
 		FROM user2
 		WHERE user_email=#{userEmail}
 	</select>
-	<select id="findUserPw" parameterType="user" resultType="user">
+	<select id="findUserPw" parameterType="user" resultType="string">
 		SELECT
 		user_pw
 		FROM user2

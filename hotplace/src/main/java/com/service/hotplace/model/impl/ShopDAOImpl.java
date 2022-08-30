@@ -54,7 +54,7 @@ public class ShopDAOImpl implements ShopDAO {
 	@Override
 	public int updateShopEnternum(Shop shop) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlsession.update(NS+"updateShopWait",shop);
+		return sqlsession.update(NS+"updateShopEnternum",shop);
 	}
 
 }

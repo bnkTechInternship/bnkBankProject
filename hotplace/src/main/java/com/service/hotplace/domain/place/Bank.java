@@ -28,6 +28,22 @@ public class Bank {
 		this.bankLat = bankLat;
 		this.bankLong = bankLong;
 	}
+	
+	
+
+
+
+	public Bank(String bankName, String bankAddress, String bankNumber, String bankOper, int bankEnternum,
+			String bankLat, String bankLong) {
+		super();
+		this.bankName = bankName;
+		this.bankAddress = bankAddress;
+		this.bankNumber = bankNumber;
+		this.bankOper = bankOper;
+		this.bankEnternum = bankEnternum;
+		this.bankLat = bankLat;
+		this.bankLong = bankLong;
+	}
 
 
 

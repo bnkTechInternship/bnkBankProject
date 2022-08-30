@@ -3,10 +3,12 @@ package com.service.hotplace.service.Impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.service.hotplace.domain.place.Bank;
 import com.service.hotplace.model.BankDAO;
+import com.service.hotplace.model.impl.BankDAOImpl;
 import com.service.hotplace.service.BankService;
 
 
@@ -15,7 +17,7 @@ public class BankServiceImpl implements BankService{
 	
 	@Autowired
 	private BankDAO bankDAO;
-
+	
 	@Override
 	public List<Bank> getBankList() throws Exception {
 		// TODO Auto-generated method stub
@@ -55,7 +57,7 @@ public class BankServiceImpl implements BankService{
 	@Override
 	public int updateBankEnternum(Bank bank) throws Exception {
 		// TODO Auto-generated method stub
-		return bankDAO.updateBank(bank);
+		return bankDAO.updateBankEnternum(bank);
 	}
 
 

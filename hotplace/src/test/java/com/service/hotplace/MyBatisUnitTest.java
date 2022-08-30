@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.service.hotplace.domain.person.User;
 import com.service.hotplace.domain.place.Bank;
@@ -18,9 +19,14 @@ import com.service.hotplace.domain.play.LikeShop;
 import com.service.hotplace.domain.play.Review;
 import com.service.hotplace.domain.play.WaitingBank;
 import com.service.hotplace.domain.play.WaitingShop;
+import com.service.hotplace.service.BankService;
+import com.service.hotplace.service.Impl.BankServiceImpl;
 
 
 public class MyBatisUnitTest {
+	
+	@Autowired
+	BankService bankService;
 	
 
 	@Test
@@ -30,11 +36,21 @@ public class MyBatisUnitTest {
 		SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(r);
 		SqlSession session = factory.openSession();
 		
+		
+		
+		
+		Bank bank = new Bank("부산은행기장","기장","052444","0930~1500",3,"위도","경도");
+		System.out.println(bank);
+		
+		System.out.println(bankService.registerBank(bank));
+		
 //		
 //		Bank tmp = new Bank("해운대점","기장군","334","ㅇㅇ",4,44,"위도","경도");
 //		System.out.println(tmp);
+		
+
 //		
-//		int result=session.insert("sql.bank.mapper.registerBank",tmp);
+//		int result=session.insert("sql.bank.mapper.registerBank",bank);
 //		session.commit();
 //		System.out.println(result);
 		
@@ -114,7 +130,7 @@ public class MyBatisUnitTest {
 //		for(WaitingShop w : list) System.out.println(w);
 		
 		
-       Shop shop = new Shop("누들차브","기장군","333","auctl싯ㅋ",4,40,"ㅇㄴㅇ","경도",10,"www");
+       //Shop shop = new Shop("누들차브","기장군","333","auctl싯ㅋ",4,40,"ㅇㄴㅇ","경도",10,"www");
 //      int result=session.insert("sql.hotplace.mapper.registerShop",shop);
 //      session.commit();
       

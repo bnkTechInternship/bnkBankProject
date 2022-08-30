@@ -8,7 +8,7 @@ import com.service.hotplace.domain.place.Bank;
 public interface UserService {
 	int registerUser(User user)throws Exception;
 	int updateUser(User user)throws Exception;
-	int deleteUser(User user)throws Exception;
+	int deleteUser(String userId)throws Exception;
 	
 	User login(User user) throws Exception;
 	User getUserById(String userId)throws Exception;

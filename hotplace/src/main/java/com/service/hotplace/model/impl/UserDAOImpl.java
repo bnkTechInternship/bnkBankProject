@@ -29,9 +29,9 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
-	public int deleteUser(User user) throws Exception {
+	public int deleteUser(String userId) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlsession.delete(NS+"deleteUser",user);
+		return sqlsession.delete(NS+"deleteUser",userId);
 	}
 
 	@Override
@@ -55,13 +55,13 @@ public class UserDAOImpl implements UserDAO{
 	@Override
 	public String findUserId(String userEmail) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlsession.selectOne(NS+"getUserId",userEmail);
+		return sqlsession.selectOne(NS+"findUserId",userEmail);
 	}
 
 	@Override
 	public String findUserPw(User user) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlsession.selectOne(NS+"getUserPw",user);
+		return sqlsession.selectOne(NS+"findUserPw",user);
 	}
 	
 	

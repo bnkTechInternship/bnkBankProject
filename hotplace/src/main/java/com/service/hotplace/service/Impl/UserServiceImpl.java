@@ -28,9 +28,9 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public int deleteUser(User user) throws Exception {
+	public int deleteUser(String userId) throws Exception {
 		// TODO Auto-generated method stub
-		return userService.deleteUser(user);
+		return userService.deleteUser(userId);
 	}
 
 	@Override

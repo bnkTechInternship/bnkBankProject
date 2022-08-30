@@ -8,7 +8,6 @@ public class WaitingBank {
 	private int bankIdx;
 	private int waitingNum;
 	private String waitingDate;
-	private int waitingCnt;
 	
 	private User user;
 	private Bank bank;
@@ -17,14 +16,13 @@ public class WaitingBank {
 	public WaitingBank() {}
 
 
-	public WaitingBank(String userId, int bankIdx, int waitingNum, String waitingDate, int waitingCnt, User user,
+	public WaitingBank(String userId, int bankIdx, int waitingNum, String waitingDate, User user,
 			Bank bank) {
 		super();
 		this.userId = userId;
 		this.bankIdx = bankIdx;
 		this.waitingNum = waitingNum;
 		this.waitingDate = waitingDate;
-		this.waitingCnt = waitingCnt;
 		this.user = user;
 		this.bank = bank;
 	}
@@ -34,30 +32,27 @@ public class WaitingBank {
 	
 
 
-	public WaitingBank(String userId, int bankIdx, int waitingNum, int waitingCnt) {
+	public WaitingBank(String userId, int bankIdx, int waitingNum) {
 		super();
 		this.userId = userId;
 		this.bankIdx = bankIdx;
 		this.waitingNum = waitingNum;
-		this.waitingCnt = waitingCnt;
 	}
 
 
-	public WaitingBank(String userId, int bankIdx, int waitingCnt) {
+	public WaitingBank(String userId, int bankIdx) {
 		super();
 		this.userId = userId;
 		this.bankIdx = bankIdx;
-		this.waitingCnt = waitingCnt;
 	}
 
 
-	public WaitingBank(String userId, int bankIdx, int waitingNum, String waitingDate, int waitingCnt) {
+	public WaitingBank(String userId, int bankIdx, int waitingNum, String waitingDate) {
 		super();
 		this.userId = userId;
 		this.bankIdx = bankIdx;
 		this.waitingNum = waitingNum;
 		this.waitingDate = waitingDate;
-		this.waitingCnt = waitingCnt;
 	}
 
 
@@ -101,16 +96,6 @@ public class WaitingBank {
 	}
 
 
-	public int getWaitingCnt() {
-		return waitingCnt;
-	}
-
-
-	public void setWaitingCnt(int waitingCnt) {
-		this.waitingCnt = waitingCnt;
-	}
-
-
 	public User getUser() {
 		return user;
 	}
@@ -134,7 +119,7 @@ public class WaitingBank {
 	@Override
 	public String toString() {
 		return "WaitingBank [userId=" + userId + ", bankIdx=" + bankIdx + ", waitingNum=" + waitingNum
-				+ ", waitingDate=" + waitingDate + ", waitingCnt=" + waitingCnt + ", user=" + user + ", bank=" + bank
+				+ ", waitingDate=" + waitingDate + ", user=" + user + ", bank=" + bank
 				+ "]";
 	}
 	

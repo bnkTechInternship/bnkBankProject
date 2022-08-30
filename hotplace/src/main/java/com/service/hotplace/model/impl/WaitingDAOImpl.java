@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.service.hotplace.domain.place.Bank;
+import com.service.hotplace.domain.place.Shop;
 import com.service.hotplace.domain.play.WaitingBank;
 import com.service.hotplace.domain.play.WaitingShop;
 import com.service.hotplace.model.WaitingDAO;
@@ -43,13 +45,13 @@ public class WaitingDAOImpl implements WaitingDAO {
 	@Override
 	public List<WaitingBank> getNowWaitingBank(String userId) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlsession.selectOne(NS+"getNowWaitingBank",userId);
+		return sqlsession.selectList(NS+"getNowWaitingBank",userId);
 	}
 
 	@Override
 	public List<WaitingShop> getNowWaitingShop(String userId) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlsession.selectOne(NS+"getNowWaitingShop",userId);
+		return sqlsession.selectList(NS+"getNowWaitingShop",userId);
 	}
 
 	@Override
@@ -65,15 +67,15 @@ public class WaitingDAOImpl implements WaitingDAO {
 	}
 
 	@Override
-	public int getShopNowWaitingCnt(WaitingShop waitingShop) throws Exception {
+	public int getShopNowWaitingCnt(Shop shop) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlsession.selectOne(NS+"getShopNowWaitingCnt",waitingShop);
+		return sqlsession.selectOne(NS+"getShopNowWaitingCnt",shop);
 	}
 
 	@Override
-	public int getBankNowWaitingCnt(WaitingBank waitingBank) throws Exception {
+	public int getBankNowWaitingCnt(Bank bank) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlsession.selectOne(NS+"getBankNowWaitingCnt",waitingBank);
+		return sqlsession.selectOne(NS+"getBankNowWaitingCnt",bank);
 	}
 
 	@Override

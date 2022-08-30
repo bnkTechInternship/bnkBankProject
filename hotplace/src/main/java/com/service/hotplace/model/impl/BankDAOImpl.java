@@ -38,7 +38,7 @@ public class BankDAOImpl implements BankDAO{
 	@Override
 	public int deleteBank(int bankIdx) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.delete(NS+"registerBank",bankIdx);
+		return sqlSession.delete(NS+"deleteBank",bankIdx);
 	}
 
 	@Override

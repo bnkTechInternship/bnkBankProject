@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.service.hotplace.domain.play.Review;
+import com.service.hotplace.model.ReviewDAO;
 import com.service.hotplace.service.ReviewService;
 
 
@@ -13,42 +14,42 @@ import com.service.hotplace.service.ReviewService;
 public class ReviewServiceImpl implements ReviewService {
 
 	@Autowired
-	private ReviewService reviewService;
+	private ReviewDAO reviewDAO;
 
 	@Override
 	public int addReview(Review review) throws Exception {
 		// TODO Auto-generated method stub
-		return reviewService.addReview(review);
+		return reviewDAO.addReview(review);
 	}
 
 	@Override
 	public int deleteReview(Review review) throws Exception {
 		// TODO Auto-generated method stub
-		return reviewService.deleteReview(review);
+		return reviewDAO.deleteReview(review);
 	}
 
 	@Override
 	public int updateReview(Review review) throws Exception {
 		// TODO Auto-generated method stub
-		return reviewService.updateReview(review);
+		return reviewDAO.updateReview(review);
 	}
 
 	@Override
 	public List<Review> getReviewListByUserId(String userId) throws Exception {
 		// TODO Auto-generated method stub
-		return reviewService.getReviewListByUserId(userId);
+		return reviewDAO.getReviewListByUserId(userId);
 	}
 
 	@Override
 	public List<Review> getReviewListByShopIdx(int shopIdx) throws Exception {
 		// TODO Auto-generated method stub
-		return reviewService.getReviewListByShopIdx(shopIdx);
+		return reviewDAO.getReviewListByShopIdx(shopIdx);
 	}
 
 	@Override
 	public double getScoreAvg(int ShopIdx) throws Exception {
 		// TODO Auto-generated method stub
-		return reviewService.getScoreAvg(ShopIdx);
+		return reviewDAO.getScoreAvg(ShopIdx);
 	}
 
 }

@@ -51,7 +51,7 @@
 	<update id="updateBankEnternum" parameterType="bank">
 		UPDATE bank
 		SET bank_enternum = bank_enternum +1
-		WHERE bank_idx=#{bank_idx}
+		WHERE bank_idx=#{bankIdx}
 	</update>
 	
 </mapper>

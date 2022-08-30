@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.service.hotplace.domain.person.User;
+import com.service.hotplace.model.UserDAO;
 import com.service.hotplace.service.UserService;
 
 
@@ -13,54 +14,54 @@ import com.service.hotplace.service.UserService;
 public class UserServiceImpl implements UserService{
 	
 	@Autowired 
-	private UserService userService;
+	private UserDAO userDAO;
 
 	@Override
 	public int registerUser(User user) throws Exception {
 		// TODO Auto-generated method stub
-		return userService.registerUser(user);
+		return userDAO.registerUser(user);
 	}
 
 	@Override
 	public int updateUser(User user) throws Exception {
 		// TODO Auto-generated method stub
-		return userService.updateUser(user);
+		return userDAO.updateUser(user);
 	}
 
 	@Override
 	public int deleteUser(String userId) throws Exception {
 		// TODO Auto-generated method stub
-		return userService.deleteUser(userId);
+		return userDAO.deleteUser(userId);
 	}
 
 	@Override
 	public User login(User user) throws Exception {
 		// TODO Auto-generated method stub
-		return userService.login(user);
+		return userDAO.login(user);
 	}
 
 	@Override
 	public User getUserById(String userId) throws Exception {
 		// TODO Auto-generated method stub
-		return userService.getUserById(userId);
+		return userDAO.getUserById(userId);
 	}
 
 	@Override
 	public List<User> getUserList() throws Exception {
 		// TODO Auto-generated method stub
-		return userService.getUserList();
+		return userDAO.getUserList();
 	}
 
 	@Override
 	public String findUserId(String userEmail) throws Exception {
 		// TODO Auto-generated method stub
-		return userService.findUserId(userEmail);
+		return userDAO.findUserId(userEmail);
 	}
 
 	@Override
 	public String findUserPw(User user) throws Exception {
 		// TODO Auto-generated method stub
-		return userService.findUserPw(user);
+		return userDAO.findUserPw(user);
 	}
 	
 

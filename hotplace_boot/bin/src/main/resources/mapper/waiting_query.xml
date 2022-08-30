@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sql.waiting.mapper">
+
+	<insert id="registerWaitingBank" parameterType="waitingBank">
+		INSERT INTO waiting_bank(user_id,bank_idx,waiting_num,waiting_date)
+		VALUES(#{userId},#{bankIdx},NVL((SELECT (max(waiting_num)+1) FROM waiting_bank WHERE bank_idx=#{bankIdx}),1),sysdate)
+	</insert>
+	
+	<insert id="registerWaitingShop" parameterType="waitingShop">
+		INSERT INTO waiting_shop(user_id,menu_idx,shop_idx,waiting_num,quantity,waiting_date,waiting_cnt)
+		VALUES(#{userId},#{menuIdx},#{shopIdx},NVL((SELECT max(waiting_num)+1 FROM waiting_shop WHERE shop_idx=#{shopIdx}),1),#{quantity},sysdate,#{waitingCnt})
+	</insert>
+	
+	<select id="getWaitingBank" parameterType="string" resultType="waitingBank">
+		SELECT * FROM waiting_bank
+		WHERE user_id=#{value}
+	</select>
+	
+	<select id="getWaitingShop" parameterType="string" resultType="waitingShop">
+		SELECT * FROM waiting_shop
+		WHERE user_id=#{value}
+	</select>
+	
+	<resultMap type="waitingShop" id="waitingshopwithshop">
+		<id column="user_id" property="userId"/>
+		<result property="shopIdx" column="shop_idx"/>
+		<result property="waitingNum" column="waiting_num"/>
+		<result property="waitingDate" column="waiting_date"/>
+		<result property="waitingCnt" column="waiting_cnt"/>
+		<association property="shop" javaType="shop">
+			<id column="shop_idx" property="shopIdx"></id>
+			<result property="shopEnternum" column="shop_enternum"/>
+		</association>
+	</resultMap>
+	
+	<select id="getNowWaitingShop" parameterType="string" resultMap="waitingshopwithshop" resultType="waitingShop">
+		SELECT w.user_id, w.shop_idx, w.waiting_num, w.waiting_date, s.shop_enternum
+		FROM waiting_shop w, shop s
+		WHERE user_id=#{value} and w.shop_idx = s.shop_idx
+	</select>
+	
+	
+	<select id="getShopNowWaitingCnt" parameterType="Shop" resultType="int">
+		SELECT w.waiting_num- s.shop_enternum
+		FROM waiting_shop w, shop s
+		WHERE w.shop_idx=#{shopIdx} and w.shop_idx = s.shop_idx
+			  and w.waiting_num = (SELECT max(waiting_num) FROM waiting_shop WHERE shop_idx=#{shopIdx} )
+	</select>
+	
+	
+
+	
+<!-- 	<select id="getNowWaitingBank" parameterType="string" resultMap="waitingbankwithbank" resultType="waitingBank">
+		SELECT w.waiting_num, b.bank_enternum
+		FROM waiting_bank w, bank b
+		WHERE user_id=#{value} and w.bank_idx = b.bank_idx
+	</select> -->
+	
+	<select id="getNowWaitingBank" parameterType="string" resultMap="waitingbankwithbank" resultType="waitingBank">
+		SELECT w.user_id, w.bank_idx, w.waiting_num, w.waiting_date, b.bank_enternum
+		FROM waiting_bank w, bank b
+		WHERE user_id=#{value} and w.bank_idx = b.bank_idx
+	</select>
+	
+	
+	<resultMap type="waitingBank" id="waitingbankwithbank">
+		<id column="user_id" property="userId"/>
+		<result property="bankIdx" column="bank_idx"/>
+		<result property="waitingNum" column="waiting_num"/>
+		<result property="waitingDate" column="waiting_date"/>
+		<association property="bank" javaType="bank">
+			<id column="bank_idx" property="bankIdx"></id>
+			<result property="bankEnternum" column="bank_enternum"/>
+		</association>
+	</resultMap>
+	
+	<select id="getBankNowWaitingCnt" parameterType="bank" resultType="int">
+		SELECT w.waiting_num - b.bank_enternum
+		FROM waiting_bank w, bank b
+		WHERE w.bank_idx=#{bankIdx} and w.bank_idx = b.bank_idx
+			  and w.waiting_num = (SELECT max(waiting_num) FROM waiting_bank WHERE bank_idx=#{bankIdx} )
+	</select>
+	
+	
+	<update id="updateTotalShopCnt" parameterType="waitingShop">
+		UPDATE shop
+		SET total_cnt = total_cnt + #{waitingCnt}
+		WHERE shop_idx = #{shopIdx}
+	</update>
+	
+	
+	<select id="getShopUntilMyTurn" parameterType="waitingShop" resultType="int">
+		SELECT w.waiting_num- s.shop_enternum
+		FROM waiting_shop w, shop s
+		WHERE w.shop_idx=#{shopIdx} and w.user_id = #{userId} and w.shop_idx = s.shop_idx
+		     and w.waiting_num= (SELECT max(waiting_num) FROM waiting_shop WHERE shop_idx= #{shopIdx} and user_id = #{userId})	
+	</select>
+	
+	
+	<select id="getBankUntilMyTurn" parameterType="waitingBank" resultType="int">
+		SELECT w.waiting_num- b.bank_enternum
+		FROM waiting_bank w, bank b
+		WHERE w.bank_idx=#{bankIdx} and w.user_id = #{userId} and w.bank_idx = b.bank_idx	
+		and w.waiting_num= (SELECT max(waiting_num) FROM waiting_bank WHERE bank_idx= #{bankIdx} and user_id = #{userId})
+	</select>
+	
+	
+
+	
+</mapper>
+
+
+
+
+
+
+
+

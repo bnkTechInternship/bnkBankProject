@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sql.bank.mapper">
+
+	<insert id="registerBank" parameterType="bank">
+		<selectKey keyProperty="bankIdx" resultType="int" order="BEFORE">
+		SELECT bank_seq.nextVal From dual
+		</selectKey>
+		INSERT INTO bank(bank_idx, bank_name,bank_address,bank_number,
+						bank_oper,bank_enternum,bank_lat,bank_long)
+		VALUES(#{bankIdx},#{bankName},#{bankAddress},#{bankNumber},#{bankOper},
+				#{bankEnternum},#{bankLat},#{bankLong})
+	</insert>
+	
+	<delete id="deleteBank" parameterType="int">
+		DELETE FROM bank WHERE bank_idx = #{value}
+	</delete>
+	
+	<update id="updateBank" parameterType="bank">
+		UPDATE bank SET bank_name = #{bankName}, bank_address = #{bankAddress},
+		                bank_number = #{bankNumber}, bank_oper = #{bankOper},
+		                bank_lat = #{bankLat}, bank_long = #{bankLong}
+		WHERE bank_idx = #{bankIdx}
+	</update>
+	
+
+	
+	<select id="getBankList" resultType="bank">
+		SELECT
+		*
+		FROM bank
+	</select>
+	
+	<select id="getBankByIdx" parameterType="int" resultType="bank">
+		SELECT
+		*
+		FROM bank
+		WHERE bank_idx=#{value}
+	</select>
+	
+	<select id="getBankByName" parameterType="string" resultType="bank">
+		SELECT
+		*
+		FROM bank
+		WHERE bank_name LIKE '%' || #{value} || '%'
+	</select>
+	
+	<update id="updateBankEnternum" parameterType="bank">
+		UPDATE bank
+		SET bank_enternum = bank_enternum +1
+		WHERE bank_idx=#{bankIdx}
+	</update>
+	
+</mapper>
+
+
+
+
+
+
+
+

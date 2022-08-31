@@ -9,7 +9,7 @@
 		INSERT INTO user2(user_id, user_pw,user_name,user_email,
 						user_address,user_number,user_balance,user_point,register_date,user_group)
 		VALUES(#{userId},#{userPw},#{userName},#{userEmail},#{userAddress},
-				#{userNumber},#{userBalance},#{userPoint},#{registerDate},'회원')
+				#{userNumber},#{userBalance},#{userPoint},sysdate,'회원')
 	</insert>
 	
 	<delete id="deleteUser" parameterType="string">

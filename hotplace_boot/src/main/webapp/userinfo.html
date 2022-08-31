@@ -1,0 +1,131 @@
+<!--Design by foolishdeveloper.com-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/sidebar.css">
+    <link rel="stylesheet" href="./css/banner.css">
+    <link rel="stylesheet" href="./css/userinfo.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./script/userinfo.js"></script>
+</head>
+
+<body>
+        <div id="topNavbar">
+            <div id="topNavbar__one">
+                <img src = "img/bnk핫플5.png" id = "logo">
+                <div id = "topInputDiv">
+                    <input type = "text">
+                </div>
+                <div id = "myInfo">
+                    <img src = "img/more.png">
+                    <img src = "img/user.png">
+                </div>
+            </div>            
+        </div> 
+
+        <div class="wrapper">
+            <div class="section">
+                <div class="container_middle1">
+                    <h1>회원정보 수정</h1>
+                </div>
+                    <div class="container_middle2"> 
+                        <div id="con_mid2">
+                            <div class="container_middle2_left">
+                                <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">
+                            </div>
+                            <div class="container_middle2_right">
+                                <h2>김근영</h2>
+                                <p>allwloo2@naver.com</p>
+                            </div>
+                    </div>
+                    <div id="form">
+                        <form action="#">
+                            <div class="form-floating input">
+                                <p><label>ID</label></p>
+                                <input type="email" class="form-control font" name="id" id="floatingInput" value="allwloo2@naver.com" placeholder="name@example.com">
+                            </div>
+                            <div class="form-floating input">
+                                <p><label>PW</label></p>
+                                <input type="password" class="form-control font" name="password" id="floatingPassword" placeholder="Password">
+                            </div>
+                            <div class="form-floating input">
+                                <p><label>비밀번호 재확인</label></p>
+                                <input type="password" class="form-control font" name="passwordcheck" id="floatingPasswordcheck" placeholder="PasswordCheck">
+                            </div>
+                            <div class="form-floating input">
+                                <p><label>이름</label></p>
+                                <input type="text" class="form-control font" name="name" id="floatingName" placeholder="Name">
+                            </div>
+                            <div class="form-floating input">
+                                <p><label>주소</label></p>
+                                <input type="text" class="form-control font" name="address" id="floatingAddress" placeholder="Address">
+                            </div>
+                            <div class="form-floating input">
+                                <p><label>전화번호</label></p>
+                                <input type="text" class="form-control font" name="phone" id="floatingPhone" placeholder="Phone">
+                            </div>
+                            <input type="hidden" id="money" name="money" value="" />
+                            <input type="hidden" id="point" name="point" value="" />
+                            <button type="button" id="btn1">
+                                회원정보 수정
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <aside>
+                    <h2>여기 동백전 들어갈고양</h2>
+                </aside>
+            </div> <!--section-->
+
+             <div class="sidebar">
+                 <div class="profile">
+                     <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="profile_picture">
+                     <h3>Anamika Roy</h3>
+                     <p>Designer</p>
+                 </div>
+                 <ul>
+                     <li>
+                         <a href="http://localhost:3000/dashboard" >
+                             <span class="icon"><i class="fas fa-home"></i></span>
+                             <span class="item">요약</span>
+                         </a>
+                     </li>
+                     <li>
+                         <a href="http://localhost:3000/reserve">
+                             <span class="icon"><i class="fas fa-desktop"></i></span>
+                             <span class="item">예약 현황</span>
+                         </a>
+                     </li>
+                     <li>
+                        <a href="http://localhost:3000/myfav">
+                            <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                            <span class="item">찜 목록</span>
+                        </a>
+                    </li>
+                     <li>
+                         <a href="http://localhost:3000/myfav">
+                             <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                             <span class="item">찜 목록</span>
+                         </a>
+                     </li>
+                     <li>
+                         <a href="http://localhost:3000/userinfo" class="active">
+                             <span class="icon"><i class="fas fa-user-friends"></i></span>
+                             <span class="item">내 정보</span>
+                         </a>
+                     </li>
+                 </ul>
+             </div>
+            </div><!-- wrapper -->
+    
+
+   
+ 
+</body>
+</html>

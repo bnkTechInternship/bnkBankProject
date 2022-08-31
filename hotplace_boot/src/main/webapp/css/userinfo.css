@@ -1,0 +1,129 @@
+html, body{
+    width: 100%;
+    height: calc(100%-80px);
+}
+
+/* 첫번째 영역...! */
+.container_middle1{
+    width: 100%;
+    padding-top: 50px;
+    padding-left: 50px;
+    height: 140px;
+    
+    border-bottom: solid 2px hotpink;
+    border-bottom-style: double;
+    border-width: 7px;
+    }
+
+.container_middle1_left{
+    width: 50%;
+    height: 100px;
+}
+
+.container_middle2 img{
+    width: 100px;
+    height: 100px;
+    float: right;
+}
+
+.container_middle2 img:hover{
+    width: 110px;
+    height: 110px;
+}
+
+#con_mid2{
+    margin-right: 0px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.container_middle2_right{
+    text-align: left;
+    padding-left: 30px;
+    padding-top: 30px;
+    width: 200px;
+    height: 120px;
+    float: right;
+    order: 0;
+
+}
+
+.container_middle2_left{
+    float: right;
+    width: 200px;
+    height: 120px;
+    order: 1;
+}
+
+
+
+
+/* 2번째 영역!*/
+.container_middle2{
+    width: 50%;
+    padding-top: 50px;
+    height: 600px;
+    float: left;
+}
+
+
+/* 폼 시작 */
+
+#form{
+    width: 50%;
+    height: 600px;
+    float: right;
+}
+
+form p{
+    text-align: left;
+}
+
+form {
+    float: right;
+    width : 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 180px;
+    gap : 15px;
+}
+
+form input{
+    font-family: Arial, Helvetica, sans-serif;
+    width: 250px;
+    height: 25px;
+}
+
+form button{
+    font-family: Arial, Helvetica, sans-serif;
+    float: left;
+    margin-top: 30px;
+    width: 250px;
+    background-color: pink;
+}
+
+/* 폼 끝 */
+
+/* 2번째 영역 끝 */
+
+.wrapper{
+    height: calc(100%-80px);
+}
+
+body{
+    width: 100%;
+    height: calc(100%-80px);
+}
+
+@media (max-width : 800px) {
+
+    .container_middle1, .container_middle2{
+        width: calc(100%);
+        border-radius: 0px;
+    }
+
+    
+
+}
+  

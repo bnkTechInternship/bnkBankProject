@@ -50,20 +50,23 @@ public class TestController {
 		return "redirect:main.html";
 	}
 	
+	
+	@ResponseBody
 	@RequestMapping("findId.do")
-	public String findIdDo(User user,Model model) throws Exception {
+	public String findIdDo(User user) throws Exception {
 		System.out.println("=================================================아이디 찾기======================================");
 		String userId = userService.findUserId(user.getUserEmail());
-		System.out.println(userId);
-		model.addAttribute("userId",userId);
-		return "find_id_result.html";
+		//System.out.println(userId);
+		//model.addAttribute("userId",userId);
+		return userId;
 	}
 	
+	@ResponseBody
 	@PostMapping("findPw.do")
 	public String findPwDo(User user, Model model) throws Exception{
 		System.out.println("===============================================비밀번호 찾기======================================");
 		String userPw = userService.findUserPw(user);
-		return "redirect:login.html";
+		return userPw;
 	}
 
 }

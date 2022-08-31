@@ -9,4 +9,9 @@ $(function() {
               $('form').submit();
         }
     })
+    
+    
+    $('#notuserstartbtn').click(function(){
+    	location.replace('main.html');
+    });
 })

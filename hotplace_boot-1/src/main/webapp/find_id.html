@@ -19,20 +19,20 @@
         <div><h2>ID를 잊으셨나요?</h2></div>
         <form action="/findId.do" method="post">
             <div class="form-floating input">
-                <input type="email" class="form-control font" name="userEmail" id="floatingInput" placeholder="name@example.com">
+                <input type="email" class="form-control font" name="userEmail" id="floatingEmail" placeholder="name@example.com">
                 <label for="floatingId">이메일</label>
             </div>
             <div class="form-floating input">
                 <input type="text" class="form-control font" name="userName" id="floatingName" placeholder="Name">
                 <label for="floatingName">이름</label>
             </div>
-            <button type="button" id="findId_button" class="btn btn-primary input" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" id="findId_button" class="btn btn-primary input">
                 ID 찾기
             </button>
         </form>
     </div>
 
-
+<!--  data-bs-toggle="modal" data-bs-target="#exampleModal" -->
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">

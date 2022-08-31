@@ -50,6 +50,8 @@ $(function() {
 				success:function(result){
 						var jsonData = JSON.parse(result); //객체 받음
 						console.log(jsonData);
+						console.log(result);
+						
 						if(jsonData.check==true){
 							$('#check').html('이미사용중인아이디').css('color','red');
 							$('#register_button').attr('disabled',true);

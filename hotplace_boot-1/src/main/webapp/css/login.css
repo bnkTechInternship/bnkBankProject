@@ -11,7 +11,7 @@ html, body {
 }
 
 body {
-    background-image: url('../img/배경 어둡게.png');
+    background-color:#1A3C40;
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;

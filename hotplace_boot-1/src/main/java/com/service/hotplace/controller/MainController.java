@@ -12,6 +12,7 @@ import com.service.hotplace.domain.place.Bank;
 import com.service.hotplace.domain.place.Shop;
 import com.service.hotplace.service.BankService;
 import com.service.hotplace.service.ShopService;
+import com.service.hotplace.service.WaitingService;
 
 @Controller
 public class MainController {
@@ -21,12 +22,30 @@ public class MainController {
 	
 	@Autowired
 	BankService bankService;
+	
+	@Autowired
+	WaitingService waitingService;
 
-	@GetMapping("/shop/init")
+	@GetMapping("/shop/init/data")
 	@ResponseBody
 	public List<Shop> sendInitData(String number) throws Exception {
 		
 		List<Shop>list = shopService.getPartData(Integer.parseInt(number));
+		List<Integer> list2 = waitingService.getPartNowWaitingCnt(Integer.parseInt(number));
+		
+		for(int i=0; i<list.size();i++) {
+			list.get(i).setTotalCnt(list2.get(i));
+		}
+		
+		return list;
+	}
+	
+	@ResponseBody
+	@GetMapping("/shop/init/waitingCnt")
+	public List<Integer> sendInitWaitingCnt(String number) throws Exception{
+		System.out.println("=================================++");
+		List<Integer> list = waitingService.getPartNowWaitingCnt(Integer.parseInt(number));
+		System.out.println("=================================++"+list);
 		return list;
 	}
 	

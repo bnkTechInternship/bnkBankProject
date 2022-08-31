@@ -20,4 +20,5 @@ public interface ShopService {
 	int updateShopEnternum(Shop shop) throws Exception;
 	
 	List<Shop> getPartData(int idx) throws Exception;
+	
 }

@@ -36,6 +36,8 @@ public interface WaitingService {
 	//가게별 누적인원업데이트
 	int updateTotalShopCnt(WaitingShop waitingShop) throws Exception;
 	
+	List<Integer> getPartNowWaitingCnt(int idx) throws Exception;
+	
 	
 	
 

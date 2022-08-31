@@ -18,7 +18,7 @@ import com.service.hotplace.domain.person.User;
 import com.service.hotplace.service.UserService;
 
 @Controller
-public class TestController {
+public class UserController {
 	
 	@Autowired
 	private UserService userService;

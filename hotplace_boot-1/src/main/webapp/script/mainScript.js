@@ -1,7 +1,8 @@
 $(function() {
 	let partData = 1;
 	getPartData(partData);		
-	getPartData(partData);	
+	getPartData(partData);
+	//getPartWaitingCnt(partData);
 	
 	
 	
@@ -66,7 +67,7 @@ $(function() {
                     <div class = "star">
                         ★ 4.5
                         <div class = "like">♡</div>
-                    </div>
+                    </div>	
                     <img src = "img2/wallpaper1.jpg">
                 </div>
                 <div>가게 이름</div>
@@ -76,6 +77,8 @@ $(function() {
             
             `           
             getPartData(partData);
+           // getPartWaitingCnt(partData);
+            
             
         } else {
             console.log("아님")
@@ -166,11 +169,41 @@ $(function() {
         },time)
     }
     
+    function getPartWaitingCnt(idx){
+    	$.ajax({
+    		
+    		url: '/shop/init/waitingCnt',
+    		type : "get",
+    		data : {
+    			"number" : idx,
+    		},
+    		
+    			success : (result) => {
+				
+				
+				for(let i = 0 ; i < result.length; i++) {
+					let addContent = 
+						`
+			                <div>실시간 웨이팅 : ${result[i]}</div>
+			                </div>
+			            
+			            `
+						$("#container").append(addContent);
+				}
+				
+			} // success 끝
+    	}
+    	
+    	)
+    	
+    	
+    }
+    
     function getPartData(idx) {
 
-    	partData += 3;
+    	
     	$.ajax({
-    		url : '/shop/init',
+    		url : '/shop/init/data',
 			type : "get",
 			data : {
 				"number" : idx,
@@ -191,12 +224,14 @@ $(function() {
 		                    	<img src = "${result[i].webAddress}">
 			                </div>
 			                <div>${result[i].shopName}</div>
-			                <div>평균 가격 : ₩35,000</div>
-			                <div>웨이팅 사람수 : 5</div>
-			            </div>
+			                <div>영업시간 : ${result[i].shopOper}</div>
+			                <div>실시간 웨이팅 : ${result[i].totalCnt}</div>
+			                </div>
 			            
 			            `
 					$("#container").append(addContent);
+
+					
 				}
 				
 			}, // success 끝
@@ -226,5 +261,7 @@ $(function() {
 				},2000)
 			}
     	})
+    	
+    	partData += 3;
     }
 })

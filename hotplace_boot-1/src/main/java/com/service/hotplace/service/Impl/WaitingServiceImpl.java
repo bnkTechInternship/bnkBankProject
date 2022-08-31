@@ -101,6 +101,7 @@ public class WaitingServiceImpl implements WaitingService{
 	@Override
 	public int getShopNowWaitingCnt(Shop shop) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println("서비스 함수 호출:::::::::"+waitingDAO.getShopNowWaitingCnt(shop));
 		return waitingDAO.getShopNowWaitingCnt(shop);
 	}
 
@@ -114,6 +115,22 @@ public class WaitingServiceImpl implements WaitingService{
 	public int updateTotalShopCnt(WaitingShop waitingShop) throws Exception {
 		// TODO Auto-generated method stub
 		return waitingDAO.updateTotalShopCnt(waitingShop);
+	}
+
+	@Override
+	public List<Integer> getPartNowWaitingCnt(int idx) throws Exception {
+		// TODO Auto-generated method stub
+		List<Integer> list = new ArrayList<Integer>();
+		System.out.println(idx);
+		for(int i=idx ; i<idx+3; i++) {
+			Shop shop = new Shop();
+			shop.setShopIdx(i);
+			System.out.println("=================================서비스임플 포문 안");
+			int cnt = getShopNowWaitingCnt(shop);
+			System.out.println("=================================서비스임플 출력값"+cnt);
+			list.add(cnt);
+		}
+		return list;
 	}
 
 }

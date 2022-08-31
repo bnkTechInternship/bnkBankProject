@@ -1,0 +1,111 @@
+html, body{
+    width: 100%;
+    height: calc(100%-80px);
+}
+
+#content h3{
+    display: inline;
+}
+
+.container_middle2 span{
+    float: right;
+}
+
+/* 첫번째 영역...! */
+.container_middle1{
+    width: 100%;
+    padding-top: 50px;
+    padding-left: 50px;
+    height: 140px;
+    
+    border-bottom: solid 2px hotpink;
+    border-bottom-style: double;
+    border-width: 7px;
+}
+
+#content{
+    width: 400px;
+    height: 300px;
+    float: left;
+    margin: auto 30px;
+}
+
+#wrapper_img{
+    width: 400px;
+    height: 200px;
+
+    padding: 5px;
+    border-radius: 30px;
+}
+
+#wrapper_right_img{
+    float:right;
+    width: 90px;
+    height: 90px;
+    padding-bottom: 10px;
+}
+
+#img1{
+    width:230px;
+    height: 100%;
+    object-fit: fill;
+    border-top-left-radius: 5%;
+    border-bottom-left-radius: 5%;
+}
+
+#img2{
+    border-top-right-radius: 5%;
+    width:150px;
+    height:93px;
+    margin: 4px;
+    margin-top: 0px;
+    float: right;
+    object-fit: fill;
+}
+
+#img3{
+    border-bottom-right-radius: 5%;
+    width:150px;
+    height:93px;
+    margin: 4px;
+    margin-top: 0px;
+    float: right;
+    object-fit: fill;
+}
+
+
+
+
+/* 2번째 영역!*/
+.container_middle2{
+
+    width: 90%;
+    clear:both;
+    
+    margin: 0 auto;
+    margin-top: 50px;
+    
+}
+
+
+
+
+/* 폼 끝 */
+
+/* 2번째 영역 끝 */
+
+@media (max-width : 800px) {
+
+.container_middle2{
+    width: 100%;
+}
+
+#content{
+    float: none;
+    margin: 0 auto;
+}
+
+    
+
+}
+  

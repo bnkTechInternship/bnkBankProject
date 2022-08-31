@@ -57,6 +57,11 @@ public class ShopServiceImpl implements ShopService{
 		// TODO Auto-generated method stub
 		return shopDAO.updateShopEnternum(shop);
 	}
+
+	@Override
+	public List<Shop> getPartData(int idx) throws Exception {
+		return shopDAO.getPartData(idx);
+	}
 	
 
 

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="wScratchPad-master/wScratchPad.min.js"></script>    
+    <script src="https://kit.fontawesome.com/5ea815c1d0.js"></script>
+    <style>
+        @import url('http://fonts.cdnfonts.com/css/qillsey-einstein');
+
+        * {
+            padding : 0;
+            margin : 0;
+            box-sizing: border-box;
+        }
+        html, body,#canvas {
+            width : 100%;
+            height : 100%;
+        }
+        #mainNavbar {
+            position: absolute;
+            top : 0;
+            left : 0;
+            width : 100%;
+            height : 70px;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            align-content: center;
+
+            background-color: rgba(255,255,255,0);
+
+            z-index: 2;
+        }
+
+        #right_content img {
+            width : 20px;
+            height : 20px;
+        }
+
+        #right_content {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap : 15px;
+            padding-right: 20px;
+        }
+
+        #logo {
+            color : white;
+            font-size: 50px;
+            font-family: 'Qillsey Einstein', sans-serif !important;
+            padding-left: 20px; 
+        }
+
+        #canvas {
+            z-index: 1;
+        }
+
+    /* goTo */
+    .my-btn-border {
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+  .my-btn {
+
+    cursor : pointer;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition : transform 0.25s;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+
+    opacity: 0;
+
+    visibility: block;
+
+    color : white;
+    font-weight: bold;
+    height: 70px; 
+    width: 170px;
+    border-radius: 50px;
+    box-shadow: -1px 2px 10px #999;
+    background: rgb(0,123,235);
+    animation-name: col;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+
+    z-index: 2;
+  }
+  .my-btn-border {
+    height: 80px; 
+    width: 140px;
+    border: 1px solid rgb(0,123,235) !important;
+    animation-name: bord-pop;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    box-shadow: 2px 2px 5px #ccc, -2px -2px 5px #ccc ;
+  }
+  @keyframes bord-pop {
+    0% {
+      transform: translate(-50%, -50%);
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.9);
+      opacity: 0.1;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1.9);
+      opacity: 0;
+    }
+  }
+  @keyframes col {
+    0% {
+      transform: scale(1) translate(0,0);
+    }
+    10% {
+      transform: scale(1.1) translate(0,0);
+    }
+    75% {
+      transform: scale(1) translate(0,0);
+    }
+    100% {
+      transform: scale(1) translate(0,0);
+    }
+  }
+
+
+  .top {
+    z-index : 2;
+  }
+        /* goTo */
+
+        /* tap */
+        #tap {
+          position : fixed;          
+          top : 40%;
+          left : 45%;
+          z-index: 3;
+          color : white;
+
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap : 15px;
+
+          font-weight: bold;
+          font-size: 20px;
+
+          animation: scratch 2s linear infinite alternate;
+        }
+
+        #tap img {
+          width : 150px;
+          height : 150px;
+        }
+
+        #content {
+          width : 100%;
+
+          position : fixed;          
+          top : 70%;
+          left : 45%;
+          z-index: 3;
+          color : white;
+
+          font-weight: bold;
+          font-size: 30px;
+        }
+
+        @keyframes scratch{
+          from{
+            left: 40%;
+          }
+          to{
+            left: 60%;
+          }
+        }
+        /* tap */
+    </style>
+</head>
+<body>
+
+    <div id="mainNavbar" class = "bottom-shadow">
+        <div id = "logo">Hot Place</div>
+        <div id="right_content">
+            <!-- <img src = "img2/moon.png">
+            <img src = "img2/user2.png"> -->
+        </div>
+    </div>
+    
+    <div id="canvas">
+
+    </div>
+
+    <div class="my-btn">
+        <div class="my-btn-border"></div>
+        <div>테이블링 하러가기</div>
+    </div>
+
+    <div id="tap">
+      <img src = "img2/tap.png" class = "disappear">
+    </div>
+    
+    <div id = "content" class = "disappear">화면을 긁어보세요!</div>
+
+
+</body>
+<script>
+    let pics = ['#foo','img2/wallpaper3.jpg','img2/wallpaper4.jpg','img2/wallpaper5.jpg','img2/wallpaper6.jpg','img2/wallpaper7.jpg']
+    let idx = 1;
+
+    $(function() {
+        $("#desc").fadeOut()
+        scratch(pics[0],pics[idx])
+
+    })
+
+    function scratch(item1,item2) {
+
+        $('#canvas').wScratchPad({
+            size        : 160,          // The size of the brush/scratch.
+            scratchDown : scratch,
+            bg          : item2,  // Background (image path or hex color).
+            fg          : item1, // Foreground (image path or hex color).
+            scratchMove : function(e,percent) {
+              $(".my-btn").css('opacity',0)
+              $(".disappear").css('opacity',0)
+            },
+            scratchUp: function(e, percent)
+            {
+                if(percent > 50)
+                {
+                    $("#canvas").fadeOut()
+                    setTimeout(() => {
+                        $("#canvas").fadeIn('100')
+                        $(".my-btn").css('opacity','1')
+                    },1000)
+                    $('#canvas').wScratchPad('reset');
+                    $("#canvas").wScratchPad('fg',pics[idx])
+                    $("#canvas").wScratchPad('bg',pics[++idx])
+                    $(this).scratch = false;
+                }
+            }
+        });
+    }
+</script>
+</html>

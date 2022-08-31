@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+/*- default setting */
+
+* {
+    padding : 0;
+    margin : 0;
+    text-decoration: none;
+    list-style: none;
+    font-family: 'Jua', serif;
+}
+
+a, a:link, a:visited, a:active {color : black;}
+
+/* default setting */
+
+
+
+
+/*- topNavbar */
+
+#topNavbar {
+    position : fixed;
+    top : 0;
+    left : 0;
+    width : 100%;
+    height : 80px;
+    border-bottom: 3px solid rgb(235,235,235);
+    display : block;
+    grid-template-rows: 80px;
+    transition : 0.2s;
+    background-color: white;
+}
+
+#logo {
+    grid-area: logo;
+    width : 130px;
+    height : 80px;
+}
+
+#myInfo {
+    width : 90px;
+    height : 60px;
+    grid-area: myInfo;
+    border : 1px solid #eeeeee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding : 0 15px 0 15px;
+    box-sizing: border-box;
+    border-radius: 50px;
+    display: flex;
+    align-self: center;
+    justify-self: center;
+    transition : 0.2s;
+}
+
+#topInputDiv {
+    grid-area : input;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#topInputDiv input {
+    width : 80%;
+    height : 40px;
+    border-radius: 30px;
+    box-sizing: border-box;
+    padding: 0 20px 0 20px;
+}
+
+#topInputDiv input:focus {
+    border-color: black;
+}
+
+#myInfo img {
+    width : 20px;
+    height  :20px;
+    padding : 0 10px 0 10px;
+    transition : 0.2s;
+}
+
+#topNavbar__one {
+    width : 100%;
+    height : 100%;
+    display: grid;
+    grid-template-areas: 
+            ".    logo   input   input   myInfo   .";
+    grid-template-columns: repeat(6,1fr);
+    position  :relative;
+}
+
+#myInfo:hover {
+    border : 1px solid skyblue;
+}
+
+/* topNavbar */
+
+/* wrapper */
+
+
+/* wrapper 끝 */
+
+
+
+
+
+
+
+/*- 반응형 */
+@media (max-width : 800px) {
+
+    #logo {
+        padding-left: 20px;
+    }
+    #topNavbar{
+        position : fixed;
+        top : 0;
+        left : 0;
+        width : 100%;
+        height : 80px;
+        border-bottom: 1px solid rgb(235,235,235);
+        display : grid;
+        grid-template-rows: 80px;
+    }
+
+
+    #topNavbar__one {
+        width : 100%;
+        height : 100%;
+        display: grid;
+        grid-template-areas: 
+                "logo   input   input   myInfo";
+        grid-template-columns: repeat(4,1fr);
+        position  :relative;
+    }
+
+    #myInfo {
+        width : 80%;
+        height : 60px;
+        grid-area: myInfo;
+        border : 1px solid #eeeeee;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding : 0 15px 0 15px;
+        box-sizing: border-box;
+        border-radius: 50px;
+        display: flex;
+        align-self: center;
+        justify-self: center;
+    }
+
+    #myInfo img {
+        width : 30px;
+        height  :30px;
+        padding : 0 10px 0 10px;
+    }    
+
+}
+/* 반응형 */

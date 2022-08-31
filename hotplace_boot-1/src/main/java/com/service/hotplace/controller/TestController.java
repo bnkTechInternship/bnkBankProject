@@ -68,5 +68,7 @@ public class TestController {
 		String userPw = userService.findUserPw(user);
 		return userPw;
 	}
+	
+	
 
 }

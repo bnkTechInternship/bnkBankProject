@@ -1,0 +1,187 @@
+html, body{
+    width: 100%;
+    height: calc(100%-80px);
+}
+
+/* 첫번째 영역...! */
+.container_middle1{
+    width: 100%;
+    padding-top: 50px;
+    padding-left: 50px;
+    height: 140px;
+    border-bottom: solid 2px hotpink;
+    border-bottom-style: double;
+    border-width: 7px;
+}
+
+
+
+
+
+/* 2번째 영역!*/
+
+
+
+.container_middle2_left{
+    width: 60%;
+    height: 700px;
+    float: left;
+    padding-top: 50px;
+    border-right: 1px solid pink;
+}
+
+.container_middle2_right{
+
+    background-color: #eeeeee;
+    width: 40%;
+    height: 700px;
+    text-align: center;
+    padding : 50px;
+
+    float: right;
+}
+
+
+.container_middle2_right img{
+    border-radius: 15%;
+    width : 80px;
+    height: 40px;
+    margin-right: 50px;
+}
+
+#wrapper_img{
+    width: 100%;
+    height: 300px;
+    border-radius: 30px;
+    text-align: center;
+}
+
+#wrapper_right_img{
+    float:right;
+    width: 40%;
+    height: 150px;
+}
+
+#img1{
+    width: 60%;
+    height: 100%;
+    object-fit: fill;
+    border-radius: 5%;
+}
+
+#img2{
+    
+    border-radius: 5%;
+    width:100%;
+    height:100%;
+    margin: 1px;
+    float: right;
+    object-fit: fill;
+}
+
+#img3{
+    border-radius: 5%;
+    width:100%;
+    height:100%;
+    margin: 1px;
+    float: right;
+    object-fit: fill;
+}
+
+
+#card{
+    margin: 0 auto;
+    background-color: white;
+    width: 350px;
+    height: 100px;
+    border-radius: 25px;
+
+}
+
+#card img{
+    margin: 30px;
+    float:left;
+    width: 50px;
+    height: 50px;
+}
+
+#text{
+    width: 240px;
+    height: 100px;
+    float:right;
+
+}
+
+#card span{
+    
+    text-align: left;
+}
+
+#card p{
+    margin-top: 5px;
+    opacity: 0.4;
+    text-align: left;
+}
+
+#card h2{
+    text-align: left;
+}
+
+#card h4{
+    margin: 5px;
+    margin-right: 10px;
+    opacity: 0.7;
+    text-align: right;
+}
+
+
+.myorder{
+    margin-top: 40px;
+    text-align: left;
+}
+
+.myorder img{
+
+}
+
+.myorder h1{
+    margin-bottom: 40px;
+}
+
+.myorder h3{
+    
+    display: inline;
+}
+
+/* 폼 끝 */
+
+/* 2번째 영역 끝 */
+
+@media (max-width : 800px) {
+
+    .container_middle1, .container_middle2{
+        width: 100%;
+        border-radius: 0px;
+    }
+    
+    .container_middle2{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .container_middle2_left{
+        width: 100%;
+        order: 3;
+        border-right: none;
+    }
+
+
+    .container_middle2_right{
+        width: 100%;
+        order: 2;
+
+    }
+
+}
+  

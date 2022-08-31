@@ -57,4 +57,9 @@ public class ShopDAOImpl implements ShopDAO {
 		return sqlsession.update(NS+"updateShopEnternum",shop);
 	}
 
+	@Override
+	public List<Shop> getPartData(int idx) throws Exception {
+		return sqlsession.selectList(NS + "getShopPart",idx);
+	}
+
 }

@@ -19,4 +19,5 @@ public interface ShopService {
 	//현재입장순번 업데이트 +1 해주는 함수
 	int updateShopEnternum(Shop shop) throws Exception;
 	
+	List<Shop> getPartData(int idx) throws Exception;
 }

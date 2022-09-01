@@ -13,6 +13,7 @@ import com.service.hotplace.domain.place.Shop;
 import com.service.hotplace.domain.play.WaitingBank;
 import com.service.hotplace.domain.play.WaitingShop;
 import com.service.hotplace.model.WaitingDAO;
+import com.service.hotplace.service.BankService;
 import com.service.hotplace.service.ShopService;
 import com.service.hotplace.service.WaitingService;
 
@@ -23,6 +24,9 @@ public class WaitingServiceImpl implements WaitingService{
 	
 	@Autowired
 	private ShopService shopservice;
+	
+	@Autowired
+	private BankService BankService;
 
 	@Override
 	public int registerWaitingBank(WaitingBank waitingBank) throws Exception {
@@ -67,9 +71,10 @@ public class WaitingServiceImpl implements WaitingService{
 	@Override
 	public WaitingBank getNowWaitingBank(User user) throws Exception {
 		// TODO Auto-generated method stub
-		List<WaitingBank> relist = waitingDAO.getNowWaitingBank(user.getUserId());
+		List<WaitingBank> relist = waitingDAO.getWaitingBank(user.getUserId());
 		for(WaitingBank wb : relist) {
-			if( wb.getWaitingNum() - wb.getBank().getBankEnternum() >=0)
+			Bank bank = BankService.getBank(wb.getBankIdx());
+			if( wb.getWaitingNum() - bank.getBankEnternum() >=0)
 				return wb;
 		}
 		return null;
@@ -81,14 +86,14 @@ public class WaitingServiceImpl implements WaitingService{
 		// TODO Auto-generated method stub
 		ArrayList<WaitingShop> returnlist = new ArrayList<WaitingShop>();
 		
-		List<WaitingShop> relist = waitingDAO.getNowWaitingShop(user.getUserId());
+		List<WaitingShop> relist = waitingDAO.getWaitingShop(user.getUserId());
 		for(WaitingShop ws : relist) {
 			Shop shop = shopservice.getShop(ws.getShopIdx());
-			if( ws.getWaitingNum() - shop.getShopEnternum() >=0)
+			if( ws.getWaitingNum() - shop.getShopEnternum() >=0) {
 				ws.setShop(shop);
 				returnlist.add(ws);
+			}
 		}
-		System.out.println("서비스에서 계산한 리스트:: "+ returnlist);
 		if(returnlist.isEmpty()) return null;
 		return returnlist;
 	}
@@ -132,9 +137,9 @@ public class WaitingServiceImpl implements WaitingService{
 		for(int i=idx ; i<idx+3; i++) {
 			Shop shop = new Shop();
 			shop.setShopIdx(i);
-			System.out.println("=================================서비스임플 포문 안");
+			//System.out.println("=================================서비스임플 포문 안");
 			int cnt = getShopNowWaitingCnt(shop);
-			System.out.println("=================================서비스임플 출력값"+cnt);
+			//System.out.println("=================================서비스임플 출력값"+cnt);
 			list.add(cnt);
 		}
 		return list;

@@ -35,10 +35,12 @@ public class MainController {
 	public List<Shop> sendInitData(String number) throws Exception {
 		
 		List<Shop>list = shopService.getPartData(Integer.parseInt(number));
-		List<Integer> list2 = waitingService.getPartNowWaitingCnt(Integer.parseInt(number));
+		//List<Integer> list2 = waitingService.getPartNowWaitingCnt(Integer.parseInt(number));
 		
 		for(int i=0; i<list.size();i++) {
-			list.get(i).setTotalCnt(list2.get(i));
+			Shop shop = shopService.getShop(Integer.parseInt(number)+i);
+			int nowCnt = waitingService.getShopNowWaitingCnt(shop);
+			list.get(i).setTotalCnt(nowCnt);
 		}
 		
 		return list;

@@ -1,3 +1,6 @@
+@import url('http://fonts.cdnfonts.com/css/qillsey-einstein');
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
 * {
     margin : 0;
     padding : 0;
@@ -46,6 +49,14 @@ body {
     width : 350px;
     height : 250px;
     margin-bottom: 40px;
+}
+
+
+#logo {
+    color : navy;
+    font-size: 130px;
+    font-family: 'Qillsey Einstein', sans-serif !important;
+    padding-left: 20px; 
 }
 
 .input {

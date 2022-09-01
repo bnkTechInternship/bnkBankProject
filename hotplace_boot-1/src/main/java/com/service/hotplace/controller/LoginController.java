@@ -29,9 +29,9 @@ public class LoginController {
 	@PostMapping("login.do")
 	public User loginDo(User user,HttpSession httpSession) throws Exception {
 		System.out.println("=============================로그인 요청===============================");		
-		System.out.println(user);
+		//System.out.println(user);
 		User loginUser = userService.login(user);
-		
+		System.out.println(loginUser);
 		if(loginUser!=null) {
 			httpSession.setAttribute("loginUser", loginUser);
 			System.out.println(loginUser);

@@ -2,12 +2,16 @@ package com.service.hotplace.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.service.hotplace.domain.person.User;
 import com.service.hotplace.domain.place.Bank;
 import com.service.hotplace.domain.place.Shop;
 import com.service.hotplace.service.BankService;
@@ -64,5 +68,18 @@ public class MainController {
 	@ResponseBody
 	List<Bank> getAllBankController() throws Exception {
 		return bankService.getBankList();
+	}
+	
+	@RequestMapping("userInfo.do")
+	String userInfoDo(HttpSession session) throws Exception{
+		
+		User user =(User)session.getAttribute("user");
+		System.out.println(user);
+		
+		if(user!= null) {
+			return "redirect:reserve.html";
+		}else {
+			return "redirect:login.html";
+		}
 	}
 }

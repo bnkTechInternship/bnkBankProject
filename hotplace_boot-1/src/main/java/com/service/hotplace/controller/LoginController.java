@@ -23,15 +23,21 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 	
-	@PostMapping("login.do")
-	public String loginDo(User user,HttpSession httpSession,HttpServletResponse response) throws Exception {
-		System.out.println("=============================로그인 요청===============================");		
-		if(userService.login(user)!=null) {
-			httpSession.setAttribute("user", user);
-			return "redirect:main.html";
-		}else return "redirect:login.html";
-	}
 	
+	
+	@ResponseBody
+	@PostMapping("login.do")
+	public User loginDo(User user,HttpSession httpSession) throws Exception {
+		System.out.println("=============================로그인 요청===============================");		
+		System.out.println(user);
+		User loginUser = userService.login(user);
+		
+		if(loginUser!=null) {
+			httpSession.setAttribute("loginUser", loginUser);
+			System.out.println(loginUser);
+			return loginUser;
+		}else return null;
+	}
 	
 	@ResponseBody
 	@PostMapping("idExist.do")
@@ -68,6 +74,8 @@ public class LoginController {
 		String userPw = userService.findUserPw(user);
 		return userPw;
 	}
+	
+	
 	
 	
 

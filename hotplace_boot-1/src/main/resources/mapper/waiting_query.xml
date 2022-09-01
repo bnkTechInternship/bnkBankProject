@@ -31,16 +31,28 @@
 		<result property="waitingNum" column="waiting_num"/>
 		<result property="waitingDate" column="waiting_date"/>
 		<result property="waitingCnt" column="waiting_cnt"/>
-		<association property="shop" javaType="shop">
+		<association property="shop" javaType="com.service.hotplace.domain.place.Shop">
 			<id column="shop_idx" property="shopIdx"></id>
 			<result property="shopEnternum" column="shop_enternum"/>
 		</association>
 	</resultMap>
 	
-	<select id="getNowWaitingShop" parameterType="string" resultMap="waitingshopwithshop" resultType="waitingShop">
-		SELECT w.user_id, w.shop_idx, w.waiting_num, w.waiting_date, s.shop_enternum
-		FROM waiting_shop w, shop s
-		WHERE user_id=#{value} and w.shop_idx = s.shop_idx
+<!-- 	<resultMap type="shop" id="shopMap">
+		<id column="shop_idx" property="shopIdx"></id>
+		<result property="shopEnternum" column="shop_enternum"/>
+	</resultMap> 
+	 -->
+	
+<!-- 	<select id="getNowWaitingShop" parameterType="string"  resultMap="waitingshopwithshop" >
+		SELECT w.user_id, w.shop_idx, w.waiting_num, w.waiting_date,s.shop_idx, s.shop_enternum
+		FROM waiting_shop w, shop s 
+		WHERE user_id=#{value}
+	</select> -->
+	
+	<select id="getNowWaitingShop" parameterType="string" resultType="waitingShop" >
+		SELECT w.user_id, w.shop_idx, w.waiting_num, w.waiting_date
+		FROM waiting_shop w
+		WHERE user_id=#{value}
 	</select>
 	
 	

@@ -6,9 +6,32 @@ $(function() {
               $('#userId').focus();
         }
         else {
-              $('form').submit();
+             /* $('form').submit();*/
+        
+        
+       
+        $.ajax({
+        	type:'post',
+        	url:'login.do',
+        	data:"userId="+$('#userId').val()+"&userPw="+$('#userPw').val(),
+      
+        	success:function(result){
+        		console.log(result);
+        		localStorage.setItem("loginUser",JSON.stringify(result));
+        		
+        		location.replace('main.html');
+        		
+        	}
+        
+        
+        })//ajax
+        
         }
+        
     })
+    
+    
+    
     
     
     $('#notuserstartbtn').click(function(){

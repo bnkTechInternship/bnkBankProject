@@ -13,12 +13,16 @@ import com.service.hotplace.domain.place.Shop;
 import com.service.hotplace.domain.play.WaitingBank;
 import com.service.hotplace.domain.play.WaitingShop;
 import com.service.hotplace.model.WaitingDAO;
+import com.service.hotplace.service.ShopService;
 import com.service.hotplace.service.WaitingService;
 
 @Service
 public class WaitingServiceImpl implements WaitingService{
 	@Autowired
 	private WaitingDAO waitingDAO;
+	
+	@Autowired
+	private ShopService shopservice;
 
 	@Override
 	public int registerWaitingBank(WaitingBank waitingBank) throws Exception {
@@ -79,9 +83,12 @@ public class WaitingServiceImpl implements WaitingService{
 		
 		List<WaitingShop> relist = waitingDAO.getNowWaitingShop(user.getUserId());
 		for(WaitingShop ws : relist) {
-			if( ws.getWaitingNum() - ws.getShop().getShopEnternum() >=0)
+			Shop shop = shopservice.getShop(ws.getShopIdx());
+			if( ws.getWaitingNum() - shop.getShopEnternum() >=0)
+				ws.setShop(shop);
 				returnlist.add(ws);
 		}
+		System.out.println("서비스에서 계산한 리스트:: "+ returnlist);
 		if(returnlist.isEmpty()) return null;
 		return returnlist;
 	}

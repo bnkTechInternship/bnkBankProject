@@ -31,6 +31,12 @@ public class Shop {
 	
 	
 
+	public Shop(int shopIdx, int shopEnternum) {
+		super();
+		this.shopIdx = shopIdx;
+		this.shopEnternum = shopEnternum;
+	}
+
 	public Shop(String shopName, String shopAddress, String shopNumber, String shopOper, int shopEnternum,
 			String shopLat, String shopLong, int totalCnt, String webAddress) {
 		super();

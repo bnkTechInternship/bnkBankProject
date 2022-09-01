@@ -73,8 +73,7 @@ public class MainController {
 	@RequestMapping("userInfo.do")
 	String userInfoDo(HttpSession session) throws Exception{
 		
-		User user =(User)session.getAttribute("user");
-		System.out.println(user);
+		User user =(User)session.getAttribute("loginUser");
 		
 		if(user!= null) {
 			return "redirect:reserve.html";

@@ -248,6 +248,7 @@ path {
     right : 10px;
     color : white;
     transition: 0.5s;
+    cursor: pointer;
 }        
 
 .photo:hover .star{

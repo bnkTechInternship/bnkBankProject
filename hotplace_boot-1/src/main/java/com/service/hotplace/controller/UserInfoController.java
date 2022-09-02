@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.service.hotplace.domain.person.User;
 import com.service.hotplace.domain.place.Menu;
 import com.service.hotplace.domain.place.Shop;
+import com.service.hotplace.domain.play.LikeShop;
 import com.service.hotplace.domain.play.Review;
 import com.service.hotplace.domain.play.WaitingShop;
+import com.service.hotplace.service.LikeService;
 import com.service.hotplace.service.MenuService;
 import com.service.hotplace.service.ReviewService;
 import com.service.hotplace.service.ShopService;
@@ -39,6 +42,9 @@ public class UserInfoController {
 	
 	@Autowired
 	private MenuService menuService;
+	
+	@Autowired
+	private LikeService likeService;
 	
 //	@ResponseBody
 //	//@RequestMapping("userInfo.do")
@@ -118,5 +124,22 @@ public class UserInfoController {
 		User reuser = userService.getUserById(user.getUserId());
 		System.out.println(reuser);
 		return reuser;
+	}
+	
+	
+	@ResponseBody
+	@GetMapping("likeShop.do")
+	public String likeShopDo(LikeShop likeShop) throws Exception{
+		int result = likeService.setLikeShop(likeShop);
+		System.out.println("l라이크샵호출,,,,,,,ㅠㅠ");
+		return "";
+	}
+	
+
+	@ResponseBody
+	@GetMapping("unlikeShop.do")
+	public String unlikeShopDo(LikeShop likeShop) throws Exception{
+		int result = likeService.deleteLikeShop(likeShop);
+		return "";
 	}
 }

@@ -58,6 +58,8 @@
             font-size: 50px;
             font-family: 'Qillsey Einstein', sans-serif !important;
             padding-left: 20px; 
+            cursor: pointer;
+      
         }
 
         #canvas {
@@ -225,6 +227,10 @@
 <script>
     let pics = ['#foo','img2/wallpaper3.jpg','img2/wallpaper4.jpg','img2/wallpaper5.jpg','img2/wallpaper6.jpg','img2/wallpaper7.jpg']
     let idx = 1;
+    
+    $('#logo').click(function(){
+    	location.replace('main.html');
+    })
 
     $(function() {
         $("#desc").fadeOut()

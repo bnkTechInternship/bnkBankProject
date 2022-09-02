@@ -85,6 +85,10 @@ $(function() {
         }
 
     })
+    
+    $('#logo').click(function(){
+    	location.replace('main.html');
+    })
 
     $(".search").click(function() {
         $("#mainNavbar").toggleClass('navbar_toggle')
@@ -95,14 +99,95 @@ $(function() {
         
     })
 
-    $("#container").on('click',".like",function() {
+/*    $("#container").on('click',".like",function() {
         let data = $(this).text()
         // 로그인 되었는지 확인하고
         // 찜하는 기능도 들어가야함
         if(data === '♡')
             $(this).html('♥').css('color','red')   
         else $(this).html('♡').css('color','white')
-    })
+    })*/
+    
+    $("#container").on('click',".like",function() {
+    	
+    	
+    	let data = $(this).text()
+    	const user = JSON.parse(localStorage.getItem('loginUser'));
+    	const userId = user.userId;
+    	console.log(userId);
+    	const shopIdx = $(this).parent().parent().next().val();
+    	console.log(data);
+    	if(data == '♡'){
+    		if(localStorage.getItem("loginUser")==null){
+    					location.replace('login.html')}
+    		$(this).html('♥').css('color','red');
+    		$.ajax({
+				type : "get",	
+    			url : "likeShop.do",
+    			data : "shopIdx="+shopIdx+"&userId="+userId,
+    			success : function(result){
+    				Swal.fire({
+    					  title: '찜 등록',
+    					  text: "이 가게를 찜 리스트에 추가할까요?",
+    					  icon: 'warning',
+    					  showCancelButton: true,
+    					  confirmButtonColor: '#3085d6',
+    					  cancelButtonColor: '#d33',
+    					  confirmButtonText: 'OK',
+    					}).then((result) => {
+    					  if (result.isConfirmed) {
+    					    Swal.fire(
+    					      '찜 등록',
+    					      '정상적으로 추가되었어요',
+    					      'success'
+    					    )
+    					  }
+    					})
+    				
+    			}//success
+	    	})//ajax
+    		
+    		
+    		
+    	}else{
+    		$(this).html('♡').css('color','white');
+    		$.ajax({
+				type : "get",	
+    			url : "unlikeShop.do",
+    			data : "shopIdx="+shopIdx+"&userId="+userId,
+    			success : function(result){
+    				
+    				Swal.fire({
+  					  title: '찜 취소',
+  					  text: "이 가게를 찜 리스트에서 제거할까요?",
+  					  icon: 'warning',
+  					  showCancelButton: true,
+  					  confirmButtonColor: '#3085d6',
+  					  cancelButtonColor: '#d33',
+  					  confirmButtonText: 'OK',
+  					}).then((result) => {
+  					  if (result.isConfirmed) {
+  					    Swal.fire(
+  					      '찜 취소',
+  					      '정상적으로 제거되었어요',
+  					      'success'
+  					    )
+  					  }
+  					})
+  					
+    			}//success
+	    	})//ajax
+    		
+    	
+    	
+    	}
+    	console.log($(this).parent().parent().next().val());
+    	
+		
+    })//click
+    
+    
+    
 
     $("#mode").click(function() {
         $("#container").toggleClass('dark_mode_container')
@@ -199,7 +284,11 @@ $(function() {
     	
     }
     
+ 
+    
     function getPartData(idx) {
+    	const user = JSON.parse(localStorage.getItem('loginUser'));
+    	let userId = user.userId;
 
     	
     	$.ajax({
@@ -211,29 +300,78 @@ $(function() {
 			
 			success : (result) => {
 				
-				
+				var like = '♡'
 				for(let i = 0 ; i < result.length; i++) {
-					let addContent = `
-			            
-			            <div class ="container_item">
-			                <div class="photo">
-			                    <div class = "star">
-									★ 4.5
-		                        <div class = "like">♡</div>
-		                    </div>
-		                    	<img src = "${result[i].webAddress}">
-			                </div>
-			                <div>${result[i].shopName}</div>
-			                <div>영업시간 : ${result[i].shopOper}</div>
-			                <div>실시간 웨이팅 : ${result[i].totalCnt}</div>
-			                </div>
-			            
-			            `
-					$("#container").append(addContent);
-
+					const webAddress=result[i].webAddress;
+					const shopIdx = result[i].shopIdx;
+					const shopName = result[i].shopName;
+					const shopOper = result[i].shopOper;
+					const totalCnt = result[i].totalCnt;
 					
+/*					$.ajax({
+						type:'post',
+			    		url:'getAvgScore.do',
+			    		async:false,
+			    		data: "shopIdx="+shopIdx,
+			    		
+			    		success : function(result){
+			    			console.log(result);
+			    			let avgScore = result;
+			    		}
+					})*/
+					
+					$.ajax({
+			    		type:'post',
+			    		url:'checkLike.do',
+			    		data: "userId="+userId+"&shopIdx="+shopIdx,
+			    		
+			    		
+			    		success : function(result){
+			    			var avgScore = 0.0;
+							$.ajax({
+								type:'post',
+					    		url:'getAvgScore.do',
+					    		async:false,
+					    		data: "shopIdx="+shopIdx,
+					    		
+					    		success : function(result){
+					    			console.log(result);
+					    			avgScore = result;
+					    		}
+							})
+							
+			    			console.log(userId+"아작스호출"+shopIdx);
+			    			var jsonData = JSON.parse(result);
+			    			console.log(jsonData);
+			    			if(jsonData ==true){
+			    				like = '♥'
+			    			}else{
+			    				like = '♡'
+			    			}
+			    			
+			    		    	//$('.like').html('♡').css('color','white');
+	    					let addContent = `
+	    			            
+	    			            <div class ="container_item">
+	    			                <div class="photo">
+	    			                    <div class = "star">
+	    									★ ${avgScore}
+	    		                        <div class = "like">` + like + `</div>
+	    		                    </div>
+	    		                    	<img src = "${webAddress}">
+	    			                </div>
+	    			                <input type=hidden value=${shopIdx}>
+	    			                <div>${shopName}</div>
+	    			                <div>영업시간 : ${shopOper}</div>
+	    			                <div>실시간 웨이팅 : ${totalCnt}</div>
+	    			                </div>`
+	    			            
+	    			        console.log(like);  
+	    					$("#container").append(addContent);
+			    		}
+			    	})
+
 				}
-				
 			}, // success 끝
 			beforeSend : () => {
 				$('.loader').css('z-index',12);

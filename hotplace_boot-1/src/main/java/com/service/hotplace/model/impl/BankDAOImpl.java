@@ -27,7 +27,7 @@ public class BankDAOImpl implements BankDAO{
 
 	@Override
 	public Bank getBank(int bankIdx) throws Exception {
-		return sqlSession.selectOne(NS+ "getBank",bankIdx);
+		return sqlSession.selectOne(NS+ "getBankByIdx",bankIdx);
 	}
 
 	@Override

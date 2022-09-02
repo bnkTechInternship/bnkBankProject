@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.service.hotplace.domain.person.User;
 import com.service.hotplace.domain.place.Bank;
 import com.service.hotplace.domain.place.Shop;
+import com.service.hotplace.domain.play.LikeShop;
 import com.service.hotplace.service.BankService;
+import com.service.hotplace.service.LikeService;
+import com.service.hotplace.service.ReviewService;
 import com.service.hotplace.service.ShopService;
 import com.service.hotplace.service.WaitingService;
 
@@ -29,6 +32,12 @@ public class MainController {
 	
 	@Autowired
 	WaitingService waitingService;
+	
+	@Autowired
+	LikeService likeService;
+	
+	@Autowired
+	ReviewService reviewService;
 
 	@GetMapping("/shop/init/data")
 	@ResponseBody
@@ -82,5 +91,39 @@ public class MainController {
 		}else {
 			return "redirect:login.html";
 		}
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("searchShop.do")
+	List<Shop> searchShop(String ShopName) throws Exception {
+		System.out.println("======================가게 조회========================");
+		List<Shop> list = shopService.getShopListByName(ShopName);
+		System.out.println(list);
+		return list;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("checkLike.do")
+	boolean checkLike(LikeShop likeShop) throws Exception {
+		boolean check = likeService.checkLikeShop(likeShop);
+		//System.out.println("======================체크라이크호출@!!!!!!!!================================");
+		//System.out.println(check);
+		return check;
+	}
+	
+	@ResponseBody
+	@RequestMapping("getAvgScore.do")
+	double getAvgScroe(String shopIdx){
+		System.out.println("에버리지 스코어함수호출=================");
+		double avg = 0;
+		try {
+			avg = reviewService.getScoreAvg(Integer.parseInt(shopIdx));
+			System.out.println(avg);
+		} catch (Exception e) {
+			return 0.0;
+		}
+		return avg;
 	}
 }

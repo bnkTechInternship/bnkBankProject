@@ -9,6 +9,7 @@
     <title>Document</title>
     <link rel = "stylesheet" href = "css/main.css">    
     <script src = "script/mainScript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <body>
     <img src = "img2/bank_white.png" class = "decoration">
@@ -22,14 +23,14 @@
     <!-- Navbar 태그 -->
     <div id="searchNavbar">
         <div class="search cursor">X</div>
-        <input type = "text" placeholder="검색하기">
-        <img src = "img2/search2.png" id = "getSearch" class = "cursor">
+        <input type = "text" id="searchShop" placeholder="검색하기">
+        <img src = "img2/search2.png" id = "getSearch" class = "cursor" onclick="javascript:location.href='searchShop.do';">
     </div>
     <div id="mainNavbar" class = "bottom-shadow">
         <div id = "logo" class = "cursor">Hot Place</div>
         <div id = "navbar_middle">
-            <div class = "cursor"><img src = "img2/restaurant2.png">맛집</div>
-            <div class = "cursor"><img src = "img2/bank2.png" >은행</div>
+            <div class = "cursor" onclick="location.href='main.html'"><img src = "img2/restaurant2.png">맛집</div>
+            <div class = "cursor"  onclick="location.href='reserve.html'"><img src = "img2/bank2.png">은행</div>
             <div class = "cursor" onclick = "location.href = `/recommand`"><img src = "img2/quality.png">추천</div>
         </div>
         <div id = "navbar_right">

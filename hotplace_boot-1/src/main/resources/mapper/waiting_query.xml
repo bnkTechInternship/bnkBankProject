@@ -121,7 +121,10 @@
 	</select>
 	
 	
-
+	<select id = "getAllShopWaiting" resultType="waitingShop">
+		select shop_idx, waiting_cnt, waiting_num
+		from waiting_shop
+	</select>
 	
 </mapper>
 

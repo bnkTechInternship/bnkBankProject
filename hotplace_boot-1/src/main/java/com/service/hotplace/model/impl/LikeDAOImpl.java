@@ -65,8 +65,19 @@ public class LikeDAOImpl implements LikeDAO {
 
 	@Override
 	public List<LikeBank> getLikeBanks(String userId) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlsession.selectList(NS+"getLikeBanks", userId);
 	}
+
+	// 이거 맞음? 수정 
+	@Override
+	public List<LikeShop> getAllLikeShops(String userId) throws Exception {
+		return sqlsession.selectList(NS+"getLikeShops", userId);
+	}
+
+	@Override
+	public List<LikeShop> getAllShopLike() throws Exception {
+		return sqlsession.selectList(NS+"getAllShopLike");
+	}
+
 
 }

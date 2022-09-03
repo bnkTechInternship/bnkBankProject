@@ -52,7 +52,10 @@
 		WHERE user_id= #{value}
 	</select>
 
-	
+	<select id = "getAllShopLike" resultType="likeShop">
+		select like_idx, user_id, shop_idx
+		from like_shop
+	</select>
 </mapper>
 
 

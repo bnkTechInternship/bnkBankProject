@@ -6,9 +6,6 @@ import java.util.List;
 import com.service.hotplace.domain.person.User;
 import com.service.hotplace.domain.place.Bank;
 import com.service.hotplace.domain.place.Shop;
-import com.service.hotplace.domain.play.LikeBank;
-import com.service.hotplace.domain.play.LikeShop;
-import com.service.hotplace.domain.play.Review;
 import com.service.hotplace.domain.play.WaitingBank;
 import com.service.hotplace.domain.play.WaitingShop;
 
@@ -24,6 +21,7 @@ public interface WaitingService {
 	//현재 줄서기 정보 ( 있으면 객체반환, 없으면 null반환
 	WaitingBank getNowWaitingBank(User user) throws Exception;
 	ArrayList<WaitingShop> getNowWaitingShop(User user) throws Exception;
+	List<WaitingShop>getAllWaitingShop() throws Exception;
 	
 	//현재 줄서고 있는 가게 내 앞에 몇팀남았는지
 	int getShopUntilMyTurn(WaitingShop waitingShop) throws Exception;

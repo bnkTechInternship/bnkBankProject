@@ -60,6 +60,11 @@ public class BankServiceImpl implements BankService{
 		return bankDAO.updateBankEnternum(bank);
 	}
 
+	@Override
+	public List<Bank> getPartData(int idx) throws Exception {
+		return bankDAO.getPartData(idx);
+	}
+
 
 
 }

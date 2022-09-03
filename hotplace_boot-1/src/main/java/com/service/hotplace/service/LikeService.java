@@ -24,6 +24,6 @@ public interface LikeService {
 	List<LikeShop> getLikeShops(User user) throws Exception;
 	List<LikeBank> getLikeBanks(User user) throws Exception;
 	
-	
+	List<LikeShop> getAllShopLike() throws Exception;
 
 }

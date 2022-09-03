@@ -2,11 +2,11 @@ package com.service.hotplace.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +16,7 @@ import com.service.hotplace.domain.person.User;
 import com.service.hotplace.domain.place.Bank;
 import com.service.hotplace.domain.place.Shop;
 import com.service.hotplace.domain.play.LikeShop;
+import com.service.hotplace.domain.play.WaitingShop;
 import com.service.hotplace.service.BankService;
 import com.service.hotplace.service.LikeService;
 import com.service.hotplace.service.ReviewService;
@@ -39,6 +40,15 @@ public class MainController {
 	
 	@Autowired
 	ReviewService reviewService;
+	
+	@GetMapping("/login.html/*") 
+	public String redirect(HttpServletRequest req) {
+		String url = req.getRequestURI().substring(12);
+		System.out.println(url);
+		
+		return "redirect:/main.html?data=" + url;
+	}
+	
 
 	@GetMapping("/shop/init/data")
 	@ResponseBody
@@ -127,5 +137,27 @@ public class MainController {
 			return 0.0;
 		}
 		return avg;
+	}
+	
+	@GetMapping("/bank/init/data")
+	@ResponseBody
+	// throws Exception은 Controller에서 다 try,catch로 바꿔야함 나중에 
+	List<Bank> sendBankInitData(String number) throws Exception {
+		int idx = Integer.parseInt(number);
+		return bankService.getPartData(idx);
+	}
+	
+	@GetMapping("/shop/allWaiting")
+	@ResponseBody
+	List<WaitingShop> getAllShopWaiting() throws Exception {
+		return waitingService.getAllWaitingShop();
+	}
+	
+	@GetMapping("/shop/allLike")
+	@ResponseBody
+	List<LikeShop> getAllShopLike() throws Exception {
+		List<LikeShop>list = likeService.getAllShopLike();
+		System.out.println("결과 : " + list);
+		return list;
 	}
 }

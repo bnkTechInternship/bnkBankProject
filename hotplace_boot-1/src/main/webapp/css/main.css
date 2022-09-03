@@ -26,6 +26,8 @@ body {
     height : 100%;
     background-color: white;
     z-index: 2;
+
+    position: relative;
 }
 
 span {
@@ -48,18 +50,32 @@ span {
     align-items: center;
     flex-direction: column;
     font-family: 'Jua', cursive;
+    z-index: 1;
+}
+
+#find_info {
+  position: absolute;
+  color : white;
+  font-size: 50px;
+  z-index: -1;
+  top : 200px;
+  left : 35%;
 }
 
 
-#shopName {
+.shopName {
 	color : black;
 	margin:10px;
-    font-size: 22px;
-
+  font-size: 22px;
 }
 
-#shopOper, #shopWaiting {
-	color : grey;
+.selected {
+  border-bottom: 1px solid rgb(224,103,133);
+}
+
+
+.shopOper, .shopWaiting {
+	color : gray;
 	margin:3px;
 	margin-left :10px;
     font-size: 17px;
@@ -374,6 +390,7 @@ path {
     width : 50px;
     height : 50px;
     z-index: 4;
+    display: none;
 }
 
 
@@ -732,3 +749,19 @@ path {
 
 
 /* loading temp Content */
+
+
+/* animation */
+.down {
+  opacity: 0;
+  transform: translateY(300px);
+  transition: transform 1s;
+}
+
+.down.active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: transform 2s;  
+}
+
+/* animation */

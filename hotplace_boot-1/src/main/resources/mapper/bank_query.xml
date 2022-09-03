@@ -54,6 +54,10 @@
 		WHERE bank_idx=#{bankIdx}
 	</update>
 	
+	<select id = "getBankPart" parameterType="int" resultType="bank">
+   		select * from bank
+   		where bank_idx_number between #{value} and #{value} + 2   		
+   </select>
 </mapper>
 
 

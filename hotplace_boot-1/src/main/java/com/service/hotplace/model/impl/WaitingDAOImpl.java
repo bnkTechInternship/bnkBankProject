@@ -84,6 +84,11 @@ public class WaitingDAOImpl implements WaitingDAO {
 		return sqlsession.update(NS+"updateTotalCnt",waitingShop);
 	}
 
+	@Override
+	public List<WaitingShop> getAllWaitingShop() throws Exception {		
+		return sqlsession.selectList(NS+"getAllShopWaiting");
+	}
+
 
 
 }

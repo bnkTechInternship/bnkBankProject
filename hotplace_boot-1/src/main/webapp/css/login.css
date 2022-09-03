@@ -14,7 +14,7 @@ html, body {
 }
 
 body {
-    background-color:#1A3C40;
+    background-image:url("../img2/login_back.png");
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -35,6 +35,7 @@ body {
     border-radius: 20px;
     flex-direction: column;
     transition : 0.2s
+    opacity:0.8;
 }
 
 #login form {

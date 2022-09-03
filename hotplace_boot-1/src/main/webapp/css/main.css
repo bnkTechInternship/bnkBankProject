@@ -51,6 +51,22 @@ span {
 }
 
 
+#shopName {
+	color : black;
+	margin:10px;
+    font-size: 22px;
+
+}
+
+#shopOper, #shopWaiting {
+	color : grey;
+	margin:3px;
+	margin-left :10px;
+    font-size: 17px;
+	
+}
+
+
 #navi {
     position: absolute;
     font-size: 20px;

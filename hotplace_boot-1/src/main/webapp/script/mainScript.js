@@ -70,7 +70,7 @@ $(function() {
                     </div>	
                     <img src = "img2/wallpaper1.jpg">
                 </div>
-                <div>가게 이름</div>
+                <div >가게 이름</div>
                 <div>평균 가격 : ₩35,000</div>
                 <div>웨이팅 사람수 : 5</div>
             </div>
@@ -287,8 +287,7 @@ $(function() {
  
     
     function getPartData(idx) {
-    	const user = JSON.parse(localStorage.getItem('loginUser'));
-    	let userId = user.userId;
+
 
     	
     	$.ajax({
@@ -299,77 +298,98 @@ $(function() {
 			},
 			
 			success : (result) => {
+		    	const user = JSON.parse(localStorage.getItem('loginUser'));
+		    	console.log(user);
 				
 				var like = '♡'
 				for(let i = 0 ; i < result.length; i++) {
-					const webAddress=result[i].webAddress;
-					const shopIdx = result[i].shopIdx;
-					const shopName = result[i].shopName;
-					const shopOper = result[i].shopOper;
-					const totalCnt = result[i].totalCnt;
+					const webAddress=result[i].webAddress
+					const shopIdx = result[i].shopIdx
+					const shopName = result[i].shopName
+					const shopOper = result[i].shopOper
+					const totalCnt = result[i].totalCnt
 					
-/*					$.ajax({
-						type:'post',
-			    		url:'getAvgScore.do',
-			    		async:false,
-			    		data: "shopIdx="+shopIdx,
-			    		
-			    		success : function(result){
-			    			console.log(result);
-			    			let avgScore = result;
-			    		}
-					})*/
-					
-					$.ajax({
-			    		type:'post',
-			    		url:'checkLike.do',
-			    		data: "userId="+userId+"&shopIdx="+shopIdx,
-			    		
-			    		
-			    		success : function(result){
-			    			var avgScore = 0.0;
-							$.ajax({
-								type:'post',
-					    		url:'getAvgScore.do',
-					    		async:false,
-					    		data: "shopIdx="+shopIdx,
-					    		
-					    		success : function(result){
-					    			console.log(result);
-					    			avgScore = result;
-					    		}
-							})
-							
-			    			console.log(userId+"아작스호출"+shopIdx);
-			    			var jsonData = JSON.parse(result);
-			    			console.log(jsonData);
-			    			if(jsonData ==true){
-			    				like = '♥'
-			    			}else{
-			    				like = '♡'
-			    			}
-			    			
-			    		    	//$('.like').html('♡').css('color','white');
-	    					let addContent = `
-	    			            
-	    			            <div class ="container_item">
-	    			                <div class="photo">
-	    			                    <div class = "star">
-	    									★ ${avgScore}
-	    		                        <div class = "like">` + like + `</div>
-	    		                    </div>
-	    		                    	<img src = "${webAddress}">
-	    			                </div>
-	    			                <input type=hidden value=${shopIdx}>
-	    			                <div>${shopName}</div>
-	    			                <div>영업시간 : ${shopOper}</div>
-	    			                <div>실시간 웨이팅 : ${totalCnt}</div>
-	    			                </div>`
-	    			            
-	    			        console.log(like);  
-	    					$("#container").append(addContent);
-			    		}
-			    	})
+					if(user!=null){
+						let userId = user.userId;
+						$.ajax({
+				    		type:'post',
+				    		url:'checkLike.do',
+				    		data: "userId="+userId+"&shopIdx="+shopIdx,
+				    		
+				    		
+				    		success : function(result){
+				    			var avgScore = 0.0;
+								$.ajax({
+									type:'post',
+						    		url:'getAvgScore.do',
+						    		async:false,
+						    		data: "shopIdx="+shopIdx,
+						    		
+						    		success : function(result){
+						    			avgScore = result;
+						    		}
+								})
+								
+				    			var jsonData = JSON.parse(result);
+				    			if(jsonData ==true){
+				    				like = '♥'
+				    			}else{
+				    				like = '♡'
+				    			}
+				    			
+				    		    	//$('.like').html('♡').css('color','white');
+		    					let addContent = `
+		    			            
+		    			            <div class ="container_item">
+		    			                <div class="photo">
+		    			                    <div class = "star">
+		    									★ ${avgScore}
+		    		                        <div class = "like">` + like + `</div>
+		    		                    </div>
+		    		                    	<img src = "${webAddress}">
+		    			                </div>
+		    			                <input type=hidden value=${shopIdx}>
+		    			                <div id="shopName">${shopName}</div>
+		    			                <div id="shopOper">영업시간 : ${shopOper}</div>
+		    			                <div id="shopWaiting">실시간 웨이팅 : ${totalCnt}</div>
+		    			                </div>`
+		    			            
+		    			        console.log(like);  
+		    					$("#container").append(addContent);
+		    					
+				    		}//success끝
+				    	})//ajax
+					}else{
+		    			var avgScore = 0.0;
+						$.ajax({
+							type:'post',
+				    		url:'getAvgScore.do',
+				    		async:false,
+				    		data: "shopIdx="+shopIdx,
+				    		
+				    		success : function(result){
+				    			avgScore = result;
+				    		}
+						})
+						let addContent=`
+			            
+			            <div class ="container_item">
+			                <div class="photo">
+			                    <div class = "star">
+									★ ${avgScore}
+		                        <div class = "like">♡</div>
+		                    </div>
+		                    	<img src = "${webAddress}">
+			                </div>
+			                <input type=hidden value=${shopIdx}>
+			                <div id="shopName">${shopName}</div>
+			                <div id="shopOper">영업시간 : ${shopOper}</div>
+			                <div id="shopWaiting">실시간 웨이팅 : ${totalCnt}</div>
+			                </div>`
+		                        
+							$("#container").append(addContent);
+
+					}
 
 				}
 			}, // success 끝
@@ -402,6 +422,33 @@ $(function() {
     	
     	partData += 3;
     }
+    
+    $('#getSearch').click(function(){
+    	let shopName = $('#searchShop').val();
+    	console.log(shopName);
+    	
+    	$.ajax({
+    		
+    		type:'post',
+    		url:'searchShopName.do',
+    		data: "shopName="+ shopName,
+    		
+    		success:function(list){
+    			console.log(list);
+    		}
+    		
+    	})
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    });
+    
+    
     
 
 })

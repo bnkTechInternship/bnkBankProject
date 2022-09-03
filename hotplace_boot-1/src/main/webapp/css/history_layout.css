@@ -1,0 +1,328 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+* {
+    padding : 0;
+    margin : 0;
+    text-decoration: none;
+    list-style: none;
+}
+
+
+.right{
+    background-color: rgba(255,255,255,0.6);
+    display: none;
+   
+}
+
+.left{
+    width: 100%;
+    height: 3000px;
+}
+
+
+.left_second{
+    position: relative;
+    overflow: scroll;
+    overflow-x: hidden;
+    padding: 50px;
+    padding-top: 30px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+
+
+
+.review{
+    float: left;
+    margin-top: 30px;
+    margin-left: 10px;
+    width: 350px;
+    height: 100px;
+}
+
+.first{
+    position: relative;
+    float: left;
+    width: 900px;
+    height: 250px;
+}
+
+.first img{
+
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 350px;
+    height: 250px;
+    overflow: hidden;
+    float: left;
+
+}
+
+.first img:hover{
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+p.bubble {
+    position: relative;
+    width: 400px;
+    height : 100px;
+    text-align: center;
+    line-height: 1.4em;
+    margin: 0 auto;
+    margin-bottom: 40px;
+    background-color: #fff;
+    border: 8px solid #333;
+    border-radius: 30px;
+    font-family: sans-serif;
+    padding: 10px;
+    font-size: large;
+ }
+ 
+ p.bubble:before,
+ p.bubble:after {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+ }
+ 
+ p.speech:before {
+    left: 30px;
+    bottom: -51px;
+    border: 25px solid;
+    border-color: #333 transparent transparent #333;
+ }
+ 
+ p.speech:after {
+    left: 38px;
+    bottom: -30px;
+    border: 15px solid;
+    border-color: #fff transparent transparent #fff;
+ }
+ 
+ p.speech2:before {
+     transform: scaleX(-1);
+    right: 30px;
+    bottom: -55px;
+    border: 25px solid;
+    border-color: #333 transparent transparent #333;
+ }
+ 
+ p.speech2:after {
+     transform: scaleX(-1);
+    right: 38px;
+    bottom: -30px;
+    border: 15px solid;
+    border-color: #fff transparent transparent #fff;
+ }
+
+ .history{
+
+    position: relative;
+    margin-top: 50px;
+    padding: 50px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    width: 100%;
+    height: 300px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+ }
+
+ .first_text{
+    margin-left: 30px;
+    width: 500px;
+    height: 300px;
+    float:left;
+}
+
+
+.date{
+    font-size: 24px;
+    opacity: 0.6;
+}
+
+#name{
+    font-size: 36px;
+    font-weight: 800;
+}
+
+#menu{
+    font-size: 24px;
+
+}
+
+.nameNstar_right{
+    float: left;
+    margin-left: 30px;
+    width: 300px;
+    height: 150px;
+}
+
+blockquote:before {
+    content: "\201C";
+    font-size: 3em;
+    font-family: Georgia;
+    color: #bcbcbc;
+    float: left;
+    margin: -5px 10px 0px -10px;
+  }
+
+
+
+fieldset, label { margin: 0; padding: 0; }
+body{ margin: 20px; }
+h1 { font-size: 1.5em; margin: 10px; }
+
+/****** Style Star Rating Widget *****/
+
+.rating { 
+  border: none;
+  float: left;
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  margin: 5px;
+  font-size: 50px; /*별 크기 */
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label { 
+  color: #bbb; 
+ float: right; 
+
+}
+
+input{
+    outline: none;
+}
+
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+/*
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+
+
+/*
+.rating > input:checked + label:hover, /* hover current star when changing rating 
+.rating > input:checked ~ label:hover, *//*
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection 
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  }  */
+
+.rating > label:hover ~ label:hover ~ label { color: #FFED85; }
+
+.fin > label{
+    color: #FFD700;
+}
+
+
+ @media (max-width : 800px) {
+
+    .alarm h2, .alarm span{
+        width: 100%;
+        font-size: 26px;
+    }
+
+    .alarm{
+        width: 100%;
+    }
+
+}
+
+  
+@-webkit-keyframes ring {
+    0% { -webkit-transform: rotateZ(0); }
+    1% { -webkit-transform: rotateZ(30deg); }
+    3% { -webkit-transform: rotateZ(-28deg); }
+    5% { -webkit-transform: rotateZ(34deg); }
+    7% { -webkit-transform: rotateZ(-32deg); }
+    9% { -webkit-transform: rotateZ(30deg); }
+    11% { -webkit-transform: rotateZ(-28deg); }
+    13% { -webkit-transform: rotateZ(26deg); }
+    15% { -webkit-transform: rotateZ(-24deg); }
+    17% { -webkit-transform: rotateZ(22deg); }
+    19% { -webkit-transform: rotateZ(-20deg); }
+    21% { -webkit-transform: rotateZ(18deg); }
+    23% { -webkit-transform: rotateZ(-16deg); }
+    25% { -webkit-transform: rotateZ(14deg); }
+    27% { -webkit-transform: rotateZ(-12deg); }
+    29% { -webkit-transform: rotateZ(10deg); }
+    31% { -webkit-transform: rotateZ(-8deg); }
+    33% { -webkit-transform: rotateZ(6deg); }
+    35% { -webkit-transform: rotateZ(-4deg); }
+    37% { -webkit-transform: rotateZ(2deg); }
+    39% { -webkit-transform: rotateZ(-1deg); }
+    41% { -webkit-transform: rotateZ(1deg); }
+  
+    43% { -webkit-transform: rotateZ(0); }
+    100% { -webkit-transform: rotateZ(0); }
+  }
+  
+  @-moz-keyframes ring {
+    0% { -moz-transform: rotate(0); }
+    1% { -moz-transform: rotate(30deg); }
+    3% { -moz-transform: rotate(-28deg); }
+    5% { -moz-transform: rotate(34deg); }
+    7% { -moz-transform: rotate(-32deg); }
+    9% { -moz-transform: rotate(30deg); }
+    11% { -moz-transform: rotate(-28deg); }
+    13% { -moz-transform: rotate(26deg); }
+    15% { -moz-transform: rotate(-24deg); }
+    17% { -moz-transform: rotate(22deg); }
+    19% { -moz-transform: rotate(-20deg); }
+    21% { -moz-transform: rotate(18deg); }
+    23% { -moz-transform: rotate(-16deg); }
+    25% { -moz-transform: rotate(14deg); }
+    27% { -moz-transform: rotate(-12deg); }
+    29% { -moz-transform: rotate(10deg); }
+    31% { -moz-transform: rotate(-8deg); }
+    33% { -moz-transform: rotate(6deg); }
+    35% { -moz-transform: rotate(-4deg); }
+    37% { -moz-transform: rotate(2deg); }
+    39% { -moz-transform: rotate(-1deg); }
+    41% { -moz-transform: rotate(1deg); }
+  
+    43% { -moz-transform: rotate(0); }
+    100% { -moz-transform: rotate(0); }
+  }
+  
+  @keyframes ring {
+    0% { transform: rotate(0); }
+    1% { transform: rotate(30deg); }
+    3% { transform: rotate(-28deg); }
+    5% { transform: rotate(34deg); }
+    7% { transform: rotate(-32deg); }
+    9% { transform: rotate(30deg); }
+    11% { transform: rotate(-28deg); }
+    13% { transform: rotate(26deg); }
+    15% { transform: rotate(-24deg); }
+    17% { transform: rotate(22deg); }
+    19% { transform: rotate(-20deg); }
+    21% { transform: rotate(18deg); }
+    23% { transform: rotate(-16deg); }
+    25% { transform: rotate(14deg); }
+    27% { transform: rotate(-12deg); }
+    29% { transform: rotate(10deg); }
+    31% { transform: rotate(-8deg); }
+    33% { transform: rotate(6deg); }
+    35% { transform: rotate(-4deg); }
+    37% { transform: rotate(2deg); }
+    39% { transform: rotate(-1deg); }
+    41% { transform: rotate(1deg); }
+  
+    43% { transform: rotate(0); }
+    100% { transform: rotate(0); }
+  }

@@ -139,7 +139,23 @@ public class UserInfoController {
 	@ResponseBody
 	@GetMapping("unlikeShop.do")
 	public String unlikeShopDo(LikeShop likeShop) throws Exception{
+		System.out.println(likeShop);
 		int result = likeService.deleteLikeShop(likeShop);
 		return "";
 	}
+	
+	
+	@ResponseBody
+	@PostMapping("getLikeList.do")
+	public List<LikeShop> getLikeList(String userId) throws Exception{
+		User user = new User();
+		user.setUserId(userId);
+		List<LikeShop> list=likeService.getLikeShops(user);
+		for(LikeShop ls: list) {
+			Shop shop = shopService.getShop(ls.getShopIdx());
+			ls.setShop(shop);
+		}
+		return list;
+	}
+	
 }

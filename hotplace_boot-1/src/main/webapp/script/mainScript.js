@@ -5,14 +5,15 @@ var shopIdx = 1;
 // 은행 대기번호, 가게 좋아요 자료구조
 var shopWaiting = new Map();
 var likeList = [];
+let shopReview = []
+
 
 let tempWaiting = 1;
 
 $(function() {
 	// test code
-	// localStorage.setItem('loginUser','user01');
+	localStorage.setItem('loginUser','user01');
 	const user = localStorage.getItem('loginUser');
-	console.log('user',user);
 
 	// 페이지 로딩시 잠시 출력되는 내용
 	let loadContent = 
@@ -26,18 +27,18 @@ $(function() {
 	</div>
 	`;
 
-	$(".decoration").fadeIn(5000)
+	// $(".decoration").fadeIn(5000)
 
 	// 처음 시작시 필요한 데이터 받아오는 함수
 	initFunction();
 
-	console.log(location.href)
 
-	let url = location.href.split('?')[1].split('=');
-	console.log(url)
+	let url = location.href.split('?');
 
 	// 시작시 기본 로딩 데이터는 은행으로
-	if(url[1] === 'bank'){
+	if(url.length == 1 || (url.length > 1 && url[1].split('=')[1] === 'bank')){
+		if(url.length > 1 && url[1].split('=')[1] == 'bank') {
+		}
 		$("#choose_bank").addClass('selected')
 		getPartData(bankIdx,"bank");
 		getPartData(bankIdx,"bank");
@@ -48,9 +49,16 @@ $(function() {
 		getPartData(shopIdx,"shop");	
 	} 
 		
+
+	
 	
 	setTimeout(() => {
 		$("#logo_slow").addClass('active')
+
+
+		$(".down_slow").addClass('active')
+		$(".down_slow2").addClass('active')
+		// $("#mainNavbar").addClass('active')
 	},2000)
 
 		
@@ -141,7 +149,6 @@ $(function() {
 		let shopId = $(this).attr('id').substr(8);
 		let userId = $(this).attr('data-user')
 
-		console.log(userId);
 
 		if($(this).text() === '♥') 
 			flag = !flag;
@@ -231,6 +238,12 @@ $(function() {
     	})
     });
 
+	$("#container").on('click','.link',function() {
+		location.href = `infoTemplate.html?category=shop&data=${$(this).attr('data-info')}`;
+	})
+
+	
+
 
 	// --- function 정리 구간 --- //
 
@@ -267,17 +280,23 @@ $(function() {
 				url : url_,
 				type : 'get',
 				data : {"number" : idx},
-				success : (result) => {
+				success : (result) => {					
 					for(let item of result) {
 						if(user == null)
 							$("#container").append(getShop_NoLogin(item));
 						else $("#container").append(getShop_Login(item));
 					}
+
 				},
 				beforeSend : () => beforeSendWork(),
-				complete : () => completeWork()
+				complete   : () => {
+					completeWork()
+					console.log("setStarReview 실행됨")
+					setStarReview();
+				}
 			})
 			shopIdx += 3;
+
 		}
 	}
 
@@ -296,7 +315,7 @@ $(function() {
 			$('.loader').css('z-index',-1);
 			$("#loadback").css('z-index',-1);
 			$('.loading').remove()
-		},2000)
+		},1500)
 	}
 
 	function showSwal(shopId,flag,userId,tag) {
@@ -333,6 +352,8 @@ $(function() {
 		  })
 	}
 
+
+
 	function likeFunction(url_,shopId,userId,tag) {
 		$.ajax({
 			url  : url_,
@@ -350,7 +371,7 @@ $(function() {
 	// 은행 정보 받아오기
 	function getBankContent(info) {
 		return 	`
-		<div class ="container_item">
+		<div class ="container_item cursor" onclick = "location.href = '/infoTemplate.html?category=bank&data=${info.bankIdx}'">
 			<div class="photo">
 				<img src = "img2/BNK.jpg">
 			</div>
@@ -367,12 +388,12 @@ $(function() {
 		if(data === undefined) data = ++tempWaiting;
 
 		return `
-		<div class ="container_item">
+		<div class ="container_item cursor">
 			<div class="photo">
 				<div class = "star" id = "shopStar${info.shopIdx}">★4.5</div>
 				<img src = "${info.webAddress}">
 			</div>
-			<div class ="shopName">${info.shopName}</div>
+			<div class ="shopName link" data-info = "${info.shopIdx}">${info.shopName}</div>
 			<div class ="shopOper">영업시간 : ${info.shopOper}</div>
 			<div class ="shopWaiting">실시간 웨이팅 : ${data}</div>
 		</div>`
@@ -382,14 +403,12 @@ $(function() {
 	// 수정해야함
 	// 수정해야함
 	// 수정해야함
-	// 얘 모든 별점 다 받아와서 가게 아이디 맞게 별점 뿌려줘야함
 	function getShop_Login(info) {
 		let data = shopWaiting.get(info.shopIdx);		
 		if(data === undefined) data = ++tempWaiting;
 
 		let like = '♡';
 
-		// 시작할때 유저 전체 like받아와서 여기서 검사하고 맞추기
 
 		// 만약 찜한 가게일 경우
 		for(let i = 0 ; i < likeList.length; i++) {
@@ -400,15 +419,15 @@ $(function() {
 		}
 
 		return `
-		<div class ="container_item">
+		<div class ="container_item cursor">
 			<div class="photo">
 				<div class = "star" id = "shopStar${info.shopIdx}">
-					★4.5
+					
 					<div class = "like" id = "shopLike${info.shopIdx}" data-user = ${user}>${like}</div>
 				</div>
 				<img src = "${info.webAddress}">
 			</div>
-			<div class ="shopName">${info.shopName}</div>
+			<div class ="shopName link" data-info = "${info.shopIdx}">${info.shopName}</div>
 			<div class ="shopOper">영업시간 : ${info.shopOper}</div>
 			<div class ="shopWaiting">실시간 웨이팅 : ${data}</div>
 		</div>`
@@ -439,22 +458,57 @@ $(function() {
 				for(let i = 0 ; i < result.length; i++)
 					if(user === result[i].userId)
 						likeList.push(result[i].shopIdx)
-				console.log("성공한 후 LikeList : ",likeList)						
 			},
 			beforeSend : () => beforeSendWork(),
 			complete : () => completeWork()
 		})
 	}
 
+	// 가게 리뷰 받아오기
+	async function getShopReview() {
+		$.ajax({
+			url  : '/shop/review',
+			type : 'get',
+
+			success : (result) => {
+				for(let i = 0 ; i < result.length; i++)
+					shopReview.push(result[i])
+			}
+		})
+	}
+
+	async function setStarReview() {
+		// 나중에 효율적으로 계산 알고리즘 짜기
+		for(let i = 0 ; i < shopReview.length; i++) {
+			let data = shopReview[i].shopIdx;
+			let cnt = 1;
+			let sum = shopReview[i].score;
+			for(let j = i + 1; j < shopReview.length; j++) {
+				if(data === shopReview[j].shopIdx) {
+					sum += shopReview[j].score;
+					cnt++;
+				}
+			}
+			if(!$(`#shopStar${shopReview[i].shopIdx}`).hasClass('exist')) {
+				$(`#shopStar${shopReview[i].shopIdx}`).prepend(`★${sum / cnt}`)
+				$(`#shopStar${shopReview[i].shopIdx}`).addClass('exist')
+			}
+		}
+	}
+
 
 	// 페이지 첫 로딩시 데이터 받아오기
 	// 은행 웨이팅, 가게 좋아요 및 웨이팅 받아오는 시작 함수
+	// 별점도
 	async function initFunction() {
 		// 모든 가게 웨이팅
 		await getAllShopWaiting();
 
 		// 가게 좋아요 가져오기
 		await getAllShopLike();
+
+		// 음식점 리뷰 가져오기
+		await getShopReview();
 
 		// 은행 웨이팅 데이터가 없어서 아직 안만듬..		
 		

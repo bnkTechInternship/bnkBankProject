@@ -17,6 +17,8 @@ public interface ReviewDAO {
 	//리뷰불러오기
 	List<Review> getReviewListByUserId(String userId) throws Exception;
 	List<Review> getReviewListByShopIdx(int shopIdx) throws Exception;
+	List<Review> getAllReview() throws Exception;
+	List<Review> getOneShopReview(int shopIdx) throws Exception;
 	
 	double getScoreAvg(int ShopIdx) throws Exception;
 	

@@ -5,6 +5,17 @@
 
 <mapper namespace="sql.bank.mapper">
 
+	<resultMap type="bank" id="bankSelectMap">
+		<result column="bank_idx" property="bankIdx"/>
+		<result column="bank_name" property="bankName"/>
+		<result column="bank_address" property="bankAddress"/>
+		<result column="bank_number" property="bankNumber"/>
+		<result column="bank_oper" property="bankOper"/>
+		<result column="bank_enternum" property="bankEnternum"/>
+		<result column="bank_lat" property="bankLat"/>
+		<result column="bank_long" property="bankLong"/>
+	</resultMap>
+
 	<insert id="registerBank" parameterType="bank">
 		<selectKey keyProperty="bankIdx" resultType="int" order="BEFORE">
 		SELECT bank_seq.nextVal From dual
@@ -54,9 +65,9 @@
 		WHERE bank_idx=#{bankIdx}
 	</update>
 	
-	<select id = "getBankPart" parameterType="int" resultType="bank">
+	<select id = "getBankPart" parameterType="int" resultType="bank" resultMap="bankSelectMap">
    		select * from bank
-   		where bank_idx_number between #{value} and #{value} + 2   		
+   		where bank_idx between #{value} and #{value} + 2   		
    </select>
 </mapper>
 

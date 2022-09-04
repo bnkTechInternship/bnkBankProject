@@ -23,7 +23,6 @@ public class ShopDAOImpl implements ShopDAO {
 
 	@Override
 	public Shop getShop(int ShopIdx) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlsession.selectOne(NS+"getShop",ShopIdx);
 	}
 

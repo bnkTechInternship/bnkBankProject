@@ -9,13 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.service.hotplace.domain.person.User;
 import com.service.hotplace.domain.place.Bank;
+import com.service.hotplace.domain.place.Market;
 import com.service.hotplace.domain.place.Shop;
 import com.service.hotplace.domain.play.LikeShop;
+import com.service.hotplace.domain.play.Review;
 import com.service.hotplace.domain.play.WaitingShop;
 import com.service.hotplace.service.BankService;
 import com.service.hotplace.service.LikeService;
@@ -139,6 +142,14 @@ public class MainController {
 		return avg;
 	}
 	
+	@GetMapping("/shop/review")
+	@ResponseBody
+	List<Review>getAllReview() throws Exception {
+		List<Review>list = reviewService.getAllReview();
+		System.out.println("list값 : " + list);
+		return list;
+	}
+	
 	@GetMapping("/bank/init/data")
 	@ResponseBody
 	// throws Exception은 Controller에서 다 try,catch로 바꿔야함 나중에 
@@ -160,4 +171,20 @@ public class MainController {
 		System.out.println("결과 : " + list);
 		return list;
 	}
+	
+	@PostMapping("/getDetail")
+	@ResponseBody
+	Object getDetails(Market market) throws Exception {
+		Object obj = null;
+		int idx = Integer.parseInt(market.getIdx());
+		if(market.getCategory().equals("shop")) 
+			obj = shopService.getShop(idx);
+		else obj = bankService.getBank(idx);
+		
+		System.out.println(obj);
+		
+		
+		return obj;
+	}
+	
 }

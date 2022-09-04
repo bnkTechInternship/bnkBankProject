@@ -24,7 +24,6 @@ public class ShopServiceImpl implements ShopService{
 
 	@Override
 	public Shop getShop(int shopIdx) throws Exception {
-		// TODO Auto-generated method stub
 		return shopDAO.getShop(shopIdx);
 	}
 

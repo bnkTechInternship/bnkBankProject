@@ -47,8 +47,20 @@ public class ReviewDAOImpl implements ReviewDAO {
 
 	@Override
 	public double getScoreAvg(int ShopIdx) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlsession.selectOne(NS+"getScoreAvg",ShopIdx);
 	}
+
+	@Override
+	public List<Review> getAllReview() throws Exception {
+		return sqlsession.selectList(NS+"getAllReview");
+
+	}
+
+	@Override
+	public List<Review> getOneShopReview(int shopIdx) throws Exception {
+		return sqlsession.selectList(NS+"getOneShopReview",shopIdx);
+	}
+	
+	
 
 }

@@ -48,8 +48,17 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public double getScoreAvg(int ShopIdx) throws Exception {
-		// TODO Auto-generated method stub
 		return reviewDAO.getScoreAvg(ShopIdx);
+	}
+
+	@Override
+	public List<Review> getAllReview() throws Exception {
+		return reviewDAO.getAllReview();
+	}
+
+	@Override
+	public List<Review> getOneShopReview(int shopIdx) throws Exception {
+		return reviewDAO.getOneShopReview(shopIdx);
 	}
 
 }

@@ -39,7 +39,16 @@
 		WHERE shop_idx = #{value}
 	</select>
 	 
+	<select id="getAllReview" resultType="review">
+		select shop_idx,score,comm
+		from review
+	</select>
 	
+	<select id = "getOneShopReview" parameterType="int" resultType="review">
+		select user_id, score, comm
+		from review
+		where shop_idx = #{value}
+	</select>
 	
 	
 </mapper>

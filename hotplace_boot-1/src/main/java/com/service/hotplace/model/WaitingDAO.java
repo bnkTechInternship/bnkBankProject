@@ -16,6 +16,7 @@ public interface WaitingDAO {
 	//이용내역 불러오기
 	List<WaitingBank> getWaitingBank(String userId) throws Exception;
 	List<WaitingShop> getWaitingShop(String userId) throws Exception;
+	List<WaitingShop> getAllWaitingShop() throws Exception;
 	
 	//현재 줄서기 정보
 	List<WaitingBank> getNowWaitingBank(String userId) throws Exception;

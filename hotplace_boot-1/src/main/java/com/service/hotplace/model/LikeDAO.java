@@ -3,6 +3,7 @@ import java.util.List;
 
 import com.service.hotplace.domain.play.LikeBank;
 import com.service.hotplace.domain.play.LikeShop;
+import com.service.hotplace.domain.play.WaitingShop;
 
 public interface LikeDAO {
 	
@@ -20,7 +21,9 @@ public interface LikeDAO {
 	
 	//찜목록보기
 	List<LikeShop> getLikeShops(String userId) throws Exception;
+	List<LikeShop> getAllLikeShops(String userId) throws Exception;
 	List<LikeBank> getLikeBanks(String userId) throws Exception;
 	
-	
+	List<LikeShop> getAllShopLike() throws Exception;
+
 }

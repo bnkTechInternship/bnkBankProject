@@ -66,4 +66,9 @@ public class LikeServiceImpl implements LikeService{
 		return likeDAO.getLikeBanks(user.getUserId());
 	}
 
+	@Override
+	public List<LikeShop> getAllShopLike() throws Exception {
+		return likeDAO.getAllShopLike();
+	}
+
 }

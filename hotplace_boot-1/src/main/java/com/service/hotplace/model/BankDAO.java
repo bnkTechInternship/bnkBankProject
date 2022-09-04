@@ -19,5 +19,5 @@ public interface BankDAO {
 	//현재 입장순번 +1 해주는 함수
 	int updateBankEnternum(Bank bank) throws Exception;
 
-
+	List<Bank> getPartData(int idx) throws Exception;
 }

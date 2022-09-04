@@ -131,7 +131,6 @@ public class UserInfoController {
 	@GetMapping("likeShop.do")
 	public String likeShopDo(LikeShop likeShop) throws Exception{
 		int result = likeService.setLikeShop(likeShop);
-		System.out.println("l라이크샵호출,,,,,,,ㅠㅠ");
 		return "";
 	}
 	

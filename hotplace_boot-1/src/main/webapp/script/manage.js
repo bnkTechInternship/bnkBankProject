@@ -15,7 +15,7 @@ $(function() {
 		
 		success : function(shop) {
 			$('#shopName').append('<h2>' + shop.shopName + '</h2>');
-			$('#enternum').append('<h1>'+shop.shopEnternum+'</h1>');
+			$('#enternum').append('<h1>현재 '+shop.shopEnternum+'번 입장</h1>');
 			$('.shopImg').append('<img src='+shop.webAddress+'>');
 			
 		}// success

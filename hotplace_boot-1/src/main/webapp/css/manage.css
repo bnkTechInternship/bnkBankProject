@@ -79,10 +79,11 @@
 	
 	.second button {
 		width: 500px;
-		height: 360px;
+		height: 300px;
 		margin:100px 100px 100px 250px;
 		padding-top: 130px;
 		border: 1px solid black;
+		text-align: center;
 		align-content: center;
 		align-self: center;
 		display: flex;

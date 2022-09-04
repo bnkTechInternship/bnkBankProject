@@ -399,10 +399,7 @@ $(function() {
 		</div>`
 	}
 
-
-	// 수정해야함
-	// 수정해야함
-	// 수정해야함
+	// 로그인한 경우 가게 데이터 받기
 	function getShop_Login(info) {
 		let data = shopWaiting.get(info.shopIdx);		
 		if(data === undefined) data = ++tempWaiting;

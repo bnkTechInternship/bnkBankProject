@@ -10,6 +10,7 @@
     <script src="script/infoTemplate.js"></script>
     <script src = "https://unpkg.com/typeit@8.3.3/dist/index.umd.js"></script>    
     <script src = "barcode_jquery/jquery-barcode.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <title>Document</title>
     <link rel="stylesheet" href="css/infoTemplate.css">
     
@@ -117,7 +118,57 @@
 <script>
     $(function () {
         let sendData = [];
+        let totalPrice = 0;
+        let totalMenu = []
+        const user = localStorage.getItem('loginUser');
+        let idx_ = url[1].split('=')
 
+
+
+        
+        $("#notepad").on('click','#payment',function() {
+            console.log('sendData',sendData)
+            console.log('totalPrice',totalPrice)
+            console.log('totalMenu',totalMenu)
+
+            for(let i = 0 ; i < sendData.length; i++) {
+                $.ajax({
+                    url  : '/info/registWaiting',
+                    type : 'post',
+                    data : {
+                        userId : user,
+                        menuIdx : sendData[i],
+                        shopIdx : idx_[1],
+                        quantity : 1,
+                        waitingCnt : 1,
+                    },
+                    success : (result) => {
+                        console.log("예약 되었습니다.")
+                    }
+                })
+            }
+
+            Swal.fire({
+                title: "예약 안내",
+                text: "예약 하시겠습니까?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'OK',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                Swal.fire(
+                    "예약 성공",
+                    "예약을 성공했습니다!<br> 예약 페이지로 넘어갑니다!",
+                    'success'                    
+                )
+                setTimeout(() => {
+                    location.href = `/reserve.html`;
+                },2000)
+            }
+            })
+        })
 
         $("#barcode").barcode("1234567890128", "code128",{barWidth:1, barHeight:70,showHRI:true,bgColor:"white"});
 
@@ -169,16 +220,17 @@
         
         $("#menu_add").hide()
         $("#content").on('click','.menu_item',function() {
-            console.log(1);
+            let price = $(this).find('.menu_size').attr('data-price');
             $("#menu_add").show();
             $("#menu_add").fadeIn(1000);            
 
             $("#notepad").removeClass('note_show')
             let addMenu = $(this).find('.menu_name').text()
             sendData.push($(this).find('.menu_name').attr('value'))
-            console.log(sendData)
-
-            TypeWord(addMenu)
+            totalPrice += parseInt(price);
+            totalMenu.push(addMenu)
+            console.log('totalMenu : ',totalMenu)
+            TypeWord(addMenu,totalPrice,totalMenu)
             setTimeout(() => {
                 $("#menu_add").fadeOut(1000);
             },1000)
@@ -186,27 +238,15 @@
 
         $("#notepad_del").click(function() {
             new TypeIt("#notepad_content", {
-            speed: 50,
-            startDelay: 900,
             })
             
             sendData = []
+            totalMenu = []
+            totalPrice = 0;
             console.log('sendData : ',sendData)
             //
         })
         
-        $("#imgDiv").on('click','#jjim',function() {
-            flag = !flag;
-            if(flag) {
-                $("#heart_beat").css('z-index','5');
-                $("#heart_beat").css('opacity','1');
-
-                setTimeout(() => {
-                    $("#heart_beat").css('z-index','-1');
-                    $("#heart_beat").css('opacity','0');
-                },2000)
-            }
-        })
 
         $(window).scroll(() => {
             let scrollTop = $(this).scrollTop();
@@ -226,20 +266,25 @@
                 if (elementTop < windowHeight - elementVisible) {
                     reveals[i].classList.add("active");
                 }
-
-
             }
-
-            
         })
     })
 
-    function TypeWord(menu) {
+    
+
+    function TypeWord(menu,totalPrice,totalMenu2) {
+        let text = '';
+        for(let i = 0 ; i < totalMenu2.length; i++) 
+            text += totalMenu2[i] + '<br>'                
+        text += '<br><br>'
+        new TypeIt("#notepad_content", {
+            })
         new TypeIt("#notepad_content", {
             speed: 50,
             startDelay: 900,
             })
-            .type(menu + '<br>')            
+            .type(text)
+            .type(`총 가격 :    ￦${totalPrice}`)            
             .go()
         console.log("word : ",$("#notepad_content").text())
     }
@@ -299,6 +344,7 @@
         });
     }
     // chart1
+
 </script>
 
 </html>

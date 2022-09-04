@@ -168,7 +168,8 @@ public class MainController {
 	@ResponseBody
 	List<LikeShop> getAllShopLike() throws Exception {
 		List<LikeShop>list = likeService.getAllShopLike();
-		System.out.println("결과 : " + list);
+		for(LikeShop item : list)
+			System.out.println(item);
 		return list;
 	}
 	

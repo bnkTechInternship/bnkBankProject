@@ -27,7 +27,7 @@ html, body{
 .form_details h3{
     width: 250px;
     height: 50px;
-    background-color: #a5c9ca;
+    background-color: rgba(255,237,226,0.8);
     border-bottom: 1px solid gray;
     text-align: center;
     padding: 10px;

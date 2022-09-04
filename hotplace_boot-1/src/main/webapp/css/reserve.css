@@ -21,7 +21,7 @@ html, body, .wrapper{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+    font-family: HallymGothic-Regular;
 }
 
 
@@ -33,7 +33,7 @@ html, body, .wrapper{
     height: 900px;
     margin: 0 auto;
     margin-top: 120px;
-    background-color: rgba(255,255,255,0.8);
+    background-color: #EDF3EE;
     border-radius: 30px;
     box-shadow: 0 5px 18px -7px rgba(0,0,0,1);
     overflow: hidden;
@@ -57,6 +57,7 @@ html, body, .wrapper{
     height:160px;
     border-bottom: 1px solid darkgray;
     font-size: 40px;
+    font-weight:bold;
 }
 
 .left_second{

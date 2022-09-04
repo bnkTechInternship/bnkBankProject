@@ -21,26 +21,30 @@
 </head>
 
 <body>
-        <div id="topNavbar">
-            <div id="topNavbar__one">
-                <img src = "img/bnk핫플5.png" id = "logo">
-                <div id = "topInputDiv">
-                    <input type = "text">
-                </div>
-                <div id = "myInfo">
-                    <img src = "img/more.png">
-                    <img src = "img/user.png">
-                </div>
-            </div>            
-        </div> 
-
+    <div id="mainNavbar" class = "bottom-shadow">
+            
+        <div id = "logo" class = "cursor" onclick = 'location.href = "/login.html/bank"''>
+            <img src = "img2/핫플동백로고.png" id = "login_photo"/> 
+            동백핫플
+        </div>
+        <div id = "navbar_middle">
+            <div class = "cursor_menu" id = "choose_food" onclick = "location.href = 'reserve.html'"><img src = "img2/restaurant2.png">실시간 웨이팅</div>
+            <div class = "cursor_menu" id = "choose_bank" onclick = "location.href = 'history_layout.html'"><img src = "img2/bank2.png">이용내역</div>
+            <div class = "cursor_menu" onclick = "location.href = `myfav.html`"><img src = "img2/quality.png">찜 목록</div>
+            <div class = "cursor_menu" onclick = "location.href = `userinfo.html`"><img src = "img/information2.png">내 정보</div>
+        </div>
+        <div id = "navbar_right">
+            <img src = "img2/moon.png" class = "cursor" id = "mode">
+            <img src = "img2/user2.png" id = "userInfo" class = "cursor" onclick="javascript:location.href='userInfo.do';">
+            <img src = "img2/search2.png" class = "search cursor">
+        </div>
+    </div>
             
         <div class="contents">
             
             <div class="left">
                 <div class="left_first">
                     <h3>내 정보</h3>
-                    
                 </div>
                 <div class="left_second">
                     <div class="form_details">

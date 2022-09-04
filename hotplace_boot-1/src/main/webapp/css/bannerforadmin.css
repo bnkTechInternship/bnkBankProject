@@ -70,6 +70,7 @@ html {
 }
 
 #navbar_middle {
+    visibility: hidden;
     color : black;
     font-weight: bold;
     display: flex;

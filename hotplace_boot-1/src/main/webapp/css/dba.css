@@ -29,7 +29,7 @@ html, body{
 .form_details h3{
     width: 250px;
     height: 50px;
-    background-color: #a5c9ca;
+    background-color: lightgray;
     border-bottom: 1px solid gray;
     text-align: center;
     padding: 10px;
@@ -201,6 +201,16 @@ button {
     margin-right: 200px;
 }
 
+#updateMenu, #deleteMenu, #updateShop, #deleteShop, #deleteBank, #updateBank{
+    float: right;
+    margin-top: 30px;
+    width: 250px;
+    background-color: darkgray;
+    text-align: center;
+    margin-right: 200px;
+}
+
+
 button.success {
   --button-bg-color: #28a745;
   --button-hover-bg-color: #218838;
@@ -237,6 +247,29 @@ button{
     height: 30px;
     width: 70px;
 }
+
+#searchShop{
+    margin: 0px;
+    padding: 0px;
+    height: 30px;
+    width: 70px;
+}
+
+
+#searchBank{
+    margin: 0px;
+    padding: 0px;
+    height: 30px;
+    width: 70px;
+}
+
+#searchMenu{
+    margin: 0px;
+    padding: 0px;
+    height: 30px;
+    width: 70px;
+}
+
 
 ul li button{
     background-color: gray;

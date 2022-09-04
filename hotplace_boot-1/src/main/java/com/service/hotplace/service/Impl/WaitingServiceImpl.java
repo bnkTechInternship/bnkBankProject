@@ -1,6 +1,7 @@
 package com.service.hotplace.service.Impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -49,22 +50,73 @@ public class WaitingServiceImpl implements WaitingService{
 	@Override
 	public ArrayList<ArrayList<WaitingShop>> getWaitingShop(User user) throws Exception {
 		List<WaitingShop> wslist= waitingDAO.getWaitingShop(user.getUserId());
+		
+		wslist.get(0).getShopIdx();
+		wslist.get(0).getMenuIdx();
+		
 		ArrayList<ArrayList<WaitingShop>> returnlist = new ArrayList<ArrayList<WaitingShop>>();
 		
 		int currShopIdx = wslist.get(0).getShopIdx();
+		System.out.println(currShopIdx);
 		ArrayList<WaitingShop> tmp = new ArrayList<WaitingShop>();
-		for(WaitingShop ws : wslist) {
-			if(ws.getShopIdx() == currShopIdx) {
-				System.out.println("샵번호 같아 tmp에 삽입함");
-				tmp.add(ws);
-			}else {
-				returnlist.add(tmp);
-				tmp.clear();
-				currShopIdx = ws.getShopIdx();
-				tmp.add(ws);
+		//System.out.println(wslist);
+		
+		HashMap<Integer, ArrayList<WaitingShop>>hash = new HashMap<>();
+		
+		for(int i = 0 ; i < wslist.size(); i++) {
+			if(hash.containsKey(wslist.get(i).getShopIdx())) {
+				hash.get(wslist.get(i).getShopIdx()).add(wslist.get(i));
+			} else {
+				ArrayList<WaitingShop>temp = new ArrayList<WaitingShop>();
+				temp.add(wslist.get(i));
+				hash.put(wslist.get(i).getShopIdx(),temp);
 			}
 		}
-		returnlist.add(tmp);
+		
+		for(int i = 0 ; i < hash.size(); i++) {
+			System.out.println(hash);
+		}
+		
+		for(int key : hash.keySet()){
+            System.out.println("키 : " + key);
+            System.out.println(hash.get(key));
+        }
+		
+		
+//		tmp.add(wslist.get(0)); // 같은거끼리 묶을 1차원배열
+//		
+//		for(int i=1; i<wslist.size(); i++) {
+//			if(tmp.get(0).getShopIdx() == wslist.get(i).getShopIdx()) {
+//				tmp.add(wslist.get(i));
+//
+//			}else {
+//				ArrayList<WaitingShop> tmp2 = new ArrayList<WaitingShop>();
+//				tmp2 = tmp;
+//				returnlist.add(new);
+//				System.out.println(returnlist);
+//				tmp.clear();
+//				tmp.add(wslist.get(i));
+//			}
+//			
+//		}
+//		returnlist.add(tmp);
+		
+		
+//		for(WaitingShop ws : wslist) {
+//			System.out.println(ws);
+//			if(ws.getShopIdx() == currShopIdx) {
+//				System.out.println("샵번호 같아 tmp에 삽입함");
+//				tmp.add(ws);
+//			}else {
+//				returnlist.add(tmp);
+//				tmp.clear();
+//				currShopIdx = ws.getShopIdx();
+//				tmp.add(ws);
+//			}
+//		}
+//		returnlist.add(tmp);
+		
+
 		return returnlist;
 	}
 

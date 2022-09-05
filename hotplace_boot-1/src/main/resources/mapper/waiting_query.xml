@@ -20,6 +20,11 @@
 		WHERE user_id=#{value}
 	</select>
 	
+	<select id = "getAllWaitingBank" resultType="waitingBank">
+		select bank_idx, waiting_num
+		from waiting_bank
+	</select>
+	
 	<select id="getWaitingShop" parameterType="string" resultType="waitingShop">
 		SELECT * FROM waiting_shop
 		WHERE user_id=#{value}

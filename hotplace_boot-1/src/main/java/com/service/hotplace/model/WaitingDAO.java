@@ -21,6 +21,7 @@ public interface WaitingDAO {
 	//현재 줄서기 정보
 	List<WaitingBank> getNowWaitingBank(String userId) throws Exception;
 	List<WaitingShop> getNowWaitingShop(String userId) throws Exception;
+	List<WaitingBank> getAllWaitingBank() throws Exception;
 	
 	//현재 줄서고 있는 가게 내 앞에 몇팀남았는지
 	int getShopUntilMyTurn(WaitingShop waitingShop) throws Exception;

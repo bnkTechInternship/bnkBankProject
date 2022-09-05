@@ -19,6 +19,7 @@ import com.service.hotplace.domain.place.Market;
 import com.service.hotplace.domain.place.Shop;
 import com.service.hotplace.domain.play.LikeShop;
 import com.service.hotplace.domain.play.Review;
+import com.service.hotplace.domain.play.WaitingBank;
 import com.service.hotplace.domain.play.WaitingShop;
 import com.service.hotplace.service.BankService;
 import com.service.hotplace.service.LikeService;
@@ -65,6 +66,8 @@ public class MainController {
 			int nowCnt = waitingService.getShopNowWaitingCnt(shop);
 			list.get(i).setTotalCnt(nowCnt);
 		}
+		
+		System.out.println("shop/init/data 결과  : " + list);
 		
 		return list;
 	}
@@ -163,6 +166,12 @@ public class MainController {
 	@ResponseBody
 	List<WaitingShop> getAllShopWaiting() throws Exception {
 		return waitingService.getAllWaitingShop();
+	}
+	
+	@GetMapping("/bank/allWaiting")
+	@ResponseBody
+	List<WaitingBank> getAllBankWaiting() throws Exception {
+		return waitingService.getAllWaitingBank();
 	}
 	
 	@GetMapping("/shop/allLike")

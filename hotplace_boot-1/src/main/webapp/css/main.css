@@ -9,8 +9,6 @@
     /* transition : 0.5s; */
     font-family: 'Jua', cursive;
 
-    
-
     text-decoration: none;
     list-style: none;
 }
@@ -675,7 +673,7 @@ path {
 
 /* map Content test */
 
-.mapContent {
+/* .mapContent {
   font-family: 'Jua', cursive;
 
   position: absolute;
@@ -698,7 +696,6 @@ path {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* align-items: center; */
   gap : 10px;
 }
 
@@ -711,6 +708,68 @@ path {
 .mapContent_title {
   font-weight: bold;
   font-size: 15px;
+} */
+
+
+.mapContent {
+  width : 350px;
+  height : 400px;
+
+  position: absolute;
+  top : 30%;
+  left : 30%;
+  background-color: #eeeeee;
+
+  display: grid;
+  grid-auto-flow: row;
+  overflow: hidden;
+
+  justify-items: center;
+  align-items: center;
+
+  border-radius: 15px;
+  border : 2px solid black;
+
+  grid-template-rows: 200px auto;
+}
+
+.mapContent_top {
+  width : 90%;
+  height : 90%;
+}
+
+.mapContent_mainContent {
+  width: 90%;
+  display: grid;
+  align-self: flex-start;
+  padding : 10px 0 10px 0;
+  gap : 7px;
+}
+
+.mapContent_mainContent > div:nth-child(1) {
+  font-size: 20px;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+.mapContent_mainContent > div:last-child {
+  margin-top: 15px;
+  justify-self: center;
+  font-weight: bold;
+  color : rgb(0,125,255);
+  cursor : pointer;
+  border-radius: 15px;
+  width : 100px;
+  text-align: center;
+}
+.mapContent_mainContent > div:last-child:hover {
+  background-color: rgb(0,125,255);
+  color : white;
+  transition: 1s;
+}
+.mapContent_small {
+  font-size: 13px;
+  color : gray;
+  padding-left: 15px;
 }
 /* map Content test */
 

@@ -712,7 +712,7 @@ path {
 
 
 .mapContent {
-  width : 350px;
+  width : 400px;
   height : 400px;
 
   position: absolute;
@@ -838,7 +838,7 @@ path {
 .down_slow2 {
   opacity: 0;
   transform: translateY(30px);
-  transition : 2s all ease;
+  transition : 0.5s all ease;
 }
 
 .down_slow2.active {

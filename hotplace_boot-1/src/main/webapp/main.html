@@ -112,7 +112,7 @@
     </div>
 </body>
 <script>
-
+    let overlays = []
     var mapContainer = document.getElementById('map'),  // 맵 div받기
         mapOption = { 
             center: new kakao.maps.LatLng(35.1542163, 129.0671883), // 지도 중심좌표
@@ -234,8 +234,6 @@
                         </div>
                     </div>
                     `
-
-                    
         	}
                 var overlay = new kakao.maps.CustomOverlay({
                     content: content,
@@ -272,15 +270,19 @@
             markers.push(marker);
 
             kakao.maps.event.addListener(marker, 'click', function() {
-                marker.toggle = !marker.toggle;
-
-                if(marker.toggle) {
+                let tempData = !marker.toggle;
+                for(let i = 0 ; i < markers.length; i++)
+                    markers[i].toggle = false;
+                for(let i = 0 ; i < overlays.length; i++)
+                    overlays[i].setMap(null);
+                if(tempData)
                     overlay.setMap(map);
-                }
-                    
                 else overlay.setMap(null);
+                
+                marker.toggle = tempData;
             });
             overlay.setMap(null);
+            overlays.push(overlay)
         }
 
         // 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다

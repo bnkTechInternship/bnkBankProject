@@ -432,7 +432,7 @@ function createMap(marketInfo) {
 
 function addFooter() {
     let data =  `
-    <footer class="footer-07 up">
+    <footer class="footer-07">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-12 text-center">

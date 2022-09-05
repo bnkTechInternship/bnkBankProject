@@ -48,20 +48,19 @@ public class WaitingServiceImpl implements WaitingService{
 	}
 
 	@Override
-	public ArrayList<ArrayList<WaitingShop>> getWaitingShop(User user) throws Exception {
+	public HashMap<Integer, ArrayList<WaitingShop>> getWaitingShop(User user) throws Exception {
 		List<WaitingShop> wslist= waitingDAO.getWaitingShop(user.getUserId());
 		
 		wslist.get(0).getShopIdx();
 		wslist.get(0).getMenuIdx();
 		
-		ArrayList<ArrayList<WaitingShop>> returnlist = new ArrayList<ArrayList<WaitingShop>>();
+		//ArrayList<ArrayList<WaitingShop>> returnlist = new ArrayList<ArrayList<WaitingShop>>();
 		
 		int currShopIdx = wslist.get(0).getShopIdx();
-		System.out.println(currShopIdx);
-		ArrayList<WaitingShop> tmp = new ArrayList<WaitingShop>();
+	//	ArrayList<WaitingShop> tmp = new ArrayList<WaitingShop>();
 		//System.out.println(wslist);
 		
-		HashMap<Integer, ArrayList<WaitingShop>>hash = new HashMap<>();
+		HashMap<Integer, ArrayList<WaitingShop>> hash = new HashMap<>();
 		
 		for(int i = 0 ; i < wslist.size(); i++) {
 			if(hash.containsKey(wslist.get(i).getShopIdx())) {
@@ -73,14 +72,9 @@ public class WaitingServiceImpl implements WaitingService{
 			}
 		}
 		
-		for(int i = 0 ; i < hash.size(); i++) {
-			System.out.println(hash);
-		}
 		
-		for(int key : hash.keySet()){
-            System.out.println("키 : " + key);
-            System.out.println(hash.get(key));
-        }
+		
+		
 		
 		
 //		tmp.add(wslist.get(0)); // 같은거끼리 묶을 1차원배열
@@ -117,7 +111,7 @@ public class WaitingServiceImpl implements WaitingService{
 //		returnlist.add(tmp);
 		
 
-		return returnlist;
+		return hash;
 	}
 
 	@Override

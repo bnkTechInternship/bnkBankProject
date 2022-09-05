@@ -1,6 +1,7 @@
 package com.service.hotplace.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.service.hotplace.domain.person.User;
@@ -16,7 +17,7 @@ public interface WaitingService {
 	
 	//이용내역 불러오기
 	List<WaitingBank> getWaitingBank(User user) throws Exception;
-	ArrayList<ArrayList<WaitingShop>> getWaitingShop(User user) throws Exception;
+	HashMap<Integer, ArrayList<WaitingShop>> getWaitingShop(User user) throws Exception;
 	
 	//현재 줄서기 정보 ( 있으면 객체반환, 없으면 null반환
 	WaitingBank getNowWaitingBank(User user) throws Exception;

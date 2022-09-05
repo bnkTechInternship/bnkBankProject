@@ -185,7 +185,7 @@ h1 { font-size: 1.5em; margin: 10px; }
 .rating > input { display: none; } 
 .rating > label:before { 
   margin: 5px;
-  font-size: 50px; /*별 크기 */
+  font-size: 50px;
   font-family: FontAwesome;
   display: inline-block;
   content: "\f005";
@@ -224,9 +224,11 @@ input{
 
 .rating > label:hover ~ label:hover ~ label { color: #FFED85; }
 
-.fin > label{
+
+#fin{
     color: #FFD700;
 }
+
 
 
  @media (max-width : 800px) {

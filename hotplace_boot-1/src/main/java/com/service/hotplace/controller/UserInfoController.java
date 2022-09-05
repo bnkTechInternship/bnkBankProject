@@ -64,6 +64,18 @@ public class UserInfoController {
 //		//return user;
 //	}
 	
+	@RequestMapping("checkCurrWaiting.do")
+	public String checkCurrWaiting(String userId) throws Exception{
+		User user = new User();
+		user.setUserId(userId);
+		List<WaitingShop> waitingshops = waitingService.getNowWaitingShop(user);
+		System.out.println("&&&&&&&&&&&&&&&&&웨이팅샵여부::"+ waitingshops);
+		if(waitingshops ==null) { return "redirect:reserve2.html";}
+		return "redirect:reserve.html";
+	}
+	
+	
+	
 	@ResponseBody
 	@PostMapping("getReviews.do")
 	public List<Review> getReviewsDo(String userId) throws Exception {
@@ -71,7 +83,7 @@ public class UserInfoController {
 		User user = new User();
 		user.setUserId(userId);
 		List<WaitingShop> waitingshops = waitingService.getNowWaitingShop(user);
-		//System.out.println(waitingshops);
+		System.out.println(waitingshops);
 		int shopIdx = waitingshops.get(0).getShopIdx();
 		List<Review> list = reviewService.getReviewListByShopIdx(shopIdx);
 		return list;

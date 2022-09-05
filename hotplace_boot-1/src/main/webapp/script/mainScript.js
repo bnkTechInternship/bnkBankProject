@@ -12,7 +12,7 @@ let tempWaiting = 1;
 
 $(function() {
 	// test code
-	localStorage.setItem('loginUser','user01');
+//	localStorage.setItem('loginUser','user01');
 	const user = localStorage.getItem('loginUser');
 
 	// 페이지 로딩시 잠시 출력되는 내용

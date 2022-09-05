@@ -11,7 +11,7 @@ html, body {
 }
 
 body {
-    background-image: url('../img/배경\ 어둡게.png');
+    background-image: url('../img2/login_back.png');
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -44,8 +44,8 @@ body {
 }
 
 #login_photo {
-    width : 350px;
-    height : 250px;
+    width : 150px;
+    height : 150px;
     margin-bottom: 50px;
 }
 

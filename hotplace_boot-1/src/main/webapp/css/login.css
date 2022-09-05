@@ -9,12 +9,17 @@
     url('//cdn.jsdelivr.net/korean-webfonts/1/orgs/govs/busan/Busan/Busan.woff') format('woff');
 }
 
+@font-face {
+    font-family: 'Frankfurter';
+    src: url('../fonts/Frankfurter.woff') format('woff');
+}
 
 * {
     margin : 0;
     padding : 0;
     text-decoration: none;
     list-style: none;
+    
     
 }
 html, body {
@@ -60,6 +65,7 @@ body {
 
 #login_photo {
     width : 180px;
+    margin-top:20px;
     height : 180px;
     
 }
@@ -70,7 +76,14 @@ body {
     font-size: 50px;
     font-family: 'Busan', sans-serif;
     padding-left: 0px; 
-    margin-bottom: 30px;
+    
+}
+
+#gome{
+	font-family: 'Frankfurter';
+	font-size : 21px;
+	color:#f7bb25;
+	margin-bottom: 30px;
 }
 
 .input {

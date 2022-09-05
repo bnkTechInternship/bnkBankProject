@@ -9,8 +9,6 @@ $(function(){
     
     $(document).on('click','.last',
     		function(e){
-    			alert($(this).val());
-    			console.log($(this).parent().attr('name'))
 		    	Swal.fire({
 				    input: 'textarea',
 				    inputLabel: '리뷰를 작성하세요',

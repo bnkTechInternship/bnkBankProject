@@ -74,16 +74,16 @@ html, body, .wrapper{
     height: 220px;
     margin: 0 auto;
     margin-top: 30px;
-    border-top-left-radius: 5%;
-    border-bottom-left-radius: 5%;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
 }
 
 .left_second #img1{
     width: 499px;
     height: 220px;
     object-fit: cover;
-    border-top-left-radius: 5%;
-    border-bottom-left-radius: 5%;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
     margin-right: 1px;
     float: left;
     
@@ -94,14 +94,13 @@ html, body, .wrapper{
     height: 220px;
     margin-left: 1px;
     object-fit: cover;
-    border-top-right-radius: 5%;
-    border-bottom-right-radius: 5%;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
     float: left;
 }
 
 .details_icon ul li {
     list-style-type: none;
-    float: left;
     width: 130px;
     margin: 10px 30px;
 /*     padding: px 0px; */
@@ -114,7 +113,6 @@ html, body, .wrapper{
 
 .details_icon ul li:hover {
     list-style-type: none;
-    float: left;
     width: 130px;
     margin: 10px 30px;
     padding: 0px 0px;
@@ -136,13 +134,14 @@ html, body, .wrapper{
 
 .details .details_menu{
     width: 800px;
-    margin-top: 30px;
+    margin-top: 1rem;
     height: 120px;
     padding: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
-    background-color: rgba(255,255,255,0.7);
-    border-radius: 10px;
+    background-color: rgb(255 255 255);
+    border-radius: 25px;
+    border: 1px solid #c4c4c452;
 }
 
 .details .details_icon{
@@ -151,11 +150,13 @@ html, body, .wrapper{
 }
 
 .details .details_text{
+	overflow: hidden;
     width: 760px;
     height: 50px;
     padding-top: 10px;
-    padding-left: 10px;
     text-align: left;
+    line-height: 3;
+    padding-left: 2rem;
 }
 
 .details_text span{
@@ -210,8 +211,6 @@ html, body, .wrapper{
     padding-left: 20px;
     padding-right: 20px;
     display: flex;
-    background-color: rgba(255,255,255,0.5);
-    /*border-bottom: 1px solid #a9a9a9;*/
 }
 
 
@@ -226,15 +225,14 @@ html, body, .wrapper{
 
 
 .review_text{
-    margin-top: 10px;
-    margin: 0 auto;
+    margin: 0.5rem auto 0px;
     text-align: left;
     width: 80%;
     height: 60%;
     background-color: rgba(247,248,249,0.5);
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 1px 1px 1px rgba(0,0,0,1);
+    box-shadow: 1px 1px 5px rgb(0 0 0);
 }
 
 .review_star{
@@ -245,7 +243,7 @@ html, body, .wrapper{
     margin-right: 20px;
     margin-top: 10px;
     border-radius: 35px;
-    box-shadow: 1px 1px 1px rgba(0,0,0,1);
+    box-shadow: 0px 1px 3px rgb(0 0 0);
 }
 
 .review_star p{
@@ -253,9 +251,9 @@ html, body, .wrapper{
     margin-left: 10px;
 }
 
-/* left img 영역 끝 */
+/* left img �쁺�뿭 �걹 */
 
-/* left details 영역 시작 */
+/* left details �쁺�뿭 �떆�옉 */
 
 .details{
     width: 800px;
@@ -272,13 +270,9 @@ html, body, .wrapper{
     padding-top: 10px
 }
 
-.details 	img{
-    
-    padding-top: 10px;
+.details img{
     width: 40px;
-    height: 50px;
     margin: 0 3px;
-    float: left;
 }
 
 

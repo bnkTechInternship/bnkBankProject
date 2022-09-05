@@ -36,17 +36,18 @@ $(function() {
 	let url = location.href.split('?');
 
 	// 시작시 기본 로딩 데이터는 은행으로
-	if(url.length == 1 || (url.length > 1 && url[1].split('=')[1] === 'bank')){
+
+	if(url.length == 1 || (url.length > 1 && url[1].split('=')[1] === 'shop')){
 		if(url.length > 1 && url[1].split('=')[1] == 'bank') {
 		}
-		$("#choose_bank").addClass('selected')
-		getPartData(bankIdx,"bank");
-		getPartData(bankIdx,"bank");
+		$("#choose_food").addClass('selected')
+		getPartData(shopIdx,"shop");
+		getPartData(shopIdx,"shop");
 	}
 	else {
-		$("#choose_food").addClass('selected')
-		getPartData(shopIdx,"shop");	
-		getPartData(shopIdx,"shop");	
+		$("#choose_bank").addClass('selected')
+		getPartData(bankIdx,"bank");	
+		getPartData(bankIdx,"bank");	
 	} 
 		
 
@@ -56,7 +57,9 @@ $(function() {
 		$("#logo_slow").addClass('active')
 
 		$(".down_slow").addClass('active')
-		$(".down_slow2").addClass('active')
+		setTimeout(() => {
+			$(".down_slow2").addClass('active')
+		},1000)
 	},2000)
 
 		

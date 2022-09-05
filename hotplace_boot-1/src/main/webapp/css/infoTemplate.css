@@ -23,7 +23,7 @@ body {
 #imgDiv {
     width : 100%;
     height : 500px;
-    background-color: aqua;
+    background-color: white;
 
     background-image: url('../img2/wallpaper9.jpg');
     background-size: cover;

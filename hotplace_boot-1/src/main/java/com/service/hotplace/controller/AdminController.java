@@ -33,7 +33,10 @@ public class AdminController {
 	
 	@PostMapping("searchUser.do")
 	public User searchUser(String userId) throws Exception {
-		return userService.getUserById(userId);
+		System.out.println("받아온 userId : " + userId);
+		User user = userService.getUserById(userId);
+		System.out.println("받아온 데이터 : " + user);
+		return user;
 	}
 	
 	@PostMapping("deleteUser.do")

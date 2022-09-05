@@ -24,13 +24,16 @@ $(function(){
     });
     
     $('#search').click(function(){
+		console.log("요청 전송")
     	let id = $('#id').val();
     	$.ajax({
     		type:'post',
     		url:'searchUser.do',
-    		data:"userId="+id,
-    		
+			data : {
+				"userId" : id
+			},    	    		
     		success:function(user){
+				console.log("받아온 데이터 : ",user)
 //    			let money = user.userBalance;
 //    			if(money == null) money="연동 안함";
 //    			
@@ -40,8 +43,8 @@ $(function(){
     			$('#id').text('value', id);
 //    			$('#id').attr('value',id);
     			$('#name').attr('value',user.userName);
-    			$('#address1').attr('value',user.userAddress.substr(0,7));
-    			$('#address2').attr('value',user.userAddress.substr(7));
+    			$('#address1').attr('value',user.userAddress);
+    			$('#address2').attr('value',user.userAddress);
     			$('#phone').attr('value',user.userNumber);
     			$('#email').attr('value',user.userEmail);
     			$('#money').attr('value',user.userBalance);

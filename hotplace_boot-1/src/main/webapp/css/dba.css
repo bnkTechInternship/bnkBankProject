@@ -58,14 +58,14 @@ html, body{
 
 
 
-form span{
+form span,.form span{
     text-align: left;
     padding-bottom: 0px;
     width: 150px;
     display: inline-block;
 }
 
-form {
+form,.form {
     border-top: 1px black solid;
     float: left;
     height: 400px;
@@ -75,7 +75,7 @@ form {
     
 }
 
-form input{
+form input, .form input{
     width: 150px;
     height: 30px;
     border-top: none;
@@ -92,7 +92,7 @@ form input{
     width: 200px;
 }
 
-form div{
+form div, .form div{
     background-color: white;
     width: 500px;
     height: 50px;
@@ -101,7 +101,7 @@ form div{
 }
 
 
-form button{
+form button, .form button{
     font-family: Arial, Helvetica, sans-serif;
     width: 625px;
     
@@ -343,14 +343,14 @@ ul li button{
         padding-top: 50px;
     }
 
-    form span{
+    form span, .form span{
         text-align: left;
         padding-bottom: 0px;
         width: 130px;
         display: inline-block;
     }
     
-    form {
+    form, .form {
         border-top: 1px black solid;
         float: left;
         width: 250px;
@@ -359,7 +359,7 @@ ul li button{
         
     }
     
-    form input{
+    form input,.form input{
         width: 80px;
         height: 15px;
         padding: 10px;
@@ -367,7 +367,7 @@ ul li button{
         
     }
 
-    form div{
+    form div,.form div{
         background-color: rgba(255,255,255,0.6);
         width: 250px;
         height: 50px;

@@ -1,17 +1,37 @@
+@import url('http://fonts.cdnfonts.com/css/qillsey-einstein');
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+@font-face {
+    font-family: 'Busan';
+    font-style: normal;
+    font-weight: 400;
+    src: url('//cdn.jsdelivr.net/korean-webfonts/1/orgs/govs/busan/Busan/Busan.woff2') format('woff2'),
+    url('//cdn.jsdelivr.net/korean-webfonts/1/orgs/govs/busan/Busan/Busan.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Frankfurter';
+    src: url('../fonts/Frankfurter.woff') format('woff');
+}
+
 * {
     margin : 0;
     padding : 0;
     text-decoration: none;
     list-style: none;
-    font-family: serif;
+    
+    
 }
 html, body {
     width : 100%;
     height : 100%;
 }
 
+
+
+
 body {
-    background-image: url('../img/배경 어둡게.png');
+    background-image:url("../img2/login_back.png");
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -20,10 +40,10 @@ body {
 }
 
 #login {
-    width : 500px;
+    width : 450px;
     min-width: 500px;
     background-color: #eeeeee;
-    height :  600px;
+    height :  640px;
     padding : 20px;
     box-sizing: border-box;
     display: flex;
@@ -31,7 +51,8 @@ body {
     align-items: center;
     border-radius: 20px;
     flex-direction: column;
-    transition : 0.2s
+    transition : 0.2s;
+    opacity:0.8;
 }
 
 #login form {
@@ -43,9 +64,26 @@ body {
 }
 
 #login_photo {
-    width : 350px;
-    height : 250px;
-    margin-bottom: 40px;
+    width : 180px;
+    margin-top:20px;
+    height : 180px;
+    
+}
+
+
+#logo {
+    color :black;
+    font-size: 50px;
+    font-family: 'Busan', sans-serif;
+    padding-left: 0px; 
+    
+}
+
+#gome{
+	font-family: 'Frankfurter';
+	font-size : 21px;
+	color:#f7bb25;
+	margin-bottom: 30px;
 }
 
 .input {

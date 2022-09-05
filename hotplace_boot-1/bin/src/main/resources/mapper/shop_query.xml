@@ -34,10 +34,11 @@
       SET
       shop_enternum = shop_enternum+1
       WHERE shop_idx=#{shopIdx}
-   </update>
+   </update> 
 
    <select id="getShopList" resultType="shop">
       SELECT
+      
       *
       FROM shop
    </select>
@@ -56,5 +57,10 @@
       *
       FROM shop
       WHERE shop_name LIKE '%' || #{value} || '%'
+   </select>
+   
+   <select id = "getShopPart" parameterType="int" resultType="shop">
+   		select * from shop
+   		where shop_idx between #{value} and #{value} + 2   		
    </select>
 </mapper>

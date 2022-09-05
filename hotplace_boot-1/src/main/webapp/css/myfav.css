@@ -13,7 +13,7 @@ html, body{
     padding-left: 5px;
     font-size: 25px;
     font-weight: 700;
-    padding-right: 7px;
+    padding-right: 0px;
 }
 
 #text2{
@@ -25,7 +25,7 @@ html, body{
 	float: right;
 	font-size: 20px;
     color:grey;
-	padding-right: 10px;
+	padding-right: 30px;
     cursor: pointer;
 }
 
@@ -34,8 +34,8 @@ html, body{
 }
 
 #wrapper_img{
-    width: 400px;
-    height: 250px;
+    width: 390px;
+    height: 260px;
 
     padding: 5px;
     border-radius: 30px;
@@ -56,10 +56,10 @@ html, body{
 }
 
 #content{
-    width: 400px;
+    width: 410px;
     height: 300px;
     float: left;
-    margin: 0 23px;
+    margin: 0 px;
     margin-bottom: 20px;
 }
 

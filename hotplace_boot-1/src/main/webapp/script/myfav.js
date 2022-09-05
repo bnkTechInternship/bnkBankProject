@@ -1,6 +1,7 @@
 $(function() {
 
-	const user = JSON.parse(localStorage.getItem('loginUser'));
+	const user = JSON.parse(localStorage.getItem("loginUser"));
+	console.log(user)
 	let userName = user.userName;
 	let userId = user.userId;
 

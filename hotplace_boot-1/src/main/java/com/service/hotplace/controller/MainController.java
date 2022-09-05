@@ -100,8 +100,9 @@ public class MainController {
 		
 		User user =(User)session.getAttribute("loginUser");
 		
+		
 		if(user!= null) {
-			return "redirect:reserve.html";
+			return "redirect:checkCurrWaiting.do?userId="+user.getUserId();
 		}else {
 			return "redirect:login.html";
 		}

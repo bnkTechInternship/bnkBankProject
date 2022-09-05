@@ -6,6 +6,31 @@ $(function() {
     let userPoint = user.userPoint;
     let userBalance = user.userBalance;
     
+    
+    
+/*    $.ajax({
+    	type:'post',
+    	url:'checkCurrWaiting.do',
+    	data:"userId="+user.userId,
+    	
+    	success:function(result){
+    		if(result == false){
+    			location.replace('reserve2.html');
+    			
+    		}
+    	}
+    	
+    
+    
+    
+    
+    
+    
+    
+    })*/
+    
+    
+    
 	
     
     $('#left_first').append(
@@ -66,6 +91,7 @@ $(function() {
     	data:"userId="+user.userId,
     	
     	success:function(result){
+    		console.log(result);
     	    $('.review_first').append(
     	    	`
                 <div class="review_head">

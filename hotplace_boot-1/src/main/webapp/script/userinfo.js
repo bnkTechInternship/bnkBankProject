@@ -64,13 +64,15 @@ $(function(){
       
      
    const user = JSON.parse(localStorage.getItem('loginUser'));
+   console.log(user);
     $('#id').html('<p>' + user.userId+'</p>');
     $('#name').attr('value',user.userName);
     $('#floatingAddress').attr('value',user.userAddress.substring(0,7));
     $('#floatingAddress2').attr('value',user.userAddress.substring(7));
     $('#floatingPhone').attr('value',user.userNumber);
     $('#floatingEmail').attr('value',user.userEmail);
-    
+    console.log(user.userPoint);
+    console.log(user.userBalance);
     
     $('#conn').click(function(){
     	

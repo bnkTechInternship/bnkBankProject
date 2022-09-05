@@ -680,6 +680,7 @@ p.speech2:after {
     bottom : 50px;
     border : 1px solid black;
     border-radius: 50%;
+    z-index: 4;
 }
 
 #note:hover {

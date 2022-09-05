@@ -196,4 +196,9 @@ public class WaitingServiceImpl implements WaitingService{
 		return waitingDAO.getAllWaitingShop();
 	}
 
+	@Override
+	public List<WaitingBank> getAllWaitingBank() throws Exception {
+		return waitingDAO.getAllWaitingBank();
+	}
+
 }

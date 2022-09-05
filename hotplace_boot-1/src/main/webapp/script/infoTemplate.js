@@ -2,16 +2,22 @@ let url = location.href.split('?')[1].split('&')
 let category_ = url[0].split('=')
 let idx_ = url[1].split('=')
 let shopReview = []
+
+    // test code
+// localStorage.setItem('loginUser','user01');
 const user = localStorage.getItem('loginUser');
 
 
 $(function() {
-    // test code
-	// localStorage.setItem('loginUser','user01');
+
 
     $("#imgDiv").on('click','#jjim',function() {
         let condition = $(this).text();
 
+        if((condition == '찜 취소하기' || condition == '찜 하기')&&user == null) {
+            loginPopup()
+            return;
+        }
 
         // 가게 찜 취소하기
         if(condition == '찜 취소하기') 
@@ -455,4 +461,13 @@ function addFooter() {
     </footer>        
     `
     $('body').append(data);
+}
+
+function loginPopup() {
+    Swal.fire({
+        icon: 'error',
+        title: '회원전용 기능입니다.',
+        text: '로그인을 해주세요',
+        footer: '<a href="login.html">로그인 하러가기</a>'
+    })
 }

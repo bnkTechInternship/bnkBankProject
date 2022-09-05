@@ -23,6 +23,7 @@ public interface WaitingService {
 	WaitingBank getNowWaitingBank(User user) throws Exception;
 	ArrayList<WaitingShop> getNowWaitingShop(User user) throws Exception;
 	List<WaitingShop>getAllWaitingShop() throws Exception;
+	List<WaitingBank> getAllWaitingBank() throws Exception;
 	
 	//현재 줄서고 있는 가게 내 앞에 몇팀남았는지
 	int getShopUntilMyTurn(WaitingShop waitingShop) throws Exception;

@@ -173,50 +173,70 @@
         var markers = [];
 
  
-
-        function addMarker(info) {
+        // 마커 추가
+        function addMarker(info,allBankWaiting,allShopWaiting) {
         	let curPos;
         	let content;
-        	
+
+            let personCnt = 0;
+            // 은행일 경우
+            if(info.bankAddress != null)  {
+                console.log('은행 호출함')
+                for(let i = 0 ; i < allBankWaiting.length; i++) 
+                    if(allBankWaiting[i].bankIdx == info.bankIdx) 
+                        personCnt = Math.max(personCnt,allBankWaiting[i].waitingNum);                
+            }
+                
+            else {// 가게일 경우
+                console.log('가게 호출함')
+                for(let i = 0 ; i < allShopWaiting.length; i++) 
+                    if(allShopWaiting[i].shopIdx == info.shopIdx) 
+                        personCnt = Math.max(personCnt,allShopWaiting[i].waitingNum);                
+            }
+            console.log("받은 allShopWaiting : ",allShopWaiting);
+            console.log(personCnt)
+            console.log("받은 info : ",info)
+            
+            // 은행일 경우
         	if(info.bankAddress != null) {
+                console.log('allBankingWaiting : ',allBankWaiting);
+
+                console.log('info : ',info)
         		curPos = new kakao.maps.LatLng(info.bankLat, info.bankLong);
                 content = `
-                    
                     <div class = "mapContent">
-                        <middle>
-                            <img src = 'img2/BNK.jpg'>
-                        </middle>
-                        <footer>
-                            <div class = "mapContent_title">${info.bankName}</div>
-                            <div>평균 가격 : 35000</div>
-                            <div>현재 웨이팅 수 : 5</div>
-                            <div style = "color : red">★ 4.5</div>
-                            <a href = "#">상세보기</a>
-                        </footer>
-                    </div>
-                    
+                        <div class = "mapContent_top" style = "background-image: url(img2/bank3.jpg); background-size: cover;"></div>        
+                        <div class = "mapContent_mainContent">
+                            <div>${info.bankName}</div>
+                            <div>현대기 번호 : ${personCnt}</div>
+                            <div class = "mapContent_small">주소 : ${info.bankAddress}</div>
+                            <div class = "mapContent_small">전화 번호 : ${info.bankNumber}</div>
+                            <div class = "mapContent_small">영업 시간 : ${info.bankOper}</div>
+                            <div onclick = 'location.href="/infoTemplate.html?category=bank&data=${info.bankIdx}"'>상세보기</div>
+                        </div>
+                    </div>                    
                     `
         	} else {
+                if(info.webAddress == undefined)
+                    info.webAddress = `img2/wallpaper1.jpg`
+
         		curPos = new kakao.maps.LatLng(info.shopLat, info.shopLong);
                 content = `
-                    
                     <div class = "mapContent">
-                        <middle>
-                            <img src = ${info.webAddress}>
-                        </middle>
-                        <footer>
-                            <div class = "mapContent_title">${info.shopName}</div>
-                            <div>평균 가격 : 35000</div>
-                            <div>현재 웨이팅 수 : 5</div>
-                            <div style = "color : red">★ 4.5</div>
-                            <a href = "#">상세보기</a>
-                        </footer>
+                        <div class = "mapContent_top" style = "background-image: url(${info.webAddress}); background-size: cover;"></div>        
+                        <div class = "mapContent_mainContent">
+                            <div>${info.shopName}</div>
+                            <div>현대기 번호 : ${personCnt}</div>
+                            <div class = "mapContent_small">주소 : ${info.shopAddress}</div>
+                            <div class = "mapContent_small">전화 번호 : ${info.shopNumber}</div>
+                            <div class = "mapContent_small">영업 시간 : ${info.shopOper}</div>
+                            <div onclick = 'location.href="/infoTemplate.html?category=shop&data=${info.shopIdx}"'>상세보기</div>
+                        </div>
                     </div>
-                    
                     `
+
+                    
         	}
-        	
-            
                 var overlay = new kakao.maps.CustomOverlay({
                     content: content,
                     map: map,
@@ -225,8 +245,8 @@
         
             /*marker image */
             var imageSrc;
-            if(info.person > 10) imageSrc = '/img2/location-pin.png';
-            else if(info.person > 5) imageSrc = '/img2/location-pin2.png';
+            if(personCnt > 10) imageSrc = '/img2/location-pin.png';
+            else if(personCnt > 5) imageSrc = '/img2/location-pin2.png';
             else imageSrc = '/img2/location-pin3.png';
 
             imageSize = new kakao.maps.Size(50, 50), // 마커이미지의 크기입니다
@@ -261,11 +281,6 @@
                 else overlay.setMap(null);
             });
             overlay.setMap(null);
-
-            // // 본인 위치 마커 생성
-            // var marker = new kakao.maps.Marker({
-            //     position: moveLatLon,
-            // });
         }
 
         // 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
@@ -285,56 +300,76 @@
             setMarkers(null);    
         }
 
-        function showMarket() {
+        async function showMarket() {
             hideMarkers();
+            let allShopWaiting = await getAllShopWaiting();
+            
+            getAllShop(allShopWaiting);
+        }
 
+        let getAllShopWaiting = async() => new Promise((resolve,reject) => {
+            $.ajax({
+                url  : `/shop/allWaiting`,
+                type : 'get',
+                success : (result) => {
+                    console.log('받은 모든 가게 Waiting info : ',result);
+                    resolve(result)
+                }
+            })
+        })
+
+
+        async function getAllShop(allShopWaiting) {
             $.ajax({
             	url : '/shop/allShop',
             	type : 'get',
             	
             	success : (result) => {
             		for(let i = 0 ; i < result.length; i++)
-            			addMarker(result[i]);
+            			addMarker(result[i],null,allShopWaiting);
             	},
-            	beforeSend : () => {
-            		$('.loader').css('z-index',12);
-    		        $("#loadback").css('z-index',11);
-            	},
-            	complete : () => {
-            		setTimeout(() => {
-    					$('.loader').css('z-index',-1);
-    		            $("#loadback").css('z-index',-1);
-    				},1000)
-            	}
+            	beforeSend : () => beforeWork(),
+            	complete : () => afterWork(),
             })
         }
+        
 
-        function showBank() {
+        async function showBank() {
             hideMarkers();
-       /*      for(let i = 0 ; i < marketInfo.length; i++) 
-                addMarker(bankInfo[i]) */
-                
+            let allBankWaiting = await getAllBankWaiting();
+            await getAllBank(allBankWaiting);
+        }
+
+        let getAllBank = async(allBankWaiting) => new Promise((resolve,reject) => {
             $.ajax({
             	url : '/bank/allBank',
             	type : 'get',
             	
             	success : (result) => {
+                    resolve(result);
             		console.log('받은 은행정보 : ',result);
             		for(let i = 0 ; i < result.length; i++)
-            			addMarker(result[i]);
+            			addMarker(result[i],allBankWaiting);
             	},
-            	beforeSend : () => {
-            		$('.loader').css('z-index',12);
-    		        $("#loadback").css('z-index',11);
-            	},
-            	complete : () => {
-            		setTimeout(() => {
-    					$('.loader').css('z-index',-1);
-    		            $("#loadback").css('z-index',-1);
-    				},1000)
-            	}
+            	beforeSend : () => beforeWork(),
+            	complete : () => afterWork(),
             })
-        }
+        })
+
+        // 모든 은행 웨이팅 받기
+        let getAllBankWaiting = async() => new Promise((resolve,reject) => {
+            $.ajax({
+            	url : '/bank/allWaiting',
+            	type : 'get',
+            	
+            	success : (result) => {
+            		console.log('받은 웨이팅 : ',result);
+                    resolve(result);
+            	},
+            	beforeSend : () => beforeWork(),
+            	complete : () => afterWork(),
+            })
+        })
 
         // info열기
         function makeOverListener(map, marker, infowindow) {
@@ -353,6 +388,18 @@
         // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
         function closeOverlay() {
             overlay.setMap(null);     
+        }
+
+        function beforeWork() {
+            $('.loader').css('z-index',12);
+            $("#loadback").css('z-index',11);
+        }
+
+        function afterWork() {
+            setTimeout(() => {
+                $('.loader').css('z-index',-1);
+                $("#loadback").css('z-index',-1);
+            },1000)
         }
 </script>
 </html>

@@ -12,8 +12,10 @@ let tempWaiting = 1;
 
 $(function() {
 	// test code
-//	localStorage.setItem('loginUser','user01');
+	// localStorage.setItem('loginUser','user01');
 	const user = localStorage.getItem('loginUser');
+
+
 
 	// 페이지 로딩시 잠시 출력되는 내용
 	let loadContent = 
@@ -26,8 +28,6 @@ $(function() {
 		</div>
 	</div>
 	`;
-
-	// $(".decoration").fadeIn(5000)
 
 	// 처음 시작시 필요한 데이터 받아오는 함수
 	initFunction();
@@ -55,10 +55,8 @@ $(function() {
 	setTimeout(() => {
 		$("#logo_slow").addClass('active')
 
-
 		$(".down_slow").addClass('active')
 		$(".down_slow2").addClass('active')
-		// $("#mainNavbar").addClass('active')
 	},2000)
 
 		
@@ -300,9 +298,6 @@ $(function() {
 		}
 	}
 
-    
-  
-
     function beforeSendWork() {
 		$('.loader').css('z-index',12);
 		$("#loadback").css('z-index',11);										
@@ -390,7 +385,7 @@ $(function() {
 		return `
 		<div class ="container_item cursor">
 			<div class="photo">
-				<div class = "star" id = "shopStar${info.shopIdx}">★4.5</div>
+				<div class = "star" id = "shopStar${info.shopIdx}"></div>
 				<img src = "${info.webAddress}">
 			</div>
 			<div class ="shopName link" data-info = "${info.shopIdx}">${info.shopName}</div>

@@ -74,9 +74,10 @@
 
         
         $("#notepad").on('click','#payment',function() {
-            console.log('sendData',sendData)
-            console.log('totalPrice',totalPrice)
-            console.log('totalMenu',totalMenu)
+           if(user == null) {
+                loginPopup()
+                return;
+           }
 
             for(let i = 0 ; i < sendData.length; i++) {
                 $.ajax({
@@ -223,7 +224,7 @@
         let text = '';
         for(let i = 0 ; i < totalMenu2.length; i++) 
             text += totalMenu2[i] + '<br>'                
-        text += '<br><br>'
+        text += '<br>'
         new TypeIt("#notepad_content", {
             })
         new TypeIt("#notepad_content", {
@@ -291,7 +292,14 @@
         });
     }
     // chart1
-
+    function loginPopup() {
+    Swal.fire({
+        icon: 'error',
+        title: '회원전용 기능입니다.',
+        text: '로그인을 해주세요',
+        footer: '<a href="login.html">로그인 하러가기</a>'
+    })
+}
 </script>
 
 </html>

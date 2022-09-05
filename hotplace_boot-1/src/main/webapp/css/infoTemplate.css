@@ -810,4 +810,35 @@ p.speech2:after {
     color : gray;
 }
 
-/*  */
+#mapContainer {
+    position: relative;
+    position: absolute;
+    width : 80%;
+    height : 100%;
+    top : 800px;
+    right : 0;
+    left : 10%;
+    border : 10px solid rgb(178,155,126);
+    z-index: 1;
+}
+
+#map {    
+    width : 100%;
+    height: 100%;
+}
+
+#mapInfo {
+    z-index: 2;
+    color : gray;
+    font-size: 40px;
+    font-weight: bold;
+
+    position: absolute;
+    top : -70px;
+    left : 45%;
+    right : 0;
+
+    width : 100%;
+}
+
+/* 붙이는데 필요한 css */

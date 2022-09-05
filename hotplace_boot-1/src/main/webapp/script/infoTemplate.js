@@ -13,27 +13,36 @@ $(function() {
         let condition = $(this).text();
 
 
-        if(condition == '찜 취소하기') {
-            showSwal(idx_[1],false,user)
-        } else showSwal(idx_[1],true,user)        
+        // 가게 찜 취소하기
+        if(condition == '찜 취소하기') 
+            showSwal(idx_[1],1,user)        
+        // 가게 찜 하기
+        else if (condition === '찜 하기') 
+            showSwal(idx_[1],2,user)        
+        // 은행 예약하기
+        else showSwal(idx_[1],3,user)     
+
     })
 
 
     initFunction();
 
+    let idx = 0;
+    let divNum = 3;
+
     if(category_[1] === 'bank')  {
-        $("#imgDiv").css('background-image',`url(../img2/BNK.jpg)`)
-        $("#bgPhoto").attr('src','img2/BNK.jpg')        
-        console.log($("#imgDiv").css('background-image'))
+        photo = [`../img2/bank3.jpg`,`../img2/BNK.jpg`];
+        $("#imgDiv").css('background-image',`url(../img2/bank3.jpg)`)        
+        divNum = 2;
     }
         
-    else {
-        photo = ['../img2/wallpaper9.jpg','../img2/wallpaper1.jpg','../img2/wallpaper2.jpg']
-        let idx = 0;
-        setInterval(() => {
-            $("#imgDiv").css('background-image',`url(${photo[parseInt((++idx)%3)]})`);
-        },5000)    
-    }
+    else  photo = ['../img2/wallpaper9.jpg','../img2/wallpaper1.jpg','../img2/wallpaper2.jpg']        
+    
+
+
+    setInterval(() => {
+        $("#imgDiv").css('background-image',`url(${photo[parseInt((idx++)%divNum)]})`);
+    },8000)    
 
     // 페이지 로딩시 애니메이션 세팅
     setTimeout(() => {
@@ -46,11 +55,12 @@ async function initFunction() {
 
     // 은행 또는 가게 정보 받아오기
     let marketInfo = await getShopData()
+    console.log('makretInfo ": ',marketInfo)
     let marketReview = undefined;
 
     // 카테고리가 가게일 경우 리뷰 가져오기
     if(category_[1] === 'shop')
-        marketReview = await getShopReview(marketInfo);
+        marketReview = await getShopReview(marketInfo);    
 
     // 데이터 세팅
     await setData(marketInfo,marketReview);  
@@ -67,6 +77,7 @@ let getShopData = async() => new Promise((resolve,reject) => {
         },
 
         success : (result) => {
+            console.log(result);
             resolve(result)            
         }
     })
@@ -97,7 +108,7 @@ async function setData(marketInfo,review) {
     // review != undefined는 리뷰가 있다는 말로 가게에 해당
     if(review != undefined) {
         let jjimInfo = await getAllShopLike();
-        appendData = await getInfoTag(jjimInfo,marketInfo,review)
+        appendData = await getShopInfoTag(jjimInfo,marketInfo,review)
 
     
         // 메뉴 생성
@@ -110,7 +121,11 @@ async function setData(marketInfo,review) {
         await addGraph();
     }
     else { //은행일 경우 은행에 맞는 정보로 세팅
+        console.log("일로오냐?")
 
+        appendData = await getBankInfoTag(marketInfo);
+
+        await bankSetting(marketInfo);
     }
     
 
@@ -118,7 +133,7 @@ async function setData(marketInfo,review) {
 }
 
 // 가게 인포 제작 함수
-async function getInfoTag(jjimInfo,marketInfo,review) {
+async function getShopInfoTag(jjimInfo,marketInfo,review) {
     console.log(marketInfo)
     let star = ''
     let jjim = '찜 하기'
@@ -287,17 +302,22 @@ let getAllShopLike = async() => new Promise((resolve,reject) => {
 
 // 찜 설정
 function showSwal(shopId,flag,userId) {
-    //flag : false => 찜 삭제
+    //flag : 1 => 찜 삭제
     let title_ = "찜 등록";
     let text_ = "이 가게를 찜 리스트에 추가할까요?";
     let desc_ = "정상적으로 추가되었습니다!";
     let url = "likeShop.do";
 
-    if(!flag) {
+    if(flag == 1) {
         title_ = "찜 삭제";
         text_ = "이 가게를 찜 리스트에서 제거할까요?";
-        desc_ = "정상적으로 제거되었어요";
+        desc_ = "찜이 삭제되었습니다!";
         url = "unlikeShop.do"
+    } else if(flag == 3) {
+        title_ = "대기표 예약"
+        text_ = "은행 대기표를 예약하시겠습니까?";
+        desc_ = "대기표가 예약되었습니다.";
+        url = "bankReserve.do"
     }
     console.log("오냐1")
 
@@ -317,20 +337,22 @@ function showSwal(shopId,flag,userId) {
             'success'
           )
           console.log("누렀따.")
-          likeFunction(url,shopId,userId)
+          setJjim(url,shopId,userId,flag)
         }
       })
 }
 
-function likeFunction(url_,shopId,userId) {
-    console.log(url_)
-    console.log(shopId)
-    console.log(userId)
+function setJjim(url_,shopId,userId,flag) {
+    let data_ = `shopIdx=${shopId}&userId=${userId}`
+
+    // 은행일 경우 전송하는 데이터 변경
+    if(flag == 3)
+        data_ = `bankIdx=${shopId}&userId=${userId}`
 
     $.ajax({
         url  : url_,
         type : 'get',
-        data : "shopIdx="+shopId+"&userId="+userId,
+        data : data_,
 
         success : (result) => {
             if($("#jjim").text() === '찜 하기') {
@@ -343,7 +365,94 @@ function likeFunction(url_,shopId,userId) {
                     $("#heart_beat").css('opacity','0');
                 },2000)
             }
-            else $("#jjim").text('찜 하기');
+            else if($("#jjim").text() === '찜 취소하기')
+                $("#jjim").text('찜 하기');                
         }
     })
+}
+
+async function getBankInfoTag(marketInfo) {
+    return `
+    <div id="restaurant_info" class="disappear init start">
+        <div id="name" class="center">${marketInfo.bankName}</div>
+        <div class="center">은행 주소 : ${marketInfo.bankAddress}</div>
+        <div class = "center small">전화번호 : ${marketInfo.bankNumber}</div>
+        <div class = "center small">운영 시간 : ${marketInfo.bankOper}</div>
+        <div id="info_menu">
+            <div id="jjim" >대기표 예약하기</div>
+        </div>
+    </div>
+    `;
+}
+
+async function bankSetting(marketInfo) {
+    $("#note").remove();
+
+    addMap(marketInfo);
+}
+
+function addMap(marketInfo) {
+    console.log('addMap marketInfo : ',marketInfo)
+    let mapTag = `
+        <div id = "mapContainer" class = "up">
+            <div id = "mapInfo">은행 위치</div>
+            <div id = "map">
+            </div>
+        </div>
+    `
+    $('body').append(mapTag);
+    createMap(marketInfo);
+    addFooter();
+}
+
+function createMap(marketInfo) {
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng(marketInfo.bankLat, marketInfo.bankLong), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+    // 마커가 표시될 위치입니다 
+    var markerPosition  = new kakao.maps.LatLng(marketInfo.bankLat, marketInfo.bankLong); 
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        position: markerPosition
+    });
+    marker.setMap(map);
+}
+
+function addFooter() {
+    let data =  `
+    <footer class="footer-07 up">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12 text-center">
+                    <h2 class="footer-heading"><a href="#" class="logo">BNK_HOT_PLACE</a></h2>
+                    <p class="menu">
+                        <a href="#">Home</a>
+                        <a href="#">Agent</a>
+                        <a href="#">About</a>
+                        <a href="#">Listing</a>
+                        <a href="#">My</a>
+                        <a href="#">Contact</a>
+                    </p>
+                    <ul class="ftco-footer-social p-0">
+                        <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><span class="ion-logo-twitter"></span></a></li>
+                        <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><span class="ion-logo-facebook"></span></a></li>
+                        <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><span class="ion-logo-instagram"></span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-md-12 text-center">
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                </div>
+            </div>
+        </div>
+    </footer>        
+    `
+    $('body').append(data);
 }

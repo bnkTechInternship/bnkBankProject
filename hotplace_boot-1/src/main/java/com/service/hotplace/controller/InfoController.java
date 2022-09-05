@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.service.hotplace.domain.place.Menu;
 import com.service.hotplace.domain.place.Shop;
 import com.service.hotplace.domain.play.Review;
+import com.service.hotplace.domain.play.WaitingBank;
 import com.service.hotplace.domain.play.WaitingShop;
 import com.service.hotplace.service.MenuService;
 import com.service.hotplace.service.ReviewService;
@@ -45,11 +46,19 @@ public class InfoController {
 	
 	@PostMapping("/info/registWaiting")
 	@ResponseBody
-	public String registWaiting(WaitingShop shop) throws Exception {
+	public String registWaitingShop(WaitingShop shop) throws Exception {
 		waitingService.registerWaitingShop(shop);
 		return "";
 	}
 	
-//	registerWaitingShop waiting shop 등록하는 메서드
+	@GetMapping("bankReserve.do")
+	@ResponseBody
+	public String registWaitingBank(WaitingBank waitingBank) throws Exception {
+		System.out.println("받은 waitingBank :" + waitingBank);
+		waitingService.registerWaitingBank(waitingBank);
+		return "";
+	}
+	
+	
 	
 }

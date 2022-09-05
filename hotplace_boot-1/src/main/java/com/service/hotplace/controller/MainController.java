@@ -181,9 +181,8 @@ public class MainController {
 		if(market.getCategory().equals("shop")) 
 			obj = shopService.getShop(idx);
 		else obj = bankService.getBank(idx);
-		
-		System.out.println(obj);
-		
+
+		System.out.println("받은 정보" + obj);
 		
 		return obj;
 	}

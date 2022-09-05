@@ -9,10 +9,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script src="script/infoTemplate.js"></script>
     <script src = "https://unpkg.com/typeit@8.3.3/dist/index.umd.js"></script>    
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=59b7bde77496d4668dfdddc31a4207fc"></script>
     <script src = "barcode_jquery/jquery-barcode.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="css/infoTemplate.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    
+    <script src="script/popper.js"></script>
+    <script src="script/bootstrap.min.js"></script>
+    <script src="script/info_main.js"></script>
     
     <style>
         
@@ -47,71 +56,9 @@
     
     <div id="container">
         <div id="imgDiv">
-
             <div id="content">
-                <div id="content_two" class="up">
-                    
-                </div>
-
-                <!-- <div id="content_one" class = "up">
-                    <div id="review_title">
-                        <img src = "img2/reviews.png">
-                    </div>
-                    <div id="review_list">
-                        <div class="review_list_container">
-                            <div class="review man" >
-                                <p class="bubble speech" >맛있고 양많습니다. 최고에요!</p>
-                                <div class="userInfo info_left">
-                                    <img src = "img2/man.png" style="width: 50px; height: 50px;">
-                                    <div class="nameNstar">
-                                        <div>김근영</div>
-                                        <div>★★★★★</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="review man" >
-                                <p class="bubble speech" >가성비가 좋습니다.<br> 맛은 평범한데 가격이 착해요</p>
-                                <div class="userInfo info_left">
-                                    <img src = "img2/man.png" style="width: 50px; height: 50px;">
-                                    <div class="nameNstar">
-                                        <div>김병관</div>
-                                        <div>★★★★</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="review_list_container">
-                            <div class="review man" >
-                                <p class="bubble speech2" >너무 위치가 안좋고 찾아가서 먹을만큼의 맛은 아닙니다</p>
-                                <div class="userInfo info_right">
-                                    <div class="nameNstar_left">
-                                        <div>구채원</div>
-                                        <div>★★</div>
-                                    </div>
-                                    <img src = "img2/woman.png" style="width: 50px; height: 50px;">
-                                </div>
-                            </div>
-
-                            <div class="review man" >
-                                <p class="bubble speech2" >맛도 별로고,, 가게 위생이 별로 안좋습니다..</p>
-                                <div class="userInfo info_right">
-                                    <div class="nameNstar_left">
-                                        <div>송준환</div>
-                                        <div>★</div>
-                                    </div>
-                                    <img src = "img2/man.png" style="width: 50px; height: 50px;">
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div> -->
-
-                <!-- <div id = "graph" class = "up">
-                    <canvas id="myChart1" style="min-width: 200px; max-height : 500px; max-width: 100%;"></canvas>
-                </div> -->
-            </div>
+                <div id="content_two" class="up"></div>
+            </div> 
         </div>
     </div>
 </body>

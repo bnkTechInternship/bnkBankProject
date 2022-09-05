@@ -1,5 +1,5 @@
 $(function() {
-
+	//
     $('#findPw_button').click(function(){
     	var email = $('#floatingEmail').val();
     	var id = $('#floatingId').val();

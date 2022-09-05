@@ -1,5 +1,5 @@
 $(function() {
-    
+    //
     $('#findId_button').click(function(){
     	
     	if( $('#floatingEmail').val()=="" ||

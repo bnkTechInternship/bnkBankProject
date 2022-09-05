@@ -2,7 +2,7 @@ $(function() {
     $(window).resize(function() {
         
     })
-
+    //
     const money = Math.floor(Math.random()*1001) * 1000;
     const point = Math.floor(Math.random()*1001) * 100;
 

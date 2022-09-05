@@ -49,11 +49,10 @@ public class LoginController {
 	}
 	
 	@PostMapping("register.do")
-	public String registerDo(User user) throws Exception {
+	public String registerDo(User user, HttpSession httpSession) throws Exception {
 		System.out.println("===============================회원가입==================================");
-		System.out.println(user);
 		userService.registerUser(user);
-		return "redirect:main.html";
+		return "redirect:login.html";
 	}
 	
 	
@@ -62,17 +61,24 @@ public class LoginController {
 	public String findIdDo(User user) throws Exception {
 		System.out.println("=================================================아이디 찾기======================================");
 		String userId = userService.findUserId(user.getUserEmail());
-		//System.out.println(userId);
-		//model.addAttribute("userId",userId);
-		return userId;
+		User user2 = userService.getUserById(userId);
+		if(user2.getUserName().contentEquals(user.getUserName()))
+			return userId;
+		else
+			return "error";
 	}
 	
 	@ResponseBody
 	@PostMapping("findPw.do")
 	public String findPwDo(User user, Model model) throws Exception{
 		System.out.println("===============================================비밀번호 찾기======================================");
-		String userPw = userService.findUserPw(user);
-		return userPw;
+		String userId2 = userService.findUserId(user.getUserEmail());
+		User user2 = userService.getUserById(userId2);
+		if(user.getUserId().equals(user2.getUserId()) )
+			return user2.getUserPw();
+		else
+			return "error";
+		
 	}
 	
 	

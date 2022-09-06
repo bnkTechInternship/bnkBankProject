@@ -1,12 +1,8 @@
 $(function(){
 	
 
-  document.getElementById("name").focus();
-
-  window.onresize = () => {
-    makeStars();
-  }
-
+  document.getElementById("floatingName").focus();
+ 
     const counter = ($counter, max, endword) => {
         let now = max;
       
@@ -25,52 +21,17 @@ $(function(){
           // 값을 적용시키면서 다음 차례에 영향을 끼침
           now -= step;
         }, 20);
-      }
-
-      // 별 배경 테스트
-       const makeStars = () => {
-        // 브라우저 가장 큰 크기
-        const $sky = document.querySelector(".sky");
-        const maxSize = Math.max(window.innerWidth, window.innerHeight)
-      
-        // 랜덤한 X 위치 값
-        const getRandomX = () => Math.random() * maxSize;
-      
-        // 랜덤한 Y 위치 값
-        const getRandomY = () => Math.random() * maxSize;
-      
-        // 랜덤한 크기 (circle는 반지름이 크기)
-        const randomRadius = () =>  Math.random() * 0.7 + 0.6;
-        
-        // 임의의 값
-        const _size = Math.floor(maxSize / 2);
-        
-        const htmlDummy = new Array(_size).fill().map((_, i) => {
-          return  `<circle class='star'
-              cx=${getRandomX()}
-              cy=${getRandomY()}
-              r=${randomRadius()}
-              className="star" />`
-        }).join('');
-        
-        $sky.innerHTML = htmlDummy;
-      }
-    
-
-        
-
-
-
-      
+      }      
      
    const user = JSON.parse(localStorage.getItem('loginUser'));
    console.log(user);
     $('#id').html('<p>' + user.userId+'</p>');
-    $('#name').attr('value',user.userName);
-    $('#floatingAddress').attr('value',user.userAddress.substring(0,7));
-    $('#floatingAddress2').attr('value',user.userAddress.substring(7));
+    $('#floatingName').attr('value',user.userName);
+    $('#floatingAddress').attr('value',user.userAddress.substring(0,5));
+    $('#floatingAddress2').attr('value',user.userAddress.substring(5));
     $('#floatingPhone').attr('value',user.userNumber);
     $('#floatingEmail').attr('value',user.userEmail);
+    $('#p1').html(user.userName);
     console.log(user.userPoint);
     console.log(user.userBalance);
     
@@ -125,33 +86,56 @@ $(function(){
     
     $('#btn1').click(function(){
     	
-        $.ajax({
-            
-        	type:'post',
-        	url:'updateInfo.do',
-        	data:'userPw='+$('#floatingPasswordcheck').val()+
-        			'&userName='+$('#floatingName').val()+
-        			'&userAddress='+$('#floatingAddress').val()+$('#floatingAddress2').val()+
-        			'&userNumber='+$('#floatingPhone').val()+
-        			'&userEmail='+$('#floatingEmail').val()+
-        			'&userId=' + user.userId,
-        			
-        			success:function(user){
-        				
-        				
-        			    $('#id').html('<p>' + user.userId+'</p>');
-        			    $('#name').attr('value',user.userName);
-        			    $('#floatingAddress').attr('value',user.userAddress.substring(0,7));
-        			    $('#floatingAddress2').attr('value',user.userAddress.substring(7));
-        			    $('#floatingPhone').attr('value',user.userNumber);
-        			    $('#floatingEmail').attr('value',user.userEmail);
-        			    alert("정상적으로 수정되었습니다.");
-        		
-        		
-        		
-        	}
+    	if(
+    			$('#floatingPassword').val()==''|| // password 변경은 다른데서 따로
+    			$('#floatingName').val()==''||
+    			$('#floatingAddress').val()==''||
+    			$('#floatingPhone').val()==''||
+    			$('#floatingEmail').val()==''
+    			
+    		)
+    	{
+    		Swal.fire({
+	  			  icon: 'error',
+	  			  title: '회원정보 수정 오류',
+	  			  text: '입력하지 않은 정보가 있습니다.'
+			})
+    	}else{
+    		
+    	
+	        $.ajax({
+	            
+	        	type:'post',
+	        	url:'updateInfo.do',
+	        	data:'userPw='+$('#floatingPassword').val()+
+	        			'&userName='+$('#floatingName').val()+
+	        			'&userAddress='+$('#floatingAddress').val()+$('#floatingAddress2').val()+
+	        			'&userNumber='+$('#floatingPhone').val()+
+	        			'&userEmail='+$('#floatingEmail').val()+
+	        			'&userId=' + user.userId,
+	        			
+	        			success:function(user){	        				
+	        				localStorage.setItem("loginUser",JSON.stringify(user));
+	        				
+	        			    $('#id').html('<p>' + user.userId+'</p>');
+	        			    $('#name').attr('value',user.userName);
+	        			    $('#floatingAddress').attr('value',user.userAddress.substring(0,5));
+	        			    $('#floatingAddress2').attr('value',user.userAddress.substring(5));
+	        			    $('#floatingPhone').attr('value',user.userNumber);
+	        			    $('#floatingEmail').attr('value',user.userEmail);
+	        		
+	        			    
+	        			    Swal.fire({
+	        		  			  icon: 'success',
+	        		  			  title: '회원정보 수정 성공!',
+	        		  			  })
+	        		
+	        		
+	        			}
         	
-        });
+        	}); // ajax
+    	}// else
+    	
 
     
     

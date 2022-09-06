@@ -215,8 +215,7 @@ async function addMenu(allMenu) {
             <div class="menu_item_tape"></div>
             <div class="menu_info">
                 <div class="menu_name" value = "${allMenu[i].menuIdx}">${allMenu[i].menuName}</div>
-                <div class = "menu_size" data-price = ${allMenu[i].menuPrice}>- 소 : ${allMenu[i].menuPrice}</div>
-                <div class = "menu_size" data-price = ${allMenu[i].menuPrice * 2}>- 대 : ${allMenu[i].menuPrice * 2}</div>
+                <div class = "menu_size" data-price = ${allMenu[i].menuPrice}> ₩ : ${allMenu[i].menuPrice}</div>                
                 <div class = "menu_desc">부드러운 감자 샐러드와 베이컨의 환상조합</div>
                 <div class = "menu_ingredient">국내산 : 감자, 풀때기</div>
                 <div class = "menu_ingredient">호주산 : 베이컨, 새우</div>

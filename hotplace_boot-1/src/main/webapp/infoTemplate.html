@@ -22,10 +22,6 @@
     <script src="script/popper.js"></script>
     <script src="script/bootstrap.min.js"></script>
     <script src="script/info_main.js"></script>
-    
-    <style>
-        
-    </style>
 </head>
 
 <body>
@@ -98,14 +94,11 @@
                                 .then((flag) => withDrawMoney(totalPrice))
                 }
             })
-
-                     
         })
 
         $("#barcode").barcode("1234567890128", "code128",{barWidth:1, barHeight:70,showHRI:true,bgColor:"white"});
 
         $("#dark").click(function() {
-            
             if($(this).attr('src') === 'img2/moon.png') {
                 $(this).attr('src','img2/sun.png');
                 $("#pen").attr('src','img2/pen2.png')
@@ -298,15 +291,8 @@
     let sendPayRequestFnc = async(flag,sendData2,totalPrice2) => new Promise((resolve,reject) => {
         // 가지고 있는 돈이 더 많은경우
         if(flag) {
-
-            // console.log(flag)
-            // console.log('--------------------')
-            // console.log("개발중인 함수 : ",sendData2)
-            // console.log("개발중인 함수 : ",totalPrice2)
-            // console.log("개발중인 함수 : ",idx_[1])
-            // console.log("개발중인 함수 : ",user)
-            // console.log('--------------------')
             let successCnt = 0;
+            // for문으로 요청보내는거 좀 아닌거 같은데,,
             for(let i = 0 ; i < sendData2.length; i++) {
                 $.ajax({
                     url  : '/info/registWaiting',
@@ -325,9 +311,6 @@
     })
 
     let withDrawMoney= async(totalPrice) => new Promise((resolve,reject) => {
-        console.log("계산할 총 금액 : ",totalPrice);
-        console.log("계산할 유저 아이디 : ",user);
-
         $.ajax({
             url  : '/info/withDraw',
             type : 'post',
@@ -347,8 +330,6 @@
             }
         })
     })
-
-    
 </script>
 
 </html>

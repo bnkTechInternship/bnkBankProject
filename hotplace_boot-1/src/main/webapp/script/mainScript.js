@@ -18,7 +18,7 @@ $(function() {
 		console.log(user.split(','))
 	
 	const reg = (/\'\"\{\}/g,'');
-	console.log(user.replace(reg))
+	// console.log(user.replace(reg))
 
 
 
@@ -118,6 +118,20 @@ $(function() {
 
         }
     })
+
+	$("#userInfo").click(function() {
+		console.log(user)
+		if(user == undefined) {
+			Swal.fire({
+				icon: 'error',
+				title: '회원전용 기능입니다.',
+				text: '로그인을 해주세요',
+				footer: '<a href="login.html">로그인 하러가기</a>'
+			})
+		}
+		else location.href = 'userinfo.html'	
+		
+	})
 
 	$('.menu').click(function() {
 

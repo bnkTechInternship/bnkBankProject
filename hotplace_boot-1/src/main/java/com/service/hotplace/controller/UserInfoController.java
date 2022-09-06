@@ -19,6 +19,7 @@ import com.service.hotplace.domain.place.Shop;
 import com.service.hotplace.domain.play.LikeShop;
 import com.service.hotplace.domain.play.Review;
 import com.service.hotplace.domain.play.WaitingShop;
+import com.service.hotplace.model.WaitingDAO;
 import com.service.hotplace.service.LikeService;
 import com.service.hotplace.service.MenuService;
 import com.service.hotplace.service.ReviewService;
@@ -50,7 +51,7 @@ public class UserInfoController {
 	public String checkCurrWaiting(User user) throws Exception{
 		List<WaitingShop> waitingshops = waitingService.getNowWaitingShop(user);
 		if(waitingshops == null)  
-			return "redirect:reserve2.html";
+			return "redirect:reserve.html";
 		return "redirect:reserve.html";
 	}
 	
@@ -85,7 +86,10 @@ public class UserInfoController {
 	@ResponseBody
 	@PostMapping("getRealWaiting.do")
 	public int getRealWaiting(User user) throws Exception{
+		System.out.println("========Controller::getRealWaiting=======");
+		System.out.println(user);
 		List<WaitingShop> waitingshops = waitingService.getNowWaitingShop(user);
+		System.out.println(waitingshops);
 		int untilCnt= waitingService.getShopUntilMyTurn(waitingshops.get(0));
 		return untilCnt;
 	}
@@ -126,5 +130,13 @@ public class UserInfoController {
 	@ResponseBody
 	public User getSpecificUser(String userId) throws Exception {
 		return userService.getUserById(userId);
+	}
+	
+	@PostMapping("deleteWaitingInfo.do")
+	@ResponseBody
+	public int deleteWaitingShop(WaitingShop waitingShop) throws Exception{
+		System.out.println("deleteWaitingInfo ::: Controller");
+		System.out.println(waitingShop);
+		return waitingService.deleteWaitingShop(waitingShop);
 	}
 }

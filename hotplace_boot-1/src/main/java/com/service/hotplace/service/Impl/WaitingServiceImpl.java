@@ -81,13 +81,14 @@ public class WaitingServiceImpl implements WaitingService{
 		ArrayList<WaitingShop> returnlist = new ArrayList<WaitingShop>();
 		List<WaitingShop> relist = waitingDAO.getWaitingShop(user.getUserId());
 		
-		for(WaitingShop ws : relist) {
+		for(WaitingShop ws : relist) { // 아 이거 현재 입장 번호가 가게의 입장번호보다 높아야 뜨는거였음 바보 멍청이 김근영....
 			Shop shop = shopservice.getShop(ws.getShopIdx());
 			if( ws.getWaitingNum() - shop.getShopEnternum() >=0) {
 				ws.setShop(shop);
 				returnlist.add(ws);
 			}
 		}
+		
 		if(returnlist.isEmpty()) 
 			return null;
 		return returnlist;
@@ -138,5 +139,10 @@ public class WaitingServiceImpl implements WaitingService{
 	@Override
 	public List<WaitingBank> getAllWaitingBank() throws Exception {
 		return waitingDAO.getAllWaitingBank();
+	}
+
+	@Override
+	public int deleteWaitingShop(WaitingShop waitingShop) throws Exception {
+		return waitingDAO.deleteWaitingShop(waitingShop);
 	}
 }

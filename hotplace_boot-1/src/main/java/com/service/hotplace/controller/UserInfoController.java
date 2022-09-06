@@ -133,9 +133,7 @@ public class UserInfoController {
 	@PostMapping("updateInfo.do")
 	public User updateInfoDo(User user) throws Exception{
 		userService.updateUser(user);
-		User reuser = userService.getUserById(user.getUserId());
-		System.out.println(reuser);
-		return reuser;
+		return userService.getUserById(user.getUserId());
 	}
 	
 	
@@ -167,6 +165,16 @@ public class UserInfoController {
 			ls.setShop(shop);
 		}
 		return list;
+	}
+	
+	
+	@PostMapping("getSpecificUser")
+	@ResponseBody
+	public User getSpecificUser(String userId) throws Exception {
+		System.out.println("받은 유저 정보 : " + userId);
+		User user = userService.getUserById(userId);
+		System.out.println("돌려줄 유저정보 : " + user);
+		return user;
 	}
 	
 }

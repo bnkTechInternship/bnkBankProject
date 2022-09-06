@@ -69,6 +69,11 @@ public class UserDAOImpl implements UserDAO{
 		// TODO Auto-generated method stub
 		return sqlsession.selectOne(NS+"isIdExist",userId);
 	}
+
+	@Override
+	public int withDrawMoney(User user) throws Exception {
+		return sqlsession.update(NS + "withDrawMoney",user);
+	}
 	
 	
 }

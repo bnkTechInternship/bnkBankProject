@@ -8,6 +8,7 @@ public interface UserDAO {
 	int registerUser(User user)throws Exception;
 	int updateUser(User user)throws Exception;
 	int deleteUser(String userId)throws Exception;
+	
 	User login(User user) throws Exception;
 	User getUserById(String userId)throws Exception;
 	List<User> getUserList()throws Exception;
@@ -16,4 +17,7 @@ public interface UserDAO {
 	String findUserPw(User user)throws Exception;
 	
 	String isIdExist(String userId) throws Exception;
+	
+	// 유저 돈 차감
+	int withDrawMoney(User user) throws Exception;
 }

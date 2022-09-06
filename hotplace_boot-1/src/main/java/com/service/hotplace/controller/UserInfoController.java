@@ -112,7 +112,6 @@ public class UserInfoController {
 			ws.setWaitingDate(menu.getMenuName());
 			ws.setWaitingCnt(menu.getMenuPrice());
 		}
-		
 		return waitingshops;
 	}
 	

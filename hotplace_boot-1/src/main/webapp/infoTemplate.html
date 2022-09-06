@@ -67,7 +67,12 @@
         let sendData = [];
         let totalPrice = 0;
         let totalMenu = []
+        // const user = localStorage.getItem('loginUser')[0].userId;
+
+        //localStorage.setItem('loginUser','user01')
         const user = localStorage.getItem('loginUser');
+        console.log('user : ',user)
+
         let idx_ = url[1].split('=')
         
         $("#notepad").on('click','#payment',function() {
@@ -75,6 +80,7 @@
                 loginPopup()
                 return;
            }
+           console.log("오냐1")
 
            Swal.fire({
                 title: "예약 안내",
@@ -87,6 +93,8 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     // 앞에서 최대 돈보다 많은지 확인
+                    console.log("오냐2")
+
                     getUserMoney(totalPrice)
                                 .then((flag) => sendPayRequestFnc(flag,sendData,totalPrice))
                                 .then((flag) => withDrawMoney(totalPrice))
@@ -271,6 +279,8 @@
             type : 'post',
             data : {"userId" : user},
             success : (result) => {
+                console.log("성공하고 받은 데이터 ",result)
+                console.log("성공하고 받은 데이터 ",totalPrice2);
                 if(result.userBalance > totalPrice2)
                     resolve(true)
                 else resolve(false)                

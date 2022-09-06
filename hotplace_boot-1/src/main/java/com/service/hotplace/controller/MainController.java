@@ -65,8 +65,7 @@ public class MainController {
 	@ResponseBody
 	@GetMapping("/shop/init/waitingCnt")
 	public List<Integer> sendInitWaitingCnt(String number) throws Exception{
-		List<Integer> list = waitingService.getPartNowWaitingCnt(Integer.parseInt(number));
-		return list;
+		return waitingService.getPartNowWaitingCnt(Integer.parseInt(number));
 	}
 	
 	@GetMapping("/shop/allShop")

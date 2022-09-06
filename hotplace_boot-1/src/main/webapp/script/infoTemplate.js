@@ -11,30 +11,33 @@ let idx_ = url[1].split('=')
 let shopReview = []
 
 // test code
-localStorage.setItem('loginUser','user01');
 const user = localStorage.getItem('loginUser');
-
+let loginUserId  = null;
+    
 
 $(function() {
+    const reg = (/[\{\'\"}]/g);
+    if(user != null) 
+        loginUserId = user.replace(reg,'').split(',')[0].split(':')[1]
 
     // 찜하기 or 찜 취소하기 클릭
     $("#imgDiv").on('click','#jjim',function() {
         let condition = $(this).text();
 
         // 비로그인시
-        if(user == null) {
+        if(loginUserId == null) {
             loginPopup()
             return;
         }
 
         // 가게 찜 취소하기
         if(condition == '찜 취소하기') 
-            showSwal(idx_[1],1,user)        
+            showSwal(idx_[1],1,loginUserId)
         // 가게 찜 하기
         else if (condition === '찜 하기') 
-            showSwal(idx_[1],2,user)        
+            showSwal(idx_[1],2,loginUserId)        
         // 은행 예약하기
-        else showSwal(idx_[1],3,user)     
+        else showSwal(idx_[1],3,loginUserId)     
 
     })
 
@@ -50,7 +53,7 @@ $(function() {
         $("#imgDiv").css('background-image',`url(../img2/bank3.jpg)`)        
         divNum = 2;
     }
-    else  photo = ['../img2/wallpaper9.jpg','../img2/wallpaper1.jpg','../img2/wallpaper2.jpg']        
+    else  photo = ['../img2/wallpaper10.jpg','../img2/wallpaper8.jpg','../img2/wallpaper1.jpg']        
 
     // 사진 변경
     setInterval(() => {
@@ -66,7 +69,6 @@ async function initFunction() {
 
     // 은행 또는 가게 정보 받아오기
     let marketInfo = await getShopData()
-    console.log('makretInfo ": ',marketInfo)
     let marketReview = undefined;
 
     // 카테고리가 가게일 경우 리뷰 가져오기
@@ -87,7 +89,6 @@ let getShopData = async() => new Promise((resolve,reject) => {
             idx : idx_[1],
         },
         success : (result) => {
-            console.log(result);
             resolve(result)            
         }
     })
@@ -100,7 +101,6 @@ let getShopReview = async(marketInfo) => new Promise((resolve,reject) => {
         type : 'get',
         data : { shopIdx : idx_[1] },
         success : (result) => {
-            console.log(result)
             let sum = 0;
             for(let i = 0 ; i < result.length; i++) {
                 shopReview.push(result[i]);
@@ -198,7 +198,6 @@ let getMenu = async(marketInfo) => new Promise((resolve,reject) => {
 // 메뉴판에 메뉴 추가하기
 async function addMenu(allMenu) {
     let menu = '';
-    console.log('allMenu : ',allMenu)
     for(let i = 0 ; i < allMenu.length; i++) {
         menu += `
         <div class="menu_item">
@@ -277,13 +276,13 @@ let getAllShopLike = async() => new Promise((resolve,reject) => {
     $.ajax({
         url : '/shop/allLike',
         type : 'get',
-        success : (result) => {            
+        success : (result) => {    
             // 비로그인시 -1
-            if(user == null)
+            if(loginUserId == null)
                 resolve(-1);
-            for(let i = 0 ; i < result.length; i++) {            
+            for(let i = 0 ; i < result.length; i++) {   
                 // 찜을 한 가게일 경우
-                if(result[i].userId === user && result[i].shopIdx == idx_[1]) 
+                if(result[i].userId === loginUserId && result[i].shopIdx == idx_[1]) 
                     resolve(1);
             }
             // 찜 안한 가게일 경우
@@ -387,7 +386,6 @@ async function bankSetting(marketInfo) {
 
 // 지도 추가, footer추가
 function addMap(marketInfo) {
-    console.log('addMap marketInfo : ',marketInfo)
     let mapTag = `
         <div id = "mapContainer" class = "up">
             <div id = "mapInfo">은행 위치</div>

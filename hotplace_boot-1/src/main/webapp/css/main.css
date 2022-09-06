@@ -174,12 +174,19 @@ span {
 .searchNavbar_toggle {
     transform : translateY(+70px);
 }
-
+/* 
 #logo {
     color : white;
     font-size: 50px;
     font-family: 'Qillsey Einstein', sans-serif !important;
     padding-left: 20px; 
+} */
+
+#logo {
+  background-image: url('../img2/changeColorLogo.png');
+  background-size: cover; 
+  width : 200px;
+  height : 70px;
 }
 
 #navbar_middle {

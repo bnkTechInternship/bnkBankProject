@@ -100,14 +100,14 @@ public class UserInfoController {
 	@ResponseBody
 	@GetMapping("likeShop.do")
 	public String likeShopDo(LikeShop likeShop) throws Exception{
-		int result = likeService.setLikeShop(likeShop);
+		likeService.setLikeShop(likeShop);
 		return "";
 	}
 
 	@ResponseBody
 	@GetMapping("unlikeShop.do")
 	public String unlikeShopDo(LikeShop likeShop) throws Exception{
-		int result = likeService.deleteLikeShop(likeShop);
+		likeService.deleteLikeShop(likeShop);
 		return "";
 	}
 	

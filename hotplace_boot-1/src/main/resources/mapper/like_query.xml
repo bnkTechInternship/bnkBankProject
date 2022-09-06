@@ -4,9 +4,9 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="sql.like.mapper">
-	<sql id="selectAllLikeBank">
-		select like_idx, user_id, bank_idx
-		from like_bank
+	<sql id="selectAllShop">
+		select like_idx, user_id, shop_idx
+		from like_shop
 	</sql>
 	
 	<!-- create -->
@@ -39,17 +39,12 @@
 	</select>
 	
 	<select id="getLikeShops" parameterType="String" resultType="LikeShop">
-		<include refid="selectAllLikeBank" />
-		WHERE user_id= #{value}
-	</select>
-	
-	<select id="getLikeBanks" parameterType="String" resultType="LikeBank">
-		<include refid="selectAllLikeBank" />
+		<include refid="selectAllShop" />
 		WHERE user_id= #{value}
 	</select>
 
 	<select id = "getAllShopLike" resultType="likeShop">
-		<include refid="selectAllLikeBank" />
+		<include refid="selectAllShop" />
 	</select>
 	
 	

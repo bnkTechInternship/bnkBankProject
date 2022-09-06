@@ -5,34 +5,29 @@ $(function() {
     let userName = user.userName;
     let userId = user.userId;
     let userPoint = user.userPoint;
-    let userBalance = user.userBalance;
+    let userBalance = user.userBalance;	
+    
+    console.log(user);
     
     
-    
-/*    $.ajax({
-    	type:'post',
-    	url:'checkCurrWaiting.do',
-    	data:"userId="+user.userId,
-    	
-    	success:function(result){
-    		if(result == false){
-    			location.replace('reserve2.html');
+    $('button').click(function(){
+
+    	$.ajax({
+    		type: 'post',
+    		url: 'deleteWaitingInfo.do',
+    		data: {
+    			userId: userId,
+    			shopIdx: $(this).parents('.contents').children().children('.left_second').children('.details').children(0).children(1).children(1).attr('name'),
+    			},
+    		
+    		success:function(data){
     			
     		}
-    	}
+    	})
     	
+    	
+    })
     
-    
-    
-    
-    
-    
-    
-    })*/
-    
-    
-    
-	
     
     $('#left_first').append(
     		'<div>'+userName+'님의 실시간 웨이팅 정보</div>'
@@ -48,9 +43,12 @@ $(function() {
     	url:'getShopInfo.do',
     	data:"userId="+user.userId,
     	
+    	
     	success:function(shop){
+    		
+    		
     		$('#shop_name').append(
-    				'<h3>' + shop.shopName + '</h3>'
+    				'<h3 name="'+shop.shopIdx+'">' + shop.shopName + '</h3>'
     		);
     		
     		$('.details_text').html(
@@ -157,11 +155,12 @@ $(function() {
     		);
     	},
     	error:function(){
-    		$('.left_second').html(`<div class="wrap_img">
+    		/*
+    		$().html(`<div class="wrap_img">
                         <div id="main_text">현재 웨이팅 중인 가게가 없어요</div>
                         <div id="sub_text">고메부산에 소개된 핫플들을 웨이팅하고 동백전 캐시백도 받아보세요!</div>
                         <a href="main.html" id="waiting_text">웨이팅하러가기</a>
-                    </div>`);
+                    </div>`);*/
     	}
     });
     
@@ -181,8 +180,8 @@ $(function() {
     		
     	},
     	error:function(untilCnt){
-    		$('.menu_list').html(``);
-    		$('.waiting_info').html(``);
+    		
+    		//$('.waiting_info').html(``);
     	}
     	
     });

@@ -387,13 +387,12 @@ html, body, .wrapper{
     border-radius: 20px;
     margin: 0 auto;
     padding: 20px;
-    padding-top: 40px;
     box-shadow: 0 5px 15px -7px rgba(0,0,0,1);
     border: 1px solid #darkgray;
 }
 
 .waiting_info span{
-    font-size: 28px;
+    font-size: 24px;
     margin: 10px;
 }
 
@@ -505,7 +504,7 @@ html, body, .wrapper{
         display: none;
     }
 
-    
+
 
 
       

@@ -63,7 +63,10 @@ public class InfoController {
 	@PostMapping("/info/getSpecificUser")
 	@ResponseBody
 	public User getSpecificUserById(String userId) throws Exception{
-		return userService.getUserById(userId);
+		User user = userService.getUserById(userId);
+		System.out.println("오냐1");
+		System.out.println("리턴할 유저값 : " + user);
+		return user;
 	}
 	
 	@PostMapping("/info/withDraw")

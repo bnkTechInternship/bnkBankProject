@@ -40,9 +40,22 @@ public class HistoryController {
 	
 	@ResponseBody
 	@PostMapping("addReview.do")
-	public int addReivew(String userId, String shopIdx, String score, String comment) throws Exception{
-		return reviewService.addReview(new Review(userId, Integer.parseInt(shopIdx.trim()), Double.parseDouble(score.trim()), comment.trim()));
+	public int addReivew(Review rv) throws Exception{
+		return reviewService.addReview(rv);
 	}
+	
+	@ResponseBody
+	@PostMapping("updateReview.do")
+	public int updateReview(Review rv) throws Exception{
+		return reviewService.updateReview(rv);
+	}
+	
+	@ResponseBody
+	@PostMapping("deleteReview.do")
+	public int DeleteReview(Review rv) throws Exception{
+		return reviewService.deleteReview(rv);
+	}
+	
 
 	@ResponseBody
 	@PostMapping("getWaitingList.do")
@@ -99,7 +112,6 @@ public class HistoryController {
 						{
 							score = (int) (rv.getScore()*2);
 							comment = rv.getComm();
-							System.out.println(score);
 						}
 				
 				price += menu.getMenuPrice()*ws.getQuantity();
@@ -112,7 +124,6 @@ public class HistoryController {
 				shopName = shop.getShopName();
 				shopWebAddress = shop.getWebAddress();
 				shopIdx = shop.getShopIdx();
-				System.out.println(shop.getWebAddress());
 			}
 
 			String[] arr = new String[] { ""+price, menulist, ""+score, comment, date, shopName, shopWebAddress, ""+shopIdx };

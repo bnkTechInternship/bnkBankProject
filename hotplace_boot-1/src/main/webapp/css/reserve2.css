@@ -50,17 +50,6 @@ html, body, .wrapper{
 }
 
 
-.contents{
-    width: 1440px;
-    height: 900px;
-    margin: 0 auto;
-    margin-top: 120px;
-    background-color: #EDF3EE;
-    border-radius: 30px;
-    box-shadow: 0 5px 18px -7px rgba(0,0,0,1);
-    overflow: hidden;
-}
-
 /* left 1 */
 
 .left{
@@ -254,9 +243,9 @@ html, body, .wrapper{
     margin-left: 10px;
 }
 
-/* left img 영역 끝 */
+/* left img �쁺�뿭 �걹 */
 
-/* left details 영역 시작 */
+/* left details �쁺�뿭 �떆�옉 */
 
 .details{
     width: 800px;

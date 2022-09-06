@@ -11,16 +11,13 @@ let shopReview = []
 let tempWaiting = 1;
 
 $(function() {
-	// test codeㅁ
-	// localStorage.setItem('loginUser','user01');
 	const user = localStorage.getItem('loginUser');
-	if(user != null)
-		console.log(user.split(','))
+	const reg = (/[\{\'\"}]/g);
+	let loginUserId  = null;
 	
-	const reg = (/\'\"\{\}/g,'');
-	// console.log(user.replace(reg))
 
-
+	if(user != null)
+		loginUserId = user.replace(reg,'').split(',')[0].split(':')[1]
 
 	// 페이지 로딩시 잠시 출력되는 내용
 	let loadContent = 
@@ -81,6 +78,7 @@ $(function() {
             $(".search").attr('src','img2/search.png')
             $("#getSearch").attr('src','img2/search.png')
             $("#userInfo").attr('src','img2/user.png')
+			$("#logo").css('background-image','url(../img2/changeColorLogo2.png)')
         } else {
             $("#searchNavbar, #mainNavbar")
                     .css('background-color','rgba(34,34,49,1)')
@@ -88,6 +86,7 @@ $(function() {
             $(".search").attr('src','img2/search2.png')
             $("#getSearch").attr('src','img2/search2.png')
             $("#userInfo").attr('src','img2/user2.png')
+			$("#logo").css('background-image','url(../img2/changeColorLogo.png)')
         }
 
         let calcScroll = scrollTop * 0.005;
@@ -111,7 +110,7 @@ $(function() {
 	// 내정보 이미지 클릭시
 	$("#userInfo").click(function() {
 		//비로그인시
-		if(user == undefined) {
+		if(loginUserId == undefined) {
 			Swal.fire({
 				icon: 'error',
 				title: '회원전용 기능입니다.',
@@ -205,7 +204,7 @@ $(function() {
     		success: (list)=> {
     			$("#container").empty()
 				for(let item of list){
-					if(user == null) 
+					if(loginUserId == null) 
 						$("#container").append(getShop_NoLogin(item));
 					else $("#container").append(getShop_Login(item));
 
@@ -267,7 +266,7 @@ $(function() {
 				data : {"number" : idx},
 				success : (result) => {					
 					for(let item of result) {
-						if(user == null)
+						if(loginUserId == null)
 							$("#container").append(getShop_NoLogin(item));
 						else $("#container").append(getShop_Login(item));
 					}
@@ -401,7 +400,7 @@ $(function() {
 			<div class="photo">
 				<div class = "star" id = "shopStar${info.shopIdx}">
 					
-					<div class = "like" id = "shopLike${info.shopIdx}" data-user = ${user}>${like}</div>
+					<div class = "like" id = "shopLike${info.shopIdx}" data-user = ${loginUserId}>${like}</div>
 				</div>
 				<img src = "${info.webAddress}">
 			</div>
@@ -434,7 +433,7 @@ $(function() {
 
 			success : (result) => {
 				for(let i = 0 ; i < result.length; i++)
-					if(user === result[i].userId)
+					if(loginUserId === result[i].userId)
 						likeList.push(result[i].shopIdx)
 			},
 			beforeSend : () => beforeSendWork(),

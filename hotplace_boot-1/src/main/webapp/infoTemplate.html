@@ -12,7 +12,7 @@
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=59b7bde77496d4668dfdddc31a4207fc"></script>
     <script src = "barcode_jquery/jquery-barcode.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <title>Document</title>
+    <title>상세 페이지</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="css/infoTemplate.css">
     <link rel="stylesheet" href="css/ionicons.min.css">
@@ -26,13 +26,18 @@
 
 <body>
 
+    <!-- 메뉴 추가 알림창 -->
     <div id = "menu_add">
         메뉴가 추가되었습니다!
     </div>
 
+    <!-- 찜 하기때 등장하는 이미지 -->
     <img src = "img2/heart_beat.png" id = "heart_beat">
 
+    <!-- 영수증 toggle 이미지 -->
     <img src = "img2/notes.png" id = "note">
+
+    <!-- 영수증 역할 태그 -->
     <div id="notepad" class = "note_show">
         <div>영수증</div>
         <div id="notepad_content"></div>
@@ -42,6 +47,7 @@
         <img src = "img2/pen.png" id = "pen">
     </div>
 
+    <!-- nav bar -->
     <div id="nav" class="start">
         <div id="text" class="cursor" onclick = "location.href = '/login.html/shop'">Hot Place</div>
         <div id="nav_img">
@@ -50,6 +56,7 @@
         </div>
     </div>
     
+    <!-- 핵심 내용 컨테이너 동적으로 내용 추가 -->
     <div id="container">
         <div id="imgDiv">
             <div id="content">
@@ -59,26 +66,30 @@
     </div>
 </body>
 <script>
-    $(function () {
-        let sendData = [];
-        let totalPrice = 0;
-        let totalMenu = []
+    $(function () {        
+        let idx_ = url[1].split('=') // 가게 또는 은행 고유 idx
+
+        let sendData = []; // 예약할 메뉴 고유 idx
+        let totalPrice = 0; // 예약 금액
+        let totalMenu = [] // 선택한 메뉴 목록(한글)
+
+        // 유저 정보 받아오기
         const user = localStorage.getItem('loginUser');
-        let idx_ = url[1].split('=')
         
+        // 결제하기 클릭
         $("#notepad").on('click','#payment',function() {
-            console.log(totalPrice)
-            console.log(totalPrice == 0)
-           if(user == null) {
+
+            // 비로그인시
+            if(user == null) {
                 popup()
                 return;
-           } else if(totalPrice == 0) {
+            } else if(totalPrice == 0) { // 메뉴를 선택안한 경우
                 popup("menuSelect")
-                console.log("실행됨")
                 return;
-           }
+            }
 
-           Swal.fire({
+            // 로그인 & 메뉴 선택한 경우 정상 진행
+            Swal.fire({
                 title: "예약 안내",
                 text: "예약 하시겠습니까?",
                 icon: 'warning',
@@ -87,17 +98,21 @@
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'OK',
             }).then((result) => {
+
+                // 결제하기를 눌렀을때
                 if (result.isConfirmed) {
                     // 앞에서 최대 돈보다 많은지 확인
                     getUserMoney(totalPrice)
-                                .then((flag) => sendPayRequestFnc(flag,sendData,totalPrice))
-                                .then((flag) => withDrawMoney(totalPrice))
+                                .then((flag) => sendPayRequestFnc(flag,sendData,totalPrice)) // 웨이팅 내역에 추가
+                                .then((flag) => withDrawMoney(totalPrice)) // 돈 차감
                 }
             })
         })
 
+        // 영수증 바코드 추가 코드
         $("#barcode").barcode("1234567890128", "code128",{barWidth:1, barHeight:70,showHRI:true,bgColor:"white"});
 
+        // 다크모드
         $("#dark").click(function() {
             if($(this).attr('src') === 'img2/moon.png') {
                 $(this).attr('src','img2/sun.png');
@@ -134,60 +149,56 @@
         })
 
 
-        let flag = false;
-        let noteFlag = false;
+        // 노트 이미지 클릭, 영수증 toggle
         $("#note").click(function() {
             $("#notepad").toggleClass('note_show')
         })
 
+        // menu 추가 문구 disappear or appear
         $("#menu_add").hide()
         $("#content").on('click','.menu_item',function() {
             let price = $(this).find('.menu_size').attr('data-price');
             $("#menu_add").show();
             $("#menu_add").fadeIn(1000);            
-
             $("#notepad").removeClass('note_show')
+
             let addMenu = $(this).find('.menu_name').text()
             sendData.push($(this).find('.menu_name').attr('value'))
             totalPrice += parseInt(price);
             totalMenu.push(addMenu)
-            console.log('totalMenu : ',totalMenu)
+
+            // 영수증 글 작서 애니메이션
             TypeWord(addMenu,totalPrice,totalMenu)
             setTimeout(() => {
                 $("#menu_add").fadeOut(1000);
             },1000)
         })
 
+        // 메뉴 전체 삭제 클릭시
         $("#notepad_del").click(function() {
             new TypeIt("#notepad_content", {
             })
-            
             sendData = []
             totalMenu = []
             totalPrice = 0;
-            console.log('sendData : ',sendData)
-            //
         })
         
 
+        // 스크롤 이벤트
         $(window).scroll(() => {
             let scrollTop = $(this).scrollTop();
-
             let calcScroll = scrollTop * 0.008;
             $('#restaurant_info').css('opacity', 1 - calcScroll);
 
-
-
+            // 스크롤 등장 이벤트
             var reveals = document.querySelectorAll(".up");
-
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
                 var elementVisible = 150;
 
-                if (elementTop < windowHeight - elementVisible) {
+                if (elementTop < windowHeight - elementVisible) 
                     reveals[i].classList.add("active");
-                }
             }
         })
     })
@@ -197,21 +208,17 @@
         for(let i = 0 ; i < totalMenu2.length; i++) 
             text += totalMenu2[i] + '<br>'                
         text += '<br>'
+
         new TypeIt("#notepad_content", {
             })
         new TypeIt("#notepad_content", {
-            speed: 50,
-            startDelay: 900,
-            })
-            .type(text)
-            .type(`총 가격 :    ￦${totalPrice}`)            
-            .go()
-        console.log("word : ",$("#notepad_content").text())
+                speed: 50,
+                startDelay: 900,
+            }).type(text).type(`총 가격 :    ￦${totalPrice}`).go()
     }
 
-    // chart1
+    // 차트 생성 함수
     function makeChart1() {
-
         const ctx = document.getElementById('myChart1').getContext('2d');
         new Chart(ctx, {
             type: 'bar',
@@ -238,12 +245,8 @@
             },
             options: {
                 scales: {
-                    y: {
-                        beginAtZero: true
-                    },
-                    xAxes: [{
-            barPercentage: 0.5
-        }]
+                    y: { beginAtZero: true },
+                    xAxes: [{ barPercentage: 0.5}]
                 },
                 legend: {display: false},
                 title: {
@@ -252,9 +255,9 @@
                 }
             }
         });
-    }
-    // chart1
+    }    
 
+    // 팝업 띄우는 함수
     function popup(category) {
         let title_ = '회원전용 기능입니다.'
         let text_ = '로그인을 해주세요'
@@ -275,6 +278,7 @@
         })
     }
 
+    // 로그인한 사용자 보유 금액 가져오는 함수
     let getUserMoney = async(totalPrice2) => new Promise((resolve,reject) => {
         $.ajax({
             url  : 'info/getSpecificUser',
@@ -288,11 +292,14 @@
         })
     })
 
+    // 웨이팅 요청 등록하는 함수
     let sendPayRequestFnc = async(flag,sendData2,totalPrice2) => new Promise((resolve,reject) => {
+
         // 가지고 있는 돈이 더 많은경우
         if(flag) {
             let successCnt = 0;
-            // for문으로 요청보내는거 좀 아닌거 같은데,,
+
+            // for문으로 ajax 요청보내는거 좀 아닌거 같은데,,
             for(let i = 0 ; i < sendData2.length; i++) {
                 $.ajax({
                     url  : '/info/registWaiting',
@@ -307,9 +314,16 @@
                 })
             }
             resolve(true);
+        }else { // 돈이 적을경우
+            Swal.fire(
+                "예약 실패",
+                "동백전에 등록된 금액이 결제 금액보다 적습니다.<br>충전후 이용가능합니다.",
+                'error'
+            )
         }
     })
 
+    // 예약금액만큼 차감하는 함수
     let withDrawMoney= async(totalPrice) => new Promise((resolve,reject) => {
         $.ajax({
             url  : '/info/withDraw',
@@ -324,9 +338,7 @@
                     "예약을 성공했습니다!<br> 예약 페이지로 넘어갑니다!",
                     'success'                    
                 )
-                setTimeout(() => {
-                    location.href = `/reserve.html`;
-                },2000)
+                setTimeout(() => { location.href = `/reserve.html`; },2000)
             }
         })
     })

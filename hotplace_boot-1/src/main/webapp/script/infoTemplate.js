@@ -1,20 +1,28 @@
+// 받은 url
 let url = location.href.split('?')[1].split('&')
+
+// shop or bank 구분
 let category_ = url[0].split('=')
+
+// shop or bank 고유 idx
 let idx_ = url[1].split('=')
+
+// 가게 리뷰
 let shopReview = []
 
-    // test code
+// test code
 localStorage.setItem('loginUser','user01');
 const user = localStorage.getItem('loginUser');
 
 
 $(function() {
 
-
+    // 찜하기 or 찜 취소하기 클릭
     $("#imgDiv").on('click','#jjim',function() {
         let condition = $(this).text();
 
-        if((condition == '찜 취소하기' || condition == '찜 하기')&&user == null) {
+        // 비로그인시
+        if(user == null) {
             loginPopup()
             return;
         }
@@ -30,9 +38,10 @@ $(function() {
 
     })
 
-
+    // 페이지 구성을 위한 함수
     initFunction();
 
+    // 사진 교환을 위한 변수
     let idx = 0;
     let divNum = 3;
 
@@ -41,22 +50,18 @@ $(function() {
         $("#imgDiv").css('background-image',`url(../img2/bank3.jpg)`)        
         divNum = 2;
     }
-        
     else  photo = ['../img2/wallpaper9.jpg','../img2/wallpaper1.jpg','../img2/wallpaper2.jpg']        
-    
 
-
+    // 사진 변경
     setInterval(() => {
         $("#imgDiv").css('background-image',`url(${photo[parseInt((idx++)%divNum)]})`);
     },8000)    
 
     // 페이지 로딩시 애니메이션 세팅
-    setTimeout(() => {
-        $('.start').addClass('active')
-    },1000)
-
+    setTimeout(() => { $('.start').addClass('active') },1000)
 })
 
+// 페이지 구성을 위한 함수
 async function initFunction() {
 
     // 은행 또는 가게 정보 받아오기
@@ -81,7 +86,6 @@ let getShopData = async() => new Promise((resolve,reject) => {
             category : category_[1],
             idx : idx_[1],
         },
-
         success : (result) => {
             console.log(result);
             resolve(result)            
@@ -115,7 +119,6 @@ async function setData(marketInfo,review) {
     if(review != undefined) {
         let jjimInfo = await getAllShopLike();
         appendData = await getShopInfoTag(jjimInfo,marketInfo,review)
-
     
         // 메뉴 생성
         await addMenuList(marketInfo);
@@ -127,8 +130,6 @@ async function setData(marketInfo,review) {
         await addGraph();
     }
     else { //은행일 경우 은행에 맞는 정보로 세팅
-        console.log("일로오냐?")
-
         appendData = await getBankInfoTag(marketInfo);
 
         await bankSetting(marketInfo);
@@ -140,21 +141,11 @@ async function setData(marketInfo,review) {
 
 // 가게 인포 제작 함수
 async function getShopInfoTag(jjimInfo,marketInfo,review) {
-    console.log(marketInfo)
     let star = ''
     let jjim = '찜 하기'
     
-    console.log("찜 상태 값 : ",jjimInfo)
-    if(jjimInfo === 1) {
+    if(jjimInfo === 1)
         jjim = '찜 취소하기'
-        console.log("해당 유저는 찜한 상태입니다.")
-    } else if(jjimInfo === 0) {
-        console.log("찜 안한 상태")
-    } else {
-        console.log("비로그인 상태")
-    }
-        
-    
 
     for(let i = 0 ; i < parseInt(review); i++)
         star += '★'
@@ -175,7 +166,6 @@ async function getShopInfoTag(jjimInfo,marketInfo,review) {
 
 // 메뉴판, 메뉴아이템 모두 추가하는 함수
 async function addMenuList(marketInfo) {
-    
     let content_two = `
     <div id="content_two" class="up">
         <div id="content_two_menu">
@@ -250,10 +240,9 @@ async function addReviewList() {
     await addReviewItem();
 }
 
+// 리뷰 내용 추가 함수
 async function addReviewItem() {
-    let cnt = 1;
     let gender = ['img2/man.png','img2/woman.png']
-    console.log("addReview Item에서 사용하는 리뷰 : ",shopReview)
 
     for(let i = 0 ; i < shopReview.length; i++) {
         let reviewItem = `
@@ -272,6 +261,7 @@ async function addReviewItem() {
     }
 }
 
+// 그래프 추가 함수
 async function addGraph() {
     let graphTag = `
     <div id = "graph" class = "up">
@@ -287,12 +277,10 @@ let getAllShopLike = async() => new Promise((resolve,reject) => {
     $.ajax({
         url : '/shop/allLike',
         type : 'get',
-
         success : (result) => {            
             // 비로그인시 -1
             if(user == null)
                 resolve(-1);
-            
             for(let i = 0 ; i < result.length; i++) {            
                 // 찜을 한 가게일 경우
                 if(result[i].userId === user && result[i].shopIdx == idx_[1]) 
@@ -324,7 +312,6 @@ function showSwal(shopId,flag,userId) {
         desc_ = "대기표가 예약되었습니다.";
         url = "bankReserve.do"
     }
-    console.log("오냐1")
 
     Swal.fire({
         title: title_,
@@ -341,13 +328,14 @@ function showSwal(shopId,flag,userId) {
             desc_,
             'success'
           )
-          console.log("누렀따.")
           setJjim(url,shopId,userId,flag)
         }
       })
 }
 
+// 찜하기 함수
 function setJjim(url_,shopId,userId,flag) {
+    // 가게일 경우
     let data_ = `shopIdx=${shopId}&userId=${userId}`
 
     // 은행일 경우 전송하는 데이터 변경
@@ -376,6 +364,7 @@ function setJjim(url_,shopId,userId,flag) {
     })
 }
 
+// 은행에 맞는 info태그 생성
 async function getBankInfoTag(marketInfo) {
     return `
     <div id="restaurant_info" class="disappear init start">
@@ -390,12 +379,13 @@ async function getBankInfoTag(marketInfo) {
     `;
 }
 
+// 은행에 맞게 페이지 세팅
 async function bankSetting(marketInfo) {
     $("#note").remove();
-
     addMap(marketInfo);
 }
 
+// 지도 추가, footer추가
 function addMap(marketInfo) {
     console.log('addMap marketInfo : ',marketInfo)
     let mapTag = `
@@ -410,25 +400,23 @@ function addMap(marketInfo) {
     addFooter();
 }
 
+// 지도 추가 함수
 function createMap(marketInfo) {
-    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    var mapContainer = document.getElementById('map'),
     mapOption = { 
-        center: new kakao.maps.LatLng(marketInfo.bankLat, marketInfo.bankLong), // 지도의 중심좌표
+        center: new kakao.maps.LatLng(marketInfo.bankLat, marketInfo.bankLong), 
         level: 3 // 지도의 확대 레벨
     };
 
-    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-    // 마커가 표시될 위치입니다 
+    var map = new kakao.maps.Map(mapContainer, mapOption); 
     var markerPosition  = new kakao.maps.LatLng(marketInfo.bankLat, marketInfo.bankLong); 
-
-    // 마커를 생성합니다
     var marker = new kakao.maps.Marker({
         position: markerPosition
     });
     marker.setMap(map);
 }
 
+// footer추가
 function addFooter() {
     let data =  `
     <footer class="footer-07">
@@ -462,6 +450,7 @@ function addFooter() {
     $('body').append(data);
 }
 
+// 비로그인 팝업
 function loginPopup() {
     Swal.fire({
         icon: 'error',

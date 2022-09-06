@@ -11,37 +11,32 @@ import com.service.hotplace.model.ReviewDAO;
 
 @Repository
 public class ReviewDAOImpl implements ReviewDAO {
-	static final String NS="sql.review.mapper.";
 	@Autowired
 	private SqlSession sqlsession;
+	static final String NS="sql.review.mapper.";
 	
 	@Override
 	public int addReview(Review review) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlsession.insert(NS+"addReview",review);
 	}
 
 	@Override
 	public int deleteReview(Review review) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlsession.delete(NS+"deleteReview",review);
 	}
 
 	@Override
 	public int updateReview(Review review) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlsession.update(NS+"updateReview",review);
 	}
 
 	@Override
 	public List<Review> getReviewListByUserId(String userId) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlsession.selectList(NS+"getReviewListByUserId",userId);
 	}
 
 	@Override
 	public List<Review> getReviewListByShopIdx(int shopIdx) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlsession.selectList(NS+"getReviewListByShopIdx",shopIdx);
 	}
 
@@ -53,14 +48,10 @@ public class ReviewDAOImpl implements ReviewDAO {
 	@Override
 	public List<Review> getAllReview() throws Exception {
 		return sqlsession.selectList(NS+"getAllReview");
-
 	}
-
+	
 	@Override
 	public List<Review> getOneShopReview(int shopIdx) throws Exception {
 		return sqlsession.selectList(NS+"getOneShopReview",shopIdx);
 	}
-	
-	
-
 }

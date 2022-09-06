@@ -46,88 +46,49 @@ public class UserInfoController {
 	@Autowired
 	private LikeService likeService;
 	
-//	@ResponseBody
-//	//@RequestMapping("userInfo.do")
-//	public String userInfoDo(HttpSession session, Model model) {
-//		
-//		System.out.println("userInfodo호출!!!!");
-//		User user =(User)session.getAttribute("user");
-//		
-//		if(user!= null) {
-//			model.addAttribute("user",user);
-//			return "User";
-//		}else {
-//			return "";
-//		}
-//		
-//		//System.out.println(user);
-//		//return user;
-//	}
-	
 	@RequestMapping("checkCurrWaiting.do")
-	public String checkCurrWaiting(String userId) throws Exception{
-		User user = new User();
-		user.setUserId(userId);
+	public String checkCurrWaiting(User user) throws Exception{
 		List<WaitingShop> waitingshops = waitingService.getNowWaitingShop(user);
-		System.out.println("&&&&&&&&&&&&&&&&&웨이팅샵여부::"+ waitingshops);
-		if(waitingshops ==null) { return "redirect:reserve2.html";}
+		if(waitingshops == null)  
+			return "redirect:reserve2.html";
 		return "redirect:reserve.html";
 	}
 	
-	
-	
 	@ResponseBody
 	@PostMapping("getReviews.do")
-	public List<Review> getReviewsDo(String userId) throws Exception {
-		System.out.println(userId);
-		User user = new User();
-		user.setUserId(userId);
+	public List<Review> getReviewsDo(User user) throws Exception {
 		List<WaitingShop> waitingshops = waitingService.getNowWaitingShop(user);
-		System.out.println(waitingshops);
 		int shopIdx = waitingshops.get(0).getShopIdx();
-		List<Review> list = reviewService.getReviewListByShopIdx(shopIdx);
-		return list;
+		return reviewService.getReviewListByShopIdx(shopIdx);
 	}
 	
 	@ResponseBody
 	@PostMapping("getShopInfo.do")
-	public Shop getShopinfoDo(String userId) throws Exception{
-		User user = new User();
-		user.setUserId(userId);
+	public Shop getShopinfoDo(User user) throws Exception{
 		List<WaitingShop> waitingshops = waitingService.getNowWaitingShop(user);
 		int shopIdx = waitingshops.get(0).getShopIdx();
-		Shop shop = shopService.getShop(shopIdx);
-		return shop;
+		return shopService.getShop(shopIdx);
 	}
-	
 	
 	@ResponseBody
 	@PostMapping("getOrder.do")
-	public List<WaitingShop> getOrderDo(String userId) throws Exception{
-		User user = new User();
-		user.setUserId(userId);
+	public List<WaitingShop> getOrderDo(User user) throws Exception{
 		List<WaitingShop> waitingshops = waitingService.getNowWaitingShop(user);
 		for(WaitingShop ws : waitingshops) {
 			Menu menu = menuService.getMenuByIdx(ws.getMenuIdx());
 			ws.setWaitingDate(menu.getMenuName());
 			ws.setWaitingCnt(menu.getMenuPrice());
 		}
-		
 		return waitingshops;
 	}
 	
-	
 	@ResponseBody
 	@PostMapping("getRealWaiting.do")
-	public int getRealWaiting(String userId) throws Exception{
-		User user = new User();
-		user.setUserId(userId);
+	public int getRealWaiting(User user) throws Exception{
 		List<WaitingShop> waitingshops = waitingService.getNowWaitingShop(user);
 		int untilCnt= waitingService.getShopUntilMyTurn(waitingshops.get(0));
-		System.out.println(untilCnt);
 		return untilCnt;
 	}
-	
 	
 	@ResponseBody
 	@PostMapping("updateInfo.do")
@@ -136,29 +97,23 @@ public class UserInfoController {
 		return userService.getUserById(user.getUserId());
 	}
 	
-	
 	@ResponseBody
 	@GetMapping("likeShop.do")
 	public String likeShopDo(LikeShop likeShop) throws Exception{
 		int result = likeService.setLikeShop(likeShop);
 		return "";
 	}
-	
 
 	@ResponseBody
 	@GetMapping("unlikeShop.do")
 	public String unlikeShopDo(LikeShop likeShop) throws Exception{
-		System.out.println(likeShop);
 		int result = likeService.deleteLikeShop(likeShop);
 		return "";
 	}
 	
-	
 	@ResponseBody
 	@PostMapping("getLikeList.do")
-	public List<LikeShop> getLikeList(String userId) throws Exception{
-		User user = new User();
-		user.setUserId(userId);
+	public List<LikeShop> getLikeList(User user) throws Exception{
 		List<LikeShop> list=likeService.getLikeShops(user);
 		for(LikeShop ls: list) {
 			Shop shop = shopService.getShop(ls.getShopIdx());
@@ -167,14 +122,9 @@ public class UserInfoController {
 		return list;
 	}
 	
-	
 	@PostMapping("getSpecificUser")
 	@ResponseBody
 	public User getSpecificUser(String userId) throws Exception {
-		System.out.println("받은 유저 정보 : " + userId);
-		User user = userService.getUserById(userId);
-		System.out.println("돌려줄 유저정보 : " + user);
-		return user;
+		return userService.getUserById(userId);
 	}
-	
 }

@@ -1,13 +1,8 @@
 $(function(){
-	
-
-  document.getElementById("floatingName").focus();
- 
+  document.getElementById("floatingName").focus(); 
     const counter = ($counter, max, endword) => {
         let now = max;
-      
         const handle = setInterval(() => {
-    
           $counter.innerHTML = Math.ceil(max - now).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+endword;
         
           // 목표수치에 도달하면 정지
@@ -123,89 +118,13 @@ $(function(){
 	        			    $('#floatingAddress2').attr('value',user.userAddress.substring(5));
 	        			    $('#floatingPhone').attr('value',user.userNumber);
 	        			    $('#floatingEmail').attr('value',user.userEmail);
-	        		
 	        			    
 	        			    Swal.fire({
 	        		  			  icon: 'success',
 	        		  			  title: '회원정보 수정 성공!',
 	        		  			  })
-	        		
-	        		
 	        			}
-        	
-        	}); // ajax
-    	}// else
-    	
-
-    
-    
+        	});
+    	}
     });
-
-    
-    
-    
-
-    
-    
-    
-
 })
-
-
-
-
-
-  
-
-
-
-
-
-//  this.target_frame.innerHTML = this.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
-/*
-function numberCounter(target_frame, target_number) {
-    this.count = 0; this.diff = 0;
-    this.target_count = parseInt(target_number);
-    this.target_frame = document.getElementById(target_frame);
-    this.timer = null;
-    this.counter();
-};
-    numberCounter.prototype.counter = function() {
-        var self = this;
-        this.diff = this.target_count - this.count;
-    
-        if(this.diff > 0) {
-            self.count += Math.ceil(this.diff / 5);
-        }
-    
-       
-    
-        if(this.count < this.target_count) {
-            this.timer = setTimeout(function() { self.counter(); }, 20);
-        } else {
-            clearTimeout(this.timer);
-        }
-    };
-
-new numberCounter(document.getElementById('counter2'), 99999);
-new numberCounter("counter2", 1123456);
-new numberCounter("counter1", 15);*/
-
-
-
-
-
-  /*
-  
-  window.onload = () => {
-    // 카운트를 적용시킬 요소
-    const $counter = document.querySelector(".count");
-    
-    // 목표 수치
-    const max = 17249;
-    
-    setTimeout(() => counter($counter, max), 2000);
-  }
-
-*/

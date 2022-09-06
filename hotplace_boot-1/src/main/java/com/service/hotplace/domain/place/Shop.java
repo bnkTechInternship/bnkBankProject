@@ -1,6 +1,7 @@
 package com.service.hotplace.domain.place;
 
 public class Shop {
+	// fields
 	private int shopIdx;
 	private String shopName;
 	private String shopAddress;
@@ -12,8 +13,8 @@ public class Shop {
 	private int totalCnt;
 	private String webAddress;
 	
+	// constructors
 	public Shop() {}
-
 	public Shop(int shopIdx, String shopName, String shopAddress, String shopNumber, String shopOper, int shopEnternum,
 			String shopLat, String shopLong, int totalCnt, String webAddress) {
 		super();
@@ -28,15 +29,11 @@ public class Shop {
 		this.totalCnt = totalCnt;
 		this.webAddress = webAddress;
 	}
-	
-	
-
 	public Shop(int shopIdx, int shopEnternum) {
 		super();
 		this.shopIdx = shopIdx;
 		this.shopEnternum = shopEnternum;
 	}
-
 	public Shop(String shopName, String shopAddress, String shopNumber, String shopOper, int shopEnternum,
 			String shopLat, String shopLong, int totalCnt, String webAddress) {
 		super();
@@ -51,85 +48,29 @@ public class Shop {
 		this.webAddress = webAddress;
 	}
 
-	public int getShopIdx() {
-		return shopIdx;
-	}
-
-	public void setShopIdx(int shopIdx) {
-		this.shopIdx = shopIdx;
-	}
-
-	public String getShopName() {
-		return shopName;
-	}
-
-	public void setShopName(String shopName) {
-		this.shopName = shopName;
-	}
-
-	public String getShopAddress() {
-		return shopAddress;
-	}
-
-	public void setShopAddress(String shopAddress) {
-		this.shopAddress = shopAddress;
-	}
-
-	public String getShopNumber() {
-		return shopNumber;
-	}
-
-	public void setShopNumber(String shopNumber) {
-		this.shopNumber = shopNumber;
-	}
-
-	public String getShopOper() {
-		return shopOper;
-	}
-
-	public void setShopOper(String shopOper) {
-		this.shopOper = shopOper;
-	}
-
-	public int getShopEnternum() {
-		return shopEnternum;
-	}
-
-	public void setShopEnternum(int shopEnternum) {
-		this.shopEnternum = shopEnternum;
-	}
-
-	public String getShopLat() {
-		return shopLat;
-	}
-
-	public void setShopLat(String shopLat) {
-		this.shopLat = shopLat;
-	}
-
-	public String getShopLong() {
-		return shopLong;
-	}
-
-	public void setShopLong(String shopLong) {
-		this.shopLong = shopLong;
-	}
-
-	public int getTotalCnt() {
-		return totalCnt;
-	}
-
-	public void setTotalCnt(int totalCnt) {
-		this.totalCnt = totalCnt;
-	}
-
-	public String getWebAddress() {
-		return webAddress;
-	}
-
-	public void setWebAddress(String webAddress) {
-		this.webAddress = webAddress;
-	}
+	// getter
+	public int getShopIdx() {return shopIdx;}
+	public String getShopName() {return shopName;}
+	public String getShopAddress() {return shopAddress;}
+	public String getShopNumber() {return shopNumber;}
+	public String getShopOper() {return shopOper;}
+	public int getShopEnternum() {return shopEnternum;}
+	public String getShopLat() {return shopLat;}
+	public String getWebAddress() {return webAddress;}
+	public int getTotalCnt() {return totalCnt;}
+	public String getShopLong() {return shopLong;}
+	
+	// setter
+	public void setShopIdx(int shopIdx) {this.shopIdx = shopIdx;}
+	public void setShopName(String shopName) {this.shopName = shopName;}
+	public void setShopAddress(String shopAddress) {this.shopAddress = shopAddress;}
+	public void setShopNumber(String shopNumber) {this.shopNumber = shopNumber;}
+	public void setShopOper(String shopOper) {this.shopOper = shopOper;}
+	public void setShopEnternum(int shopEnternum) {this.shopEnternum = shopEnternum;}
+	public void setShopLat(String shopLat) {this.shopLat = shopLat;}
+	public void setShopLong(String shopLong) {this.shopLong = shopLong;}
+	public void setTotalCnt(int totalCnt) {this.totalCnt = totalCnt;}
+	public void setWebAddress(String webAddress) {this.webAddress = webAddress;}
 
 	@Override
 	public String toString() {
@@ -137,6 +78,4 @@ public class Shop {
 				+ shopNumber + ", shopOper=" + shopOper + ", shopEnternum=" + shopEnternum + ", shopLat=" + shopLat
 				+ ", shopLong=" + shopLong + ", totalCnt=" + totalCnt + ", webAddress=" + webAddress + "]";
 	};
-	
-
 }

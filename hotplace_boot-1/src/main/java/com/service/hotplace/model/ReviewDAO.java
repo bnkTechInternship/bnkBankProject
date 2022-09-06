@@ -5,16 +5,10 @@ import java.util.List;
 import com.service.hotplace.domain.play.Review;
 
 public interface ReviewDAO {
-	//리뷰작성
+	// create
 	int addReview(Review review) throws Exception;
 	
-	//리뷰삭제
-	int deleteReview(Review review) throws Exception;
-	
-	//리뷰수정
-	int updateReview(Review review) throws Exception;
-	
-	//리뷰불러오기
+	// read
 	List<Review> getReviewListByUserId(String userId) throws Exception;
 	List<Review> getReviewListByShopIdx(int shopIdx) throws Exception;
 	List<Review> getAllReview() throws Exception;
@@ -22,5 +16,9 @@ public interface ReviewDAO {
 	
 	double getScoreAvg(int ShopIdx) throws Exception;
 	
-
+	// update
+	int updateReview(Review review) throws Exception;
+	
+	// delete
+	int deleteReview(Review review) throws Exception;
 }

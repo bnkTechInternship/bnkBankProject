@@ -11,62 +11,52 @@ import com.service.hotplace.model.UserDAO;
 
 @Repository
 public class UserDAOImpl implements UserDAO{
-	
-	static final String NS="sql.hotplace.mapper.";
 	@Autowired
 	private SqlSession sqlsession;
+	static final String NS="sql.hotplace.mapper.";
 
 	@Override
 	public int registerUser(User user) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlsession.insert(NS+"registerUser",user);
 	}
 
 	@Override
 	public int updateUser(User user) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlsession.update(NS+"updateUser",user);
 	}
 
 	@Override
 	public int deleteUser(String userId) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlsession.delete(NS+"deleteUser",userId);
 	}
 
 	@Override
 	public User login(User user) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlsession.selectOne(NS+"login",user);
 	}
 
 	@Override
 	public User getUserById(String userId) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlsession.selectOne(NS+"getUserById",userId);
 	}
 
 	@Override
 	public List<User> getUserList() throws Exception {
-		// TODO Auto-generated method stub
 		return sqlsession.selectList(NS+"getUserList");
 	}
 
 	@Override
 	public String findUserId(String userEmail) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlsession.selectOne(NS+"findUserId",userEmail);
 	}
 
 	@Override
 	public String findUserPw(User user) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlsession.selectOne(NS+"findUserPw",user);
 	}
 
 	@Override
 	public String isIdExist(String userId) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlsession.selectOne(NS+"isIdExist",userId);
 	}
 
@@ -74,6 +64,4 @@ public class UserDAOImpl implements UserDAO{
 	public int withDrawMoney(User user) throws Exception {
 		return sqlsession.update(NS + "withDrawMoney",user);
 	}
-	
-	
 }

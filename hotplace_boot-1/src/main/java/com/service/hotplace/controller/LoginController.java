@@ -23,66 +23,46 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 	
-	
-	
 	@ResponseBody
 	@PostMapping("login.do")
 	public User loginDo(User user,HttpSession httpSession) throws Exception {
-		System.out.println("=============================로그인 요청===============================");		
-		//System.out.println(user);
 		User loginUser = userService.login(user);
-		System.out.println(loginUser);
 		if(loginUser!=null) {
 			httpSession.setAttribute("loginUser", loginUser);
-			System.out.println(loginUser);
 			return loginUser;
-		}else return null;
+		}
+		return null;
 	}
 	
 	@ResponseBody
 	@PostMapping("idExist.do")
 	public boolean idExistDo(String id) throws Exception {
-		boolean check = userService.isIdExist(id);
-		//model.addAttribute("check", check);
-		System.out.println(id);
-		return check;
+		return userService.isIdExist(id);
 	}
 	
 	@PostMapping("register.do")
 	public String registerDo(User user, HttpSession httpSession) throws Exception {
-		System.out.println("===============================회원가입==================================");
 		userService.registerUser(user);
 		return "redirect:login.html";
 	}
 	
-	
 	@ResponseBody
 	@RequestMapping("findId.do")
 	public String findIdDo(User user) throws Exception {
-		System.out.println("=================================================아이디 찾기======================================");
 		String userId = userService.findUserId(user.getUserEmail());
 		User user2 = userService.getUserById(userId);
 		if(user2.getUserName().contentEquals(user.getUserName()))
 			return userId;
-		else
-			return "error";
+		return "error";
 	}
 	
 	@ResponseBody
 	@PostMapping("findPw.do")
 	public String findPwDo(User user, Model model) throws Exception{
-		System.out.println("===============================================비밀번호 찾기======================================");
 		String userId2 = userService.findUserId(user.getUserEmail());
 		User user2 = userService.getUserById(userId2);
-		if(user.getUserId().equals(user2.getUserId()) )
+		if(user.getUserId().equals(user2.getUserId()))
 			return user2.getUserPw();
-		else
-			return "error";
-		
+		return "error";
 	}
-	
-	
-	
-	
-
 }

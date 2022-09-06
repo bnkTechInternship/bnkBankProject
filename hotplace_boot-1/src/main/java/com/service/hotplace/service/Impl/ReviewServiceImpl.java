@@ -18,31 +18,26 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public int addReview(Review review) throws Exception {
-		// TODO Auto-generated method stub
 		return reviewDAO.addReview(review);
 	}
 
 	@Override
 	public int deleteReview(Review review) throws Exception {
-		// TODO Auto-generated method stub
 		return reviewDAO.deleteReview(review);
 	}
 
 	@Override
 	public int updateReview(Review review) throws Exception {
-		// TODO Auto-generated method stub
 		return reviewDAO.updateReview(review);
 	}
 
 	@Override
 	public List<Review> getReviewListByUserId(String userId) throws Exception {
-		// TODO Auto-generated method stub
 		return reviewDAO.getReviewListByUserId(userId);
 	}
 
 	@Override
 	public List<Review> getReviewListByShopIdx(int shopIdx) throws Exception {
-		// TODO Auto-generated method stub
 		return reviewDAO.getReviewListByShopIdx(shopIdx);
 	}
 
@@ -60,5 +55,4 @@ public class ReviewServiceImpl implements ReviewService {
 	public List<Review> getOneShopReview(int shopIdx) throws Exception {
 		return reviewDAO.getOneShopReview(shopIdx);
 	}
-
 }

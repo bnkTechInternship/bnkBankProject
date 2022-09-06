@@ -6,18 +6,23 @@ import com.service.hotplace.domain.person.User;
 import com.service.hotplace.domain.place.Bank;
 
 public interface UserService {
+	// create
 	int registerUser(User user)throws Exception;
-	int updateUser(User user)throws Exception;
-	int deleteUser(String userId)throws Exception;
+	
+	// read
+	List<User> getUserList()throws Exception;
 	
 	User login(User user) throws Exception;
 	User getUserById(String userId)throws Exception;
-	List<User> getUserList()throws Exception;
 	
 	String findUserId(String userEmail)throws Exception;
 	String findUserPw(User user)throws Exception;
-	
 	boolean isIdExist(String userId) throws Exception;
-
+		
+	// update
+	int updateUser(User user)throws Exception;
 	void withDrawMoney(User user) throws Exception;
+		
+	// delete
+	int deleteUser(String userId)throws Exception;
 }

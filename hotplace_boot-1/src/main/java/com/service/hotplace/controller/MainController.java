@@ -47,43 +47,26 @@ public class MainController {
 	
 	@GetMapping("/login.html/*") 
 	public String redirect(HttpServletRequest req) {
-		String url = req.getRequestURI().substring(12);
-		System.out.println(url);
-		
-		return "redirect:/main.html?data=" + url;
+		return "redirect:/main.html?data=" + req.getRequestURI().substring(12);
 	}
-	
 
 	@GetMapping("/shop/init/data")
 	@ResponseBody
 	public List<Shop> sendInitData(String number) throws Exception {
-		
 		List<Shop>list = shopService.getPartData(Integer.parseInt(number));
-		//List<Integer> list2 = waitingService.getPartNowWaitingCnt(Integer.parseInt(number));
-		
 		for(int i=0; i<list.size();i++) {
 			Shop shop = shopService.getShop(Integer.parseInt(number)+i);
 			int nowCnt = waitingService.getShopNowWaitingCnt(shop);
 			list.get(i).setTotalCnt(nowCnt);
 		}
-		
-		System.out.println("shop/init/data 결과  : " + list);
-		
 		return list;
 	}
 	
 	@ResponseBody
 	@GetMapping("/shop/init/waitingCnt")
 	public List<Integer> sendInitWaitingCnt(String number) throws Exception{
-		System.out.println("=================================++");
 		List<Integer> list = waitingService.getPartNowWaitingCnt(Integer.parseInt(number));
-		System.out.println("=================================++"+list);
 		return list;
-	}
-	
-	@GetMapping("/recommand")
-	public String sendRedirect() {
-		return "redirect:recommand.html";
 	}
 	
 	@GetMapping("/shop/allShop")
@@ -99,67 +82,49 @@ public class MainController {
 	}
 	
 	@RequestMapping("userInfo.do")
-	String userInfoDo(HttpSession session) throws Exception{
-		
+	String userInfoDo(HttpSession session){
 		User user =(User)session.getAttribute("loginUser");
-		
-		
-		if(user!= null) {
-			return "redirect:checkCurrWaiting.do?userId="+user.getUserId();
-		}else {
-			return "redirect:login.html";
-		}
+
+		if(user!= null) 
+			return "redirect:checkCurrWaiting.do?userId=" + user.getUserId();
+		return "redirect:login.html";
 	}
-	
 	
 	@ResponseBody
 	@PostMapping("searchShopName.do")
 	List<Shop> searchShop(String shopName) throws Exception {
-		System.out.println(shopName);
-		System.out.println("======================가게 조회========================");
-		List<Shop> list = shopService.getShopListByName(shopName);
-		System.out.println(list);
-		return list;
+		return shopService.getShopListByName(shopName);
 	}
-	
 	
 	@ResponseBody
 	@RequestMapping("checkLike.do")
 	boolean checkLike(LikeShop likeShop) throws Exception {
-		boolean check = likeService.checkLikeShop(likeShop);
-		//System.out.println("======================체크라이크호출@!!!!!!!!================================");
-		//System.out.println(check);
-		return check;
+		return likeService.checkLikeShop(likeShop);
 	}
 	
 	@ResponseBody
 	@RequestMapping("getAvgScore.do")
-	double getAvgScroe(String shopIdx){
-		System.out.println("에버리지 스코어함수호출=================");
+	double getAvgScroe(String shopIdx) {
 		double avg = 0;
-		try {
-			avg = reviewService.getScoreAvg(Integer.parseInt(shopIdx));
-			System.out.println(avg);
-		} catch (Exception e) {
-			return 0.0;
-		}
+		try {avg = reviewService.getScoreAvg(Integer.parseInt(shopIdx));} 
+		catch (Exception e) {return 0.0;}
+		
 		return avg;
 	}
 	
 	@GetMapping("/shop/review")
 	@ResponseBody
-	List<Review>getAllReview() throws Exception {
-		List<Review>list = reviewService.getAllReview();
-		System.out.println("list값 : " + list);
+	List<Review>getAllReview() {
+		List<Review> list = null;
+		try {list = reviewService.getAllReview();} 
+		catch (Exception e) {}
 		return list;
 	}
 	
 	@GetMapping("/bank/init/data")
 	@ResponseBody
-	// throws Exception은 Controller에서 다 try,catch로 바꿔야함 나중에 
 	List<Bank> sendBankInitData(String number) throws Exception {
-		int idx = Integer.parseInt(number);
-		return bankService.getPartData(idx);
+		return bankService.getPartData(Integer.parseInt(number));
 	}
 	
 	@GetMapping("/shop/allWaiting")
@@ -177,10 +142,7 @@ public class MainController {
 	@GetMapping("/shop/allLike")
 	@ResponseBody
 	List<LikeShop> getAllShopLike() throws Exception {
-		List<LikeShop>list = likeService.getAllShopLike();
-		for(LikeShop item : list)
-			System.out.println(item);
-		return list;
+		return likeService.getAllShopLike();
 	}
 	
 	@PostMapping("/getDetail")
@@ -191,9 +153,6 @@ public class MainController {
 		if(market.getCategory().equals("shop")) 
 			obj = shopService.getShop(idx);
 		else obj = bankService.getBank(idx);
-
-		System.out.println("받은 정보" + obj);
-		
 		return obj;
 	}
 	

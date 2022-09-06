@@ -113,6 +113,11 @@
 	
 	<!-- delete -->
 	
+	<delete id="deleteWaitingShop" parameterType="waitingShop">
+		DELETE FROM waiting_shop
+		WHERE user_id = #{userId} and  shop_idx = #{shopIdx}
+	</delete>
+	
 </mapper>
 
 

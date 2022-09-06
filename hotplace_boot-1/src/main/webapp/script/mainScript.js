@@ -11,7 +11,7 @@ let shopReview = []
 let tempWaiting = 1;
 
 $(function() {
-	// test code
+	// test codeㅁ
 	// localStorage.setItem('loginUser','user01');
 	const user = localStorage.getItem('loginUser');
 	if(user != null)

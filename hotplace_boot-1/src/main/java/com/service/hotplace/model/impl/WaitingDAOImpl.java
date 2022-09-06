@@ -82,4 +82,9 @@ public class WaitingDAOImpl implements WaitingDAO {
 	public List<WaitingBank> getAllWaitingBank() throws Exception {
 		return sqlsession.selectList(NS + "getAllWaitingBank");
 	}
+	
+	@Override
+	public int deleteWaitingShop(WaitingShop waitingShop) throws Exception{
+		return sqlsession.selectOne(NS+"deleteWaitingShop", waitingShop);
+	}
 }

@@ -82,7 +82,7 @@ $(function() {
     		
     	},
     	error:function(){
-        	$('.left_second').append(`<h2 style="padding: 80px;">아직 방문한 핫플이 없어요.!<h2>`);
+    		
         }
     
     })
@@ -157,7 +157,11 @@ $(function() {
     		);
     	},
     	error:function(){
-    		alert("hi");
+    		$('.left_second').html(`<div class="wrap_img">
+                        <div id="main_text">현재 웨이팅 중인 가게가 없어요</div>
+                        <div id="sub_text">고메부산에 소개된 핫플들을 웨이팅하고 동백전 캐시백도 받아보세요!</div>
+                        <a href="main.html" id="waiting_text">웨이팅하러가기</a>
+                    </div>`);
     	}
     });
     
@@ -174,7 +178,13 @@ $(function() {
     		$('#untilTime').append(
     				'예상 대기시간 '+ parseInt(untilCnt)*10 +'분'
     		)
+    		
+    	},
+    	error:function(untilCnt){
+    		$('.menu_list').html(``);
+    		$('.waiting_info').html(``);
     	}
+    	
     });
 
 })

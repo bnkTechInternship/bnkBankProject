@@ -4,7 +4,7 @@ let idx_ = url[1].split('=')
 let shopReview = []
 
     // test code
-// localStorage.setItem('loginUser','user01');
+localStorage.setItem('loginUser','user01');
 const user = localStorage.getItem('loginUser');
 
 

@@ -14,6 +14,11 @@ $(function() {
 	// test code
 	// localStorage.setItem('loginUser','user01');
 	const user = localStorage.getItem('loginUser');
+	if(user != null)
+		console.log(user.split(','))
+	
+	const reg = (/\'\"\{\}/g,'');
+	console.log(user.replace(reg))
 
 
 

@@ -71,8 +71,14 @@
         let idx_ = url[1].split('=')
         
         $("#notepad").on('click','#payment',function() {
+            console.log(totalPrice)
+            console.log(totalPrice == 0)
            if(user == null) {
-                loginPopup()
+                popup()
+                return;
+           } else if(totalPrice == 0) {
+                popup("menuSelect")
+                console.log("실행됨")
                 return;
            }
 
@@ -256,12 +262,23 @@
     }
     // chart1
 
-    function loginPopup() {
+    function popup(category) {
+        let title_ = '회원전용 기능입니다.'
+        let text_ = '로그인을 해주세요'
+        let footer_ = '<a href="login.html">로그인 하러가기</a>'
+
+        if(category == 'menuSelect') {
+            title_ = '메뉴를 선택하지 않았습니다.'
+            text_ = '하나이상의 메뉴를 선택해주세요!'
+            footer_ = false;
+            console.log("메뉴Select실행됨")
+        }
+
         Swal.fire({
             icon: 'error',
-            title: '회원전용 기능입니다.',
-            text: '로그인을 해주세요',
-            footer: '<a href="login.html">로그인 하러가기</a>'
+            title: title_,
+            text: text_,
+            footer: text_
         })
     }
 

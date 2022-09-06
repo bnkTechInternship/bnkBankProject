@@ -53,7 +53,6 @@ public class HistoryController {
 		
 		HashMap<Integer, ArrayList<WaitingShop>> list =  waitingService.getWaitingShop(user);
 		
-		
 		int price = 0;
 		String menulist = "";
 		int score = 0;
@@ -64,8 +63,30 @@ public class HistoryController {
 		int shopIdx = 0;
 		ArrayList<ArrayList<String>> histroy = new ArrayList<ArrayList<String>>();
 		
+/*		List<Shop> shops = shopService.getShopList(); 수정본 1
+		List<Menu> menus = menuService.getMenuList(12);
+		
 		
 		for(int key : list.keySet()) {
+			for(Shop s : shops) { // 모든 shop을 돌면서..
+				if(key == s.getShopIdx()) {
+					menus = menuService.getMenuList(shopIdx);
+					for(Menu m : menus) {
+						
+						// 여기서 메뉴이름 더하고 가격 더하고... 
+						
+					}
+				}
+				
+			}
+		}*/
+			
+		
+		for(int key : list.keySet()) { 
+			
+			// 일단 전체 shop 불러옴
+			// 전체 shop의 번호가 key 값이랑 같으면
+			// 
 			
 			for(WaitingShop ws : list.get(key)) {
 				

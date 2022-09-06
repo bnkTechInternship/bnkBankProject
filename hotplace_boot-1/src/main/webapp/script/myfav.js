@@ -33,7 +33,7 @@ $(function() {
 
 
 
-		}
+		},
 	});
 
 	$(".left_second").on('click',".like",function() {

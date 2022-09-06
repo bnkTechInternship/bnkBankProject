@@ -133,9 +133,7 @@ public class UserInfoController {
 	@PostMapping("updateInfo.do")
 	public User updateInfoDo(User user) throws Exception{
 		userService.updateUser(user);
-		User reuser = userService.getUserById(user.getUserId());
-		System.out.println(reuser);
-		return reuser;
+		return userService.getUserById(user.getUserId());
 	}
 	
 	

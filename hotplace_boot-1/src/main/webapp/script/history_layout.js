@@ -177,6 +177,9 @@ $(function(){
             		$('.left_second').append(addContent);
 
             }
+        },
+        error:function(){
+        	$('.left_second').append(`<h2 style="padding: 80px;">아직 방문한 핫플이 없어요.!<h2>`);
         }
 
     }); // ajax

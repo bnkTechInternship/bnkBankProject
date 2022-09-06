@@ -1,5 +1,5 @@
 package com.service.hotplace.controller;
-//김병관 바보
+
 import java.io.PrintWriter;
 import java.lang.ProcessBuilder.Redirect;
 

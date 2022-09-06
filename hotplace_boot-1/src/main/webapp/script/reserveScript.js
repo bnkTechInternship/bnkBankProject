@@ -4,44 +4,18 @@ $(function() {
 	const user = JSON.parse(localStorage.getItem('loginUser'));
     let userName = user.userName;
     let userId = user.userId;
-    let userPoint = user.userPoint;
-    let userBalance = user.userBalance;
     
-    
-    
-/*    $.ajax({
-    	type:'post',
-    	url:'checkCurrWaiting.do',
-    	data:"userId="+user.userId,
-    	
-    	success:function(result){
-    		if(result == false){
-    			location.replace('reserve2.html');
-    			
-    		}
-    	}
-    	
-    
-    
-    
-    
-    
-    
-    
-    })*/
-    
-    
-    
+    setCardMoney(userId).then(setCard);
+
 	
-    
+
     $('#left_first').append(
     		'<div>'+userName+'님의 실시간 웨이팅 정보</div>'
     );
     
-    $('.card_text').append(
-            '<p id="p1">' +userName + '</p><h5>' + userPoint + 'p</h5><h2>'+
-            userBalance+'원</h2>'
-    );
+    
+
+	
     
     $.ajax({
     	type:'post',
@@ -188,3 +162,22 @@ $(function() {
     });
 
 })
+
+let setCardMoney = async(userId) => new Promise((resolve,reject) => {
+	$.ajax({
+		url  : '/info/getSpecificUser',
+		type : 'post',
+		data : {"userId" : userId},
+		success : (result) => resolve(result)
+	})	
+})
+
+let setCard = (receiveData) => {
+	let addContent = 
+	`
+		<p id = "p1">${receiveData.userName}</p>
+		<h5>포인트 : ${receiveData.userPoint}</h5>
+		<h2>${receiveData.userBalance}원</h2>
+	`
+	$('.card_text').append(addContent);
+}

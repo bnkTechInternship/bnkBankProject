@@ -4,7 +4,6 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="sql.review.mapper">
-
 	<resultMap type="review" id="reviewResultMap">
 		<result column="user_id" property="userId"/>
 		<result column="shop_idx" property="shopIdx"/>
@@ -12,32 +11,26 @@
 		<result column="comm" property="comm"/>
 	</resultMap>
 	
-
+	<sql id="selectAllReview">
+		select user_id, shop_idx, score, comm
+		from review
+	</sql>
+	
+	<!-- create -->
 	<insert id="addReview" parameterType="review">
 		INSERT INTO review
 		VALUES(#{userId},#{shopIdx},#{score},#{comm})
 	</insert>
 	
 	
-	<delete id="deleteReview" parameterType="review">
-		DELETE FROM review
-		WHERE user_id = #{userId} and shop_idx=#{shopIdx}
-	</delete>
-	
-	<update id="updateReview" parameterType="review">
-		UPDATE review
-		SET score=#{score}, comm=#{comm}
-		WHERE user_id = #{userId} and shop_idx=#{shopIdx}
-		
-	</update>
-	
+	<!-- read -->
 	<select id="getReviewListByUserId" parameterType="String" resultType="review">
-		SELECT * FROM review
+		<include refid="selectAllReview" />
 		WHERE user_id = #{value}
 	</select>
 	
 	<select id="getReviewListByShopIdx" parameterType="int"  resultType="review">
-		SELECT * FROM review
+		<include refid="selectAllReview" />
 		WHERE shop_idx=#{value}
 	</select>
 	
@@ -47,16 +40,28 @@
 	</select>
 	 
 	<select id="getAllReview" resultType="review">
-		select shop_idx,score,comm
-		from review
+		<include refid="selectAllReview" />
 	</select>
 	
 	<select id = "getOneShopReview" parameterType="int" resultType="review" resultMap="reviewResultMap">
-		select user_id, shop_idx,score, comm
-		from review
+		<include refid="selectAllReview" />
 		where shop_idx = #{value}
 	</select>
-	
+		
+		
+	<!-- update -->
+	<update id="updateReview" parameterType="review">
+		UPDATE review
+		SET score=#{score}, comm=#{comm}
+		WHERE user_id = #{userId} and shop_idx=#{shopIdx}
+	</update>
+		
+		
+	<!-- delete -->
+	<delete id="deleteReview" parameterType="review">
+		DELETE FROM review
+		WHERE user_id = #{userId} and shop_idx=#{shopIdx}
+	</delete>
 	
 </mapper>
 

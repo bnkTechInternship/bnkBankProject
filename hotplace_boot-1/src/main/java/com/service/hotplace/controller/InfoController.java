@@ -43,10 +43,7 @@ public class InfoController {
 	@GetMapping("/info/getShopReview")
 	@ResponseBody
 	public List<Review> getShopReview(Shop shop) throws Exception {
-		List<Review>list = reviewService.getOneShopReview(shop.getShopIdx());
-		for(Review item : list)
-			System.out.println(item);
-		return list;
+		return reviewService.getOneShopReview(shop.getShopIdx());
 	}
 	
 	@PostMapping("/info/registWaiting")
@@ -59,7 +56,6 @@ public class InfoController {
 	@GetMapping("bankReserve.do")
 	@ResponseBody
 	public String registWaitingBank(WaitingBank waitingBank) throws Exception {
-		System.out.println("받은 waitingBank :" + waitingBank);
 		waitingService.registerWaitingBank(waitingBank);
 		return "";
 	}
@@ -76,7 +72,6 @@ public class InfoController {
 	@PostMapping("/info/withDraw")
 	@ResponseBody
 	public boolean withDrawMoney(User user) throws Exception {
-		System.out.println("info/withdraw 받은 데이터  : " + user );
 		userService.withDrawMoney(user);
 		return true;
 	}

@@ -4,7 +4,12 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="sql.like.mapper">
+	<sql id="selectAllLikeBank">
+		select like_idx, user_id, bank_idx
+		from like_bank
+	</sql>
 	
+	<!-- create -->
 	<insert id="setLikeShop" parameterType="likeShop">
 		<selectKey keyProperty="likeIdx" resultType="int" order="BEFORE">
 		SELECT like_shop_seq.nextVal From dual
@@ -21,17 +26,8 @@
 		VALUES(#{likeIdx},#{userId},#{bankIdx})
 	</insert>
 	
-	<delete id="deleteLikeShop" parameterType="LikeShop">
-		DELETE FROM like_shop 
-		WHERE user_id = #{userId} and shop_idx = #{shopIdx, jdbcType=INTEGER}
-	</delete>
 	
-	<delete id="deleteLikeBank" parameterType="LikeBank">
-		DELETE FROM like_bank
-		WHERE user_id = #{userId} and bank_idx = #{bankIdx, jdbcType=INTEGER}
-	</delete>
-	
-	
+	<!-- read -->
 	<select id="checkLikeShop" parameterType="LikeShop" resultType="int">
 		SELECT like_idx FROM like_shop
 		WHERE user_id = #{userId} and shop_idx = #{shopIdx, jdbcType=INTEGER}
@@ -43,19 +39,33 @@
 	</select>
 	
 	<select id="getLikeShops" parameterType="String" resultType="LikeShop">
-		SELECT * FROM like_shop
+		<include refid="selectAllLikeBank" />
 		WHERE user_id= #{value}
 	</select>
 	
 	<select id="getLikeBanks" parameterType="String" resultType="LikeBank">
-		SELECT * FROM like_bank
+		<include refid="selectAllLikeBank" />
 		WHERE user_id= #{value}
 	</select>
 
 	<select id = "getAllShopLike" resultType="likeShop">
-		select like_idx, user_id, shop_idx
-		from like_shop
+		<include refid="selectAllLikeBank" />
 	</select>
+	
+	
+	<!-- update -->
+		
+	<!-- delete -->
+	<delete id="deleteLikeShop" parameterType="LikeShop">
+		DELETE FROM like_shop 
+		WHERE user_id = #{userId} and shop_idx = #{shopIdx, jdbcType=INTEGER}
+	</delete>
+	
+	<delete id="deleteLikeBank" parameterType="LikeBank">
+		DELETE FROM like_bank
+		WHERE user_id = #{userId} and bank_idx = #{bankIdx, jdbcType=INTEGER}
+	</delete>
+	
 </mapper>
 
 

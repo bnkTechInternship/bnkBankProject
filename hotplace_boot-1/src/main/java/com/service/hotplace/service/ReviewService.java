@@ -7,22 +7,21 @@ import com.service.hotplace.domain.play.LikeShop;
 import com.service.hotplace.domain.play.Review;
 
 public interface ReviewService {
-	//리뷰작성
-	int addReview(Review review) throws Exception;
-	//리뷰삭제
-	int deleteReview(Review review) throws Exception;
+	// create
+	int addReview(Review review) throws Exception; //리뷰작성
 	
-	//리뷰수정
-	int updateReview(Review review) throws Exception;
 	
-	//리뷰불러오기
-	List<Review> getReviewListByUserId(String userId) throws Exception;
-	List<Review> getReviewListByShopIdx(int shopIdx) throws Exception;
-	List<Review> getAllReview() throws Exception;
-	List<Review> getOneShopReview(int shopIdx) throws Exception;
+	// read
+	List<Review> getReviewListByUserId(String userId) throws Exception; //리뷰불러오기
+	List<Review> getReviewListByShopIdx(int shopIdx) throws Exception;  //리뷰불러오기
+	List<Review> getAllReview() throws Exception;					    //리뷰불러오기
+	List<Review> getOneShopReview(int shopIdx) throws Exception;        //리뷰불러오기
 	
 	double getScoreAvg(int ShopIdx) throws Exception;
-
-
-
+	
+	// update
+	int updateReview(Review review) throws Exception; //리뷰수정
+	
+	// delete
+	int deleteReview(Review review) throws Exception; //리뷰삭제
 }

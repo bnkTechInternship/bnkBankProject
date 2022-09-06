@@ -11,13 +11,12 @@ import com.service.hotplace.model.ShopDAO;
 
 @Repository
 public class ShopDAOImpl implements ShopDAO {
-	static final String NS="sql.hotplace.mapper.";
 	@Autowired
 	private SqlSession sqlsession;
+	static final String NS="sql.hotplace.mapper.";
 	
 	@Override
 	public List<Shop> getShopList() throws Exception {
-		// TODO Auto-generated method stub
 		return sqlsession.selectList(NS+"getShopList");
 	}
 
@@ -28,31 +27,26 @@ public class ShopDAOImpl implements ShopDAO {
 
 	@Override
 	public int registerShop(Shop shop) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlsession.insert(NS+"registerShop",shop);
 	}
 
 	@Override
 	public int deleteShop(int shopIdx) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlsession.delete(NS+"deleteShop",shopIdx);
 	}
 
 	@Override
 	public int updateShop(Shop shop) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlsession.update(NS+"updateShop",shop);
 	}
 
 	@Override
 	public List<Shop> getShopListByName(String name) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlsession.selectList(NS+"getShopListByName",name);
 	}
 
 	@Override
 	public int updateShopEnternum(Shop shop) throws Exception {
-		// TODO Auto-generated method stub
 		return sqlsession.update(NS+"updateShopEnternum",shop);
 	}
 
@@ -60,5 +54,4 @@ public class ShopDAOImpl implements ShopDAO {
 	public List<Shop> getPartData(int idx) throws Exception {
 		return sqlsession.selectList(NS + "getShopPart",idx);
 	}
-
 }

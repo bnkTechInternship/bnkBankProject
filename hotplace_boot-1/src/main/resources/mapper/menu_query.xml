@@ -4,8 +4,12 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="sql.menu.mapper">
+	<sql id="selectAllMenu">
+		select menu_idx, shop_idx, menu_name, menu_price
+		from menu
+	</sql>
 	
-
+	<!-- create -->
 	<insert id="addMenu" parameterType="menu">
 		<selectKey keyProperty="menuIdx" resultType="int" order="BEFORE">
 		SELECT menu_seq.nextVal From dual
@@ -14,32 +18,37 @@
 		VALUES(#{menuIdx},#{shopIdx},#{menuName},#{menuPrice})
 	</insert>
 	
+	
+	<!-- read -->
+	<select id="getMenuByIdx" parameterType="int" resultType="menu">
+		<include refid="selectAllMenu" />
+		WHERE menu_idx = #{value}
+	</select>
+	
+	<select id="getMenuList" parameterType="int" resultType="menu">
+		<include refid="selectAllMenu" />
+		WHERE shop_idx = #{value}
+	</select>
+	
+	<select id="getMenuByName" parameterType="string" resultType="menu">
+		<include refid="selectAllMenu" />
+		WHERE menu_name LIKE '%' || #{value} || '%'
+	</select>
+	
+	
+	<!-- update -->
+	<update id="updateMenu" parameterType="menu">
+	UPDATE menu SET menu_name = #{menuName}, menu_price = #{menuPrice}
+	WHERE menu_idx = #{menuIdx} and shop_idx= #{shopIdx}
+	</update>
+	
+	
+	<!-- delete -->
 	<delete id="deleteMenu" parameterType="int">
 		DELETE FROM menu
 		WHERE menu_idx = #{value}
 	</delete>
 	
-	<select id="getMenuByIdx" parameterType="int" resultType="menu">
-		SELECT * FROM menu
-		WHERE menu_idx = #{value}
-	</select>
-	
-	<select id="getMenuList" parameterType="int" resultType="menu">
-		SELECT * FROM menu
-		WHERE shop_idx = #{value}
-	</select>
-	
-	
-	
-	<select id="getMenuByName" parameterType="string" resultType="menu">
-		SELECT * FROM menu
-		WHERE menu_name LIKE '%' || #{value} || '%'
-	</select>
-	
-	<update id="updateMenu" parameterType="menu">
-		UPDATE menu SET menu_name = #{menuName}, menu_price = #{menuPrice}
-		WHERE menu_idx = #{menuIdx} and shop_idx= #{shopIdx}
-	</update>
 </mapper>
 
 

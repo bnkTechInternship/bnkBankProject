@@ -7,8 +7,6 @@ html, body{
     display: none;
 }
 
-
-
 #text1{
     padding-left: 5px;
     font-size: 25px;
@@ -65,7 +63,7 @@ html, body{
 
 
 
-/* right container 색깔 다시 바꾸기 */
+/* right container �깋源� �떎�떆 諛붽씀湲� */
 
 .right_first{
     background-color: rgba(255,255,255,0.6);

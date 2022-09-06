@@ -3,6 +3,7 @@ $(function() {
 	
 	const user = JSON.parse(localStorage.getItem('loginUser'));
     let userName = user.userName;
+    let userId = user.userId;
     let userPoint = user.userPoint;
     let userBalance = user.userBalance;
     
@@ -79,7 +80,11 @@ $(function() {
     		
     		
     		
-    	}
+    	},
+    	error:function(){
+        	$('.left_second').append(`<h2 style="padding: 80px;">아직 방문한 핫플이 없어요.!<h2>`);
+        }
+    
     })
     
     
@@ -125,7 +130,7 @@ $(function() {
     $.ajax({
     	type:'post',
     	url:'getOrder.do',
-    	data:"userId="+user.userId,
+    	data:"userId="+userId,
     	
     	success:function(waitingshops){
     		let totalPrice = 0;
@@ -150,6 +155,9 @@ $(function() {
                         '</span></div><div class="menu_amount"><span>:</span></div><div class="menu_price"><span>'+ totalPrice +'원</span></div></div>'
 
     		);
+    	},
+    	error:function(){
+    		alert("hi");
     	}
     });
     

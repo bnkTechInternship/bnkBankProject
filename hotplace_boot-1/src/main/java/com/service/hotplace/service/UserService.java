@@ -19,4 +19,5 @@ public interface UserService {
 	
 	boolean isIdExist(String userId) throws Exception;
 
+	void withDrawMoney(User user) throws Exception;
 }

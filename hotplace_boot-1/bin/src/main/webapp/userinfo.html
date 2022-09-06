@@ -8,121 +8,127 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./css/sidebar.css">
     <link rel="stylesheet" href="./css/banner.css">
+    <link rel="stylesheet" href="./css/layout.css">
     <link rel="stylesheet" href="./css/userinfo.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="./script/userinfo.js"></script>
+    <script src = "script/userinfo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    
 </head>
 
 <body>
-        <div id="topNavbar">
-            <div id="topNavbar__one">
-                <img src = "img/bnk핫플5.png" id = "logo">
-                <div id = "topInputDiv">
-                    <input type = "text">
+    <div id="mainNavbar" class = "bottom-shadow">
+            
+        <div id = "logo" class = "cursor" onclick = 'location.href = "/login.html/bank"''>
+            <img src = "img2/핫플동백로고.png" id = "login_photo"/> 
+            동백핫플
+        </div>
+        <div id = "navbar_middle">
+            <div class = "cursor_menu" id = "choose_food" onclick = "location.href = 'reserve.html'"><img src = "img2/restaurant2.png">실시간 웨이팅</div>
+            <div class = "cursor_menu" id = "choose_bank" onclick = "location.href = 'history_layout.html'"><img src = "img2/bank2.png">이용내역</div>
+            <div class = "cursor_menu" onclick = "location.href = `myfav.html`"><img src = "img2/quality.png">찜 목록</div>
+            <div class = "cursor_menu" onclick = "location.href = `userinfo.html`"><img src = "img/information2.png">내 정보</div>
+        </div>
+        <div id = "navbar_right">
+            <img src = "img2/moon.png" class = "cursor" id = "mode">
+            <img src = "img2/user2.png" id = "userInfo" class = "cursor" onclick="javascript:location.href='userInfo.do';">
+            <img src = "img2/search2.png" class = "search cursor">
+        </div>
+    </div>
+            
+        <div class="contents">
+            
+            <div class="left">
+                <div class="left_first">
+                    <h3>내 정보</h3>
                 </div>
-                <div id = "myInfo">
-                    <img src = "img/more.png">
-                    <img src = "img/user.png">
-                </div>
-            </div>            
-        </div> 
-
-        <div class="wrapper">
-            <div class="section">
-                <div class="container_middle1">
-                    <h1>회원정보 수정</h1>
-                </div>
-                    <div class="container_middle2"> 
-                        <div id="con_mid2">
-                            <div class="container_middle2_left">
-                                <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">
-                            </div>
-                            <div class="container_middle2_right">
-                                <h2>김근영</h2>
-                                <p>allwloo2@naver.com</p>
-                            </div>
+                <div class="left_second">
+                    <div class="form_details">
+                        <h3>ID</h3>
+                        <h3 id="three">비밀번호 변경</h3>
+                        <h3>이름</h3>
+                        <h3 id="two">주소</h3>
+                        <h3>전화번호</h3>
+                        <h3>이메일</h3>
                     </div>
-                    <div id="form">
-                        <form action="#">
-                            <div class="form-floating input">
-                                <p><label>ID</label></p>
-                                <input type="email" class="form-control font" name="id" id="floatingInput" value="allwloo2@naver.com" placeholder="name@example.com">
-                            </div>
-                            <div class="form-floating input">
-                                <p><label>PW</label></p>
-                                <input type="password" class="form-control font" name="password" id="floatingPassword" placeholder="Password">
-                            </div>
-                            <div class="form-floating input">
-                                <p><label>비밀번호 재확인</label></p>
-                                <input type="password" class="form-control font" name="passwordcheck" id="floatingPasswordcheck" placeholder="PasswordCheck">
-                            </div>
-                            <div class="form-floating input">
-                                <p><label>이름</label></p>
-                                <input type="text" class="form-control font" name="name" id="floatingName" placeholder="Name">
-                            </div>
-                            <div class="form-floating input">
-                                <p><label>주소</label></p>
-                                <input type="text" class="form-control font" name="address" id="floatingAddress" placeholder="Address">
-                            </div>
-                            <div class="form-floating input">
-                                <p><label>전화번호</label></p>
-                                <input type="text" class="form-control font" name="phone" id="floatingPhone" placeholder="Phone">
-                            </div>
-                            <input type="hidden" id="money" name="money" value="" />
-                            <input type="hidden" id="point" name="point" value="" />
-                            <button type="button" id="btn1">
-                                회원정보 수정
-                            </button>
-                        </form>
+                    <form action="#">
+                        
+                        
+                        <div class="form-floating input" id="id">
+                            <p>allwloo2</p>
+                        </div>
+                        
+                        <div class="password">
+                            <span>현재 비밀번호</span>
+                            <input spellcheck="false" type="password" class="form-control font" name="password" id="floatingPassword">
+                        </div>
+
+                        <div class="password" id="passcheck">
+                            <span>변경 비밀번호</span>
+                            <input spellcheck="false" type="password" class="detailaddr" name="passwordcheck" id="floatingPasswordcheck">
+                        </div>
+
+                        <div class="form-floating" id="passcheck">
+                            <span>변경 비밀번호 확인</span>
+                            <input spellcheck="false" type="password" class="detailaddr" name="passwordcheck" id="floatingPasswordcheck2">
+                        </div>
+
+                        
+
+                        <div class="form-floating input">
+                            <input spellcheck="false" type="text" class="form-control font" id="name" name="name" id="floatingName" >
+                        </div>
+                        
+                        <div class="password">
+                            <input spellcheck="false" type="text" class="form-control font" name="address" id="floatingAddress" >
+                        </div>
+
+                        <div class="form-floating input" id="detailaddr">
+                            <input spellcheck="false" type="text" class="detailaddr" name="address" id="floatingAddress2" >
+                        </div>
+
+                        
+
+                        <div class="form-floating input">
+                            <input spellcheck="false" type="text" class="long" name="phone" id="floatingPhone" >
+                        </div>
+                        <div class="form-floating input">
+                            <input spellcheck="false" type="text"  class="long" name="email" id="floatingEmail" >
+                        </div>
+                        
+
+                    </form>
+                    
+                    <button type="submit" id="btn1">
+                        	회원정보 수정
+                    </button>
+
+                </div>  
+            </div><!--left-->
+            <div class="right">
+                <div class="right_first">
+
+
+                </div>
+                <div class="right_second">
+                    <div class="card">
+                        <div class="card_img"><img src="img/동백전찐로고.png"></div>
+                        <div class="card_text">
+                            <p id="p1">구채원</p>
+                            <h5 class="count"></h5>
+                            <h2 class="count2"></h2>
+                        </div>
+                        <button id="conn">동백전 연동하기</button>
                     </div>
                 </div>
-                <aside>
-                    <h2>여기 동백전 들어갈고양</h2>
-                </aside>
-            </div> <!--section-->
 
-             <div class="sidebar">
-                 <div class="profile">
-                     <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="profile_picture">
-                     <h3>Anamika Roy</h3>
-                     <p>Designer</p>
-                 </div>
-                 <ul>
-                     <li>
-                         <a href="http://localhost:3000/dashboard" >
-                             <span class="icon"><i class="fas fa-home"></i></span>
-                             <span class="item">요약</span>
-                         </a>
-                     </li>
-                     <li>
-                         <a href="http://localhost:3000/reserve">
-                             <span class="icon"><i class="fas fa-desktop"></i></span>
-                             <span class="item">예약 현황</span>
-                         </a>
-                     </li>
-                     <li>
-                        <a href="http://localhost:3000/myfav">
-                            <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
-                            <span class="item">찜 목록</span>
-                        </a>
-                    </li>
-                     <li>
-                         <a href="http://localhost:3000/myfav">
-                             <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
-                             <span class="item">찜 목록</span>
-                         </a>
-                     </li>
-                     <li>
-                         <a href="http://localhost:3000/userinfo" class="active">
-                             <span class="icon"><i class="fas fa-user-friends"></i></span>
-                             <span class="item">내 정보</span>
-                         </a>
-                     </li>
-                 </ul>
-             </div>
-            </div><!-- wrapper -->
+            </div>
+        </div>
+
     
 
    

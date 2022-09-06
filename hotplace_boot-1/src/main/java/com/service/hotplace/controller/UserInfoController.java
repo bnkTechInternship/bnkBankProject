@@ -167,4 +167,14 @@ public class UserInfoController {
 		return list;
 	}
 	
+	
+	@PostMapping("getSpecificUser")
+	@ResponseBody
+	public User getSpecificUser(String userId) throws Exception {
+		System.out.println("받은 유저 정보 : " + userId);
+		User user = userService.getUserById(userId);
+		System.out.println("돌려줄 유저정보 : " + user);
+		return user;
+	}
+	
 }

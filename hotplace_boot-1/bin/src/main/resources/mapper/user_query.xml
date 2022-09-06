@@ -20,7 +20,7 @@
 	<update id="updateUser" parameterType="user">
 		UPDATE user2
 		SET user_pw=#{userPw}, user_email=#{userEmail}, user_address=#{userAddress},
-			user_number=#{userNumber},user_balance=#{userBalance},user_point=#{userPoint}
+			user_number=#{userNumber}
 		WHERE user_id=#{userId}
 	</update>
 	

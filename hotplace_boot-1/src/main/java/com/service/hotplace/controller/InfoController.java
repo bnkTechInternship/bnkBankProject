@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.service.hotplace.domain.person.User;
 import com.service.hotplace.domain.place.Menu;
 import com.service.hotplace.domain.place.Shop;
 import com.service.hotplace.domain.play.Review;
@@ -15,6 +16,7 @@ import com.service.hotplace.domain.play.WaitingBank;
 import com.service.hotplace.domain.play.WaitingShop;
 import com.service.hotplace.service.MenuService;
 import com.service.hotplace.service.ReviewService;
+import com.service.hotplace.service.UserService;
 import com.service.hotplace.service.WaitingService;
 
 @Controller
@@ -28,6 +30,9 @@ public class InfoController {
 	
 	@Autowired
 	WaitingService waitingService;
+	
+	@Autowired
+	UserService userService;
 	
 	@GetMapping("/info/getAllMenu")
 	@ResponseBody
@@ -59,6 +64,17 @@ public class InfoController {
 		return "";
 	}
 	
+	@PostMapping("/info/getSpecificUser")
+	@ResponseBody
+	public User getSpecificUserById(String userId) throws Exception{
+		return userService.getUserById(userId);
+	}
 	
-	
+	@PostMapping("/info/withDraw")
+	@ResponseBody
+	public boolean withDrawMoney(User user) throws Exception {
+		System.out.println("info/withdraw 받은 데이터  : " + user );
+		userService.withDrawMoney(user);
+		return true;
+	}
 }

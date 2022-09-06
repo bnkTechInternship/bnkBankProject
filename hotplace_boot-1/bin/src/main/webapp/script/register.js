@@ -2,7 +2,7 @@ $(function() {
     $(window).resize(function() {
         
     })
-
+    //
     const money = Math.floor(Math.random()*1001) * 1000;
     const point = Math.floor(Math.random()*1001) * 100;
 
@@ -19,16 +19,35 @@ $(function() {
     $('#modalpoint').html(pointstr+'&#8361;');
     
     $('#register_button').click(function(){
-    	 $('form').submit();
+    	
+    	if( $('#floatingId').val()=="" ||
+    			$('#floatingPassword').val()=="" ||
+    			$('#floatingPasswordcheck').val()==""|| 
+    			$('#floatingName').val()==""|| 
+    			$('#floatingEmail').val()==""|| 
+    			$('#floatingAddress').val()=="" || 
+    			$('#floatingPhone').val()==""){
+    		
+    		Swal.fire({
+	  			  icon: 'error',
+	  			  title: '회원가입 오류',
+	  			  text: '입력하지 않은 정보가 있습니다.'
+			}).then()
+				
+    	}else{
+    		
+    	Swal.fire({
+  			  icon: 'success',
+  			  title: '회원가입 성공!',
+  			  }).then((result)=>{
+  				  if(result.isConfirmed)
+	  					  $('form').submit();
+  			  	}
+  			  )
+    	}
     });
     
-    
-//    $('#exampleModal').addEventListener("click", e => {
-//        const evTarget = e.target
-//        if(evTarget.classList.contains("modal")) {
-//            modal.style.display = "none"
-//        }
-//    });
+   
   
     
     
@@ -49,7 +68,6 @@ $(function() {
 				//응답부분
 				success:function(result){
 						var jsonData = JSON.parse(result); //객체 받음
-						console.log(jsonData);
 						if(jsonData.check==true){
 							$('#check').html('이미사용중인아이디').css('color','red');
 							$('#register_button').attr('disabled',true);
@@ -58,6 +76,10 @@ $(function() {
 							$('#register_button').attr('disabled',false);
 						}
 				}//success
+				,error:function(result){
+					$('#check').html('이미사용중인아이디').css('color','red');
+					$('#register_button').attr('disabled',true);
+				}
 				
 			});//ajax
 		}//else
@@ -67,7 +89,6 @@ $(function() {
     $('#floatingPasswordcheck').keyup(function(){
 		//1.아이디 요건 충족하는지의 여부를 가늠..
 		var pw_chk=$(this).val();
-		console.log($('#floatingPassword').val());
 		if(pw_chk !=$('#floatingPassword').val()){
 			
 			$('#pwCheck').html('비밀번호가 다릅니다').css('color','red').css('font-size', 'x-small');

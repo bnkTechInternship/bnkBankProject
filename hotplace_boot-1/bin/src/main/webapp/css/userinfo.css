@@ -1,107 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
 html, body{
     width: 100%;
     height: calc(100%-80px);
 }
 
-/* 첫번째 영역...! */
-.container_middle1{
-    width: 100%;
-    padding-top: 50px;
-    padding-left: 50px;
-    height: 140px;
-    
-    border-bottom: solid 2px hotpink;
-    border-bottom-style: double;
-    border-width: 7px;
-    }
 
-.container_middle1_left{
-    width: 50%;
+.form_details{
+    width: 250px;
+    height: 450px;
+    float:left;
+    border-top: 1px black solid;
+    border-right: 2px solid #2c3333;
+    margin-left: 100px;
+}
+
+#floatingAddress2{
+    width: 400px;
+}
+
+
+.password{
+    border-bottom: none;
+}
+
+.form_details h3{
+    width: 250px;
+    height: 50px;
+    background-color: rgba(255,237,226,0.8);
+    border-bottom: 1px solid gray;
+    text-align: center;
+    padding: 10px;
+
+    font-weight: 300;
+}
+
+#two{
     height: 100px;
+    padding: 30px;
 }
 
-.container_middle2 img{
-    width: 100px;
-    height: 100px;
-    float: right;
+#three{
+    height: 150px;
+    padding: 50px;
 }
 
-.container_middle2 img:hover{
-    width: 110px;
-    height: 110px;
-}
 
-#con_mid2{
-    margin-right: 0px;
-    display: flex;
-    flex-direction: row-reverse;
-}
 
-.container_middle2_right{
+
+.left_second{margin-top: 30px;}
+
+
+
+form span{
     text-align: left;
-    padding-left: 30px;
-    padding-top: 30px;
-    width: 200px;
-    height: 120px;
-    float: right;
-    order: 0;
-
-}
-
-.container_middle2_left{
-    float: right;
-    width: 200px;
-    height: 120px;
-    order: 1;
-}
-
-
-
-
-/* 2번째 영역!*/
-.container_middle2{
-    width: 50%;
-    padding-top: 50px;
-    height: 600px;
-    float: left;
-}
-
-
-/* 폼 시작 */
-
-#form{
-    width: 50%;
-    height: 600px;
-    float: right;
-}
-
-form p{
-    text-align: left;
+    padding-bottom: 0px;
+    width: 150px;
+    display: inline-block;
 }
 
 form {
-    float: right;
-    width : 100%;
-    display: flex;
+    border-top: 1px black solid;
+    float: left;
+    height: 500px;
+    width : 500px;
     flex-direction: column;
-    align-items: center;
-    margin-bottom: 180px;
-    gap : 15px;
+    gap : 20px;
+    
 }
 
 form input{
-    font-family: Arial, Helvetica, sans-serif;
-    width: 250px;
-    height: 25px;
+    width: 150px;
+    height: 30px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;;
+    background-color: lightgoldenrodyellow;
+    padding: 10px;
+    margin-bottom: 10px;
+    
 }
+
+.long{
+    width: 200px;
+}
+
+form div{
+    background-color: white;
+    width: 500px;
+    height: 50px;
+    border-bottom: #212529 1px solid;
+    padding: 10px;
+}
+
 
 form button{
     font-family: Arial, Helvetica, sans-serif;
-    float: left;
+    float: right;
     margin-top: 30px;
-    width: 250px;
-    background-color: pink;
+    width: 625px;
+    margin-right: 240px;
+    
 }
+
+.card{
+    float:right;
+    margin: 0 auto;
+    width: 350px;
+    height: 220px;
+    background-color: white;
+    box-shadow: 0 4px 2px -2px rgba(0,0,0,0.7);
+    border-radius: 30px;
+
+}
+
+.card img{
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    margin: 70px 0;
+    margin-left: 30px;
+    float: left;
+}
+
+.card_text{
+    width:240px;
+    height:220px;
+    float: right
+}
+
+#p1{
+    text-align: right;
+    margin-right: 15px;
+    opacity: 0.7;
+}
+
+h5{
+    opacity: 0.7;
+    margin-top: 60px;
+    margin-left: 25px;
+    font-size: 12px;
+}
+
+h2{
+    font-size: 30px;
+    margin-left: 25px;
+}
+
+
+
+
+:root {
+  --button-color: #ffffff;
+  --button-bg-color: #0d6efd;
+  --button-hover-bg-color: #025ce2;
+}
+
+
+
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  
+  background: var(--button-bg-color);
+  color: var(--button-color);
+  
+  margin: 0;
+  padding: 0.5rem 1rem;
+  
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none;
+  
+  border: none;
+  border-radius: 4px;
+  
+  margin-top: 50px;
+
+  display: inline-block;
+  width: 350px;
+  
+  
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  
+  cursor: pointer;
+  
+  transition: 0.5s;
+}
+
+#btn1{
+    margin-top: 0px;
+    width: 750px;
+    background-color: darkgray;
+    text-align: center;
+    margin-left: 100px;
+}
+button.success {
+  --button-bg-color: #28a745;
+  --button-hover-bg-color: #218838;
+}
+
+button.error {
+  --button-bg-color: #dc3545;
+  --button-hover-bg-color: #c82333;
+}
+
+button.warning {
+  --button-color: #212529;
+  --button-bg-color: #ffc107;
+  --button-hover-bg-color: #e0a800;
+}
+
+button:active,
+button:hover,
+button:focus {
+  background: var(--button-hover-bg-color);
+  outline: 0;
+}
+button:disabled {
+  opacity: 0.5;
+}
+
+
 
 /* 폼 끝 */
 
@@ -118,11 +242,7 @@ body{
 
 @media (max-width : 800px) {
 
-    .container_middle1, .container_middle2{
-        width: calc(100%);
-        border-radius: 0px;
-    }
-
+ 
     
 
 }

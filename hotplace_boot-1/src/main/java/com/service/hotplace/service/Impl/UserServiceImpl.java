@@ -42,7 +42,6 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User getUserById(String userId) throws Exception {
-		// TODO Auto-generated method stub
 		return userDAO.getUserById(userId);
 	}
 
@@ -70,7 +69,9 @@ public class UserServiceImpl implements UserService{
 		if(userDAO.isIdExist(userId) != null) exist=true;
 		return exist;
 	}
-	
 
-
+	@Override
+	public void withDrawMoney(User user) throws Exception {
+		userDAO.withDrawMoney(user);
+	}
 }

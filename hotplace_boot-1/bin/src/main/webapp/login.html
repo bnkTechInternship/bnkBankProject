@@ -10,13 +10,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src = "script/login.js"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <!-- 김병관 바보 -->
 </head>
 <body>
     <div id = "login">
-        <img src = "img/bnk핫플2.png" id = "login_photo">
+        <img src = "img2/핫플동백로고.png" id = "login_photo"> 
+        <div id= "logo"> 동백핫플</div>
+        <div id= "gome"> with gourmetbusan</div>
 
-        <form id="frm" name="frm" action="/login.do" method="post">
+        <form id="frm" name="frm" action="" method="post">
             <div class="form-floating input">
                 <input type="email" class="form-control font" id="userId" name="userId" placeholder="name@example.com">
                 <label for="floatingInput">ID</label>
@@ -26,7 +29,7 @@
                 <label for="floatingPassword">PW</label>
             </div>
             <button id = "login_button" type="button" class="btn btn-primary input">로그인</button>
-            <button type="button" class="btn btn-primary input">비회원으로 시작하기</button>
+            <button type="button" id="notuserstartbtn" class="btn btn-primary input">비회원으로 시작하기</button>
             <div>
                 <a href="/register.html" >회원가입</a> &nbsp;
                 <a href="/find_id.html" target='_blank'> 아이디 찾기 </a> &nbsp; <a href="/find_pass.html" target='_blank'> 비밀번호 찾기</a>

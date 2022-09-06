@@ -69,9 +69,6 @@
         let totalMenu = []
         const user = localStorage.getItem('loginUser');
         let idx_ = url[1].split('=')
-
-
-
         
         $("#notepad").on('click','#payment',function() {
            if(user == null) {
@@ -79,24 +76,7 @@
                 return;
            }
 
-            for(let i = 0 ; i < sendData.length; i++) {
-                $.ajax({
-                    url  : '/info/registWaiting',
-                    type : 'post',
-                    data : {
-                        userId : user,
-                        menuIdx : sendData[i],
-                        shopIdx : idx_[1],
-                        quantity : 1,
-                        waitingCnt : 1,
-                    },
-                    success : (result) => {
-                        console.log("예약 되었습니다.")
-                    }
-                })
-            }
-
-            Swal.fire({
+           Swal.fire({
                 title: "예약 안내",
                 text: "예약 하시겠습니까?",
                 icon: 'warning',
@@ -106,16 +86,14 @@
                 confirmButtonText: 'OK',
             }).then((result) => {
                 if (result.isConfirmed) {
-                Swal.fire(
-                    "예약 성공",
-                    "예약을 성공했습니다!<br> 예약 페이지로 넘어갑니다!",
-                    'success'                    
-                )
-                setTimeout(() => {
-                    location.href = `/reserve.html`;
-                },2000)
-            }
+                    // 앞에서 최대 돈보다 많은지 확인
+                    getUserMoney(totalPrice)
+                                .then((flag) => sendPayRequestFnc(flag,sendData,totalPrice))
+                                .then((flag) => withDrawMoney(totalPrice))
+                }
             })
+
+                     
         })
 
         $("#barcode").barcode("1234567890128", "code128",{barWidth:1, barHeight:70,showHRI:true,bgColor:"white"});
@@ -150,7 +128,6 @@
             $(".menu_ingredient").toggleClass('dark_mode')
             $('.menu_item_tape').toggleClass('dark_mode_white')
 
-
             $("#review_list").toggleClass('dark_mode_only_back')
             $('.userInfo *').toggleClass('dark_mode_only_text')
 
@@ -164,8 +141,6 @@
             $("#notepad").toggleClass('note_show')
         })
 
-        // makeChart1()
-        
         $("#menu_add").hide()
         $("#content").on('click','.menu_item',function() {
             let price = $(this).find('.menu_size').attr('data-price');
@@ -218,8 +193,6 @@
         })
     })
 
-    
-
     function TypeWord(menu,totalPrice,totalMenu2) {
         let text = '';
         for(let i = 0 ; i < totalMenu2.length; i++) 
@@ -253,11 +226,6 @@
                     'rgba(255, 99, 132, 0.7)',
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(255, 99, 132, 0.2)',
-                        // 'rgba(255, 99, 132, 0.2)',
-                        // 'rgba(54, 162, 235, 0.2)',
-                        // 'rgba(255, 206, 86, 1)',
-                        // 'rgba(75, 192, 192, 0.2)',
-                        // 'rgba(153, 102, 255, 0.2)'
                     ],
                     borderColor: [
                         'rgba(255, 99, 132, 0.6)',
@@ -265,11 +233,6 @@
                         'rgba(255, 99, 132, 0.6)',
                         'rgba(255, 99, 132, 0.6)',
                         'rgba(255, 99, 132, 0.6)',
-
-                        // 'rgba(54, 162, 235, 0.6)',
-                        // 'rgba(255, 206, 86, 0.6)',
-                        // 'rgba(75, 192, 192, 0.6)',
-                        // 'rgba(153, 102, 255, 0.6)'
                     ],
                     borderWidth: 1
                 }]
@@ -292,14 +255,83 @@
         });
     }
     // chart1
+
     function loginPopup() {
-    Swal.fire({
-        icon: 'error',
-        title: '회원전용 기능입니다.',
-        text: '로그인을 해주세요',
-        footer: '<a href="login.html">로그인 하러가기</a>'
+        Swal.fire({
+            icon: 'error',
+            title: '회원전용 기능입니다.',
+            text: '로그인을 해주세요',
+            footer: '<a href="login.html">로그인 하러가기</a>'
+        })
+    }
+
+    let getUserMoney = async(totalPrice2) => new Promise((resolve,reject) => {
+        $.ajax({
+            url  : 'info/getSpecificUser',
+            type : 'post',
+            data : {"userId" : user},
+            success : (result) => {
+                if(result.userBalance > totalPrice2)
+                    resolve(true)
+                else resolve(false)                
+            }
+        })
     })
-}
+
+    let sendPayRequestFnc = async(flag,sendData2,totalPrice2) => new Promise((resolve,reject) => {
+        // 가지고 있는 돈이 더 많은경우
+        if(flag) {
+
+            // console.log(flag)
+            // console.log('--------------------')
+            // console.log("개발중인 함수 : ",sendData2)
+            // console.log("개발중인 함수 : ",totalPrice2)
+            // console.log("개발중인 함수 : ",idx_[1])
+            // console.log("개발중인 함수 : ",user)
+            // console.log('--------------------')
+            let successCnt = 0;
+            for(let i = 0 ; i < sendData2.length; i++) {
+                $.ajax({
+                    url  : '/info/registWaiting',
+                    type : 'post',
+                    data : {
+                        userId : user,
+                        menuIdx : sendData2[i],
+                        shopIdx : idx_[1],
+                        quantity : 1,
+                        waitingCnt : 1,
+                    },
+                })
+            }
+            resolve(true);
+        }
+    })
+
+    let withDrawMoney= async(totalPrice) => new Promise((resolve,reject) => {
+        console.log("계산할 총 금액 : ",totalPrice);
+        console.log("계산할 유저 아이디 : ",user);
+
+        $.ajax({
+            url  : '/info/withDraw',
+            type : 'post',
+            data : {
+                "userBalance" : totalPrice,
+                "userId" : user 
+            },
+            success : (result) => {
+                Swal.fire(
+                    "예약 성공",
+                    "예약을 성공했습니다!<br> 예약 페이지로 넘어갑니다!",
+                    'success'                    
+                )
+                setTimeout(() => {
+                    location.href = `/reserve.html`;
+                },2000)
+            }
+        })
+    })
+
+    
 </script>
 
 </html>

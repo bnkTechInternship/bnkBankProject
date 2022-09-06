@@ -69,6 +69,11 @@
 		WHERE user_id = #{value}
 	</select>
 	
+	<update id="withDrawMoney" parameterType="user">
+		update user2 set user_balance = user_balance - #{userBalance}
+		where user_id = #{userId}
+	</update>
+	
 </mapper>
 
 

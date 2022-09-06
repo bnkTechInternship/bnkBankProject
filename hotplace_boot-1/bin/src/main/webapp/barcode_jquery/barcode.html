@@ -1,0 +1,22 @@
+<html>
+<head>
+    <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="jquery-barcode.js"></script>
+</head>
+<body>
+
+<div id="bcTarget1" style="margin-top:30px;"></div>
+<div id="bcTarget2" style="margin-top:30px;"></div>
+<div id="bcTarget3" style="margin-top:30px;"></div>
+<div id="bcTarget4" style="margin-top:30px;"></div>
+<div id="bcTarget5" style="margin-top:30px;"></div>
+</body>
+<script type="text/javascript">
+	$("#bcTarget1").barcode("1234567890128", "code128");
+	$("#bcTarget2").barcode("1234567890128", "ean13",{barWidth:2, barHeight:30});
+	$("#bcTarget3").barcode("1234567", "int25",{barWidth:2, barHeight:30});	
+	$("#bcTarget4").barcode("1234567890128", "code128",{barWidth:1, barHeight:70,showHRI:true,bgColor:"red"});
+	$("#bcTarget5").barcode("1234567890128", "datamatrix",{showHRI:false,bgColor:"yellow"});
+	
+</script>
+</html>

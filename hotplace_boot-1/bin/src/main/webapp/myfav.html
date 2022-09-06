@@ -8,113 +8,84 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./css/sidebar.css">
     <link rel="stylesheet" href="./css/banner.css">
+    <link rel="stylesheet" href="./css/layout.css">
     <link rel="stylesheet" href="./css/myfav.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="script/myfav.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 
 <body>
-        <div id="topNavbar">
-            <div id="topNavbar__one">
-                <img src = "img/bnk핫플5.png" id = "logo">
-                <div id = "topInputDiv">
-                    <input type = "text">
-                </div>
-                <div id = "myInfo">
-                    <img src = "img/more.png">
-                    <img src = "img/user.png">
-                </div>
-                <div></div>
-            </div>            
-        </div> 
+    <div id="mainNavbar" class = "bottom-shadow">
+            
+        <div id = "logo" class = "cursor" onclick = 'location.href = "/login.html/bank"''>
+            <img src = "img2/핫플동백로고.png" id = "login_photo"/> 
+            동백핫플
+        </div>
+        <div id = "navbar_middle">
+            <div class = "cursor_menu" id = "choose_food" onclick = "location.href = 'reserve.html'"><img src = "img2/restaurant2.png">실시간 웨이팅</div>
+            <div class = "cursor_menu" id = "choose_bank" onclick = "location.href = 'history_layout.html'"><img src = "img2/bank2.png">이용내역</div>
+            <div class = "cursor_menu" onclick = "location.href = `myfav.html`"><img src = "img2/quality.png">찜 목록</div>
+            <div class = "cursor_menu" onclick = "location.href = `userinfo.html`"><img src = "img/information2.png">내 정보</div>
+        </div>
+        <div id = "navbar_right">
+            <img src = "img2/moon.png" class = "cursor" id = "mode">
+            <img src = "img2/user2.png" id = "userInfo" class = "cursor" onclick="javascript:location.href='userInfo.do';">
+            <img src = "img2/search2.png" class = "search cursor">
+        </div>
+    </div> 
 
-        <div class="wrapper">
-            <div class="section">
-                <div class="container_middle1">
-                    <h1>찜 목록</h1>
+        <div class="contents">
+            <div class="left">
+                <div class="left_first">
+                    <!-- <h3>김근영님의 찜 목록</h3> -->
                 </div>
-                <div class="container_middle2">
+                <div class="left_second">
+
+                    <!-- <div id="content">
+                        <div id="wrapper_img">
+                            <img id="img1" src="/img/카페맛집1.jpg">
+                        </div>
+                        <span id="text1">태평양</span>
+                        <span id="text2">부산광역시 기장군</span>
+                        <span id="like">♥</span>
+                    </div>
                     <div id="content">
                         <div id="wrapper_img">
                             <img id="img1" src="/img/카페맛집1.jpg">
-                            <div id="wrapper_right_img">
-                                <img id="img2" src="./img/고메부산10.PNG" /> 
-                                <img id="img3" src="./img/기장카페.jpg" />
-                            </div>
                         </div>
-                        <h3>태평양</h3>
-                        <span>부산광역시 기장군</span>
+                        <span id="text1">태평양</span>
+                        <span id="text2">부산광역시 기장군</span>
                     </div>
-
-
-                
                     <div id="content">
                         <div id="wrapper_img">
-                            <img id="img1" src="/img/곱창전골.jpg">
-                            <div id="wrapper_right_img">
-                                <img id="img2" src="./img/주먹밥.jpg" /> 
-                                <img id="img3" src="./img/곱창전골집.jpg" />
-                            </div>
-                        </div>
-                        <h3>한우곱창</h3>
-                        <span>부산광역시 연제구</span>
-                    </div>
-
-                    <div id="content">
-                        <div id="wrapper_img"><a href="#">
                             <img id="img1" src="/img/카페맛집1.jpg">
-                            <div id="wrapper_right_img">
-                                <img id="img2" src="./img/고메부산10.PNG" /> 
-                                <img id="img3" src="./img/고메부산3.jpg" />
-                            </div>
-                        </a></div>
-                        <h3>태평양</h3>
-                        <span>부산광역시 기장군</span>
+                        </div>
+                        <span>태평양</span>
+                        <span id="text2">부산광역시 기장군</span>
                     </div>
+                    <div id="content">
+                        <div id="wrapper_img">
+                            <img id="img1" src="/img/카페맛집1.jpg">
+                        </div>
+                        <span id="text1">태평양</span>
+                        <span id="text2">부산광역시 기장군</span>
+                    </div>
+                    <div id="content">
+                        <div id="wrapper_img">
+                            <img id="img1" src="/img/카페맛집1.jpg">
+                        </div>
+                        <span id="text1">태평양</span>
+                        <span id="text2">부산광역시 기장군</span>
+                    </div> -->
 
-                </div> 
-            </div> <!--section-->
+                </div>
+            </div>
 
-             <div class="sidebar">
-                 <div class="profile">
-                     <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="profile_picture">
-                     <h3>Anamika Roy</h3>
-                     <p>Designer</p>
-                 </div>
-                 <ul>
-                     <li>
-                         <a href="http://localhost:3000/dashboard" >
-                             <span class="icon"><i class="fas fa-home"></i></span>
-                             <span class="item">요약</span>
-                         </a>
-                     </li>
-                     <li>
-                         <a href="http://localhost:3000/reserve">
-                             <span class="icon"><i class="fas fa-desktop"></i></span>
-                             <span class="item">예약 현황</span>
-                         </a>
-                     </li>
-                     <li>
-                        <a href="http://localhost:3000/history">
-                            <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
-                            <span class="item">최근 기록</span>
-                        </a>
-                    </li>
-                     <li>
-                         <a href="http://localhost:3000/myfav" class="active">
-                             <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
-                             <span class="item">찜 목록</span>
-                         </a>
-                     </li>
-                     <li>
-                         <a href="http://localhost:3000/userinfo">
-                             <span class="icon"><i class="fas fa-user-friends"></i></span>
-                             <span class="item">내 정보</span>
-                         </a>
-                     </li>
-                 </ul>
-             </div>
-            </div><!-- wrapper -->
+    
 
  
 </body>

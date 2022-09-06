@@ -14,6 +14,11 @@ $(function() {
 	// test code
 	// localStorage.setItem('loginUser','user01');
 	const user = localStorage.getItem('loginUser');
+	if(user != null)
+		console.log(user.split(','))
+	
+	const reg = (/\'\"\{\}/g,'');
+	// console.log(user.replace(reg))
 
 
 
@@ -32,14 +37,10 @@ $(function() {
 	// 처음 시작시 필요한 데이터 받아오는 함수
 	initFunction();
 
-
 	let url = location.href.split('?');
 
-	// 시작시 기본 로딩 데이터는 은행으로
-
+	// 시작시 기본 로딩 데이터는 가게로
 	if(url.length == 1 || (url.length > 1 && url[1].split('=')[1] === 'shop')){
-		if(url.length > 1 && url[1].split('=')[1] == 'bank') {
-		}
 		$("#choose_food").addClass('selected')
 		getPartData(shopIdx,"shop");
 		getPartData(shopIdx,"shop");
@@ -49,9 +50,6 @@ $(function() {
 		getPartData(bankIdx,"bank");	
 		getPartData(bankIdx,"bank");	
 	} 
-		
-
-	
 	
 	setTimeout(() => {
 		$("#logo_slow").addClass('active')
@@ -62,12 +60,9 @@ $(function() {
 		},1000)
 	},2000)
 
-		
-
 	// 스크롤 이벤트
     $(window).scroll(function() {
         let scrollTop = $(this).scrollTop();
-
 
         if(scrollTop > 280)
             $("#logo_slow > div:nth-child(3)").css('opacity',0)
@@ -110,58 +105,46 @@ $(function() {
 			if($('.selected').text() === '은행')
 				getPartData(bankIdx,"bank")
 			else getPartData(shopIdx,"shop")
-
         }
     })
 
-	$('.menu').click(function() {
-
-		//즉 선택한게 아니다 은행 -> 맛집 or 맛집 -> 은행
-		$("#container").empty();
-
-		if($(this).text() === '은행') {
-			bankIdx = 1;
-			getPartData(bankIdx,"bank");
-			getPartData(bankIdx,"bank");
+	// 내정보 이미지 클릭시
+	$("#userInfo").click(function() {
+		//비로그인시
+		if(user == undefined) {
+			Swal.fire({
+				icon: 'error',
+				title: '회원전용 기능입니다.',
+				text: '로그인을 해주세요',
+				footer: '<a href="login.html">로그인 하러가기</a>'
+			})
 		}
-		else {
-			shopIdx = 1;
-			getPartData(shopIdx,"shop");
-			getPartData(shopIdx,"shop");
-		}
-
-		$('.menu').removeClass('selected');
-		$(this).addClass('selected');
+		else location.href = 'userinfo.html'	
 	})
     
+	// 검색 이미지 클릭시
     $(".search").click(function() {
         $("#mainNavbar").toggleClass('navbar_toggle')
         $("#searchNavbar").toggleClass('searchNavbar_toggle')
 
         $("#mainNavbar").toggleClass('bottom-shadow')
         $("#searchNavbar").toggleClass('bottom-shadow')
-        
     })
 
-   
+   // 좋아요 클릭시
     $("#container").on('click',".like",function() {
 		// flag : true -> 찜하기, flag : false -> 찜 삭제
 		let flag = true;		
 		let shopId = $(this).attr('id').substr(8);
 		let userId = $(this).attr('data-user')
 
-
 		if($(this).text() === '♥') 
 			flag = !flag;
-		
 
 		showSwal(shopId,flag,userId,$(this))
-
-    })//click
+    })
     
-    
-    
-
+	// 다크모드
     $("#mode").click(function() {
         $("#container").toggleClass('dark_mode_container')
         $(".container_item").toggleClass('dark_mode_container_item')
@@ -169,12 +152,12 @@ $(function() {
         $(".star").toggleClass('dark_mode_star')
         let data = $(this).attr('src');
 
-        if(data === 'img2/moon.png') 
-            $(this).attr('src','img2/sun.png')
-        else 
-            $(this).attr('src','img2/moon.png')
+        if(data === 'img2/moon.png')  
+			$(this).attr('src','img2/sun.png')
+        else $(this).attr('src','img2/moon.png')
     })
 
+	// 위로가기 버튼 클릭시
     $( '#up' ).click( function() {
         if($(this).attr('src') === 'img2/up-arrow.png') {
             $( 'html, body' ).animate( { scrollTop : 0 }, 1000 );
@@ -182,6 +165,7 @@ $(function() {
         }
     });
 
+	// 프론트 기술이 부족해 js로 위치 설정..
     let pos = [ {top : "70px", left : "250px"},
                 {top : "300px", left : "100px"}, 
                 {top : "220px", left : "390px"},
@@ -190,7 +174,6 @@ $(function() {
                 {top : "220px", left : "1050px"}]
 
     $(".decoration").each((idx,item) => $(item).css('top',pos[idx].top).css('left',pos[idx].left))
-
     $("#changeToMap").click(function() {
         $('.right-layer').toggleClass('active')
         setTimeout(() => {
@@ -207,13 +190,14 @@ $(function() {
         },880)
     })
 
+	// 은행 or 가게 불러오는 이미지 클릭시 로딩 페이지 등장
     $("#toggleBtn img").click(function() {
         loadPage(1500);
     })
 
+	// 검색하기 클릭시
 	$('#getSearch').click(function(){
-    	let shopName = $('#searchShop').val();
-    	
+    	let shopName = $('#searchShop').val();    
     	$.ajax({
     		type:'post',
     		url:'searchShopName.do',
@@ -227,18 +211,17 @@ $(function() {
 
 				}
 				$(window).off('scroll')
-				// $("#logo_slow").css('display','none');
 				$('.decoration').css('display','none');
 				$("#logo_slow").text('검색한 결과를 확인하세요!');
 				$("#find_info").css('z-index',2);
 				$("#logo_slow").css('z-index',-1);
-				
     		},
 			beforeSend : () => beforeSendWork(),
 			complete : () => completeWork()
     	})
     });
 
+	// 가게 로딩
 	$("#container").on('click','.link',function() {
 		location.href = `infoTemplate.html?category=shop&data=${$(this).attr('data-info')}`;
 	})
@@ -248,6 +231,7 @@ $(function() {
 
 	// --- function 정리 구간 --- //
 
+	// 로딩 애니메이션 함수
     function loadPage(time) {
         $('.loader').css('z-index',12);
         $("#loadback").css('z-index',11);
@@ -257,6 +241,7 @@ $(function() {
         },time)
     }
          
+	// 스크롤시 일부 데이터만 받아오는 함수
     function getPartData(idx,category) {
 		let url_ = `/${category}/init/data`
 
@@ -266,7 +251,6 @@ $(function() {
 				url : url_,
 				type : 'get',
 				data : {"number" : idx},
-
 				success : (result) => {
 					for(let item of result) 						
 						$("#container").append(getBankContent(item));
@@ -287,20 +271,18 @@ $(function() {
 							$("#container").append(getShop_NoLogin(item));
 						else $("#container").append(getShop_Login(item));
 					}
-
 				},
 				beforeSend : () => beforeSendWork(),
 				complete   : () => {
 					completeWork()
-					console.log("setStarReview 실행됨")
 					setStarReview();
 				}
 			})
 			shopIdx += 3;
-
 		}
 	}
 
+	// ajax요청동안 실행되는 함수
     function beforeSendWork() {
 		$('.loader').css('z-index',12);
 		$("#loadback").css('z-index',11);										
@@ -308,6 +290,7 @@ $(function() {
 			$("#container").append(loadContent);
 	}
 
+	// ajax요청 끝나면 실행되는 함수
 	function completeWork() {
 		setTimeout(() => {
 			$('.loader').css('z-index',-1);
@@ -316,6 +299,7 @@ $(function() {
 		},1500)
 	}
 
+	// 모달 함수
 	function showSwal(shopId,flag,userId,tag) {
 		//flag : false => 찜 삭제
 		let title_ = "찜 등록";
@@ -339,25 +323,24 @@ $(function() {
 			cancelButtonColor: '#d33',
 			confirmButtonText: 'OK',
 		  }).then((result) => {
-			if (result.isConfirmed) {
-			  Swal.fire(
-				title_,
-				desc_,
-				'success'
-			  )
-			  likeFunction(url,shopId,userId,tag)
-			}
+				if (result.isConfirmed) {
+					Swal.fire(
+						title_,
+						desc_,
+						'success'
+					)
+					likeFunction(url,shopId,userId,tag)
+				}
 		  })
 	}
 
 
-
+	// 좋아요 처리 함수
 	function likeFunction(url_,shopId,userId,tag) {
 		$.ajax({
 			url  : url_,
 			type : 'get',
 			data : "shopIdx="+shopId+"&userId="+userId,
-
 			success : (result) => {
 				if(tag.text() === '♥')
 					tag.text('♡').css('color','white')
@@ -472,6 +455,7 @@ $(function() {
 		})
 	}
 
+	// 별점 세팅 함수
 	async function setStarReview() {
 		// 나중에 효율적으로 계산 알고리즘 짜기
 		for(let i = 0 ; i < shopReview.length; i++) {
@@ -491,10 +475,8 @@ $(function() {
 		}
 	}
 
-
 	// 페이지 첫 로딩시 데이터 받아오기
-	// 은행 웨이팅, 가게 좋아요 및 웨이팅 받아오는 시작 함수
-	// 별점도
+	// 가게 좋아요, 웨이팅, 별점 받아오는 시작 함수
 	async function initFunction() {
 		// 모든 가게 웨이팅
 		await getAllShopWaiting();
@@ -504,8 +486,5 @@ $(function() {
 
 		// 음식점 리뷰 가져오기
 		await getShopReview();
-
-		// 은행 웨이팅 데이터가 없어서 아직 안만듬..		
-		
 	}
 })

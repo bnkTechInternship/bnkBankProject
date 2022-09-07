@@ -100,7 +100,7 @@ $(function() {
 
         var innerHeight = $(window).innerHeight();
         var scrollHeight = $('body').prop('scrollHeight');
-        if (scrollTop + innerHeight >= scrollHeight - 10) {    
+        if (scrollTop + innerHeight >= scrollHeight - 5) {    
 			if($('.selected').text() === '은행')
 				getPartData(bankIdx,"bank")
 			else getPartData(shopIdx,"shop")
@@ -244,41 +244,30 @@ $(function() {
     function getPartData(idx,category) {
 		let url_ = `/${category}/init/data`
 
-		// 은행 데이터 요청
-		if(category === 'bank') {
-			$.ajax({
-				url : url_,
-				type : 'get',
-				data : {"number" : idx},
-				success : (result) => {
-					for(let item of result) 						
+		$.ajax({
+			url  : url_,
+			type : 'get',
+			data : {"number" : idx},
+			success : (result) => {
+				for(let item of result) {
+					if(category === 'bank')	// 은행일 경우
 						$("#container").append(getBankContent(item));
-				},
-				beforeSend : () => beforeSendWork(),
-				complete : () => completeWork()
-			})
-			bankIdx += 3;
-		} // 가게 데이터 요청
-		else if(category === 'shop') {
-			$.ajax({
-				url : url_,
-				type : 'get',
-				data : {"number" : idx},
-				success : (result) => {					
-					for(let item of result) {
-						if(loginUserId == null)
-							$("#container").append(getShop_NoLogin(item));
-						else $("#container").append(getShop_Login(item));
-					}
-				},
-				beforeSend : () => beforeSendWork(),
-				complete   : () => {
-					completeWork()
-					setStarReview();
+					else if(loginUserId == null) // 가게 & 비로그인 경우
+						$("#container").append(getShop_NoLogin(item));
+					else $("#container").append(getShop_Login(item)); // 가게 & 로그인
 				}
-			})
-			shopIdx += 3;
-		}
+			},
+			beforeSend : () => beforeSendWork(),
+			complete : () => {
+				completeWork()
+				if(category === 'shop') // 가게일 경우 별점 추가
+					setStarReview();
+			}
+		})
+		// 카테고리에 맞는 아이템 idx 증가
+		if(category === 'bank')
+			bankIdx += 3;
+		else shopIdx += 3;		
 	}
 
 	// ajax요청동안 실행되는 함수
@@ -295,7 +284,7 @@ $(function() {
 			$('.loader').css('z-index',-1);
 			$("#loadback").css('z-index',-1);
 			$('.loading').remove()
-		},1500)
+		},2000)
 	}
 
 	// 모달 함수
@@ -467,7 +456,7 @@ $(function() {
 				}
 			}
 			if(!$(`#shopStar${shopReview[i].shopIdx}`).hasClass('exist')) {
-				$(`#shopStar${shopReview[i].shopIdx}`).prepend(`★${sum / cnt}`)
+				$(`#shopStar${shopReview[i].shopIdx}`).prepend(`★${(sum / cnt).toFixed(1)}`)
 				$(`#shopStar${shopReview[i].shopIdx}`).addClass('exist')
 			}
 		}

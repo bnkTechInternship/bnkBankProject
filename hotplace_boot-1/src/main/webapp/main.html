@@ -110,6 +110,7 @@
             level: 3 // 지도의 확대 레벨
         };
         var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성
+
         if(navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
                 let arr = [];
@@ -131,13 +132,12 @@
                     content: "현재 내위치" 
                 });
 
-                // 마커를 생성
+                // 마커 생성
                 var marker = new kakao.maps.Marker({
                     position: moveLatLon,
                     image: markerImage, // 마커이미지 설정 
                 });
             
-                // 마커가 지도 위에 표시되도록 설정합니다
                 marker.setMap(map);
                 kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
                 kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
@@ -201,12 +201,12 @@
                     </div>
                     `
         	}
-                // 카카오멥에 오버레이될 마커 이미지
-                var overlay = new kakao.maps.CustomOverlay({
-                    content: content,
-                    map: map,
-                    position: curPos
-                });
+            // 카카오멥에 오버레이될 마커 이미지
+            var overlay = new kakao.maps.CustomOverlay({
+                content: content,
+                map: map,
+                position: curPos
+            });
         
             var imageSrc;
             if(personCnt > 10) imageSrc = '/img2/location-pin.png';

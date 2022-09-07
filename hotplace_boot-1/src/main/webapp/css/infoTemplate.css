@@ -1,10 +1,14 @@
 @import url('http://fonts.cdnfonts.com/css/qillsey-einstein');
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
 
 * {
     padding : 0;
     margin : 0;      
     box-sizing: border-box;      
+    font-family: 'Noto Sans KR', sans-serif;
+
 }
 html,body {
     width : 100%;
@@ -147,6 +151,13 @@ body {
 }
 
 /*animation */
+
+#text {
+    background-image: url('../img2/changeColorLogo2.png');
+    background-size: cover;
+    width : 200px;
+    height : 70px;
+}
 
 #content {
     padding : 600px 100px 0px 100px;
@@ -408,6 +419,10 @@ body {
     z-index: 1;
 
     position: relative;
+}
+
+.menu_item * {
+    /* font-family: 'Noto Sans KR', sans-serif; */
 }
 
 #menu_add {

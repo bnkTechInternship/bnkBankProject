@@ -48,6 +48,11 @@ html, body,#canvas {
     padding-left: 20px; 
     cursor: pointer;
 
+    background-image: url('../img2/changeColorLogo.png');
+    background-size: cover;
+    width : 200px;
+    height : 70px;
+
 }
 
 #canvas {

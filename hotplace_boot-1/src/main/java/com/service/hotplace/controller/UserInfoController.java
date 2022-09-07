@@ -179,6 +179,34 @@ public class UserInfoController {
 		return waitingService.deleteWaitingBank(waitingBank);
 	}
 	
+	@PostMapping("bothWaiting.do")
+	@ResponseBody
+	public List<Object> bothWaiting(User user) throws Exception{
+	
+		List<Object> list = new ArrayList<Object>();
+		
+		
+		
+		WaitingBank waitingBank = waitingService.getNowWaitingBank(user);
+		ArrayList<WaitingShop> waitingShop = waitingService.getNowWaitingShop(user);
+		
+		if(waitingShop != null && waitingShop.size() != 0) {
+			
+			list.add(waitingShop.get(0)); // 웨이팅 샵
+			list.add(shopService.getShop(waitingShop.get(0).getShopIdx()));
+			list.add(waitingService.getShopUntilMyTurn(waitingShop.get(0)));
+			
+		}else if(waitingBank != null ) {
+			
+			list.add(waitingBank);
+			list.add(bankService.getBank(waitingBank.getBankIdx()));
+			list.add(waitingService.getBankUntilMyTurn(waitingBank));
+			
+		}else  	return null;
+		
+		return list;
+	}
+	
 	
 	
 	@PostMapping("/info/addMoney")

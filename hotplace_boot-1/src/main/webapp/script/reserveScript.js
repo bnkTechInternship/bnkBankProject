@@ -182,51 +182,60 @@ $(function() {
     
     
     $('button').click(function(){
-    	$.ajax({
-    		type: 'post',
-    		url: 'deleteWaitingBankInfo.do',
-    		data: {
-    			userId: userId,
-    			bankIdx: $(this).parents('.contents').children().children('.left_second').children('.details').children(0).children(1).children(1).attr('name'),
-    			},
-    		
-    		success:function(data){
-    			Swal.fire({
-					icon: 'warning',
-					title: '예약 취소',
-					text: '예약이 취소되었습니다.',
-					footer: '<a href="main.html">예약하러가기</a>'
-				})
-				setTimeout(() => {
-					location.reload()
-				},2000)
-    		},
+		if(totalPrice!=0){
+			$.ajax({
+				type: 'post',
+				url: 'deleteWaitingBankInfo.do',
+				data: {
+					userId: userId,
+					bankIdx: $(this).parents('.contents').children().children('.left_second').children('.details').children(0).children(1).children(1).attr('name'),
+					},
+				
+				success:function(data){
+					delWaiting($(this),userId,totalPrice)
+					Swal.fire({
+						icon: 'warning',
+						title: '예약 취소',
+						text: '예약이 취소되었습니다.',
+						footer: '<a href="main.html">예약하러가기</a>'
+					})
+					setTimeout(() => {
+						location.reload()
+					},2000)
 
-			error:function(data){
-				console.log(data)
-				Swal.fire({
-					icon: 'error',
-					title: '취소 실패',
-					text: '예약내역이 존재하지 않습니다',
-					footer: '<a href="main.html">예약하러가기</a>'
-				})
-				setTimeout(() => {
-					location.reload()
-				},2000)
-			}
+					if(data==null){
+						console.log(data)
+							Swal.fire({
+								icon: 'error',
+								title: '취소 실패',
+								text: '예약내역이 존재하지 않습니다',
+								footer: '<a href="main.html">예약하러가기</a>'
+							})
+							setTimeout(() => {
+								location.reload()
+							},2000)
+					}
 
-    	})
-    	
+				},
 
-		if(totalPrice == 0) {
+				error:function(data){
+					
+				}
+
+			})
+
+
+
+		}else{
 			Swal.fire({
 				icon: 'error',
 				title: '취소 실패',
 				text: '예약내역이 존재하지 않습니다',
 				footer: '<a href="main.html">예약하러가기</a>'
 			})
-		}		
-		else delWaiting($(this),userId,totalPrice)
+		}
+
+		
 		
     })
     

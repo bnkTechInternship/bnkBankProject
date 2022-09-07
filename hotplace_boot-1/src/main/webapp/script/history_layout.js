@@ -102,12 +102,7 @@ $(function(){
 				    cancelButtonText: '아니요, 취소할래요',
 				    reverseButtons: false
 				    }).then((result)=>{
-				        text = result.value
-				        // console.log(result.value);
 				        if(result.isConfirmed){ // 확인버튼이면 ajax 처리하고 성공 실패에따라 모달
-				        	
-				       
-				        	
 				        	$.ajax({
 				        		type: 'post',
 				        		url: 'addReview.do',
@@ -115,7 +110,7 @@ $(function(){
 				        			userId: userId,
 				        			shopIdx: $(this).parent().attr('name'),
 				        			score: $(this).val(),
-				        			comm: text
+				        			comm: result.value
 				        			}
 				        		,
 				        		

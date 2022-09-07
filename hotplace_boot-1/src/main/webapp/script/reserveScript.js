@@ -182,18 +182,39 @@ $(function() {
     
     
     $('button').click(function(){
-``
     	$.ajax({
     		type: 'post',
     		url: 'deleteWaitingBankInfo.do',
     		data: {
     			userId: userId,
-    			shopIdx: $(this).parents('.contents').children().children('.left_second').children('.details').children(0).children(1).children(1).attr('name'),
+    			bankIdx: $(this).parents('.contents').children().children('.left_second').children('.details').children(0).children(1).children(1).attr('name'),
     			},
     		
     		success:function(data){
-    			
-    		}
+    			Swal.fire({
+					icon: 'warning',
+					title: '예약 취소',
+					text: '예약이 취소되었습니다.',
+					footer: '<a href="main.html">예약하러가기</a>'
+				})
+				setTimeout(() => {
+					location.reload()
+				},2000)
+    		},
+
+			error:function(data){
+				console.log(data)
+				Swal.fire({
+					icon: 'error',
+					title: '취소 실패',
+					text: '예약내역이 존재하지 않습니다',
+					footer: '<a href="main.html">예약하러가기</a>'
+				})
+				setTimeout(() => {
+					location.reload()
+				},2000)
+			}
+
     	})
     	
 
@@ -209,70 +230,7 @@ $(function() {
 		
     })
     
-    
 
-    
-    
-
-	
-    /*
-    $.ajax({
-    	type:'post',
-    	url:'getShopInfo.do',
-    	data:"userId="+user.userId,
-    	
-    	
-    	success:function(shop){
-    		
-    		$('#shop_name').append(
-    				'<h3 name="'+shop.shopIdx+'">' + shop.shopName + '</h3>'
-    		);
-    		
-    		$('.details_text').html(
-    				'<span>' + shop.shopNumber + '</span>'
-    		);
-    		
-    		$('#phone').click(function(){
-    			$('.details_text').html(
-        				'<span>' + shop.shopNumber + '</span>'
-        		);
-    			
-    		});
-    		
-    		$('#oper').click(function(){
-    			$('.details_text').html(
-        				'<span>' + shop.shopOper + '</span>'
-        		);
-    			
-    		});
-    		
-    		$('#addr').click(function(){
-    			$('.details_text').html(
-        				'<span>' + shop.shopAddress + '</span>'
-        		);
-    			
-    		});
-    		
-    		
-    		if(shop.shopIdx==null){
-    			
-    			$('.left_second').html(`<div class="wrap_img">
-                        <div id="main_text">현재 웨이팅 중인 가게가 없어요</div>
-                        <div id="sub_text">고메부산에 소개된 핫플들을 웨이팅하고 동백전 캐시백도 받아보세요!</div>
-                        <a href="main.html" id="waiting_text">웨이팅하러가기</a>
-                    </div>`);
-    		}
-    		
-    		
-    		
-    	},
-    	error:function(){
-    		
-        }
-    
-    })*/
-    
-    
     
     
     $.ajax({

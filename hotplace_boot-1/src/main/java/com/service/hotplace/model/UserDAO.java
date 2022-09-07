@@ -21,6 +21,7 @@ public interface UserDAO {
 	// update
 	int updateUser(User user)throws Exception;
 	int withDrawMoney(User user) throws Exception; // 유저 돈 차감
+	int depositMoney(User user) throws Exception;  // 유저 돈 증가
 		
 	// delete
 	int deleteUser(String userId)throws Exception;

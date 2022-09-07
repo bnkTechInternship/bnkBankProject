@@ -66,4 +66,9 @@ public class UserServiceImpl implements UserService{
 	public void withDrawMoney(User user) throws Exception {
 		userDAO.withDrawMoney(user);
 	}
+
+	@Override
+	public void depositMoney(User user) throws Exception {
+		userDAO.depositMoney(user);
+	}
 }

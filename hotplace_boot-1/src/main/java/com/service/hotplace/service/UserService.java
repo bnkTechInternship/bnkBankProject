@@ -22,6 +22,8 @@ public interface UserService {
 	// update
 	int updateUser(User user)throws Exception;
 	void withDrawMoney(User user) throws Exception;
+	void depositMoney(User user) throws Exception;  // 유저 돈 증가
+
 		
 	// delete
 	int deleteUser(String userId)throws Exception;

@@ -1,13 +1,13 @@
 @import url('http://fonts.cdnfonts.com/css/qillsey-einstein');
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 
 * {
     padding : 0;
     margin : 0;
     box-sizing: border-box;
-    /* transition : 0.5s; */
-    font-family: 'Jua', cursive;
+    /* transition : 0.5s; */    
+    font-family: 'Noto Sans KR', sans-serif;
 
     text-decoration: none;
     list-style: none;
@@ -104,6 +104,10 @@ span {
   flex-direction: column;
 
   animation-delay: 2s;
+}
+
+#logo_slow * {
+  font-family: 'Jua', cursive !important;
 }
 
 #searchNavbar,#mainNavbar {
@@ -242,6 +246,10 @@ path {
     padding : 5px 5px 30px 5px;
     border-radius: 10px;
     font-weight: bold;
+}
+
+.container * {
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 .container_item img {

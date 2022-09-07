@@ -94,8 +94,6 @@ public class WaitingServiceImpl implements WaitingService{
 				returnlist.add(ws);
 			}
 		}
-		
-		
 		return returnlist;
 	}
 

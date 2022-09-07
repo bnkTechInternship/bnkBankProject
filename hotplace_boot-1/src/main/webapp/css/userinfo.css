@@ -3,6 +3,7 @@
 html, body{
     width: 100%;
     height: calc(100%-80px);
+    
 }
 
 
@@ -227,9 +228,9 @@ button:disabled {
 
 
 
-/* 폼 끝 */
+/* �뤌 �걹 */
 
-/* 2번째 영역 끝 */
+/* 2踰덉㎏ �쁺�뿭 �걹 */
 
 .wrapper{
     height: calc(100%-80px);

@@ -84,6 +84,8 @@ public class WaitingServiceImpl implements WaitingService{
 	public ArrayList<WaitingShop> getNowWaitingShop(User user) throws Exception {
 		ArrayList<WaitingShop> returnlist = new ArrayList<WaitingShop>();
 		List<WaitingShop> relist = waitingDAO.getWaitingShop(user.getUserId());
+		if(relist.isEmpty()) 
+			return null;
 		
 		for(WaitingShop ws : relist) { // 아 이거 현재 입장 번호가 가게의 입장번호보다 높아야 뜨는거였음 바보 멍청이 김근영....
 			Shop shop = shopservice.getShop(ws.getShopIdx());
@@ -93,8 +95,7 @@ public class WaitingServiceImpl implements WaitingService{
 			}
 		}
 		
-		if(returnlist.isEmpty()) 
-			return null;
+		
 		return returnlist;
 	}
 

@@ -16,6 +16,20 @@ $(function() {
     
     $('button').click(function(){
 
+    	$.ajax({
+    		type: 'post',
+    		url: 'deleteWaitingBankInfo.do',
+    		data: {
+    			userId: userId,
+    			shopIdx: $(this).parents('.contents').children().children('.left_second').children('.details').children(0).children(1).children(1).attr('name'),
+    			},
+    		
+    		success:function(data){
+    			
+    		}
+    	})
+    	
+    	
 		// $.ajax({
 		// 	url  : '',
 		// 	type : 'post',

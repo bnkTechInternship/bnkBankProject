@@ -118,6 +118,11 @@
 		WHERE user_id = #{userId} and  shop_idx = #{shopIdx}
 	</delete>
 	
+	<delete id="deleteWaitingBank" parameterType="waitingBank">
+		DELETE FROM waiting_bank
+		WHERE user_id = #{userId} and  bank_idx = #{bankIdx}
+	</delete>
+	
 </mapper>
 
 

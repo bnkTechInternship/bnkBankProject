@@ -33,6 +33,7 @@ public interface WaitingService {
 	// update
 	int updateTotalShopCnt(WaitingShop waitingShop) throws Exception; //가게별 누적인원업데이트
 	int deleteWaitingShop(WaitingShop waitingShop) throws Exception;
+	int deleteWaitingBank(WaitingBank waitingBank) throws Exception;
 	
 	// delete
 }

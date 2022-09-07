@@ -172,11 +172,14 @@ public class UserInfoController {
 		return untilCnt;
 	}
 	
-	@PostMapping("deleteWaitingBank.do")
+	@PostMapping("deleteWaitingBankInfo.do")
 	@ResponseBody
 	public int deleteWaitingBank(WaitingBank waitingBank) throws Exception{
-		System.out.println(waitingBank);
-		return waitingService.deleteWaitingBank(waitingBank);
+		System.out.println("==============deleteWaitingBankInfo.do================");
+		System.out.println("======controller::" +waitingBank);
+		int result = waitingService.deleteWaitingBank(waitingBank);
+		System.out.println("결과 : " + result);
+		return result;
 	}
 	
 	@PostMapping("bothWaiting.do")
@@ -184,9 +187,6 @@ public class UserInfoController {
 	public List<Object> bothWaiting(User user) throws Exception{
 	
 		List<Object> list = new ArrayList<Object>();
-		
-		
-		
 		WaitingBank waitingBank = waitingService.getNowWaitingBank(user);
 		ArrayList<WaitingShop> waitingShop = waitingService.getNowWaitingShop(user);
 		

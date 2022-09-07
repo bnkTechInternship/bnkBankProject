@@ -136,8 +136,6 @@ public class UserInfoController {
 	@PostMapping("deleteWaitingInfo.do")
 	@ResponseBody
 	public int deleteWaitingShop(WaitingShop waitingShop) throws Exception{
-		System.out.println("deleteWaitingInfo ::: Controller");
-		System.out.println(waitingShop);
 		return waitingService.deleteWaitingShop(waitingShop);
 	}
 	
@@ -171,4 +169,10 @@ public class UserInfoController {
 	
 	
 	
+	@PostMapping("/info/addMoney")
+	@ResponseBody
+	public void addUserMoney(User user) throws Exception {
+		userService.depositMoney(user);
+		System.out.println(user.getUserBalance() + "만큼 증가");
+	}
 }

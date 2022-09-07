@@ -64,4 +64,9 @@ public class UserDAOImpl implements UserDAO{
 	public int withDrawMoney(User user) throws Exception {
 		return sqlsession.update(NS + "withDrawMoney",user);
 	}
+
+	@Override
+	public int depositMoney(User user) throws Exception {		
+		return sqlsession.update(NS + "depositMoney",user);
+	}
 }

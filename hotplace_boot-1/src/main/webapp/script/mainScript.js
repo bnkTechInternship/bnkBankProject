@@ -415,7 +415,6 @@ $(function() {
 		$.ajax({
 			url : '/shop/allWaiting',
 			type : 'get',
-
 			success : (result) => {
 				for(let item of result)
 					shopWaiting.set(item.shopIdx,item.waitingNum)
@@ -477,7 +476,7 @@ $(function() {
 	// 페이지 첫 로딩시 데이터 받아오기
 	// 가게 좋아요, 웨이팅, 별점 받아오는 시작 함수
 	async function initFunction() {
-		// 모든 가게 웨이팅
+		// 가게 웨이팅
 		await getAllShopWaiting();
 
 		// 가게 좋아요 가져오기

@@ -113,12 +113,15 @@ let getShopReview = async(marketInfo) => new Promise((resolve,reject) => {
 
 // 데이터 세팅
 async function setData(marketInfo,review) {
-    let appendData;
+    let appendData; // 정보 설몀 태그로 가게 또는 은행에 따라 변경됨.
 
     // review != undefined는 리뷰가 있다는 말로 가게에 해당
     if(review != undefined) {
+         // 가게 좋아요 세팅
         let jjimInfo = await getAllShopLike();
-        appendData = await getShopInfoTag(jjimInfo,marketInfo,review)
+
+        // 가게에 맞는 데이터 받기
+        appendData = await getShopInfoTag(jjimInfo,marketInfo,review) 
     
         // 메뉴 생성
         await addMenuList(marketInfo);
@@ -129,13 +132,14 @@ async function setData(marketInfo,review) {
         // 그래프 생성
         await addGraph();
     }
-    else { //은행일 경우 은행에 맞는 정보로 세팅
+    //은행일 경우 은행에 맞는 정보로 세팅
+    else { 
+        // 은행에 맞는 데이터 받기
         appendData = await getBankInfoTag(marketInfo);
 
+        // 은행의 경우 지도, footer 추가
         await bankSetting(marketInfo);
     }
-    
-
     $('#imgDiv').prepend(appendData)
 }
 
@@ -153,7 +157,7 @@ async function getShopInfoTag(jjimInfo,marketInfo,review) {
     return `
     <div id="restaurant_info" class="disappear init start">
         <div id="name" class="center">${marketInfo.shopName}</div>
-        <div id="review" class="center"><span>${star}</span>${review}</div>
+        <div id="review" class="center"><span>${star}</span>${review.toFixed(1)}</div>
         <div class="center">${marketInfo.shopAddress}</div>
         <div class = "center small">전화번호 : ${marketInfo.shopNumber}</div>
         <div class = "center small">운영 시간 : ${marketInfo.shopOper}</div>

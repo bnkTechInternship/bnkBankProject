@@ -87,4 +87,9 @@ public class WaitingDAOImpl implements WaitingDAO {
 	public int deleteWaitingShop(WaitingShop waitingShop) throws Exception{
 		return sqlsession.selectOne(NS+"deleteWaitingShop", waitingShop);
 	}
+
+	@Override
+	public int deleteWaitingBank(WaitingBank waitingBank) throws Exception {
+		return sqlsession.selectOne(NS+"deleteWaitingBank", waitingBank); // 수정
+	}
 }

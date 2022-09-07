@@ -3,23 +3,22 @@ package com.service.hotplace.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.service.hotplace.domain.person.User;
+import com.service.hotplace.domain.place.Bank;
 import com.service.hotplace.domain.place.Menu;
 import com.service.hotplace.domain.place.Shop;
 import com.service.hotplace.domain.play.LikeShop;
 import com.service.hotplace.domain.play.Review;
+import com.service.hotplace.domain.play.WaitingBank;
 import com.service.hotplace.domain.play.WaitingShop;
-import com.service.hotplace.model.WaitingDAO;
+import com.service.hotplace.service.BankService;
 import com.service.hotplace.service.LikeService;
 import com.service.hotplace.service.MenuService;
 import com.service.hotplace.service.ReviewService;
@@ -46,6 +45,9 @@ public class UserInfoController {
 	
 	@Autowired
 	private LikeService likeService;
+	
+	@Autowired
+	private BankService bankService;
 	
 	@RequestMapping("checkCurrWaiting.do")
 	public String checkCurrWaiting(User user) throws Exception{
@@ -89,7 +91,6 @@ public class UserInfoController {
 		System.out.println("========Controller::getRealWaiting=======");
 		System.out.println(user);
 		List<WaitingShop> waitingshops = waitingService.getNowWaitingShop(user);
-		System.out.println(waitingshops);
 		int untilCnt= waitingService.getShopUntilMyTurn(waitingshops.get(0));
 		return untilCnt;
 	}
@@ -139,4 +140,35 @@ public class UserInfoController {
 		System.out.println(waitingShop);
 		return waitingService.deleteWaitingShop(waitingShop);
 	}
+	
+	@PostMapping("getBankInfo.do")
+	@ResponseBody
+	public List<Object> getBankInfo(User user) throws Exception {
+		System.out.println("======Controller:: getRBankInfo========");
+		WaitingBank waitingBank = waitingService.getNowWaitingBank(user);
+		Bank bank = bankService.getBank(waitingBank.getBankIdx());
+		ArrayList<Object> al1 = new ArrayList<>();
+		al1.add(bank);
+		al1.add(waitingBank);
+		return al1;
+	}
+	
+	@PostMapping("getRealWaitingBank.do")
+	@ResponseBody
+	public int getRealWaitingBank(User user) throws Exception{
+		System.out.println("========Controller::getRealWaitingBank=======");
+		WaitingBank waitingBank = waitingService.getNowWaitingBank(user);
+		int untilCnt= waitingService.getBankUntilMyTurn(waitingBank);
+		return untilCnt;
+	}
+	
+	@PostMapping("deleteWaitingBank.do")
+	@ResponseBody
+	public int deleteWaitingBank(WaitingBank waitingBank) throws Exception{
+		System.out.println(waitingBank);
+		return waitingService.deleteWaitingBank(waitingBank);
+	}
+	
+	
+	
 }

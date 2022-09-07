@@ -67,12 +67,16 @@ public class WaitingServiceImpl implements WaitingService{
 
 	@Override
 	public WaitingBank getNowWaitingBank(User user) throws Exception {
+		System.out.println("=======servcie:: getNowWaitingBank");
 		List<WaitingBank> relist = waitingDAO.getWaitingBank(user.getUserId());
+		
+		System.out.println(relist);
 		for(WaitingBank wb : relist) {
 			Bank bank = BankService.getBank(wb.getBankIdx());
-			if( wb.getWaitingNum() - bank.getBankEnternum() >=0)
+			if( wb.getWaitingNum() - bank.getBankEnternum() >=0) {
 				return wb;
-		}
+			}
+				}
 		return null;
 	}
 
@@ -144,5 +148,10 @@ public class WaitingServiceImpl implements WaitingService{
 	@Override
 	public int deleteWaitingShop(WaitingShop waitingShop) throws Exception {
 		return waitingDAO.deleteWaitingShop(waitingShop);
+	}
+	
+	@Override
+	public int deleteWaitingBank(WaitingBank waitingBank) throws Exception {
+		return waitingDAO.deleteWaitingBank(waitingBank);
 	}
 }

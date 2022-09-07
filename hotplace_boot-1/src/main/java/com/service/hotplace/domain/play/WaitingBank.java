@@ -122,8 +122,7 @@ public class WaitingBank {
 				+ ", waitingDate=" + waitingDate + ", user=" + user + ", bank=" + bank
 				+ "]";
 	}
-	
-	
+
 
 
 

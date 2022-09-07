@@ -26,7 +26,7 @@ $(function() {
 			  showCancelButton: true,
 			  confirmButtonColor: '#d33',
 			  cancelButtonColor: '#3085d6',
-			  confirmButtonText: '취소할래요',
+			  confirmButtonText: '취소할래요.',
 			  cancelButtonText: '그냥둘래요.',
 			}).then((result) => {
 			  if (result.isConfirmed) {

@@ -61,16 +61,24 @@ public class UserInfoController {
 	@PostMapping("getReviews.do")
 	public List<Review> getReviewsDo(User user) throws Exception {
 		List<WaitingShop> waitingshops = waitingService.getNowWaitingShop(user);
-		int shopIdx = waitingshops.get(0).getShopIdx();
-		return reviewService.getReviewListByShopIdx(shopIdx);
+		if(waitingshops!=null && waitingshops.size() != 0) {
+			int shopIdx = waitingshops.get(0).getShopIdx();
+			return reviewService.getReviewListByShopIdx(shopIdx);
+		}
+		
+		return null;
 	}
 	
 	@ResponseBody
 	@PostMapping("getShopInfo.do")
 	public Shop getShopinfoDo(User user) throws Exception{
 		List<WaitingShop> waitingshops = waitingService.getNowWaitingShop(user);
-		int shopIdx = waitingshops.get(0).getShopIdx();
-		return shopService.getShop(shopIdx);
+		System.out.println("getShopInfo.do");
+		if(waitingshops!=null && waitingshops.size() != 0) {
+			int shopIdx = waitingshops.get(0).getShopIdx();
+			return shopService.getShop(shopIdx);
+		}
+		return null;
 	}
 	
 	@ResponseBody
@@ -91,8 +99,12 @@ public class UserInfoController {
 		System.out.println("========Controller::getRealWaiting=======");
 		System.out.println(user);
 		List<WaitingShop> waitingshops = waitingService.getNowWaitingShop(user);
-		int untilCnt= waitingService.getShopUntilMyTurn(waitingshops.get(0));
-		return untilCnt;
+		if(waitingshops!=null && waitingshops.size() != 0) {
+			int untilCnt= waitingService.getShopUntilMyTurn(waitingshops.get(0));
+			return untilCnt;
+		}
+		
+		return 0;
 	}
 	
 	@ResponseBody

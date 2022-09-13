@@ -72,7 +72,7 @@ $(function(){
 	    					        			success:function(){
 	    					        				Swal.fire(
 	    					    						      'Deleted!',
-	    					    						      'Your file has been deleted.',
+	    					    						      '리뷰가 성공적으로 삭제되었습니다.',
 	    					    						      'success'
 	    					    						).then((result)=>{
 	    										        	location.reload(); // 버튼을 누르면 페이지 새로고침
@@ -244,7 +244,6 @@ $(function(){
                 		<div class="first">
                 			<img src="${list[i][6]}">
                 			<div class="first_text"> 
-                				<div class = "date">${list[i][4]} - 식사 완료</div><br><br>
                 				<span id="name">${list[i][5]}</span><br><br><br>
                 				<span id="menu">${list[i][1]}<br>${list[i][0]}</span>
                             </div>

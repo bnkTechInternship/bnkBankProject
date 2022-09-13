@@ -6,7 +6,7 @@
 <mapper namespace="sql.hotplace.mapper">
 	<sql id="selectAllUser">
 		select user_id, user_pw, user_name, user_email, user_address,
-		user_number, user_balance, user_point, register_date, user_sex, user_group
+		user_number, user_balance, user_point, register_date, user_group
 		from user2
 	</sql>
 	

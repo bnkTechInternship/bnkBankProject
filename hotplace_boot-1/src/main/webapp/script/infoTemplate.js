@@ -362,7 +362,10 @@ function setJjim(url_,shopId,userId,flag) {
                 },2000)
             }
             else if($("#jjim").text() === '찜 취소하기')
-                $("#jjim").text('찜 하기');                
+                $("#jjim").text('찜 하기');    
+                  
+            if(flag == 3)
+                setTimeout(() => { location.href = `/reserve.html`; },2000)          
         }
     })
 }

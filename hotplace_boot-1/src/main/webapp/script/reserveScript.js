@@ -5,6 +5,8 @@ $(function() {
     let userName = user.userName;
     let userId = user.userId;
 
+	var category = 0;
+
     setCardMoney(userId).then(setCard);
 
     let userPoint = user.userPoint;
@@ -28,7 +30,7 @@ $(function() {
 		success:function(data){
 			
 				if(data[0]==null){
-					
+					category = 0; // 아무것도 안받아왔을때
 					$('.left_second').html(`<div class="wrap_img">
 		                    <div id="main_text">현재 웨이팅 중인 가게가 없어요</div>
 		                    <div id="sub_text">고메부산에 소개된 핫플들을 웨이팅하고 동백전 캐시백도 받아보세요!</div>
@@ -37,7 +39,7 @@ $(function() {
 					
 				}
 				else if(data[1].shopIdx!=null){ // 식당 정보 불러왔을때
-				
+					category = 1; // 샵 받아왔을때
 				console.log("샵");
 				
 				$('#shop_name').append(
@@ -109,7 +111,7 @@ $(function() {
 	   	    		)
 				
 			}else if(data[1].bankIdx!=null){ // 은행 정보 불러왔을때
-		
+				category = 2; // 은행정보불러왔을때
 				
 	    		$('#shop_name').append(
 	    				`<h3 name='${data[1].bankIdx}'>${data[1].bankName}</h3>`
@@ -182,7 +184,59 @@ $(function() {
     
     
     $('button').click(function(){
-		if(totalPrice!=0){
+		
+		if(category==0){ // 아무것도 없을때 
+			Swal.fire({
+				icon: 'error',
+				title: '취소 실패',
+				text: '예약내역이 존재하지 않습니다',
+				footer: '<a href="main.html">예약하러가기</a>'
+			})
+			setTimeout(() => {
+				location.reload()
+			},2000)
+		}else if(category==1){ // 샵 받아왔을때
+
+			if(totalPrice!=0){
+				$.ajax({
+					type: 'post',
+					url: 'deleteWaitingInfo.do',
+					data: {
+						userId: userId,
+						shopIdx: $(this).parents('.contents').children().children('.left_second').children('.details').children(0).children(1).children(1).attr('name'),
+						},
+					
+					success:function(data){
+						
+						delWaiting($(this),userId,totalPrice)
+						Swal.fire({
+							icon: 'warning',
+							title: '예약 취소',
+							text: '예약이 취소되었습니다.',
+							footer: '<a href="main.html">예약하러가기</a>'
+						})
+						setTimeout(() => {
+							location.reload()
+						},2000)
+
+					},
+
+					error:function(data){
+						
+					}
+
+				})
+
+			}else{
+				Swal.fire({
+					icon: 'error',
+					title: '취소 실패',
+					text: '예약내역이 존재하지 않습니다',
+					footer: '<a href="main.html">예약하러가기</a>'
+				})
+			}
+
+		}else{ // 뱅크
 			$.ajax({
 				type: 'post',
 				url: 'deleteWaitingBankInfo.do',
@@ -192,6 +246,7 @@ $(function() {
 					},
 				
 				success:function(data){
+					
 					delWaiting($(this),userId,totalPrice)
 					Swal.fire({
 						icon: 'warning',
@@ -203,35 +258,12 @@ $(function() {
 						location.reload()
 					},2000)
 
-					if(data==null){
-						console.log(data)
-							Swal.fire({
-								icon: 'error',
-								title: '취소 실패',
-								text: '예약내역이 존재하지 않습니다',
-								footer: '<a href="main.html">예약하러가기</a>'
-							})
-							setTimeout(() => {
-								location.reload()
-							},2000)
-					}
-
 				},
 
 				error:function(data){
 					
 				}
 
-			})
-
-
-
-		}else{
-			Swal.fire({
-				icon: 'error',
-				title: '취소 실패',
-				text: '예약내역이 존재하지 않습니다',
-				footer: '<a href="main.html">예약하러가기</a>'
 			})
 		}
 

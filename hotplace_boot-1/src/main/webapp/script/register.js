@@ -3,9 +3,11 @@ $(function() {
         
     })
     //
-    const money = Math.floor(Math.random()*1001) * 1000;
-    const point = Math.floor(Math.random()*1001) * 100;
+    //const money = Math.floor(Math.random()*1001) * 1000;
+    //const point = Math.floor(Math.random()*1001) * 100;
 
+    const money = 20000;
+    const point = 0;
     
     $('#money').val(money);
     $('#point').val(point);

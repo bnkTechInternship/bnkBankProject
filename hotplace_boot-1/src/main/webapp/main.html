@@ -152,6 +152,7 @@
         function addMarker(info,allBankWaiting,allShopWaiting) {
         	let curPos;
         	let content;
+            console.log("allShopWaiting1",allShopWaiting)
 
             let personCnt = 0;
             // 은행일 경우
@@ -161,9 +162,11 @@
                         personCnt = Math.max(personCnt,allBankWaiting[i].waitingNum);                
             }
             else {// 가게일 경우
-                for(let i = 0 ; i < allShopWaiting.length; i++) 
+                for(let i = 0 ; i < allShopWaiting.length - 1; i++) {
+                    console.log(allShopWaiting[i])
                     if(allShopWaiting[i].shopIdx == info.shopIdx) 
                         personCnt = Math.max(personCnt,allShopWaiting[i].waitingNum);                
+                }
             }
 
             // 은행일 경우
@@ -276,10 +279,12 @@
 
         // 모든 가게 정보 받기
         async function getAllShop(allShopWaiting) {
+            console.log("allShopWaiting1",allShopWaiting)
             $.ajax({
             	url : '/shop/allShop',
             	type : 'get',
             	success : (result) => {
+                    console.log("allShopWaiting2",allShopWaiting)
             		for(let i = 0 ; i < result.length; i++)
             			addMarker(result[i],null,allShopWaiting);
             	},

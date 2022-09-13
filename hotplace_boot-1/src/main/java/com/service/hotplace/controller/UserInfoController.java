@@ -176,9 +176,8 @@ public class UserInfoController {
 	@ResponseBody
 	public int deleteWaitingBank(WaitingBank waitingBank) throws Exception{
 		System.out.println("==============deleteWaitingBankInfo.do================");
-		System.out.println("======controller::" +waitingBank);
+		System.out.println("====controller::"+waitingBank);
 		int result = waitingService.deleteWaitingBank(waitingBank);
-		System.out.println("결과 : " + result);
 		return result;
 	}
 	
@@ -191,6 +190,8 @@ public class UserInfoController {
 		ArrayList<WaitingShop> waitingShop = waitingService.getNowWaitingShop(user);
 		
 		if(waitingShop != null && waitingShop.size() != 0) {
+			
+			System.out.println("========shop받아오기========");
 			
 			list.add(waitingShop.get(0)); // 웨이팅 샵
 			list.add(shopService.getShop(waitingShop.get(0).getShopIdx()));

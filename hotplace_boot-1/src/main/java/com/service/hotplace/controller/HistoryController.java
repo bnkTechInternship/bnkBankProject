@@ -41,6 +41,7 @@ public class HistoryController {
 	@ResponseBody
 	@PostMapping("addReview.do")
 	public int addReivew(Review rv) throws Exception{
+		System.out.println("addReview:: "+rv);
 		return reviewService.addReview(rv);
 	}
 	
@@ -75,25 +76,6 @@ public class HistoryController {
 		String shopWebAddress = "";
 		int shopIdx = 0;
 		ArrayList<ArrayList<String>> histroy = new ArrayList<ArrayList<String>>();
-		
-/*		List<Shop> shops = shopService.getShopList(); 수정본 1
-		List<Menu> menus = menuService.getMenuList(12);
-		
-		
-		for(int key : list.keySet()) {
-			for(Shop s : shops) { // 모든 shop을 돌면서..
-				if(key == s.getShopIdx()) {
-					menus = menuService.getMenuList(shopIdx);
-					for(Menu m : menus) {
-						
-						// 여기서 메뉴이름 더하고 가격 더하고... 
-						
-					}
-				}
-				
-			}
-		}*/
-			
 		
 		for(int key : list.keySet()) { 
 			
@@ -139,6 +121,8 @@ public class HistoryController {
 			
 			
 		}
+		
+		System.out.println(histroy);
 
 		return histroy;
 	}

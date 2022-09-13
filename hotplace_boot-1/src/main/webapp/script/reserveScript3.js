@@ -125,6 +125,14 @@ $(function() {
                      </div>
                      `
     				 )
+    				 
+    		 $('#untilCnt').append(
+    				'내 차례까지 '+ W+ '팀'		
+    		)
+    		
+    		$('#untilTime').append(
+    				'예상 대기시간 '+ parseInt(untilCnt)*10 +'분'
+    		)
     		
     		
     		

@@ -339,7 +339,8 @@ html, body, .wrapper{
 
 .menu_list{
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 25px;
+    padding-left: 25px;
     width: 350px;
     height: 200px;
     border-radius: 30px;

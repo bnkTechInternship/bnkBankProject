@@ -62,6 +62,8 @@ public class FlaskController {
 	
 	
 	// 아마 이걸 쓰면 될거임
+	// flask 버전 혹시 모르니 놔둠...
+	/*
 	@ResponseBody
 	@RequestMapping("test2.do")
 	public ResponseEntity<String> testUser2(User user) throws Exception {
@@ -93,6 +95,41 @@ public class FlaskController {
 		// 최종 결과 아래에서 리턴 아작스 처리
 		
 		return response;
+	}
+	*/
+	
+	@ResponseBody
+	@RequestMapping("test2.do")
+	public String pythonProcessbuilder(User user) throws Exception {
+		System.out.println("pythonbuilder run,,,,");
+		String arg1;
+		ProcessBuilder builder;
+		BufferedReader br;
+		
+		String path = System.getProperty("user.dir");
+		System.out.println(path);
+		
+		arg1 = "C:\\Users\\BIFF2020\\Desktop\\bnkBankProject20220915pfin\\hotplace_boot-1\\src\\main\\python\\test.py";
+		builder = new ProcessBuilder("python", arg1);
+		
+		builder.redirectErrorStream(true);
+		Process process = builder.start();
+		
+		int exitval = process.waitFor();
+		
+		br = new BufferedReader(new InputStreamReader(process.getInputStream(), "UTF-8"));
+		
+		String line;
+		while((line = br.readLine()) != null) {
+			System.out.println((">>> "+ line));
+		}
+		
+		if(exitval != 0) {
+			System.out.println("비정상종료");
+		}
+
+
+		return "pythonProcessbuilder";
 	}
 	
 

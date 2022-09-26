@@ -33,5 +33,6 @@
 		<mapper resource="mapper/waiting_query.xml"/>	
 		<mapper resource="mapper/shop_query.xml"/>	
 		<mapper resource="mapper/user_query.xml"/>	
+		<mapper resource="mapper/survey_query.xml"/>		
 	</mappers>
 </configuration>

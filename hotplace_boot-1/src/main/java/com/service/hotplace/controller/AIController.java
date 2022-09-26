@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -27,9 +28,21 @@ public class AIController {
 		return shopService.getShopListByMemberType(memberType);
 	}
 	
-	// 설문조사 DB 저장
-	public int registerSurvey(Survey survey) throws Exception{
-		int result = surveyService.registerSurvey(survey);
-		return result;
+	@PostMapping("recommand/confirm")
+	@ResponseBody
+	// 리턴타입 boolean말고 다른걸로 해서 머신러닝 결과값 넘겨주기
+	public boolean isExist(String userId) throws Exception {
+		boolean flag = surveyService.isExistSurvey(userId);
+		if(flag) { // 즉 등록된 데이터가 있다. 여기서 머신러닝 연결하고 데이터 받아오기
+			
+		}
+		return flag;
 	}
+	
+	@GetMapping("recommand/registInfo")
+	public String testFnc(Survey survey) throws Exception {
+		surveyService.registerSurvey(survey);
+		return "redirect:/recommand.html";
+	}
+	
 }

@@ -12,11 +12,18 @@ public class SurveyDAOImpl implements SurveyDAO {
 	
 	@Autowired
 	private SqlSession sqlsession;
-	static final String NS="sql.hotplace.mapper.";
+	static final String NS="sql.hotplace.mapper2.";
 
 	@Override
 	public int registerSurvey(Survey survey) throws Exception {
 		return sqlsession.insert(NS+"registerSurvey", survey);
+	}
+
+	@Override
+	public boolean isExistSurvey(String userId) throws Exception {
+		Survey survey = sqlsession.selectOne(NS + "selectSurvey",userId);
+		if(survey != null) return true;
+		return false;
 	}
 
 }

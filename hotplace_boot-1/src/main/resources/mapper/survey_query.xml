@@ -3,7 +3,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="sql.hotplace.mapper">
+<mapper namespace="sql.hotplace.mapper2">
 	<!-- create -->
 	<insert id="registerSurvey" parameterType="survey">
 		INSERT INTO survey(user_id, age, marital_status, n_family,
@@ -11,4 +11,10 @@
 		VALUES(#{userId},#{age},#{maritalStatus},#{nFamily},
 		#{generType},#{educ},#{job},#{ecMeantime},#{ecType},#{eatoutFreq})
 	</insert>
+	
+	<!-- read -->
+	<select id = "selectSurvey" parameterType="String" resultType="survey">
+		select user_id,AGE,MARITAL_STATUS,N_FAMILY,GENER_TYPE,EDUC,JOB,EC_MEANTIME,EC_TYPE,EATOUT_FREQ
+		from survey where user_id = #{value}
+	</select>
 </mapper>

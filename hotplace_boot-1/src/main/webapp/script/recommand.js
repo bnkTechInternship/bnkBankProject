@@ -1,29 +1,23 @@
-$(function() {
+$(document).ready(readyFnc)
+
+
+function readyFnc() {
     let isLogined = localStorage.getItem('loginUser')
     let user = null;
     if(isLogined)
         user = JSON.parse(localStorage.getItem('loginUser'));    
     console.log(isLogined)
     console.log(user)
+    console.log(user)
 
+    
     // 로그인 되어있는 경우
     if(user) {
         let userId = user.userId;
-        console.log(userId)
-
-
-        //ajax로 요청 보내서 선택사항 데이터가 있는지
-        let result = null;
-
-        // 결과가 있으면
-        if(result) {
-            
-            // ajax로 데이터 분석해서 맞는 데이터 받기
-        } 
-        else { //결과 없으면
-            $("#select_1").addClass('appear')
-            $("#select_1").css('z-index',10)
-        }            
+        console.log('userId : 123',userId)
+        $("#userId_hidden").attr('value',userId);
+        
+        isExist(userId)                    
     } 
     
     
@@ -39,6 +33,16 @@ $(function() {
         $('#input_data').css('z-index',10)
     })
 
+    $("#marri_2").on('change',function() {
+        let chooseData = $(this).val()
+        console.log(chooseData)
+
+        if(chooseData == 1)
+            $("#MARITAL_STATUS").css('display','block')
+        else $("#MARITAL_STATUS").css('display','none')
+    })
+
+
     $("#send_data").click(() => {
         //ajax써서 데이터 전송하기
         
@@ -51,6 +55,22 @@ $(function() {
         )
         setTimeout(() => {location.reload()},1500)
     })
-    
-})
+}
 
+let isExist = async(userId2) => new Promise((resolve,reject) => {
+    $.ajax({
+        type : 'post',
+        url  : 'recommand/confirm',
+        data : {'userId' : userId2},
+
+        success : (result) => {
+            console.log("값 확인 결과 : ",result)
+            if(result == false) { 
+                $("#select_1").addClass('appear')
+                $("#select_1").css('z-index',10)
+            } else {// 머신러닝 분석 데이터 받기
+                
+            }
+        }
+    })
+})

@@ -3,8 +3,7 @@ package com.service.hotplace.domain.AI;
 import com.service.hotplace.domain.person.User;
 import com.service.hotplace.domain.place.Shop;
 
-public class Survey {
-	
+public class Survey {	
 	private String userId;
 	private int age;
 	private int maritalStatus;

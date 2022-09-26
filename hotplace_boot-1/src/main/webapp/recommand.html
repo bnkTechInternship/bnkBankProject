@@ -50,13 +50,89 @@
 
     <!-- 데이터 입력 태그 -->
     <div id="input_data">
-        <input type = "text" name = "name" placeholder="이름">
-        <input type = "text" name = "name" placeholder="이름">
-        <input type = "text" name = "name" placeholder="이름">
-        <input type = "text" name = "name" placeholder="이름">
-        <input type = "text" name = "name" placeholder="이름">
-        <div id="send_data" class = "cursor">입력하기</div>
-    </div>    
+        <form action = "recommand/registInfo" method = "get">
+            <input type = "hidden" name = "userId" id = "userId_hidden" value="123">
+            <input type = "text" name = "age" placeholder="연령" class = "full">
+            <select class = "full" id = "marri_2">
+                <option value = "">결혼유무 선택</option>
+                <option value = "1">결혼</option>
+                <option value = "2">미혼</option>
+            </select>
+            <select class = "full" id = "maritalStatus" name = "maritalStatus">
+                <option value = "">배우자의 상태</option>
+                <option value = "1">배우자가 있으며, 함께 살고 있음(사실혼 상태 포함)</option>
+                <option value = "2">배우자가 있으나, 함께 살고 있지않음(출장 등의 일시적 상태 제외)
+                <option value = "3">배우자 사망으로 배우자가 없음</option>
+                <option value = "4">이혼으로 배우자가 없음</option>
+            </select>
+            <select class = "full" id = "nFamily" name = "nFamily">
+                <option value = "">가구원수</option>
+                <option value = "1">1명</option>
+                <option value = "2">2명</option>
+                <option value = "3">3명</option>
+                <option value = "4">4명</option>
+                <option value = "5">5명</option>
+                <option value = "6">6명 이상</option>
+            </select>
+            <select class = "full" id = "generType" name = "generType">
+                <option value = "">세대 유형</option>
+                <option value = "1">1세대 가구 - 1인가구</option>
+                <option value = "2">1세대 가구 - 부부</option>
+                <option value = "3">1세대 가구 - 기타</option>
+                <option value = "4">2세대 가구 - 부부 + 미혼자녀</option>
+                <option value = "5">2세대 가구 - 편부모 + 미혼자녀</option>
+                <option value = "6">2세대 가구 - 기타</option>
+                <option value = "7">3세대 이상가구</option>
+            </select>
+            <select class = "full" id = "educ" name = "educ">
+                <option value = "">교육 수준</option>
+                <option value = "1">서당/한학</option>
+                <option value = "2">무학</option>
+                <option value = "3">초등학교</option>
+                <option value = "4">중학교</option>
+                <option value = "5">고등학교</option>
+                <option value = "6">2년/3년제 대학</option>
+                <option value = "7">4년제 대학</option>
+                <option value = "8">대학원</option>
+                <option value = "88">비해당(소아)</option>
+            </select>
+            <select class = "full" id = "job" name = "job">
+                <option value = "">현재 직업</option>
+                <option value = "1">관리자, 전문가 및 관련 종사자</option>
+                <option value = "2">사무 종사자</option>
+                <option value = "3">서비스 및 판매 종사자</option>
+                <option value = "4">농림어업 숙련 종사자</option>
+                <option value = "5">기능원, 장치 기계조작 및 조립 종사자</option>
+                <option value = "6">단순 노무종사자</option>
+                <option value = "7">무직(주부, 학생 등)</option>
+            </select>
+            <input type = "text" name = "ecMeantime" class = "full" placeholder="주당평균 근로시간">
+            <select class = "full" id = "ecType" name = "ecType">
+                <option value = "">근로시간 형태</option>
+                <option value = "1">주간 근무</option>
+                <option value = "2">저녁 근무(14:00 ~ 24:00)</option>
+                <option value = "3">밤 근무(21:00 ~ 익일 am 8:00)</option>
+                <option value = "4">주야간 규칙적 교대근무</option>
+                <option value = "5">24시간 교대근무</option>
+                <option value = "6">분할근무(하루 근무시간대 2개이상)</option>
+                <option value = "7">불규칙 교대근무</option>
+                <option value = "8">기타</option>
+                <option value = "88">비해당(최근 1년간 일하지 않음)</option>
+            </select>
+            <select class = "full" id = "eatoutFreq" name = "eatoutFreq">
+                <option value = "">외식 횟수</option>
+                <option value = "1">하루 2회이상</option>
+                <option value = "2">하루1회</option>
+                <option value = "3">주 5~6회</option>
+                <option value = "4">주 3~4회</option>
+                <option value = "5">주 1~2회</option>
+                <option value = "6">월 1~3회</option>
+                <option value = "7">거의 안한다</option>
+            </select>
+            <button type = "submit">데이터 제출</button>
+        </form>
+    </div>  
+
     
     <!-- 스크래치 유도 태그2 -->
     <div id = "content" class = "disappear">화면을 긁어보세요!</div>

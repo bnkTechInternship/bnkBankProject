@@ -7,4 +7,7 @@ import com.service.hotplace.domain.place.Shop;
 public interface SurveyDAO {
 	//create
 	int registerSurvey(Survey survey) throws Exception;
+	
+	//read
+	boolean isExistSurvey(String userId) throws Exception;
 }

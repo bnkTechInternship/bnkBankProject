@@ -12,11 +12,12 @@ public class Shop {
 	private String shopLong;
 	private int totalCnt;
 	private String webAddress;
+	private int memberType;
 	
 	// constructors
 	public Shop() {}
 	public Shop(int shopIdx, String shopName, String shopAddress, String shopNumber, String shopOper, int shopEnternum,
-			String shopLat, String shopLong, int totalCnt, String webAddress) {
+			String shopLat, String shopLong, int totalCnt, String webAddress, int memberType) {
 		super();
 		this.shopIdx = shopIdx;
 		this.shopName = shopName;
@@ -28,6 +29,7 @@ public class Shop {
 		this.shopLong = shopLong;
 		this.totalCnt = totalCnt;
 		this.webAddress = webAddress;
+		this.memberType = memberType;
 	}
 	public Shop(int shopIdx, int shopEnternum) {
 		super();
@@ -35,7 +37,7 @@ public class Shop {
 		this.shopEnternum = shopEnternum;
 	}
 	public Shop(String shopName, String shopAddress, String shopNumber, String shopOper, int shopEnternum,
-			String shopLat, String shopLong, int totalCnt, String webAddress) {
+			String shopLat, String shopLong, int totalCnt, String webAddress, int memberType) {
 		super();
 		this.shopName = shopName;
 		this.shopAddress = shopAddress;
@@ -46,6 +48,7 @@ public class Shop {
 		this.shopLong = shopLong;
 		this.totalCnt = totalCnt;
 		this.webAddress = webAddress;
+		this.memberType = memberType;
 	}
 
 	// getter
@@ -59,6 +62,7 @@ public class Shop {
 	public String getWebAddress() {return webAddress;}
 	public int getTotalCnt() {return totalCnt;}
 	public String getShopLong() {return shopLong;}
+	public int getMemberType() {return memberType;}
 	
 	// setter
 	public void setShopIdx(int shopIdx) {this.shopIdx = shopIdx;}
@@ -71,11 +75,12 @@ public class Shop {
 	public void setShopLong(String shopLong) {this.shopLong = shopLong;}
 	public void setTotalCnt(int totalCnt) {this.totalCnt = totalCnt;}
 	public void setWebAddress(String webAddress) {this.webAddress = webAddress;}
+	public int setMemberType() {return memberType = memberType;}	
 
 	@Override
 	public String toString() {
 		return "Shop [shopIdx=" + shopIdx + ", shopName=" + shopName + ", shopAddress=" + shopAddress + ", shopNumber="
 				+ shopNumber + ", shopOper=" + shopOper + ", shopEnternum=" + shopEnternum + ", shopLat=" + shopLat
-				+ ", shopLong=" + shopLong + ", totalCnt=" + totalCnt + ", webAddress=" + webAddress + "]";
+				+ ", shopLong=" + shopLong + ", totalCnt=" + totalCnt + ", webAddress=" + webAddress + ", memberType=" + memberType + "]";
 	};
 }

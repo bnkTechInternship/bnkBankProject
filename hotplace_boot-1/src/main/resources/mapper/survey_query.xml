@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sql.hotplace.mapper">
+	<!-- create -->
+	<insert id="registerSurvey" parameterType="survey">
+		INSERT INTO survey(user_id, age, marital_status, n_family,
+		gener_type, educ, job, ec_meantime, ec_type, eatout_freq)
+		VALUES(#{userId},#{age},#{maritalStatus},#{nFamily},
+		#{generType},#{educ},#{job},#{ecMeantime},#{ecType},#{eatoutFreq})
+	</insert>
+</mapper>

@@ -54,4 +54,9 @@ public class ShopDAOImpl implements ShopDAO {
 	public List<Shop> getPartData(int idx) throws Exception {
 		return sqlsession.selectList(NS + "getShopPart",idx);
 	}
+
+	@Override
+	public List<Shop> getShopListByMemberType(int memberType) throws Exception {
+		return sqlsession.selectList(NS + "getShopListByMemberType", memberType);
+	}
 }

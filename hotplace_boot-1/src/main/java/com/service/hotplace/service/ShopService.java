@@ -12,6 +12,7 @@ public interface ShopService {
 	List<Shop> getShopList() throws Exception;
 	List<Shop> getShopListByName(String ShopName) throws Exception;
 	List<Shop> getPartData(int idx) throws Exception;
+	List<Shop> getShopListByMemberType(int memberType) throws Exception;
 		
 	Shop getShop(int shopIdx) throws Exception;
 	

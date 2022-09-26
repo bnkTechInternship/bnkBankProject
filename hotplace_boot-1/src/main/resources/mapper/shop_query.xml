@@ -12,58 +12,64 @@
 
 	<!-- create -->
 	<insert id="registerShop" parameterType="shop">
-      <selectKey keyProperty="shopIdx" resultType="int"
-         order="BEFORE">
-         SELECT shop_seq.nextVal From dual
-      </selectKey>
-      INSERT INTO shop(shop_idx, shop_name,shop_address,shop_number,
-      shop_oper,shop_enternum,shop_lat,shop_long,total_cnt,web_address)
-      VALUES(#{shopIdx},#{shopName},#{shopAddress},#{shopNumber},#{shopOper},
-      #{shopEnternum},#{shopLat},#{shopLong},#{totalCnt},#{webAddress})
-   </insert>
-		
-		
+		<selectKey keyProperty="shopIdx" resultType="int"
+			order="BEFORE">
+			SELECT shop_seq.nextVal From dual
+		</selectKey>
+		INSERT INTO shop(shop_idx, shop_name,shop_address,shop_number,
+		shop_oper,shop_enternum,shop_lat,shop_long,total_cnt,web_address,member_type)
+		VALUES(#{shopIdx},#{shopName},#{shopAddress},#{shopNumber},#{shopOper},
+		#{shopEnternum},#{shopLat},#{shopLong},#{totalCnt},#{webAddress},#{memberType})
+	</insert>
+
+
 	<!-- read -->
 	<select id="getShopList" resultType="shop">
-     <include refid="selectAllShop" />
-   </select>
+		<include refid="selectAllShop" />
+	</select>
 
-   <select id="getShop" parameterType="int" resultType="shop">
-     <include refid="selectAllShop" />
-      WHERE shop_idx = #{shopIdx}
-   </select>
+	<select id="getShop" parameterType="int" resultType="shop">
+		<include refid="selectAllShop" />
+		WHERE shop_idx = #{shopIdx}
+	</select>
 
-   <select id="getShopListByName" parameterType="string" resultType="shop">
-      <include refid="selectAllShop" />
-      WHERE shop_name LIKE '%' || #{value} || '%'
-   </select>
-   
-   <select id = "getShopPart" parameterType="int" resultType="shop">
-   		<include refid="selectAllShop" />
-   		where shop_idx between #{value} and #{value} + 2   		
-   </select>
-		
-		
+	<select id="getShopListByName" parameterType="string"
+		resultType="shop">
+		<include refid="selectAllShop" />
+		WHERE shop_name LIKE '%' || #{value} || '%'
+	</select>
+
+	<select id="getShopPart" parameterType="int" resultType="shop">
+		<include refid="selectAllShop" />
+		where shop_idx between #{value} and #{value} + 2
+	</select>
+
 	<!-- update -->
 	<update id="updateShop" parameterType="shop">
-      UPDATE shop SET shop_name
-      = #{shopName}, shop_address = #{shopAddress},
-      shop_number = #{shopNumber}, shop_oper = #{shopOper},
-      shop_lat = #{shopLat}, shop_long = #{shopLong}
-      WHERE shop_idx = #{shopIdx}
-   </update>
+		UPDATE shop SET shop_name
+		= #{shopName}, shop_address = #{shopAddress},
+		shop_number = #{shopNumber}, shop_oper = #{shopOper},
+		shop_lat = #{shopLat}, shop_long = #{shopLong}, member_type = #{memberType}
+		WHERE shop_idx = #{shopIdx}
+	</update>
 
-   <update id="updateShopEnternum" parameterType="shop">
-      UPDATE shop
-      SET
-      shop_enternum = shop_enternum+1
-      WHERE shop_idx=#{shopIdx}
-   </update>
-		
-		
+	<update id="updateShopEnternum" parameterType="shop">
+		UPDATE shop
+		SET
+		shop_enternum = shop_enternum+1
+		WHERE shop_idx=#{shopIdx}
+	</update>
+
+
 	<!-- delete -->
 	<delete id="deleteShop" parameterType="int">
-      DELETE FROM shop WHERE
-      shop_idx = #{value}
-   </delete>
+		DELETE FROM shop WHERE
+		shop_idx = #{value}
+	</delete>
+	
+	<!-- AI project -->
+	<select id="getShopListByMemberType" parameterType="int" resultType="shop">
+		<include refid="selectAllShop" />
+		where member_type = #{value}
+	</select>
 </mapper>

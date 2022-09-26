@@ -53,4 +53,9 @@ public class ShopServiceImpl implements ShopService{
 	public List<Shop> getPartData(int idx) throws Exception {
 		return shopDAO.getPartData(idx);
 	}
+
+	@Override
+	public List<Shop> getShopListByMemberType(int memberType) throws Exception {
+		return shopDAO.getShopListByMemberType(memberType);
+	}
 }

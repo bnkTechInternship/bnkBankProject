@@ -10,4 +10,6 @@ public interface SurveyService {
 	
 	//read
 	boolean isExistSurvey(String userId) throws Exception;
+	
+	Survey selectSurvey(String userId) throws Exception;
 }

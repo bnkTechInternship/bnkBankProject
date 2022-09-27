@@ -23,4 +23,9 @@ public class SurveyServiceImpl implements SurveyService {
 		return surveyDAO.isExistSurvey(userId);
 	}
 
+	@Override
+	public Survey selectSurvey(String userId) throws Exception {
+		return surveyDAO.selectSurvey(userId);
+	}
+
 }

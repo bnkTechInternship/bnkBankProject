@@ -25,5 +25,9 @@ public class SurveyDAOImpl implements SurveyDAO {
 		if(survey != null) return true;
 		return false;
 	}
+	
+	public Survey selectSurvey(String userId) throws Exception {
+		return sqlsession.selectOne(NS + "selectSurvey",userId);
+	}
 
 }

@@ -2,7 +2,6 @@
 import numpy as np;
 import pandas as pd;
 import pickle;
-import matplotlib.pyplot as plt
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.preprocessing import StandardScaler
 import seaborn as sns
@@ -10,7 +9,10 @@ import sklearn
 import sys;
 import os;
 from datetime import datetime
+import warnings
 
+warnings.simplefilter(action='ignore', category=FutureWarning)
+warnings.simplefilter(action='ignore', category=UserWarning)
 #print(sys.argv)
 # 30,1,1,1,1,2,1,32,1,1,1
 

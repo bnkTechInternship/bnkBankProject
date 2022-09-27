@@ -48,6 +48,12 @@
         </div>
     </div>
 
+    <div id = "introduce_ment">
+        <div id = "recommand_name">XXX님</div>
+        <div id = "recommand_time">아침에 혼자먹기 적합한</div>
+        <div id = "recommand_last">메뉴 찾으세요?</div>
+    </div>
+
     <!-- 데이터 입력 태그 -->
     <div id="input_data">
         <form action = "recommand/registInfo" method = "get">
@@ -143,7 +149,10 @@
     // 현재 이미지 파일들을 추후 데이터 분석 & 추천으로 변경
     let pics = ['#foo','img2/wallpaper3.jpg','img2/wallpaper4.jpg','img2/wallpaper5.jpg','img2/wallpaper6.jpg','img2/wallpaper7.jpg']
     let shops = [5,0,1,2,3,4];
+    let ments = '';
+    let bab = '';
     let idx = 1;
+    
     
     // 로고 클릭 (메인 연결)
     
@@ -163,11 +172,15 @@
         // 로그인 되어있는 경우
         if(user) {
             let userId = user.userId;
-            console.log('userId : 123',userId)
             $("#userId_hidden").attr('value',userId);
             
             isExist(userId)                    
-        } else scratch(pics[0],pics[idx])
+        } else {
+            $("#recommand_last").text('이러한 메뉴는 어떠세요?')
+            $("#recommand_name").text('')
+            $("#recommand_time").text('')
+            scratch(pics[0],pics[idx])
+        }
         
         
         $("#select_no").click(() => {
@@ -184,7 +197,6 @@
 
         $("#marri_2").on('change',function() {
             let chooseData = $(this).val()
-            console.log(chooseData)
 
             if(chooseData == 1)
                 $("#MARITAL_STATUS").css('display','block')
@@ -219,17 +231,19 @@
               $(".my-btn").css('z-index',-1)
 
               $(".disappear").css('opacity',0)
+              $("#introduce_ment").css('opacity',0)
+              $("#introduce_ment").css('z-index',-1)
             },
             scratchUp: function(e, percent)
             {
                 if(percent > 50)
                 {
-                    console.log("percent > 50 pics : ",pics);
-                    console.log(idx)
-                    console.log(pics[idx])
                     $('#redirBtn').attr('onclick',`location.href = '/infoTemplate.html?category=shop&data=${shops[idx-1]}'`)
                     $('.my-btn').attr('onclick',`location.href = '/infoTemplate.html?category=shop&data=${shops[idx-1]}'`)
                     $('.my-btn-border').attr('onclick',`location.href = '/infoTemplate.html?category=shop&data=${shops[idx-1]}'`)
+                    
+                    $("#introduce_ment").css('opacity',1)
+                    $("#introduce_ment").css('z-index',5)
 
                     $("#canvas").fadeOut()
                     setTimeout(() => {
@@ -254,19 +268,35 @@
         data : {'userId' : userId2},
 
         success : (result) => {
-            console.log("받은 결과 : ",result)
             if(result.length == 0) {
                 $("#select_1").addClass('appear')
                 $("#select_1").css('z-index',10)
                 scratch(pics[0],pics[idx])
             } 
             else {
+                let hour = new Date().getHours();
+                if(hour >= 11 && hour <= 14)
+                    bab = '점심'
+                else if(hour >= 15 && hour <= 19)
+                    bab = '저녁'
+                else if((hour >= 20 && hour <= 24) || (hour >= 0 && hour <= 5))
+                    bab = '야식'
+                else bab = '아침'
+                
+
                 pics = ['#foo']     
                 shops = []           
                 for(let i = 0 ; i < result.length; i++) {
                     pics.push(result[i].webAddress)
                     shops.push(result[i].shopIdx)
                 }
+                if(result[0].memberType == 1) ments = "혼자"                        
+                else if(result[0].memberType == 2) ments = "가족과"
+                else ments = "가족외 지인들과"
+
+                $("#recommand_name").text(`${userId2}님`)
+                $("#recommand_time").text(`${bab}에 ${ments} 먹기 적합한`)
+
                 scratch(pics[0],pics[idx])
             }
         }

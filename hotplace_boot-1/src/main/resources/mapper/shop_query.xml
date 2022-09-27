@@ -6,7 +6,7 @@
 <mapper namespace="sql.hotplace.mapper">
 	<sql id="selectAllShop">
 		select shop_idx, shop_name, shop_address, shop_number,
-		shop_oper, shop_enternum, shop_lat, shop_long,total_cnt, web_address
+		shop_oper, shop_enternum, shop_lat, shop_long,total_cnt, web_address,member_type
 		from shop
 	</sql>
 

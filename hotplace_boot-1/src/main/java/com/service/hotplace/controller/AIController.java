@@ -33,7 +33,7 @@ public class AIController {
 	@PostMapping("recommand/confirm")
 	@ResponseBody
 	// 리턴타입 boolean말고 다른걸로 해서 머신러닝 결과값 넘겨주기
-	public String isExist(String userId) throws Exception {
+	public List<Shop> isExist(String userId) throws Exception {
 		boolean flag = surveyService.isExistSurvey(userId); // by 근영 이거 true 나오는데 왜 설문조사 뜨지?
 		String line = "";
 	    String path = System.getProperty("user.dir");
@@ -67,16 +67,15 @@ public class AIController {
 			br = new BufferedReader(new InputStreamReader(process.getInputStream(), "UTF-8"));
 			
 			
-			while((line = br.readLine()) != null) {
+			while((line = br.readLine()) != null) 
 				System.out.println((">>> "+ line)); // 여기서 값 얻는다 지금은 "1"
-			}
 			
-			if(exitval != 0) {
-				System.out.println("비정상종료");
-			}
-			
+			if(exitval != 0)
+				return null;					
+			return shopService.getShopListByMemberType(Integer.parseInt(line));
 		}
-		return line;
+//		return shopService.getShopList(); //test code
+		return null;
 	}
 	
 	@GetMapping("recommand/registInfo")

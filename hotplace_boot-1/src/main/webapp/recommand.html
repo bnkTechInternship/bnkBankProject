@@ -22,9 +22,9 @@
     <div id="canvas"></div>
 
     <!-- 웨이팅 버튼 -->
-    <div class="my-btn" onclick = "location.href = `/login.html/shop`">
-        <div class="my-btn-border" onclick = "location.href = `/login.html/shop`"></div>
-        <div onclick = "location.href = `/login.html/shop`">웨이팅 하러가기</div>
+    <div class="my-btn" onclick = "">
+        <div class="my-btn-border" onclick = ""></div>
+        <div onclick = "" id = "redirBtn">웨이팅 하러가기</div>
     </div>
 
     <!-- 스크래치 유도 태그1 -->
@@ -142,6 +142,7 @@
     // 특정 사진으로 오늘의 메뉴 추천
     // 현재 이미지 파일들을 추후 데이터 분석 & 추천으로 변경
     let pics = ['#foo','img2/wallpaper3.jpg','img2/wallpaper4.jpg','img2/wallpaper5.jpg','img2/wallpaper6.jpg','img2/wallpaper7.jpg']
+    let shops = [5,0,1,2,3,4];
     let idx = 1;
     
     // 로고 클릭 (메인 연결)
@@ -154,7 +155,6 @@
         })
 
         // 가져온 함수 부분
-        alert(1);
         let isLogined = localStorage.getItem('loginUser')
         let user = null;
         if(isLogined)
@@ -167,7 +167,7 @@
             $("#userId_hidden").attr('value',userId);
             
             isExist(userId)                    
-        } 
+        } else scratch(pics[0],pics[idx])
         
         
         $("#select_no").click(() => {
@@ -204,8 +204,7 @@
             )
             setTimeout(() => {location.reload()},1500)
         })
-
-        scratch(pics[0],pics[idx])
+        // scratch(pics[0],pics[idx])
     })
 
     // 긁는 애니메이션 세팅 함수
@@ -217,16 +216,26 @@
             fg          : item1,
             scratchMove : function(e,percent) {
               $(".my-btn").css('opacity',0)
+              $(".my-btn").css('z-index',-1)
+
               $(".disappear").css('opacity',0)
             },
             scratchUp: function(e, percent)
             {
                 if(percent > 50)
                 {
+                    console.log("percent > 50 pics : ",pics);
+                    console.log(idx)
+                    console.log(pics[idx])
+                    $('#redirBtn').attr('onclick',`location.href = '/infoTemplate.html?category=shop&data=${shops[idx-1]}'`)
+                    $('.my-btn').attr('onclick',`location.href = '/infoTemplate.html?category=shop&data=${shops[idx-1]}'`)
+                    $('.my-btn-border').attr('onclick',`location.href = '/infoTemplate.html?category=shop&data=${shops[idx-1]}'`)
+
                     $("#canvas").fadeOut()
                     setTimeout(() => {
                         $("#canvas").fadeIn('100')
                         $(".my-btn").css('opacity','1')
+                        $(".my-btn").css('z-index',10)
                     },1000)
                     $('#canvas').wScratchPad('reset')
                                 .wScratchPad('fg',pics[idx])
@@ -245,13 +254,20 @@
         data : {'userId' : userId2},
 
         success : (result) => {
-            console.log("값 확인 결과 : ",result)
-            if(result == false) { 
+            console.log("받은 결과 : ",result)
+            if(result.length == 0) {
                 $("#select_1").addClass('appear')
                 $("#select_1").css('z-index',10)
-            } else {// 머신러닝 분석 데이터 받기
-                // 여기서 받은 사진으로 기존 사진 배열 변경하고 추천
-                console.log(pics) 
+                scratch(pics[0],pics[idx])
+            } 
+            else {
+                pics = ['#foo']     
+                shops = []           
+                for(let i = 0 ; i < result.length; i++) {
+                    pics.push(result[i].webAddress)
+                    shops.push(result[i].shopIdx)
+                }
+                scratch(pics[0],pics[idx])
             }
         }
     })

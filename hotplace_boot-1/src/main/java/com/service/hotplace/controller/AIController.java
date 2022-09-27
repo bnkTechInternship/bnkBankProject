@@ -66,12 +66,15 @@ public class AIController {
 			int exitval = process.waitFor();
 			br = new BufferedReader(new InputStreamReader(process.getInputStream(), "UTF-8"));
 			
-			
+			line = br.readLine();
+			/*
 			while((line = br.readLine()) != null) 
 				System.out.println((">>> "+ line)); // 여기서 값 얻는다 지금은 "1"
+			*/
 			
 			if(exitval != 0)
-				return null;					
+				return null;			
+			System.out.println(shopService.getShopListByMemberType(Integer.parseInt(line))); //line이 혼밥/가족 외/가족
 			return shopService.getShopListByMemberType(Integer.parseInt(line));
 		}
 //		return shopService.getShopList(); //test code
